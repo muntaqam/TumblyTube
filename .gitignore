@@ -24,6 +24,8 @@ vendor/
 
 /public/assets
 /app/assets/javascripts/bundle.js
+/app/assets/javascripts/bundle.js.map
+
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
