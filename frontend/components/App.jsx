@@ -1,9 +1,13 @@
 import React from 'react';
+import GreetingContainer from './greeting/greeting_container';
 
 const App = () => {
   return (
     <div>
-      <h1>TumblyTube</h1>
+      <header>
+        <h1>TumblyTube</h1>  
+        <GreetingContainer />
+      </header>
     </div>
   );
 };
