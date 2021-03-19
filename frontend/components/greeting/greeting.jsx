@@ -1,13 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Greeting = ({ currentUser, logout }) => {
-
   const welcome = () => {
     return (
       <div className="header-group">
         <h2 className="header-name">Welcome, {currentUser.username}!</h2>
-        <button className="header-btn" onClick={logout}>Log out</button>
+        <button className="header-btn" onClick={logout}>
+          Log out
+        </button>
       </div>
     );
   };
