@@ -54,6 +54,7 @@ class SignUpForm extends React.Component {
       <div id="signup-form-container">
         {console.log(this.state.errors)}
         <form>
+          <img className="session-logo" src={window.tumbleLogoURL} />
           <h1 className="session-title">Create your Tumble Account</h1>
           <span className="session-subtitle">to continue to TumblyTube</span>
           <input

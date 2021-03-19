@@ -14,14 +14,22 @@
  *= require_self
  */
 
-body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border;
+:root {
+  --clr-text: #000;
+  --clr-primary: #1a73e8;
+  --clr-secondary: #62666a;
+  --clr-placeholder: #80868b;
+  --clr-error: #d93025;
 }
 
-body,
-input {
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  color: var(--clr-text);
   font-family: "Roboto", sans-serif;
-  font-size: 62.5%;
+  font-size: 1.125rem;
 }
