@@ -6,6 +6,7 @@ class LoginUsername extends React.Component {
       <div className="login-input-container">
         {/* {this.renderErrors()} */}
         <div className="login-input-container username">
+          <img className="session-logo" src={window.tumbleLogoURL} />
           <h1 className="session-title">Sign in</h1>
           <span className="session-subtitle">to continue to TumblyTube</span>
           <form className="login-form">
@@ -15,7 +16,7 @@ class LoginUsername extends React.Component {
               value={this.props.values.username}
               placeholder="Username"
             />
-            <span className="demo-user">Sign in as demo user</span>
+            <a className="demo-user">Sign in as demo user</a>
             <span>or</span>
             {this.props.formLink}
             <button className="session-form-btn" onClick={this.props.nextStep}>

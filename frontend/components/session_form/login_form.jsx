@@ -54,6 +54,7 @@ class LoginForm extends React.Component {
     const { errors, clearErrors, formLink } = this.props;
     const { username, password } = this.state;
     const values = { username, password };
+
     return (
       <div className="login-form-container">
         {step === "username" ? (
