@@ -54,54 +54,81 @@ class SignUpForm extends React.Component {
       <div id="signup-form-container">
         {console.log(this.state.errors)}
         <form>
-          <img className="session-logo" src={window.tumbleLogoURL} />
-          <h1 className="session-title">Create your Tumble Account</h1>
-          <span className="session-subtitle">to continue to TumblyTube</span>
-          <input
-            className="session-form-input"
-            onChange={this.handleChange("username")}
-            value={this.state.username}
-            placeholder="Username"
-          />
-          <input
-            type="email"
-            className="session-form-input"
-            onChange={this.handleChange("email")}
-            value={this.state.email}
-            placeholder="Your email address"
-          />
-          <input
-            type="password"
-            className="session-form-input"
-            onChange={this.handleChange("password")}
-            value={this.state.password}
-            placeholder="Password"
-          />
-          <input
-            type="password"
-            className="session-form-input"
-            onChange={this.handleChange("confirmPW")}
-            value={this.state.confirmPW}
-            placeholder="Confirm"
-          />
-          {this.props.formLink}
-          <span>or</span>
-          <button>Sign in as demo user</button>
-          <button className="session-form-btn" onClick={this.handleSubmit}>
-            Sign Up
-          </button>
+          <header className="signup-form-header">
+            <img className="session-logo" src={window.tumbleLogoURL} />
+            <h2 className="session-title">Create your Tumble Account</h2>
+            <span className="session-subtitle">to continue to TumblyTube</span>
+          </header>
+          <div className="signup-form-item__username">
+            <input
+              className="session-form-input"
+              onChange={this.handleChange("username")}
+              value={this.state.username}
+              placeholder="Username"
+              aria-placeholder="Username"
+            />
+          </div>
+          <div className="signup-form-item__email">
+            <input
+              type="email"
+              className="session-form-input"
+              onChange={this.handleChange("email")}
+              value={this.state.email}
+              placeholder="Your email address"
+              aria-placeholder="Your email address"
+            />
+          </div>
+          <div className="signup-form-item__password">
+            <input
+              type="password"
+              className="session-form-input"
+              onChange={this.handleChange("password")}
+              value={this.state.password}
+              placeholder="Password"
+              aria-placeholder="Password"
+            />
+          </div>
+          <div className="signup-form-item__confirmPW">
+            <input
+              type="password"
+              className="session-form-input"
+              onChange={this.handleChange("confirmPW")}
+              value={this.state.confirmPW}
+              placeholder="Confirm"
+              aria-placeholder="Confirm"
+            />
+          </div>
+          <div className="signup-form-bottom">
+            {this.props.formLink}
+            <span>or</span>
+            <button>Sign in as demo user</button>
+            <button className="session-form-btn" onClick={this.handleSubmit}>
+              Sign Up
+            </button>
+          </div>
         </form>
-        <footer id="session-footer">
-          <span id="session-footer-lang">English (United States)</span>
-          <ul id="session-personal-links">
+        <footer className="session__footer">
+          <div className="session__footer__lang">
+            <span className="session__footer__lang__item">
+              English (United States)
+              <span className="material-icons">arrow_drop_down</span>
+            </span>
+          </div>
+          <ul className="session__footer__list">
             <li>
-              <a href="#">Project Repo</a>
+              <a href="#" className="session__footer__list__item">
+                Project Repo
+              </a>
             </li>
             <li>
-              <a href="#">Github</a>
+              <a href="#" className="session__footer__list__item">
+                Github
+              </a>
             </li>
             <li>
-              <a href="#">LinkedIn</a>
+              <a href="#" className="session__footer__list__item">
+                LinkedIn
+              </a>
             </li>
           </ul>
         </footer>

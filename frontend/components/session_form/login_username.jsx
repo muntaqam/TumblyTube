@@ -3,27 +3,47 @@ import React from "react";
 class LoginUsername extends React.Component {
   render() {
     return (
-      <div className="login-input-container">
+      <div className="login">
         {/* {this.renderErrors()} */}
-        <div className="login-input-container username">
-          <img className="session-logo" src={window.tumbleLogoURL} />
-          <h1 className="session-title">Sign in</h1>
-          <span className="session-subtitle">to continue to TumblyTube</span>
-          <form className="login-form">
+        <header className="login__header">
+          <img className="login__header__logo" src={window.tumbleLogoURL} />
+          <h2 className="login__header__title">Sign in</h2>
+          <span className="login__header__subtitle">
+            to continue to TumblyTube
+          </span>
+        </header>
+        <form className="login__form">
+          <div className="login__form__input">
             <input
-              className="session-form-input"
+              className="login__form__input__item"
               onChange={this.props.handleChange}
               value={this.props.values.username}
-              placeholder="Username"
             />
-            <a className="demo-user">Sign in as demo user</a>
-            <span>or</span>
-            {this.props.formLink}
-            <button className="session-form-btn" onClick={this.props.nextStep}>
+            <label className="login__form__input__label">
+              Email or Username
+            </label>
+          </div>
+          <div className="login__form__question">
+            Don't want to sign in or create an account?{" "}
+          </div>
+          <a
+            className="login__form__demo"
+            onClick={this.props.handleDemo}
+          >
+            Sign in as demo user
+          </a>
+          <div className="login__form__btn">
+            <div className="login__form__btn__link--heavy">
+              {this.props.formLink}
+            </div>
+            <button
+              className="login__form__btn__item"
+              onClick={this.props.nextStep}
+            >
               Next
             </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     );
   }
