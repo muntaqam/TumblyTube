@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class LoginPassword extends React.Component {
   render() {
@@ -15,15 +16,20 @@ class LoginPassword extends React.Component {
     return (
       <div className="login login--container">
         <header className="session__header session__header__login">
-          <img className="session__header__logo" src={window.tumbleLogoURL} />
+          <Link to="/" className="session__header__logo__container">
+            <img
+              className="session__header__logo__img"
+              src={window.tumbleLogoURL}
+            />
+          </Link>
           <h2 className="session__header__title">
             Hi {this.props.values.username}
           </h2>
-          <div className="session__header__username">
-            <span
-              className="session__header__subtitle"
-              onClick={this.props.prevStep}
-            >
+          <div
+            className="session__header__username"
+            onClick={this.props.prevStep}
+          >
+            <span className="session__header__subtitle">
               {this.props.values.username}
             </span>
             <span className="material-icons">expand_more</span>

@@ -107,7 +107,11 @@ SESSIONS HEADER
     align-items: center;
   }
 
-  &__logo {
+  &__logo__container {
+    display: contents;
+  }
+
+  &__logo__img {
     width: 5em;
   }
 

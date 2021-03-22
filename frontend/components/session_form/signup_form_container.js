@@ -7,7 +7,6 @@ import { login, signup, clearErrors } from "../../actions/session_actions";
 const mSTP = ({ errors }) => {
   return {
     errors: errors.session,
-    formType: "signup",
     formLink: <Link to="/login">Sign in instead</Link>,
   };
 };
