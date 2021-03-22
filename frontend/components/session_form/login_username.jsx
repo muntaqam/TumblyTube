@@ -17,6 +17,7 @@ class LoginUsername extends React.Component {
             <input
               className="login__form__input__item"
               onChange={this.props.handleChange}
+              placeholder=" "
               value={this.props.values.username}
             />
             <label className="login__form__input__label">

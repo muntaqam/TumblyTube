@@ -12,18 +12,7 @@ class SignUpForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.renderErrors = this.renderErrors.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
-  }
-
-  renderErrors() {
-    return (
-      <ul>
-        {this.props.errors.map((err, idx) => (
-          <li key={idx}>{err}</li>
-        ))}
-      </ul>
-    );
   }
 
   handleChange(type) {
@@ -55,12 +44,51 @@ class SignUpForm extends React.Component {
   }
 
   render() {
+    let errors = this.props.errors.concat(this.state.errors);
+    let usernameErr;
+    let emailErr;
+    let passwordErr;
+    let passwordMatchErr;
+
+    for (let i = 0; i < errors.length; i++) {
+      let errorType = errors[i].split(" ")[0];
+
+      if (errorType === "Username") {
+        usernameErr = (
+          <div className="session__errors">
+            <span className="material-icons">error</span>
+            <span className="session__errors__type">{errors[i]}</span>
+          </div>
+        );
+      } else if (errorType === "Email") {
+        emailErr = (
+          <div className="session__errors">
+            <span className="material-icons">error</span>
+            <span className="session__errors__type">{errors[i]}</span>
+          </div>
+        );
+      } else if (errorType === "Password") {
+        passwordErr = (
+          <div className="session__errors">
+            <span className="material-icons">error</span>
+            <span className="session__errors__type">{errors[i]}</span>
+          </div>
+        );
+      } else {
+        passwordMatchErr = (
+          <div className="session__errors">
+            <span className="material-icons">error</span>
+            <span className="session__errors__type">{errors[i]}</span>
+          </div>
+        );
+      }
+    }
+
     return (
       <div className="session">
         <div className="signup">
           <div className="signup__main">
             <div className="signup__left">
-              {console.log(this.state.errors)}
               <header className="session__header session__header__signup">
                 <img
                   className="session__header__logo"
@@ -76,22 +104,32 @@ class SignUpForm extends React.Component {
               <form className="signup__form">
                 <div className="signup__form__input">
                   <input
-                    className="signup__form__input__item"
+                    className={
+                      "signup__form__input__item" +
+                      (usernameErr ? " signup__form__input__item--error" : "")
+                    }
                     onChange={this.handleChange("username")}
+                    placeholder=" "
                     value={this.state.username}
                   />
                   <label className="signup__form__input__label">Username</label>
+                  {usernameErr}
                 </div>
                 <div className="signup__form__input">
                   <input
                     type="email"
-                    className="signup__form__input__item"
+                    className={
+                      "signup__form__input__item" +
+                      (emailErr ? " signup__form__input__item--error" : "")
+                    }
                     onChange={this.handleChange("email")}
+                    placeholder=" "
                     value={this.state.email}
                   />
                   <label className="signup__form__input__label">
                     Your email address
                   </label>
+                  {emailErr}
                 </div>
                 <a
                   className="signup__form__demo"
@@ -103,24 +141,36 @@ class SignUpForm extends React.Component {
                   <div className="signup__form__input">
                     <input
                       type="password"
-                      className="signup__form__input__item"
+                      className={
+                        "signup__form__input__item" +
+                        (passwordErr ? " signup__form__input__item--error" : "")
+                      }
                       onChange={this.handleChange("password")}
+                      placeholder=" "
                       value={this.state.password}
                     />
                     <label className="signup__form__input__label">
                       Password
                     </label>
+                    {passwordErr}
                   </div>
                   <div className="signup__form__input">
                     <input
                       type="password"
-                      className="signup__form__input__item"
+                      className={
+                        "signup__form__input__item" +
+                        (passwordMatchErr
+                          ? " signup__form__input__item--error"
+                          : "")
+                      }
                       onChange={this.handleChange("confirmPW")}
+                      placeholder=" "
                       value={this.state.confirmPW}
                     />
                     <label className="signup__form__input__label">
                       Confirm
                     </label>
+                    {passwordMatchErr}
                   </div>
                 </div>
                 <div className="signup__form__input__pw-confirm">
