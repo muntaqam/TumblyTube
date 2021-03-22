@@ -3,14 +3,14 @@ import React from "react";
 class LoginPassword extends React.Component {
   render() {
     return (
-      <div className="login">
-        <header className="login__header">
-          <img className="login__header__logo" src={window.tumbleLogoURL} />
-          <h2 className="login__header__title">
+      <div className="login login--container">
+        <header className="session__header session__header__login">
+          <img className="session__header__logo" src={window.tumbleLogoURL} />
+          <h2 className="session__header__title">
             Hi {this.props.values.username}
           </h2>
           <span
-            className="login__header__subtitle"
+            className="session__header__subtitle"
             onClick={this.props.prevStep}
           >
             {this.props.values.username}

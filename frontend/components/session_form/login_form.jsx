@@ -51,7 +51,7 @@ class LoginForm extends React.Component {
   }
 
   handleDemo() {
-    this.props.login({ username: "demo user", password: "demouserlogin" });
+    this.props.login({ username: "demo user", password: "demouser123" });
   }
 
   render() {
@@ -92,15 +92,32 @@ class LoginForm extends React.Component {
 
           <ul className="session__footer__list">
             <li>
-              <a href="#" className="session__footer__list__item">
+              <a
+                href="https://github.com/nyan9/TumblyTube"
+                className="session__footer__list__item"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 ProjectRepo
               </a>
             </li>
             <li>
-              <a href="#">Github</a>
+              <a
+                href="https://github.com/nyan9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Github
+              </a>
             </li>
             <li>
-              <a href="#">LinkedIn</a>
+              <a
+                href="https://www.linkedin.com/in/nyannaing/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
             </li>
           </ul>
         </footer>

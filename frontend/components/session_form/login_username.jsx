@@ -3,12 +3,12 @@ import React from "react";
 class LoginUsername extends React.Component {
   render() {
     return (
-      <div className="login">
+      <div className="login login--container">
         {/* {this.renderErrors()} */}
-        <header className="login__header">
-          <img className="login__header__logo" src={window.tumbleLogoURL} />
-          <h2 className="login__header__title">Sign in</h2>
-          <span className="login__header__subtitle">
+        <header className="session__header session__header__login">
+          <img className="session__header__logo" src={window.tumbleLogoURL} />
+          <h2 className="session__header__title">Sign in</h2>
+          <span className="session__header__subtitle">
             to continue to TumblyTube
           </span>
         </header>
@@ -26,10 +26,7 @@ class LoginUsername extends React.Component {
           <div className="login__form__question">
             Don't want to sign in or create an account?{" "}
           </div>
-          <a
-            className="login__form__demo"
-            onClick={this.props.handleDemo}
-          >
+          <a className="login__form__demo" onClick={this.props.handleDemo}>
             Sign in as demo user
           </a>
           <div className="login__form__btn">
