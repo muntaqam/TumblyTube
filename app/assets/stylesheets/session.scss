@@ -354,3 +354,18 @@ SESSIONS HEADER
     }
   }
 }
+
+/* 
+  ERRORS
+*/
+
+.session__errors {
+  font-size: 0.75rem;
+  color: var(--clr-error);
+  line-height: 2;
+
+  .material-icons {
+    font-size: 0.75rem;
+    margin: 0 2px;
+  }
+}
