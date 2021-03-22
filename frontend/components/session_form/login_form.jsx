@@ -14,6 +14,7 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.prevStep = this.prevStep.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   // renderErrors() {
@@ -49,6 +50,10 @@ class LoginForm extends React.Component {
     this.props.login(user);
   }
 
+  handleDemo() {
+    this.props.login({ username: "demo user", password: "demouser123" });
+  }
+
   render() {
     const { step } = this.state;
     const { errors, clearErrors, formLink } = this.props;
@@ -56,11 +61,12 @@ class LoginForm extends React.Component {
     const values = { username, password };
 
     return (
-      <div className="login-form-container">
+      <div className="session">
         {step === "username" ? (
           <LoginUsername
             nextStep={this.nextStep}
             handleChange={this.handleChange("username")}
+            handleDemo={this.handleDemo}
             errors={errors}
             clearErrors={clearErrors}
             formLink={formLink}
@@ -70,6 +76,7 @@ class LoginForm extends React.Component {
           <LoginPassword
             prevStep={this.prevStep}
             handleChange={this.handleChange("password")}
+            handleDemo={this.handleDemo}
             handleSubmit={this.handleSubmit}
             errors={errors}
             clearErrors={clearErrors}
@@ -77,17 +84,40 @@ class LoginForm extends React.Component {
             values={values}
           />
         )}
-        <footer id="session-footer">
-          <span id="session-footer-lang">English (United States)</span>
-          <ul id="session-personal-links">
+        <footer className="session__footer">
+          <span className="session__footer__lang">
+            English (United States)
+            <span className="material-icons">arrow_drop_down</span>
+          </span>
+
+          <ul className="session__footer__list">
             <li>
-              <a href="#">Project Repo</a>
+              <a
+                href="https://github.com/nyan9/TumblyTube"
+                className="session__footer__list__item"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                ProjectRepo
+              </a>
             </li>
             <li>
-              <a href="#">Github</a>
+              <a
+                href="https://github.com/nyan9"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Github
+              </a>
             </li>
             <li>
-              <a href="#">LinkedIn</a>
+              <a
+                href="https://www.linkedin.com/in/nyannaing/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
             </li>
           </ul>
         </footer>
