@@ -2,6 +2,16 @@ import React from "react";
 
 class LoginPassword extends React.Component {
   render() {
+    let error;
+    if (this.props.errors.length > 0) {
+      error = (
+        <div className="session__errors">
+          <span className="material-icons">error</span>
+          <span>Incorrect password</span>
+        </div>
+      );
+    }
+
     return (
       <div className="login login--container">
         <header className="session__header session__header__login">
@@ -9,24 +19,32 @@ class LoginPassword extends React.Component {
           <h2 className="session__header__title">
             Hi {this.props.values.username}
           </h2>
-          <span
-            className="session__header__subtitle"
-            onClick={this.props.prevStep}
-          >
-            {this.props.values.username}
-          </span>
+          <div className="session__header__username">
+            <span
+              className="session__header__subtitle"
+              onClick={this.props.prevStep}
+            >
+              {this.props.values.username}
+            </span>
+            <span className="material-icons">expand_more</span>
+          </div>
         </header>
         <form className="login__form">
           <div className="login__form__input">
             <input
               type="password"
-              className="login__form__input__item"
+              className={
+                "login__form__input__item" +
+                (error ? " signup__form__input__item--error" : "")
+              }
               onChange={this.props.handleChange}
+              placeholder=" "
               value={this.props.values.password}
             />
             <label className="login__form__input__label">Password</label>
+            {error}
           </div>
-          <div className="login__form__question question--no-margin">
+          <div className="login__form__question">
             Don't want to sign in or create an account?{" "}
           </div>
           <a className="login__form__demo" onClick={this.props.handleDemo}>

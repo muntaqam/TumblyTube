@@ -15,12 +15,6 @@
     color: var(--clr-primary);
     letter-spacing: 0.3px;
   }
-
-  @media only screen and (min-width: 601px) {
-    justify-content: center;
-    align-items: center;
-    padding: 5em;
-  }
 }
 
 /*
@@ -67,6 +61,12 @@
 }
 
 @media only screen and (min-width: 601px) {
+  .session {
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
+  }
+
   .login--container {
     width: 32em;
     max-height: 36em;
@@ -80,6 +80,7 @@
     border: 1px solid #dadce0;
     border-radius: 7px;
     margin-bottom: 0;
+    max-width: 60em;
 
     .signup__form__password {
       display: flex;
@@ -121,6 +122,32 @@ SESSIONS HEADER
   }
 }
 
+// LOGIN PASSWORD BACK BUTTON
+.session__header__username {
+  margin-top: 1em;
+  border: 1px solid #dadce0;
+  border-radius: 1em;
+  padding: 0.25em 1em;
+  display: inline-flex;
+  align-items: center;
+
+  .session__header__subtitle {
+    font-size: 0.9rem;
+    font-weight: 300;
+    padding: 0;
+  }
+
+  .material-icons {
+    font-size: 1.3rem;
+    align-self: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: #f9f9f9;
+  }
+}
+
 /*
   LOGIN FORM
 */
@@ -131,7 +158,7 @@ SESSIONS HEADER
   padding-top: 3em;
 
   &__question {
-    margin-top: 4em;
+    margin-top: 6em;
     font-size: 0.875rem;
     color: var(--clr-secondary);
   }
@@ -143,10 +170,6 @@ SESSIONS HEADER
     &:hover {
       cursor: pointer;
     }
-  }
-
-  .question--no-margin {
-    margin-top: 1em;
   }
 
   &__btn {
@@ -164,6 +187,10 @@ SESSIONS HEADER
       border-radius: 4px;
       background-color: var(--clr-primary);
       color: white;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -186,11 +213,6 @@ SESSIONS HEADER
     border-radius: 4px;
     font-size: 1rem;
     color: #202124;
-
-    &:focus {
-      border: 2px solid var(--clr-primary);
-      color: #000;
-    }
   }
 
   &__label {
@@ -206,19 +228,7 @@ SESSIONS HEADER
 }
 
 /*
-  LOGIN FORM INPUT ANIMATION
-*/
-
-.login__form__input__item:focus + .login__form__input__label {
-  transform: translateY(-215%);
-  font-size: 0.8rem;
-  padding: 0 4px;
-  background: white;
-  color: var(--clr-primary);
-}
-
-/*
- SIGNUP FORM
+SIGNUP FORM
 */
 
 .signup__form {
@@ -257,7 +267,7 @@ SESSIONS HEADER
   height: 36px;
   width: 100%;
   position: relative;
-  margin-top: 1.7em;
+  margin-top: 2em;
 
   &__item {
     height: 100%;
@@ -268,11 +278,6 @@ SESSIONS HEADER
     border-radius: 4px;
     font-size: 0.85rem;
     color: #202124;
-
-    &:focus {
-      border: 2px solid var(--clr-primary);
-      color: #000;
-    }
   }
 
   &__pw-confirm {
@@ -291,18 +296,6 @@ SESSIONS HEADER
     transition: all 0.3s ease;
     pointer-events: none;
   }
-}
-
-/*
-  SIGNUP FORM INPUT ANIMATION
-*/
-
-.signup__form__input__item:focus + .signup__form__input__label {
-  transform: translateY(-130%);
-  font-size: 0.8rem;
-  padding: 0 4px;
-  background: white;
-  color: var(--clr-primary);
 }
 
 /*
@@ -355,17 +348,117 @@ SESSIONS HEADER
   }
 }
 
+/*
+  LOGIN FORM INPUT ANIMATION
+*/
+
+// label moves to top border on focus
+.login__form__input__item:focus + .login__form__input__label {
+  top: -6px;
+  left: 20px;
+  font-size: 0.8rem;
+  padding: 0 4px;
+  background: white;
+  color: var(--clr-primary);
+}
+
+.login__form__input__item:focus {
+  border: 2px solid var(--clr-primary);
+}
+
+// label sticks to top border when text in input
+.login__form__input__item:not(:placeholder-shown).login__form__input__item:not(:focus)
+  + .login__form__input__label {
+  top: -6px;
+  left: 20px;
+  font-size: 0.8rem;
+  padding: 0 4px;
+  background: white;
+  color: var(--clr-primary);
+}
+
+.login__form__input__item:not(:placeholder-shown).login__form__input__item:not(:focus) {
+  border: 2px solid var(--clr-primary);
+}
+
+/*
+  SIGNUP FORM INPUT ANIMATION
+*/
+
+// label moves to top border on focus
+.signup__form__input__item:focus + .signup__form__input__label {
+  top: -6px;
+  left: 8px;
+  font-size: 0.8rem;
+  padding: 0 4px;
+  background: white;
+  color: var(--clr-primary);
+}
+
+// BORDER
+.signup__form__input__item:focus {
+  border: 2px solid var(--clr-primary);
+}
+
+// label sticks to top border when text in input
+.signup__form__input__item:not(:placeholder-shown).signup__form__input__item:not(:focus)
+  + .signup__form__input__label {
+  top: -6px;
+  left: 8px;
+  font-size: 0.8rem;
+  padding: 0 4px;
+  background: white;
+  color: var(--clr-primary);
+}
+
+// BORDER STICKY
+.signup__form__input__item:not(:placeholder-shown).signup__form__input__item:not(:focus) {
+  border: 2px solid var(--clr-primary);
+}
+
 /* 
-  ERRORS
+ERRORS
 */
 
 .session__errors {
   font-size: 0.75rem;
   color: var(--clr-error);
   line-height: 2;
+  display: inline-flex;
+  align-items: center;
 
   .material-icons {
-    font-size: 0.75rem;
+    font-size: 1rem;
     margin: 0 2px;
   }
+}
+
+@media only screen and (min-width: 601px) {
+  .signup__form__password .session__errors {
+    margin-top: 2em;
+  }
+}
+
+// ERROR BORDER
+.signup__form__input__item--error:focus {
+  border: 2px solid var(--clr-error);
+}
+
+// ERROR BORDER STICKY
+.signup__form__input__item--error:not(:placeholder-shown).signup__form__input__item--error:not(:focus) {
+  border: 2px solid var(--clr-error);
+}
+
+// ERROR LABEL
+.signup__form__input__item--error:focus + .signup__form__input__label,
+.signup__form__input__item--error:focus + .login__form__input__label {
+  color: var(--clr-error);
+}
+
+// ERROR LABEL STICKY
+.signup__form__input__item--error:not(:placeholder-shown).signup__form__input__item--error:not(:focus)
+  + .signup__form__input__label,
+.signup__form__input__item--error:not(:placeholder-shown).signup__form__input__item--error:not(:focus)
+  + .login__form__input__label {
+  color: var(--clr-error);
 }

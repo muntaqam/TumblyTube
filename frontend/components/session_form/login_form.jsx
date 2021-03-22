@@ -17,16 +17,6 @@ class LoginForm extends React.Component {
     this.handleDemo = this.handleDemo.bind(this);
   }
 
-  // renderErrors() {
-  //   return (
-  //     <ul>
-  //       {this.props.errors.map((err, idx) => (
-  //         <li key={idx}>{err}</li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
-
   nextStep() {
     this.setState({ step: "password" });
   }
