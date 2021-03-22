@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class LoginUsername extends React.Component {
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   render() {
     return (
       <div className="login login--container">

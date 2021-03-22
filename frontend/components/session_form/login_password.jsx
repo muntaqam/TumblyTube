@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class LoginPassword extends React.Component {
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   render() {
     let error;
     if (this.props.errors.length > 0) {

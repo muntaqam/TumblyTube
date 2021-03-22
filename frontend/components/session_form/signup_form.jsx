@@ -16,6 +16,10 @@ class SignUpForm extends React.Component {
     this.handleDemo = this.handleDemo.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   handleChange(type) {
     return (e) =>
       this.setState({
