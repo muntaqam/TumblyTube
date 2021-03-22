@@ -1,12 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class LoginUsername extends React.Component {
   render() {
     return (
       <div className="login login--container">
-        {/* {this.renderErrors()} */}
         <header className="session__header session__header__login">
-          <img className="session__header__logo" src={window.tumbleLogoURL} />
+          <Link to="/" className="session__header__logo__container">
+            <img
+              className="session__header__logo__img"
+              src={window.tumbleLogoURL}
+            />
+          </Link>
           <h2 className="session__header__title">Sign in</h2>
           <span className="session__header__subtitle">
             to continue to TumblyTube

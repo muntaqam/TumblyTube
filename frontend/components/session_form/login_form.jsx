@@ -46,7 +46,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { step } = this.state;
-    const { errors, clearErrors, formLink } = this.props;
+    const { errors, clearErrors, formLink, indexLink } = this.props;
     const { username, password } = this.state;
     const values = { username, password };
 
@@ -60,6 +60,7 @@ class LoginForm extends React.Component {
             errors={errors}
             clearErrors={clearErrors}
             formLink={formLink}
+            indexLink={indexLink}
             values={values}
           />
         ) : (
@@ -71,6 +72,7 @@ class LoginForm extends React.Component {
             errors={errors}
             clearErrors={clearErrors}
             formLink={formLink}
+            indexLink={indexLink}
             values={values}
           />
         )}

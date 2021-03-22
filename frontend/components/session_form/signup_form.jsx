@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -90,10 +91,12 @@ class SignUpForm extends React.Component {
           <div className="signup__main">
             <div className="signup__left">
               <header className="session__header session__header__signup">
-                <img
-                  className="session__header__logo"
-                  src={window.tumbleLogoURL}
-                />
+                <Link to="/" className="session__header__logo__container">
+                  <img
+                    className="session__header__logo__img"
+                    src={window.tumbleLogoURL}
+                  />
+                </Link>
                 <h2 className="session__header__title">
                   Create your Tumble Account
                 </h2>
