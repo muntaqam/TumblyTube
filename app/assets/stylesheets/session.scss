@@ -12,7 +12,6 @@
 
   & a {
     text-decoration: none;
-    font-weight: 600;
     color: var(--clr-primary);
     letter-spacing: 0.3px;
   }
@@ -70,6 +69,7 @@
 @media only screen and (min-width: 601px) {
   .login--container {
     width: 32em;
+    max-height: 36em;
     padding: 3em 3em 6em 3em;
     border: 1px solid #dadce0;
     border-radius: 7px;
@@ -79,6 +79,7 @@
     padding: 3em 3em 6em 3em;
     border: 1px solid #dadce0;
     border-radius: 7px;
+    margin-bottom: 0;
 
     .signup__form__password {
       display: flex;
@@ -162,7 +163,6 @@ SESSIONS HEADER
       padding: 0.75em 1.75em;
       border-radius: 4px;
       background-color: var(--clr-primary);
-      font-weight: 600;
       color: white;
     }
   }
@@ -244,7 +244,6 @@ SESSIONS HEADER
       padding: 0.75em 1.75em;
       border-radius: 4px;
       background-color: var(--clr-primary);
-      font-weight: 600;
       color: white;
     }
   }
@@ -314,6 +313,7 @@ SESSIONS HEADER
   display: flex;
   align-items: baseline;
   font-size: 0.75rem;
+  flex-shrink: 1;
 
   &__lang {
     white-space: nowrap;
@@ -342,9 +342,15 @@ SESSIONS HEADER
   &__list a {
     color: var(--clr-secondary);
   }
+}
 
-  @media only screen and (min-width: 601px) {
-    // max-width: 37.3em;
+@media only screen and (min-width: 601px) {
+  .session__footer {
     margin-top: 2em;
+    width: 37.3em;
+
+    &--signup {
+      width: 100%;
+    }
   }
 }
