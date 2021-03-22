@@ -151,12 +151,11 @@ class SignUpForm extends React.Component {
               </figure>
             </div>
           </div>
-          <footer className="session__footer">
+          <footer className="session__footer session__footer--signup">
             <span className="session__footer__lang">
               English (United States)
               <span className="material-icons">arrow_drop_down</span>
             </span>
-
             <ul className="session__footer__list">
               <li>
                 <a
