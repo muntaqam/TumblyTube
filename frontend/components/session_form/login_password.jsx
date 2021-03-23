@@ -2,17 +2,44 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class LoginPassword extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { password: "" };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentWillUnmount() {
     this.props.clearErrors();
   }
 
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const user = Object.assign(
+      {},
+      {
+        username: this.props.identifiedUser.username,
+        password: this.state.password,
+      }
+    );
+    this.props.login(user);
+  }
+
   render() {
-    let error;
+    let showErr;
     if (this.props.errors.length > 0) {
-      error = (
+      showErr = (
         <div className="session__errors">
           <span className="material-icons">error</span>
-          <span>Incorrect password</span>
+          <span className="session__errors__type">{this.props.errors[0]}</span>
         </div>
       );
     }
@@ -27,14 +54,14 @@ class LoginPassword extends React.Component {
             />
           </Link>
           <h2 className="session__header__title">
-            Hi {this.props.values.username}
+            Hi {this.props.identifiedUser.username}
           </h2>
           <div
             className="session__header__username"
             onClick={this.props.prevStep}
           >
             <span className="session__header__subtitle">
-              {this.props.values.username}
+              {this.props.identifiedUser.email}
             </span>
             <span className="material-icons">expand_more</span>
           </div>
@@ -45,14 +72,14 @@ class LoginPassword extends React.Component {
               type="password"
               className={
                 "login__form__input__item" +
-                (error ? " signup__form__input__item--error" : "")
+                (showErr ? " signup__form__input__item--error" : "")
               }
-              onChange={this.props.handleChange}
+              onChange={this.handleChange}
               placeholder=" "
-              value={this.props.values.password}
+              value={this.state.password}
             />
             <label className="login__form__input__label">Password</label>
-            {error}
+            {showErr}
           </div>
           <div className="login__form__question">
             Don't want to sign in or create an account?{" "}
@@ -66,7 +93,7 @@ class LoginPassword extends React.Component {
             </div>
             <button
               className="login__form__btn__item"
-              onClick={this.props.handleSubmit}
+              onClick={this.handleSubmit}
             >
               Sign In
             </button>

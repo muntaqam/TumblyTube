@@ -2,10 +2,15 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import LoginForm from "./login_form";
-import { login, clearErrors } from "../../actions/session_actions";
+import {
+  login,
+  identifyUser,
+  clearErrors,
+} from "../../actions/session_actions";
 
-const mSTP = ({ errors }) => {
+const mSTP = ({ session, errors }) => {
   return {
+    identifiedUser: session.identifiedUser,
     errors: errors.session,
     formLink: <Link to="/signup">Create account</Link>,
   };
@@ -14,6 +19,7 @@ const mSTP = ({ errors }) => {
 const mDTP = (dispatch) => {
   return {
     login: (user) => dispatch(login(user)),
+    identifyUser: (type) => dispatch(identifyUser(type)),
     clearErrors: () => dispatch(clearErrors()),
   };
 };

@@ -6,12 +6,9 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: "",
       step: "username",
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.nextStep = this.nextStep.bind(this);
     this.prevStep = this.prevStep.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
@@ -25,55 +22,41 @@ class LoginForm extends React.Component {
     this.setState({ step: "username" });
   }
 
-  handleChange(type) {
-    return (e) => {
-      this.setState({ [type]: e.target.value });
-    };
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    const user = Object.assign(
-      {},
-      { username: this.state.username, password: this.state.password }
-    );
-    this.props.login(user);
-  }
-
   handleDemo() {
-    this.props.login({ username: "demo user", password: "demouser123" });
+    this.props.login({ email: "Demo User", password: "demouser123" });
   }
 
   render() {
     const { step } = this.state;
-    const { errors, clearErrors, formLink, indexLink } = this.props;
-    const { username, password } = this.state;
-    const values = { username, password };
+    const {
+      errors,
+      clearErrors,
+      formLink,
+      identifyUser,
+      identifiedUser,
+      login,
+    } = this.props;
 
     return (
       <div className="session">
         {step === "username" ? (
           <LoginUsername
             nextStep={this.nextStep}
-            handleChange={this.handleChange("username")}
+            identifyUser={identifyUser}
             handleDemo={this.handleDemo}
             errors={errors}
             clearErrors={clearErrors}
             formLink={formLink}
-            indexLink={indexLink}
-            values={values}
           />
         ) : (
           <LoginPassword
+            identifiedUser={identifiedUser}
+            login={login}
             prevStep={this.prevStep}
-            handleChange={this.handleChange("password")}
             handleDemo={this.handleDemo}
-            handleSubmit={this.handleSubmit}
             errors={errors}
             clearErrors={clearErrors}
             formLink={formLink}
-            indexLink={indexLink}
-            values={values}
           />
         )}
         <footer className="session__footer">

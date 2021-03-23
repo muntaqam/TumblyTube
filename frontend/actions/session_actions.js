@@ -1,14 +1,22 @@
 import * as APIUtil from "../util/session_api_util";
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
+export const RECEIVE_NAME_EMAIL = "RECEIVE_NAME_EMAIL";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
-export const CLEAR_ERRORS= "CLEAR_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 const receiveCurrentUser = (currentUser) => {
   return {
     type: RECEIVE_CURRENT_USER,
     currentUser,
+  };
+};
+
+const receiveNameEmail = (user) => {
+  return {
+    type: RECEIVE_NAME_EMAIL,
+    user,
   };
 };
 
@@ -41,6 +49,13 @@ export const signup = (user) => (dispatch) => {
 export const login = (user) => (dispatch) => {
   return APIUtil.login(user).then(
     (user) => dispatch(receiveCurrentUser(user)),
+    (err) => dispatch(receiveErrors(err.responseJSON))
+  );
+};
+
+export const identifyUser = (inputValue) => (dispatch) => {
+  return APIUtil.identifyUser(inputValue).then(
+    (user) => dispatch(receiveNameEmail(user)),
     (err) => dispatch(receiveErrors(err.responseJSON))
   );
 };

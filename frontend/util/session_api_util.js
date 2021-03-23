@@ -20,3 +20,17 @@ export const logout = () => {
     method: "DELETE",
   });
 };
+
+export const identifyUser = (inputValue) => {
+  let method;
+  if (inputValue.split("@").length !== 2) {
+    method = "username";
+  } else {
+    method = "email";
+  }
+
+  return $.ajax({
+    url: `/api/identify_${method}/${inputValue}`,
+    method: "GET",
+  });
+};
