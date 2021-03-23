@@ -142,10 +142,7 @@ class SignUpForm extends React.Component {
                   </label>
                   {emailErr}
                 </div>
-                <a
-                  className="signup__form__demo"
-                  onClick={this.props.handleDemo}
-                >
+                <a className="signup__form__demo" onClick={this.handleDemo}>
                   Sign in as Demo user instead
                 </a>
                 <div className="signup__form__password">
