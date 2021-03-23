@@ -29,11 +29,10 @@ class SignUpForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.username.split(" ").length !== 0) {
-      this.setState({ errors: ["Username can't have empty spaces"] });
-    }
 
-    if (this.state.password !== this.state.confirmPW) {
+    if (this.state.username.split(" ").length > 1) {
+      this.setState({ errors: ["Username can't have empty spaces"] });
+    } else if (this.state.password !== this.state.confirmPW) {
       this.setState({ errors: ["Passwords do not match"] });
     } else {
       const user = Object.assign(

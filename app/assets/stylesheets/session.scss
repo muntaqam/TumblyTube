@@ -194,6 +194,7 @@ SESSIONS HEADER
 
       &:hover {
         cursor: pointer;
+        background-color: #1569d8;
       }
     }
   }
@@ -259,6 +260,11 @@ SIGNUP FORM
       border-radius: 4px;
       background-color: var(--clr-primary);
       color: white;
+
+      &:hover {
+        background-color: #1569d8;
+        cursor: pointer;
+      }
     }
   }
 }
