@@ -85,7 +85,7 @@ class SignUpForm extends React.Component {
         );
       } else {
         passwordMatchErr = (
-          <div className="session__errors">
+          <div className="session__errors session__errors--pw-match">
             <span className="material-icons">error</span>
             <span className="session__errors__type">{errors[i]}</span>
           </div>
