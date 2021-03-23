@@ -26,7 +26,7 @@ class LoginPassword extends React.Component {
     const user = Object.assign(
       {},
       {
-        username: this.props.identifiedUser.username,
+        email: this.props.identifiedUser.email,
         password: this.state.password,
       }
     );
