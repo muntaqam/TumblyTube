@@ -6,11 +6,14 @@ const NavBar = ({ currentUser, logout }) => {
     <div className="navbar">
       <section className="navbar__session__btn">
         {currentUser ? (
-          <div
-            className="navbar__session__btn navbar__session__btn--logout"
-            onClick={() => logout}
-          >
-            Log out
+          <div>
+            <h3>Hello, {currentUser.username}</h3>
+            <button
+              className="navbar__session__btn navbar__session__btn--logout"
+              onClick={logout}
+            >
+              Log out
+            </button>
           </div>
         ) : (
           <div>
