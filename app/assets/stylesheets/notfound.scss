@@ -1,0 +1,29 @@
+.notfound {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  &__figure {
+    margin: auto;
+    align-self: center;
+  }
+
+  &__caption {
+    margin-top: 3em;
+  }
+
+  &__go-home {
+    margin: auto;
+    text-decoration: none;
+    background: #2f2e41;
+    color: #fff;
+    padding: 0.75em 2em;
+    border-radius: 30px;
+
+    &:hover {
+      cursor: pointer;
+      background: #53d8fe;
+      color: #2f2e41;
+    }
+  }
+}
