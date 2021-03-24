@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import Root from "./components/root";
 // TESTS
-import { login, logout, signup, identifyUser } from "./actions/session_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
@@ -23,8 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // TESTING START
   window.window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.logout = logout;
-  window.identifyUser = identifyUser;
   // TESTING END
 
   const root = document.getElementById("root");

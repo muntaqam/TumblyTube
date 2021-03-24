@@ -1,0 +1,129 @@
+.navbar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--clr-white);
+
+  &--left {
+    align-items: center;
+    flex: 0.3;
+  }
+
+  &--center {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+
+  &--right {
+    align-items: center;
+    justify-content: flex-end;
+    flex: 0.3;
+  }
+
+  &__logo {
+    width: 2em;
+    object-fit: contain;
+    display: block;
+  }
+
+  &__icon:hover {
+    cursor: pointer;
+  }
+}
+
+#menu-button {
+  font-size: 1.7rem;
+  margin: 0 0.8em 0 0.25em;
+  color: var(--clr-text-gray);
+}
+
+#search-button {
+  font-size: 1.2rem;
+  color: var(--clr-text-light-gray);
+}
+
+#upload-button {
+  color: var(--clr-text-gray);
+  position: relative;
+}
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+  border-radius: 1px;
+  border: 1.2px solid #d3d3d3;
+  width: 70%;
+
+  &__input {
+    border: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding-left: 0.7rem;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__button {
+    border-left: 1.2px solid #d3d3d3;
+    padding: 0.2em 1.2em;
+    background: var(--clr-dim-white);
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+      background: var(--clr-hightlight-gray);
+      color: #000000;
+    }
+
+    &:hover > .navbar__tooltip {
+      display: inline-block;
+    }
+  }
+}
+
+.navbar__tooltip {
+  display: none;
+  position: absolute;
+  background: #0101015e;
+  color: white;
+  padding: 10px;
+  font-size: 0.75rem;
+  border-radius: 3px;
+
+  &--search {
+    left: 2px;
+    top: 38px;
+  }
+}
+
+#upload-button:hover + .navbar__tooltip--upload {
+  display: inline-block;
+  top: 51px;
+  right: 58px;
+}
+
+.navbar__avatar {
+  margin: 0 0.7em 0 2em;
+  width: 2.3em;
+  padding: 0.5em;
+  border-radius: 3em;
+  border: 1px solid #74f7f9;
+  background-color: #74f7f9;
+  color: #ffff;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+

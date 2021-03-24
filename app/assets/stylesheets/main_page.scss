@@ -1,0 +1,48 @@
+:root {
+  --clr-white: #ffffff;
+  --clr-dim-white: #f9f9f9;
+  --clr-text-gray: #606060;
+  --clr-text-light-gray: #818181;
+  --clr-separator-gray: #e0e0e0;
+  --clr-hightlight-gray: #e5e5e5;
+}
+
+.main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+}
+
+.main__top {
+  width: 100%;
+  height: 56px;
+  flex-direction: row;
+  padding: 0 1em;
+}
+
+.main__center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+  &__side {
+    // display: none;
+    outline: 1px solid black;
+    width: 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &__videos {
+    outline: 1px solid black;
+    display: grid;
+    width: 100%;
+  }
+}
