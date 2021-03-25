@@ -21,7 +21,6 @@
 
 node_modules/
 vendor/
-Gemfile.lock
 
 /public/assets
 /app/assets/javascripts/bundle.js
