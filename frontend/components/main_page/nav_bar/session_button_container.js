@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { logout, login } from "../../actions/session_actions";
-import MainPage from "./main_page";
+import { logout } from "../../../actions/session_actions";
+import SessionButton from "./session_button";
 
 const mSTP = ({ session, entities: { users } }) => {
   return {
@@ -11,8 +11,7 @@ const mSTP = ({ session, entities: { users } }) => {
 const mDTP = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
-    login: () => dispatch(login()),
   };
 };
 
-export default connect(mSTP, mDTP)(MainPage);
+export default connect(mSTP, mDTP)(SessionButton);

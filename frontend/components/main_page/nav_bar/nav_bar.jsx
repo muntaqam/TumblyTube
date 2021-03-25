@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import SearchBar from "./search_bar";
+import SessionButtonContainer from "./session_button_container";
 
 export default function NavBar() {
   return (
@@ -25,7 +26,7 @@ export default function NavBar() {
           className="navbar__icon navbar__icon--upload"
         />
         <div className="navbar__tooltip navbar__tooltip--upload">Upload</div>
-        <div className="navbar__avatar">D</div>
+        <SessionButtonContainer />
       </div>
     </div>
   );

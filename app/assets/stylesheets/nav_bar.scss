@@ -38,8 +38,8 @@
 }
 
 #menu-button {
-  font-size: 1.7rem;
-  margin: 0 0.8em 0 0.25em;
+  font-size: 1.5rem;
+  margin: 0 0.8em 0 0.3em;
   color: var(--clr-text-gray);
 }
 
@@ -49,6 +49,7 @@
 }
 
 #upload-button {
+  font-size: 1.7rem;
   color: var(--clr-text-gray);
   position: relative;
 }
@@ -56,9 +57,8 @@
 .navbar__search {
   display: flex;
   align-items: center;
-  border-radius: 1px;
-  border: 1.2px solid #d3d3d3;
-  width: 70%;
+  width: 71%;
+  height: 2em;
 
   &__input {
     border: none;
@@ -67,22 +67,39 @@
     background: transparent;
     padding-left: 0.7rem;
     font-size: 1rem;
+    border: 1.2px solid #d3d3d3;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
 
     &:focus {
       outline: none;
+      border: 1px solid #0651b4;
     }
   }
 
   &__button {
-    border-left: 1.2px solid #d3d3d3;
-    padding: 0.2em 1.2em;
+    border-top: 1.2px solid #d3d3d3;
+    border-bottom: 1.2px solid #d3d3d3;
+    border-right: 1.2px solid #d3d3d3;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    padding: 0.2em 1.4em;
     background: var(--clr-dim-white);
+    position: relative;
+    height: 100%;
+    flex-shrink: 1;
+    outline: none;
+    display: flex;
+    align-items: center;
     position: relative;
 
     &:hover {
       cursor: pointer;
       background: var(--clr-hightlight-gray);
-      color: #000000;
+    }
+
+    &:hover > #search-button {
+      color: black;
     }
 
     &:hover > .navbar__tooltip {
@@ -94,36 +111,153 @@
 .navbar__tooltip {
   display: none;
   position: absolute;
-  background: #0101015e;
+  background: #0101017a;
   color: white;
   padding: 10px;
   font-size: 0.75rem;
   border-radius: 3px;
+  transition-duration: 0.5s;
+  text-align: center;
 
   &--search {
-    left: 2px;
-    top: 38px;
+    left: 7px;
+    top: 45px;
+  }
+
+  &--upload {
+    top: 58px;
+    right: 102px;
   }
 }
 
 #upload-button:hover + .navbar__tooltip--upload {
   display: inline-block;
-  top: 51px;
-  right: 58px;
 }
 
-.navbar__avatar {
-  margin: 0 0.7em 0 2em;
-  width: 2.3em;
-  padding: 0.5em;
-  border-radius: 3em;
-  border: 1px solid #74f7f9;
-  background-color: #74f7f9;
-  color: #ffff;
-  text-align: center;
+#signin-button {
+  font-size: 1.7rem;
+  color: #065fd4;
+}
 
-  &:hover {
-    cursor: pointer;
+.navbar__session {
+  &__avatar {
+    margin: 0 0.7em 0 2em;
+    width: 2.3em;
+    height: 2.3em;
+    border-radius: 50%;
+    border: 1px solid #74f7f9;
+    background-color: #74f7f9;
+    color: #ffff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus + .navbar__session__dd,
+    & + .navbar__session__dd:hover,
+    & + .navbar__session__dd:focus-within {
+      display: flex;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &--dd {
+      width: 0.4em;
+      height: 0.4em;
+      font-size: 1.5rem;
+      padding: 0.96em;
+      margin: 0;
+    }
+  }
+
+  &__dd {
+    display: none;
+    flex-direction: column;
+    display: none;
+    position: absolute;
+    top: 49px;
+    right: 0px;
+    align-content: center;
+    align-items: center;
+    background: #fdfdfd;
+    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+
+    &__user {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0.6em 3em 1.5em 0.6em;
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      padding-left: 1em;
+      margin-bottom: auto;
+      margin-top: 0.2em;
+
+      &__name {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.25em;
+      }
+
+      &__email {
+        font-size: 0.9rem;
+      }
+    }
+
+    &__signout {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      justify-content: flex-start;
+      padding: 1em;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &-text {
+        margin: 0 0 0 1em;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  &__login {
+    display: flex;
+    border: 1px solid #065fd4;
+    align-items: center;
+    padding: 0.3em 0.7em;
+    text-align: center;
+    border-radius: 2px;
+    margin-left: 1em;
+    text-decoration: none;
+
+    &__text {
+      margin-left: 0.3em;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #065fd4;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
+#signout-button {
+  font-size: 1.7rem;
+  color: #909090;
+}
