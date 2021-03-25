@@ -6,9 +6,15 @@ Rails.application.routes.draw do
     format: false, 
     constraints: { email: %r{[^\/]+}}, 
     param: :email
+
     get "/identify_username/:username", to: "sessions#identify_username", param: :username
-    resource :users, only: [:create]
+
     resource :session, only: [:create, :destroy, :show]
+    resource :users, only: [:create]
+
+    resources :videos, only: [:index, :show, :create, :destroy, :update] do 
+      resources :comments, only: [:index, :create]
+    end
   end
 
   root "static_pages#root"
