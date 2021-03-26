@@ -5,7 +5,7 @@
   flex-direction: row;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 50;
   background-color: var(--clr-white);
 
   &--left {
@@ -48,7 +48,7 @@
   color: var(--clr-text-light-gray);
 }
 
-#upload-button {
+#upload-button-icon {
   font-size: 1.7rem;
   color: var(--clr-text-gray);
   position: relative;
@@ -130,7 +130,11 @@
   }
 }
 
-#upload-button:hover + .navbar__tooltip--upload {
+.upload-button {
+  background: transparent;
+}
+
+.upload-button:hover + .navbar__tooltip--upload {
   display: inline-block;
 }
 

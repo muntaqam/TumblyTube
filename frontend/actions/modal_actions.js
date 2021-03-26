@@ -1,15 +1,15 @@
-export const SHOW_MODAL = "SHOW_MODAL";
-export const HIDE_MODAL = "HIDE_MODAL";
+export const OPEN_MODAL = "OPEN_MODAL";
+export const CLOSE_MODAL = "CLOSE_MODAL";
 
-export const showModal = (modal) => {
+export const openModal = (modal) => {
   return {
-    type: SHOW_MODAL,
+    type: OPEN_MODAL,
     modal,
   };
 };
 
-export const hideModal = () => {
+export const closeModal = () => {
   return {
-    type: HIDE_MODAL,
+    type: CLOSE_MODAL,
   };
 };

@@ -1,20 +1,45 @@
 import React from "react";
-import UploadFormVideoContainer from "../upload_form/upload_form_video_container";
+import { closeModal } from "../../actions/modal_actions";
+import { connect } from "react-redux";
+import UploadVideoFormContainer from "../upload_video/upload_video_form_container";
+// import SidebarContainer from "../side_bar/side_bar_container";
 
-const Modal = ({ modal, hideModal }) => {
-  if (!modal) return null;
+function Modal({ modal, closeModal }) {
+  if (!modal) {
+    return null;
+  }
+
+  let component;
+  switch (modal) {
+    case "upload":
+      component = <UploadVideoFormContainer />;
+      break;
+    // case "sidebar":
+    //   component = <SidebarContainer />;
+    //   break;
+    default:
+      return null;
+  }
 
   return (
-    <div className="modal">
-      <div className="modal__container" onClick={hideModal}>
-        <div
-          className="modal__container__upload"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <UploadFormVideoContainer />
-        </div>
+    <div className="modal-background" onClick={closeModal}>
+      <div className="modal-child" onClick={(e) => e.stopPropagation()}>
+        {component}
       </div>
     </div>
   );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    modal: state.ui.modal,
+  };
 };
-export default Modal;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    closeModal: () => dispatch(closeModal()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

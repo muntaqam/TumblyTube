@@ -6,12 +6,12 @@ export class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: "",
+      searchStr: "",
     };
   }
 
   update() {
-    return (e) => this.setState({ searchTerm: e.currentTarget.value });
+    return (e) => this.setState({ searchStr: e.currentTarget.value });
   }
   render() {
     return (

@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
-import { hideModal } from "../../actions/modal_actions";
+import { closeModal } from "../../actions/modal_actions";
 import { createVideo } from "../../actions/videos_actions";
-import UploadVideoForm from "./upload_form_video";
+import UploadVideoForm from "./upload_video_form";
 
 const mapStateToProps = ({ errors }) => {
   return {
     errors: errors.video,
-    formType: "uploadVideo",
+    formType: "upload",
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    hideModal: () => dispatch(hideModal()),
+    closeModal: () => dispatch(closeModal()),
     upload: (video) => dispatch(createVideo(video)),
   };
 };

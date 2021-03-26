@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "./nav_bar/nav_bar";
+import NavBar from "./nav_bar/nav_bar_container";
 import SideBar from "./side_bar/side_bar";
 import MainVideoIndex from "./video_index/main_vid_idx";
 

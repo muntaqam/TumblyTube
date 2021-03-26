@@ -3,7 +3,6 @@ class Api::VideosController < ApplicationController
   def index
     @videos = Video.all
     render :index
-
   end
 
   def show
@@ -13,6 +12,7 @@ class Api::VideosController < ApplicationController
 
   def create
     @video = Video.new(video_pararms)
+    @video.creator_id = current_user.id
     if @video.save
       render :show
     else
@@ -23,10 +23,11 @@ class Api::VideosController < ApplicationController
   def destroy
       @video = Video.find(params[:id])
       @video.destroy
+      render :index
   end
 
   private
   def video_params 
-    params.require(:video).permit(:creator_id, :title, :description)
+    params.require(:video).permit(:title, :description, :video_file)
   end
 end

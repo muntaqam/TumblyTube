@@ -14,11 +14,6 @@
  *= require_self
  */
 html {
-  --clr-primary: #1a73e8;
-  --clr-secondary: #62666a;
-  --clr-placeholder: #80868b;
-  --clr-error: #d93025;
-
   box-sizing: border-box;
   color: var(--clr-text);
   font-family: "Roboto", Arial, Helvetica, sans-serif;

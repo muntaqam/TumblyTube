@@ -5,14 +5,16 @@ import MainPage from "./main_page/main_page";
 import LoginFormContainer from "./session_form/login_form_container";
 import SignupFormContainer from "./session_form/signup_form_container";
 import NotFound from "./notfound";
+import Modal from "../components/modal/modal";
 
 const App = () => {
   return (
     <div>
+      <Modal />
       <Switch>
+        <AuthRoute path="/login" component={LoginFormContainer} />
+        <AuthRoute path="/signup" component={SignupFormContainer} />
         <Route exact path="/" component={MainPage} />
-        <AuthRoute exact path="/login" component={LoginFormContainer} />
-        <AuthRoute exact path="/signup" component={SignupFormContainer} />
         <Route component={NotFound} />
       </Switch>
     </div>

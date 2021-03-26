@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
   
   namespace :api, defaults: {format: :json} do
+    resource :session, only: [:create, :destroy, :show]
     get "/identify_email/:email", 
-    to: "sessions#identify_email", 
-    format: false, 
-    constraints: { email: %r{[^\/]+}}, 
-    param: :email
+      to: "sessions#identify_email", 
+      format: false, 
+      constraints: { email: %r{[^\/]+}}, 
+      param: :email
 
     get "/identify_username/:username", to: "sessions#identify_username", param: :username
-
-    resource :session, only: [:create, :destroy, :show]
+    
+    
     resource :users, only: [:create]
-
-    resources :videos, only: [:index, :show, :create, :destroy, :update] do 
-      resources :comments, only: [:index, :create]
-    end
+    
+    resources :videos, only: [:index, :show, :create, :destroy, :update] 
   end
 
   root "static_pages#root"

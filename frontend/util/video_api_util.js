@@ -12,11 +12,13 @@ export const fetchVideo = (vidId) => {
   });
 };
 
-export const createVideo = (inputData) => {
+export const createVideo = (formData) => {
   $.ajax({
     method: "POST",
     url: "/api/videos",
-    data: inputData,
+    data: formData,
+    contentType: false,
+    processData: false,
   });
 };
 
