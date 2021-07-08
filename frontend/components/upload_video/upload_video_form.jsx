@@ -1,6 +1,7 @@
 import React from "react";
 import UploadVideoDragDrop from "./upload_video_dragdrop";
 import UploadVideoDetails from "./upload_video_details";
+;
 
 class UploadVideoForm extends React.Component {
   constructor(props) {
