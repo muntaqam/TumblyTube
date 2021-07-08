@@ -31,6 +31,7 @@ class UploadVideoForm extends React.Component {
   }
 
   handleChange(type) {
+    debugger;
     return (e) => {
       this.setState({ [type]: e.target.value });
     };
@@ -81,17 +82,23 @@ class UploadVideoForm extends React.Component {
     const { closeModal } = this.props;
     let formStep;
     if (!this.state.videoUrl) {
-      formStep = (
-        <UploadVideoDragDrop
-          closeModal={closeModal}
-          handleDrop={this.handleDrop}
-          handleDragOver={this.handleDragOver}
-          handleDragEnter={this.handleDragEnter}
-          handleFile={this.handleFile}
-        />
-      );
+      formStep = <UploadVideoDragDrop
+        closeModal={closeModal}
+        handleDrop={this.handleDrop}
+        handleDragOver={this.handleDragOver}
+        handleDragEnter={this.handleDragEnter}
+        handleFile={this.handleFile}
+      />
     } else {
-      formStep = <UploadVideoDetails />;
+      formStep = <UploadVideoDetails 
+        closeModal={closeModal}
+        title={title}
+        description={description}
+        videoFile={videoFile}
+        videoUrl={videoUrl}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+      />;
     }
 
     return formStep;
