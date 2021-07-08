@@ -1,19 +1,19 @@
 export const fetchVideos = () => {
-  $.ajax({
+  return $.ajax({
     method: "GET",
     url: "/api/videos",
   });
 };
 
 export const fetchVideo = (vidId) => {
-  $.ajax({
+  return $.ajax({
     method: "GET",
     url: `/api/videos/${vidId}`,
   });
 };
 
 export const createVideo = (formData) => {
-  $.ajax({
+  return $.ajax({
     method: "POST",
     url: "/api/videos",
     data: formData,

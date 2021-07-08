@@ -6,6 +6,7 @@ export const REMOVE_VIDEO = "REMOVE_VIDEO";
 export const RECEIVE_VIDEO_ERRORS = "RECEIVE_VIDEO_ERRORS";
 export const CLEAR_VIDEO_ERRORS = "CLEAR_VIDEO_ERRORS";
 
+//sync
 const receiveVideos = (videos) => ({
   type: RECEIVE_VIDEOS,
   videos,
@@ -32,10 +33,12 @@ export const clearVideoErrors = () => ({
   type: CLEAR_VIDEO_ERRORS,
 });
 
-export const fetchVideos = (data) => (dispatch) =>
-  APIUtilVid.fetchVideos(data).then((videos) =>
+//async
+export const fetchVideos = () => (dispatch) => {
+  return APIUtilVid.fetchVideos().then((videos) =>
     dispatch(receiveVideos(videos))
   );
+};
 
 export const fetchVideo = (vidId) => (dispatch) =>
   APIUtilVid.fetchVideo(vidId).then((video) => dispatch(receiveVideo(video)));
