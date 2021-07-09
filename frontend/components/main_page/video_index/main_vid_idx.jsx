@@ -6,7 +6,6 @@ class MainVideoIndex extends React.Component {
   }
   render() {
     if (this.props.videos.length !== 0) {
-      debugger;
       return (
         <ul>
           {Object.values(this.props.videos).map((video) => (
