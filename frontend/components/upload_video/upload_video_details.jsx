@@ -60,8 +60,8 @@ export default class UploadVideoDetails extends React.Component {
           <div>
             <p>Finished processing</p>
           </div>
-          <button id="upload-video-submit-btn" onClick={this.handleSubmit}>
-            {this.props.formType}
+          <button id="upload-video-submit-btn" onClick={this.props.handleSubmit}>
+            Upload!
           </button>
         </footer>
       </div>
