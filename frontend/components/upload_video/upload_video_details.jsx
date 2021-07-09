@@ -12,21 +12,6 @@ export default class UploadVideoDetails extends React.Component {
           </div>
         </header>
 
-        {/* <div id="line-container">
-          <div id="circle-details-container">
-            <p className="strong-p">Details</p>
-            <div id="circle-details"></div>
-          </div>
-          <div id="circle-elements-container">
-            <p className="strong-p">Elements</p>
-            <div id="circle-elements"></div>
-          </div>
-          <div id="circle-visibility-container">
-            <p className="strong-p">Visibility</p>
-            <div id="circle-visibility"></div>
-          </div>
-        </div> */}
-
         <div>
           <form>
             <input
