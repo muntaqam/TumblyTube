@@ -6,15 +6,17 @@ import LoginFormContainer from "./session_form/login_form_container";
 import SignupFormContainer from "./session_form/signup_form_container";
 import NotFound from "./notfound";
 import Modal from "../components/modal/modal";
+import VideoShow from "../components/show_video/show_video_container";
 
 const App = () => {
   return (
     <div>
       <Modal />
       <Switch>
-        <AuthRoute path="/login" component={LoginFormContainer} />
-        <AuthRoute path="/signup" component={SignupFormContainer} />
-        <Route exact path="/" component={MainPage} />
+        <AuthRoute path='/login' component={LoginFormContainer} />
+        <AuthRoute path='/signup' component={SignupFormContainer} />
+        <Route exact path='/' component={MainPage} />
+        <Route exact path='/videos/:video_id' component={VideoShow} />
         <Route component={NotFound} />
       </Switch>
     </div>

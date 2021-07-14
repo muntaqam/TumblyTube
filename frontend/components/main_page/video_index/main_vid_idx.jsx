@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class MainVideoIndex extends React.Component {
   componentDidMount() {
@@ -10,10 +11,12 @@ class MainVideoIndex extends React.Component {
         <ul>
           {Object.values(this.props.videos).map((video) => (
             <li>
-              <video height="170" width="303" controls >
-                <source src={video.videoUrl}/>
-              </video>
-              {video.title}
+              <Link to={`/videos/${video.id}`}>
+                <video height='170' width='303' controls>
+                  <source src={video.videoUrl} />
+                </video>
+                {video.title}
+              </Link>
             </li>
           ))}
         </ul>
