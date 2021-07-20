@@ -4,6 +4,16 @@ import NavBar from "../main_page/nav_bar/nav_bar_container";
 class VideoShow extends React.Component {
   constructor(props) {
     super(props);
+    this.videoRef = React.createRef();
+    this.togglePlay = this.togglePlay.bind(this);
+  }
+
+  togglePlay() {
+    if (this.videoRef.current.paused) {
+      this.videoRef.current.play();
+    } else {
+      this.videoRef.current.pause();
+    }
   }
 
   componentDidMount() {
@@ -21,12 +31,17 @@ class VideoShow extends React.Component {
           <video
             className='player__video viewer'
             src={this.props.video.videoUrl}
+            ref={this.videoRef}
           ></video>
           <div className='player__controls'>
             <div className='progress'>
               <div className='progress__filled'></div>
             </div>
-            <button className='player__button toggle' title='Toggle Play'>
+            <button
+              className='player__button toggle'
+              title='Toggle Play'
+              onClick={this.togglePlay}
+            >
               ➤
             </button>
             <input
