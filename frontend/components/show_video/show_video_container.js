@@ -6,8 +6,8 @@ import { fetchVideo } from "../../actions/videos_actions";
 
 const mSTP = (state, ownProps) => {
   return {
-    videoId: ownProps.match.params.video_id,
-    video: state.entities.videos[ownProps.match.params.video_id],
+    video: state.entities.videos[ownProps.match.params.id],
+    videoId: ownProps.match.params.id,
   };
 };
 

@@ -12,7 +12,7 @@ class MainVideoIndex extends React.Component {
           {Object.values(this.props.videos).map((video) => (
             <li>
               <Link to={`/videos/${video.id}`}>
-                <video height='170' width='303' controls>
+                <video height='170' width='303'>
                   <source src={video.videoUrl} />
                 </video>
                 {video.title}
