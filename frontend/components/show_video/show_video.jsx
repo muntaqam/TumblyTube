@@ -9,11 +9,8 @@ class VideoShow extends React.Component {
   }
 
   togglePlay() {
-    if (this.videoRef.current.paused) {
-      this.videoRef.current.play();
-    } else {
-      this.videoRef.current.pause();
-    }
+    const method = this.videoRef.current.paused ? "play" : "pause";
+    this.videoRef.current[method]();
   }
 
   componentDidMount() {
