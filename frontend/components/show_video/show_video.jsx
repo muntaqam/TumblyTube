@@ -29,6 +29,7 @@ class VideoShow extends React.Component {
             className='player__video viewer'
             src={this.props.video.videoUrl}
             ref={this.videoRef}
+            onClick={this.togglePlay}
           ></video>
           <div className='player__controls'>
             <div className='progress'>
