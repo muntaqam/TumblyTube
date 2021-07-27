@@ -7,9 +7,9 @@ import {
   volumeOffIcon,
   fullScreenIcon,
   fullScreenExitIcon,
-} from "./video_controls";
+} from "./video_control_icons";
 
-class VideoShow extends React.Component {
+class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +20,7 @@ class VideoShow extends React.Component {
     this.videoRef = React.createRef();
     this.togglePlay = this.togglePlay.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
+    this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +49,10 @@ class VideoShow extends React.Component {
     }
   }
 
+  toggleFullScreen() {
+    this.videoRef.current.webkitEnterFullScreen();
+  }
+
   render() {
     if (!this.props.video) return null;
 
@@ -62,6 +67,7 @@ class VideoShow extends React.Component {
             src={this.props.video.videoUrl}
             ref={this.videoRef}
             onClick={this.togglePlay}
+            onDoubleClick={this.toggleFullScreen}
             autoPlay
           ></video>
           <div className='player__controls'>
@@ -76,7 +82,7 @@ class VideoShow extends React.Component {
               {this.state.paused ? playIcon : pauseIcon}
             </button>
             <button
-              className='player__volume toggle'
+              className='player__button toggle'
               onClick={this.toggleMute}
               title={this.state.muted ? "Unmute" : "Mute"}
             >
@@ -97,6 +103,9 @@ class VideoShow extends React.Component {
             <button data-skip='10' className='player__button'>
               25s ⤻
             </button>
+            <button className='player__button' onClick={this.toggleFullScreen}>
+              {fullScreenIcon}
+            </button>
           </div>
 
           <h2>{this.props.video.title}</h2>
@@ -107,4 +116,4 @@ class VideoShow extends React.Component {
   }
 }
 
-export default VideoShow;
+export default VideoPlayer;
