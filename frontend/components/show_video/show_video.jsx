@@ -14,10 +14,12 @@ class VideoShow extends React.Component {
     super(props);
     this.state = {
       paused: false,
+      muted: false,
     };
 
     this.videoRef = React.createRef();
     this.togglePlay = this.togglePlay.bind(this);
+    this.toggleMute = this.toggleMute.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +34,17 @@ class VideoShow extends React.Component {
     } else {
       vid.pause();
       this.setState({ paused: true });
+    }
+  }
+
+  toggleMute() {
+    const vid = this.videoRef.current;
+    if (vid.muted) {
+      vid.muted = false;
+      this.setState({ muted: false });
+    } else {
+      vid.muted = true;
+      this.setState({ muted: true });
     }
   }
 
@@ -57,10 +70,17 @@ class VideoShow extends React.Component {
             </div>
             <button
               className='player__button toggle'
-              title='Play/Pause'
+              title={this.state.paused ? "Play" : "Pause"}
               onClick={this.togglePlay}
             >
               {this.state.paused ? playIcon : pauseIcon}
+            </button>
+            <button
+              className='player__volume toggle'
+              onClick={this.toggleMute}
+              title={this.state.muted ? "Unmute" : "Mute"}
+            >
+              {this.state.muted ? volumeOffIcon : volumeUpIcon}
             </button>
             <input
               type='range'
@@ -74,7 +94,7 @@ class VideoShow extends React.Component {
             <button data-skip='-10' className='player__button'>
               ⤺ 10s
             </button>
-            <button data-skip='25' className='player__button'>
+            <button data-skip='10' className='player__button'>
               25s ⤻
             </button>
           </div>
