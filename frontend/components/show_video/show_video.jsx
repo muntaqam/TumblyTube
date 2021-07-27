@@ -1,17 +1,41 @@
 import React from "react";
 import NavBar from "../main_page/nav_bar/nav_bar_container";
+import {
+  play,
+  pause,
+  volumeUp,
+  volumeOff,
+  fullScreen,
+  fullScreenExit,
+} from "./video_controls";
 
 class VideoShow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      paused: false,
+    };
+
     this.videoRef = React.createRef();
     this.togglePlay = this.togglePlay.bind(this);
   }
 
   togglePlay() {
-    const method = this.videoRef.current.paused ? "play" : "pause";
-    this.videoRef.current[method]();
+    const vid = this.videoRef.current;
+    if (vid.paused) {
+      vid.play();
+      this.setState({ paused: false });
+    } else {
+      vid.pause();
+      this.setState({ paused: true });
+    }
   }
+
+  // changeIcon() {
+  //   if (this.videoRef.current.paused) {
+  //   } else {
+  //   }
+  // }
 
   componentDidMount() {
     this.props.fetchVideo(this.props.videoId);
@@ -19,6 +43,7 @@ class VideoShow extends React.Component {
 
   render() {
     if (!this.props.video) return null;
+
     return (
       <div>
         <div className='main__top'>
@@ -30,6 +55,7 @@ class VideoShow extends React.Component {
             src={this.props.video.videoUrl}
             ref={this.videoRef}
             onClick={this.togglePlay}
+            autoPlay
           ></video>
           <div className='player__controls'>
             <div className='progress'>
@@ -40,7 +66,7 @@ class VideoShow extends React.Component {
               title='Toggle Play'
               onClick={this.togglePlay}
             >
-              ➤
+              {this.state.paused ? play : pause}
             </button>
             <input
               type='range'
