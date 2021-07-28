@@ -1,0 +1,21 @@
+import React from "react";
+import PauseIcon from "@material-ui/icons/Pause";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import VolumeUpIcon from "@material-ui/icons/VolumeUp";
+import VolumeOffIcon from "@material-ui/icons/VolumeOff";
+import FullscreenIcon from "@material-ui/icons/Fullscreen";
+import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
+
+export const playIcon = <PlayArrowIcon id='playarrow-icon' />;
+
+export const pauseIcon = <PauseIcon id='pause-icon' />;
+
+export const volumeUpIcon = <VolumeUpIcon id='volumeup-icon' />;
+
+export const volumeOffIcon = <VolumeOffIcon id='volumeoff-icon' />;
+
+export const fullScreenIcon = <FullscreenIcon id='fullscreen-icon' />;
+
+export const fullScreenExitIcon = (
+  <FullscreenExitIcon id='fullscreenexit-icon' />
+);

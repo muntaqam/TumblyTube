@@ -40,8 +40,11 @@ export const fetchVideos = () => (dispatch) => {
   );
 };
 
-export const fetchVideo = (vidId) => (dispatch) =>
-  APIUtilVid.fetchVideo(vidId).then((video) => dispatch(receiveVideo(video)));
+export const fetchVideo = (vidId) => (dispatch) => {
+  return APIUtilVid.fetchVideo(vidId).then((video) =>
+    dispatch(receiveVideo(video))
+  );
+};
 
 export const createVideo = (video) => (dispatch) =>
   APIUtilVid.createVideo(video).then(

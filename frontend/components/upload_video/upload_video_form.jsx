@@ -31,7 +31,6 @@ class UploadVideoForm extends React.Component {
   }
 
   handleChange(type) {
-    debugger;
     return (e) => {
       this.setState({ [type]: e.target.value });
     };
@@ -63,7 +62,7 @@ class UploadVideoForm extends React.Component {
     if (file) {
       fileReader.readAsDataURL(file);
     } else {
-      this.setState({ videoUrl: "", videoFile: null });
+      this.setState({ videoUrl: null, videoFile: null });
     }
   }
 
