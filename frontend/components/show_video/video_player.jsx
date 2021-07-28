@@ -18,8 +18,11 @@ class VideoPlayer extends React.Component {
     };
 
     this.videoRef = React.createRef();
+    this.volRef = React.createRef();
+
     this.togglePlay = this.togglePlay.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
+    this.handleVolume = this.handleVolume.bind(this);
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
 
@@ -39,12 +42,23 @@ class VideoPlayer extends React.Component {
   }
 
   toggleMute() {
-    const vid = this.videoRef.current;
-    if (vid.muted) {
-      vid.muted = false;
+    const vol = this.videoRef.current.volume;
+    if (vol === 0) {
+      this.videoRef.current.volume = 0.5;
       this.setState({ muted: false });
     } else {
-      vid.muted = true;
+      this.videoRef.current.volume = 0;
+      this.setState({ muted: true });
+    }
+  }
+
+  handleVolume() {
+    const rangeVal = this.volRef.current.value;
+    this.videoRef.current.volume = rangeVal;
+
+    if (rangeVal > 0) {
+      this.setState({ muted: false });
+    } else {
       this.setState({ muted: true });
     }
   }
@@ -92,10 +106,12 @@ class VideoPlayer extends React.Component {
               type='range'
               name='volume'
               className='player__slider'
+              ref={this.volRef}
               min='0'
               max='1'
               step='0.05'
               value='1'
+              onChange={this.handleVolume}
             />
             <button data-skip='-10' className='player__button'>
               ⤺ 10s
