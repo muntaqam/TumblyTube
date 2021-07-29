@@ -124,7 +124,7 @@ class VideoPlayer extends React.Component {
               {this.state.paused ? playIcon : pauseIcon}
             </button>
             <button
-              className='player__button toggle'
+              className='player__button player__button-mute toggle'
               onClick={this.toggleMute}
               title={this.state.muted ? "Unmute" : "Mute"}
             >
@@ -150,7 +150,10 @@ class VideoPlayer extends React.Component {
             >
               10s ⤻
             </button>
-            <button className='player__button' onClick={this.toggleFullScreen}>
+            <button
+              className='player__button player__button-fs'
+              onClick={this.toggleFullScreen}
+            >
               {fullScreenIcon}
             </button>
           </div>
