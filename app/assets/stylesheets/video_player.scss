@@ -29,7 +29,6 @@
 .player__slider {
   -webkit-appearance: none;
   height: 30px;
-  margin-right: auto;
   background-color: transparent;
 
   &::-webkit-slider-runnable-track {
@@ -85,10 +84,16 @@
 }
 
 .progress__filled {
-  width: 50%;
   background: #74f7f8;
   flex: 0;
-  flex-basis: 50%;
+  flex-basis: 0.5%;
+}
+
+.player__time {
+  color: white;
+  font-size: 14px;
+  align-self: center;
+  margin-right: auto;
 }
 
 /* unholy css to style input type="range" */

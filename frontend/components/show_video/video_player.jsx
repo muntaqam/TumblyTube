@@ -15,6 +15,8 @@ class VideoPlayer extends React.Component {
     this.state = {
       paused: false,
       muted: false,
+      duration: "0:00",
+      currentTime: "0:00",
     };
 
     this.videoRef = React.createRef();
@@ -25,6 +27,7 @@ class VideoPlayer extends React.Component {
     this.togglePlay = this.togglePlay.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
+    this.setTime = this.setTime.bind(this);
     this.handleProgress = this.handleProgress.bind(this);
     this.handleScrub = this.handleScrub.bind(this);
     // this.handleSeek = this.handleSeek.bind(this);
@@ -68,12 +71,28 @@ class VideoPlayer extends React.Component {
     }
   }
 
-  // handleSeek() {
-  //   this.videoRef.current.currentTime += 5;
-  // }
-
   toggleFullScreen() {
     this.videoRef.current.requestFullscreen();
+  }
+
+  setTime() {
+    this.handleProgress();
+
+    const vid = this.videoRef.current;
+    let durationMin = Math.floor(vid.duration / 60);
+    let durationSec = Math.floor(vid.duration - durationMin * 60);
+    let currentMin = Math.floor(vid.currentTime / 60);
+    let currentSec = Math.floor(vid.currentTime - currentMin * 60);
+    if (durationSec < 10) {
+      durationSec = `0${durationSec}`;
+    }
+    if (currentSec < 10) {
+      currentSec = `0${currentSec}`;
+    }
+    this.setState({
+      duration: `${durationMin}:${durationSec}`,
+      currentTime: `${currentMin}:${currentSec}`,
+    });
   }
 
   handleProgress() {
@@ -83,6 +102,7 @@ class VideoPlayer extends React.Component {
   }
 
   handleScrub(e) {
+    e.preventDefault();
     const vid = this.videoRef.current;
     const progress = this.progressRef.current;
     const scrubTime =
@@ -105,7 +125,7 @@ class VideoPlayer extends React.Component {
             ref={this.videoRef}
             onClick={this.togglePlay}
             onDoubleClick={this.toggleFullScreen}
-            onTimeUpdate={this.handleProgress}
+            onTimeUpdate={this.setTime}
             autoPlay
           ></video>
           <div className='player__controls'>
@@ -140,16 +160,11 @@ class VideoPlayer extends React.Component {
               step='0.05'
               onChange={this.handleVolume}
             />
-            <button data-skip='-10' className='player__button'>
-              ⤺ 10s
-            </button>
-            <button
-              data-skip='10'
-              className='player__button'
-              onClick={this.handleSeek}
-            >
-              10s ⤻
-            </button>
+            <div className='player__time'>
+              <span>{this.state.currentTime}</span>
+              <span>/</span>
+              <span>{this.state.duration}</span>
+            </div>
             <button
               className='player__button player__button-fs'
               onClick={this.toggleFullScreen}
