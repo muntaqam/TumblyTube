@@ -1,20 +1,21 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import VideoPlayer from "./video_player";
-import { fetchVideo } from "../../actions/videos_actions";
+import VideoShow from "./show_video";
+import { fetchVideos, fetchVideo } from "../../actions/videos_actions";
 
-const mSTP = (state, ownProps) => {
+const mSTP = ({ entities }, ownProps) => {
   return {
-    video: state.entities.videos[ownProps.match.params.id],
-    videoId: ownProps.match.params.id,
+    videos: entities.videos,
+    currentVideo: entities.videos[ownProps.match.params.id],
+    currentVideoId: ownProps.match.params.id,
   };
 };
 
 const mDTP = (dispatch) => {
   return {
-    fetchVideo: (videoId) => dispatch(fetchVideo(videoId)),
+    fetchVideos: () => dispatch(fetchVideos()),
   };
 };
 
-export default withRouter(connect(mSTP, mDTP)(VideoPlayer));
+export default withRouter(connect(mSTP, mDTP)(VideoShow));

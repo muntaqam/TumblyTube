@@ -36,10 +36,6 @@ class VideoPlayer extends React.Component {
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchVideo(this.props.videoId);
-  }
-
   togglePlay() {
     const vid = this.videoRef.current;
     if (vid.paused) {
@@ -198,8 +194,6 @@ class VideoPlayer extends React.Component {
             </button>
           </div>
         </div>
-        <h2>{this.props.video.title}</h2>
-        <span>{this.props.video.description}</span>
       </div>
     );
   }
