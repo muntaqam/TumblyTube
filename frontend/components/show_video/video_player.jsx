@@ -3,6 +3,7 @@ import NavBar from "../main_page/nav_bar/nav_bar_container";
 import {
   playIcon,
   pauseIcon,
+  replayIcon,
   volumeUpIcon,
   volumeOffIcon,
   fullScreenIcon,
@@ -15,6 +16,7 @@ class VideoPlayer extends React.Component {
     this.state = {
       paused: false,
       muted: false,
+      ended: false,
       duration: "0:00",
       currentTime: "0:00",
     };
@@ -25,12 +27,12 @@ class VideoPlayer extends React.Component {
     this.progressRef = React.createRef();
 
     this.togglePlay = this.togglePlay.bind(this);
+    this.handleEnded = this.handleEnded.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
     this.setTime = this.setTime.bind(this);
     this.handleProgress = this.handleProgress.bind(this);
     this.handleScrub = this.handleScrub.bind(this);
-    // this.handleSeek = this.handleSeek.bind(this);
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
 
@@ -47,15 +49,25 @@ class VideoPlayer extends React.Component {
       vid.pause();
       this.setState({ paused: true });
     }
+
+    if (this.state.ended) {
+      this.setState({ ended: false });
+    }
   }
 
   toggleMute() {
     const vol = this.videoRef.current.volume;
-    if (vol === 0) {
-      this.videoRef.current.volume = 0.5;
+    const halfVol = 0.5;
+    const zeroVol = 0;
+
+    if (vol == 0) {
+      this.videoRef.current.volume = halfVol;
+      this.volRef.current.value = halfVol;
       this.setState({ muted: false });
-    } else {
-      this.videoRef.current.volume = 0;
+    }
+    if (vol > 0) {
+      this.videoRef.current.volume = zeroVol;
+      this.volRef.current.value = zeroVol;
       this.setState({ muted: true });
     }
   }
@@ -110,8 +122,20 @@ class VideoPlayer extends React.Component {
     vid.currentTime = scrubTime;
   }
 
+  handleEnded() {
+    this.setState({ ended: true });
+  }
+
   render() {
     if (!this.props.video) return null;
+
+    let playPauseReplay = pauseIcon;
+    if (this.state.ended) {
+      playPauseReplay = replayIcon;
+    }
+    if (this.state.paused) {
+      playPauseReplay = playIcon;
+    }
 
     return (
       <div>
@@ -126,6 +150,7 @@ class VideoPlayer extends React.Component {
             onClick={this.togglePlay}
             onDoubleClick={this.toggleFullScreen}
             onTimeUpdate={this.setTime}
+            onEnded={this.handleEnded}
             autoPlay
           ></video>
           <div className='player__controls'>
@@ -141,7 +166,7 @@ class VideoPlayer extends React.Component {
               title={this.state.paused ? "Play" : "Pause"}
               onClick={this.togglePlay}
             >
-              {this.state.paused ? playIcon : pauseIcon}
+              {playPauseReplay}
             </button>
             <button
               className='player__button player__button-mute toggle'
