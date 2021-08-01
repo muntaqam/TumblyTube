@@ -16,6 +16,7 @@ function SideVideoIndex(props) {
       <li>
         <Link to={`/videos/${props.video.id}`}>
           <video
+            muted
             height='170'
             width='303'
             src={props.video.videoUrl}
