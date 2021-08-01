@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../main_page/nav_bar/nav_bar_container";
 import {
   playIcon,
   pauseIcon,
@@ -123,8 +122,6 @@ class VideoPlayer extends React.Component {
   }
 
   render() {
-    if (!this.props.video) return null;
-
     let playPauseReplay = pauseIcon;
     if (this.state.ended) {
       playPauseReplay = replayIcon;
@@ -134,65 +131,60 @@ class VideoPlayer extends React.Component {
     }
 
     return (
-      <div>
-        <div className='main__top'>
-          <NavBar />
-        </div>
-        <div className='player'>
-          <video
-            className='player__video viewer'
-            src={this.props.video.videoUrl}
-            ref={this.videoRef}
-            onClick={this.togglePlay}
-            onDoubleClick={this.toggleFullScreen}
-            onTimeUpdate={this.setTime}
-            onEnded={this.handleEnded}
-            autoPlay
-          ></video>
-          <div className='player__controls'>
-            <div
-              className='progress'
-              ref={this.progressRef}
-              onClick={this.handleScrub}
-            >
-              <div className='progress__filled' ref={this.progressBarRef}></div>
-            </div>
-            <button
-              className='player__button toggle'
-              title={this.state.paused ? "Play" : "Pause"}
-              onClick={this.togglePlay}
-            >
-              {playPauseReplay}
-            </button>
-            <button
-              className='player__button player__button-mute toggle'
-              onClick={this.toggleMute}
-              title={this.state.muted ? "Unmute" : "Mute"}
-            >
-              {this.state.muted ? volumeOffIcon : volumeUpIcon}
-            </button>
-            <input
-              type='range'
-              name='volume'
-              className='player__slider'
-              ref={this.volRef}
-              min='0'
-              max='1'
-              step='0.05'
-              onChange={this.handleVolume}
-            />
-            <div className='player__time'>
-              <span>{this.state.currentTime}</span>
-              <span>/</span>
-              <span>{this.state.duration}</span>
-            </div>
-            <button
-              className='player__button player__button-fs'
-              onClick={this.toggleFullScreen}
-            >
-              {fullScreenIcon}
-            </button>
+      <div className='player'>
+        <video
+          className='player__video viewer'
+          src={this.props.video.videoUrl}
+          ref={this.videoRef}
+          onClick={this.togglePlay}
+          onDoubleClick={this.toggleFullScreen}
+          onTimeUpdate={this.setTime}
+          onEnded={this.handleEnded}
+          autoPlay
+        ></video>
+        <div className='player__controls'>
+          <div
+            className='progress'
+            ref={this.progressRef}
+            onClick={this.handleScrub}
+          >
+            <div className='progress__filled' ref={this.progressBarRef}></div>
           </div>
+          <button
+            className='player__button toggle'
+            title={this.state.paused ? "Play" : "Pause"}
+            onClick={this.togglePlay}
+          >
+            {playPauseReplay}
+          </button>
+          <button
+            className='player__button player__button-mute toggle'
+            onClick={this.toggleMute}
+            title={this.state.muted ? "Unmute" : "Mute"}
+          >
+            {this.state.muted ? volumeOffIcon : volumeUpIcon}
+          </button>
+          <input
+            type='range'
+            name='volume'
+            className='player__slider'
+            ref={this.volRef}
+            min='0'
+            max='1'
+            step='0.05'
+            onChange={this.handleVolume}
+          />
+          <div className='player__time'>
+            <span>{this.state.currentTime}</span>
+            <span>/</span>
+            <span>{this.state.duration}</span>
+          </div>
+          <button
+            className='player__button player__button-fs'
+            onClick={this.toggleFullScreen}
+          >
+            {fullScreenIcon}
+          </button>
         </div>
       </div>
     );
