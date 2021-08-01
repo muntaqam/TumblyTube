@@ -22,10 +22,10 @@ function SideVideoIndex(props) {
             onMouseEnter={handleMouseEnter}
             onMouseOut={handleMouseOut}
           ></video>
-          {props.video.title}
-          {props.video.username}
-          {props.video.created_at}
         </Link>
+        {props.video.title}
+        {props.video.username}
+        {props.video.uploadedAt}
       </li>
     </ul>
   );
