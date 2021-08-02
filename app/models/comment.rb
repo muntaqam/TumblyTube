@@ -11,4 +11,21 @@
 #  updated_at        :datetime         not null
 #
 class Comment < ApplicationRecord
+  
+  validates :body, :commenter_id, :video_id, presence: true
+
+  belongs_to :video
+
+  belongs_to :commenter,
+    foreign_key: :commenter_id
+    class_name: :User
+
+  belongs_to :parent_comment,
+    foreign_key: :parent_comment_id,
+    class_name: :Comment
+    optional: true
+
+  has_many :child_comments,
+    foreign_key: :parent_comment_id,
+    class_name: :Comment
 end
