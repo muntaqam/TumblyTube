@@ -33,10 +33,10 @@ Rails.application.routes.draw do
     get "/identify_username/:username", to: "sessions#identify_username", param: :username
     
     resource :users, only: [:create]
-    
-    resources :videos, only: [:index, :show, :create, :destroy, :update]
-
-    resources :comments, only: [:create]
+    resources :videos, only: [:index, :show, :create, :destroy, :update] do
+      resources :comments, only: [:index, :create]
+    end
+    resources :comments, only: [:destroy]
   end
 
   root "static_pages#root"
