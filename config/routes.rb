@@ -34,7 +34,9 @@ Rails.application.routes.draw do
     
     resource :users, only: [:create]
     
-    resources :videos, only: [:index, :show, :create, :destroy, :update] 
+    resources :videos, only: [:index, :show, :create, :destroy, :update]
+
+    resources :comments, only: [:create]
   end
 
   root "static_pages#root"

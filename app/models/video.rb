@@ -17,5 +17,9 @@ class Video < ApplicationRecord
     foreign_key: :creator_id,
     class_name: :User
 
+  has_many :comments,
+    foreign_key: :commenter_id,
+    class_name: :Comment
+
   has_one_attached :video_file
 end
