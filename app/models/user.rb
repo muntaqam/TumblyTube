@@ -57,7 +57,6 @@ class User < ApplicationRecord
   end
 
   private
-
   def new_session_token
     SecureRandom.urlsafe_base64
   end
