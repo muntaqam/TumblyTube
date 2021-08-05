@@ -1,10 +1,11 @@
 class Api::CommentsController < ApplicationController
-  
+
+  before_action :require_login, only: [:create, :destroy]
+
   def index 
-    @comments = Comment.all
-    render :index
+    @comments = Video.find_by_id(params[:video_id]).comments
   end
-  
+
   def create
     @comment = current_user.comments.new(comment_params)
 
@@ -16,7 +17,13 @@ class Api::CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find_by_id(params[:id])
 
+    if @comment.destroy
+      render json: @comment.body
+    else
+      render json: @comment.errors.full_messages, status: :unprocessable_entity
+    end
   end
 
   private
