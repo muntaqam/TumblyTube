@@ -1,4 +1,8 @@
-import { RECEIVE_VIDEOS, RECEIVE_VIDEO, REMOVE_VIDEO } from "../actions/videos_actions";
+import {
+  RECEIVE_VIDEOS,
+  RECEIVE_VIDEO,
+  REMOVE_VIDEO,
+} from "../actions/videos_actions";
 
 export default (state = {}, action) => {
   Object.freeze(state);
