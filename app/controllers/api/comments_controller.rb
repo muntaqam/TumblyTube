@@ -20,7 +20,7 @@ class Api::CommentsController < ApplicationController
     @comment = Comment.find_by_id(params[:id])
 
     if @comment.destroy
-      render json: @comment.body
+      render :show
     else
       render json: @comment.errors.full_messages, status: :unprocessable_entity
     end
