@@ -21,16 +21,31 @@ class VideoShow extends React.Component {
         <div className='main__top'>
           <NavBar />
         </div>
-        <VideoPlayer
-          video={this.props.currentVideo}
-          videoId={this.props.currentVideoId}
-        />
-        <div>{this.props.currentVideo.title}</div>
         <div>
-          {this.props.currentVideo.createdAt}
-          Like Dislike Share
+          <div>
+            <VideoPlayer
+              video={this.props.currentVideo}
+              videoId={this.props.currentVideoId}
+            />
+            <div>{this.props.currentVideo.title}</div>
+            <div>
+              {`${this.props.currentVideo.uploadedAt} ago`}
+              <div>Like Dislike Share</div>
+            </div>
+            <div>
+              <div>
+                <div>UserIcon</div>
+                <div>
+                  <div>{this.props.currentVideo.creator}</div>
+                  <div>1.1k Subscribers</div>
+                  <div>Subscribe</div>
+                </div>
+              </div>
+              <div>{this.props.currentVideo.description}</div>
+            </div>
+          </div>
+          <div>{sideVideos}</div>
         </div>
-        {sideVideos}
       </div>
     );
   }
