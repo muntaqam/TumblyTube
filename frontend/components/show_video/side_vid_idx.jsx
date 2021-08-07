@@ -24,9 +24,11 @@ function SideVideoIndex(props) {
             onMouseOut={handleMouseOut}
           ></video>
         </Link>
-        {props.video.title}
-        {props.video.username}
-        {props.video.uploadedAt}
+        <div>
+          <div>{props.video.title}</div>
+          <div>{props.video.username}</div>
+          <div>{`${props.video.uploadedAt} ago`}</div>
+        </div>
       </li>
     </ul>
   );
