@@ -2,13 +2,22 @@ import React from "react";
 import VideoPlayer from "./video_player";
 import SideVideoIndex from "./side_vid_idx";
 import NavBar from "../main_page/nav_bar/nav_bar_container";
+import CommentIndexContainer from "../comments/comment_idx_container";
 
 class VideoShow extends React.Component {
   componentDidMount() {
+    debugger;
     this.props.fetchVideos();
+    // this.props.fetchComments(this.props.currentVideoId);
+  }
+
+  componentDidUpdate() {
+    debugger;
+    this.props.fetchComments(this.props.currentVideoId);
   }
 
   render() {
+    debugger;
     if (!this.props.currentVideo) return null;
     let sideVideos = Object.values(this.props.videos).map((vid) => {
       if (vid.id != this.props.currentVideoId) {
@@ -43,6 +52,7 @@ class VideoShow extends React.Component {
               </div>
               <div>{this.props.currentVideo.description}</div>
             </div>
+            <CommentIndexContainer />
           </div>
           <div>{sideVideos}</div>
         </div>
