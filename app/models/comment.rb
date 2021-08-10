@@ -28,4 +28,8 @@ class Comment < ApplicationRecord
   has_many :child_comments,
     foreign_key: :parent_comment_id,
     class_name: :Comment
+
+  def num_child_comments
+    self.child_comments.count
+  end
 end
