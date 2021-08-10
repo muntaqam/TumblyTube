@@ -6,18 +6,15 @@ import CommentIndexContainer from "../comments/comment_idx_container";
 
 class VideoShow extends React.Component {
   componentDidMount() {
-    debugger;
     this.props.fetchVideos();
     // this.props.fetchComments(this.props.currentVideoId);
   }
 
   componentDidUpdate() {
-    debugger;
     this.props.fetchComments(this.props.currentVideoId);
   }
 
   render() {
-    debugger;
     if (!this.props.currentVideo) return null;
     let sideVideos = Object.values(this.props.videos).map((vid) => {
       if (vid.id != this.props.currentVideoId) {
