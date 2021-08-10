@@ -12,7 +12,7 @@ function CommentIndexItem(props) {
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
       <ul>
         {comment.childComments.map((childComment) => (
-          <li>
+          <li key={childComment.id}>
             <div>{comment.username}</div>
             <div>{`${comment.commentedAt} ago`}</div>
             {childComment.body}
