@@ -3,6 +3,7 @@ import VideoPlayer from "./video_player";
 import SideVideoIndex from "./side_vid_idx";
 import NavBar from "../main_page/nav_bar/nav_bar_container";
 import CommentIndexContainer from "../comments/comment_idx_container";
+import CommentFormContainer from "../comments/comment_form_container";
 
 class VideoShow extends React.Component {
   componentDidMount() {
@@ -49,6 +50,7 @@ class VideoShow extends React.Component {
               </div>
               <div>{this.props.currentVideo.description}</div>
             </div>
+            <CommentFormContainer />
             <CommentIndexContainer />
           </div>
           <div>{sideVideos}</div>
