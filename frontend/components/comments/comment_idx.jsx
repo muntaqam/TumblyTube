@@ -6,12 +6,8 @@ function CommentIndex(props) {
   return (
     <ul>
       {comments.map((comment) => (
-        <li>
-          <CommentIndexItem
-            key={comment.id}
-            comment={comment}
-            deleteComment={deleteComment}
-          />
+        <li key={comment.id}>
+          <CommentIndexItem comment={comment} deleteComment={deleteComment} />
         </li>
       ))}
     </ul>
