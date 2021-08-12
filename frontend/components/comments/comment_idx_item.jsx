@@ -21,8 +21,8 @@ function CommentIndexItem(props) {
       <ul>
         {comment.childComments.map((childComment) => (
           <li key={childComment.id}>
-            <div>{comment.username}</div>
-            <div>{`${comment.commentedAt} ago`}</div>
+            <div>{childComment.username}</div>
+            <div>{`${childComment.commentedAt} ago`}</div>
             {childComment.body}
           </li>
         ))}
