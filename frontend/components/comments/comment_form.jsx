@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 function CommentForm(props) {
-  const { currentUser, currentVideoId, createComment, parentCommentId } = props;
+  const {
+    currentUser,
+    currentVideoId,
+    createComment,
+    parentCommentId,
+    toggleReply,
+  } = props;
   const [body, setBody] = useState("");
   const [disabled, setDisabled] = useState(true);
 
@@ -32,6 +38,7 @@ function CommentForm(props) {
 
   function handleCancel(e) {
     e.preventDefault();
+    if (parentCommentId) toggleReply();
     setBody("");
     setDisabled(true);
   }
