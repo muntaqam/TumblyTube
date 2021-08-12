@@ -14,9 +14,14 @@ function CommentIndexItem(props) {
   }
 
   function handleDelete(commentId) {
-    let userVerified = verifyUser();
-    if (userVerified) deleteComment(commentId);
+    deleteComment(commentId);
   }
+
+  const renderDelete = (commentId) => {
+    let userVerified = verifyUser();
+    if (userVerified)
+      return <button onClick={() => handleDelete(commentId)}>Delete</button>;
+  };
 
   return (
     <div>
@@ -28,9 +33,7 @@ function CommentIndexItem(props) {
       {toggled ? (
         <CommentForm parentCommentId={comment.id} toggleReply={toggleReply} />
       ) : null}
-      {verifyUser() ? (
-        <button onClick={() => handleDelete(comment.id)}>Delete</button>
-      ) : null}
+      {renderDelete(comment.id)}
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
       <ul>
         {comment.childComments.map((childComment) => (
@@ -38,6 +41,7 @@ function CommentIndexItem(props) {
             <div>{childComment.username}</div>
             <div>{`${childComment.commentedAt} ago`}</div>
             {childComment.body}
+            <div>{renderDelete(childComment.id)}</div>
           </li>
         ))}
       </ul>
