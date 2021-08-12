@@ -20,7 +20,6 @@ export default (state = {}, action) => {
       );
       return newState;
     case REMOVE_COMMENT:
-
       delete newState[action.commentId];
       return newState;
     default:
