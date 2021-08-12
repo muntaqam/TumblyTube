@@ -1,4 +1,5 @@
 import {
+  RECEIVE_CHILD_COMMENT,
   RECEIVE_COMMENT,
   RECEIVE_COMMENTS,
   REMOVE_COMMENT,
@@ -6,14 +7,20 @@ import {
 
 export default (state = {}, action) => {
   Object.freeze(state);
+  let newState = Object.assign({}, state);
 
   switch (action.type) {
     case RECEIVE_COMMENTS:
       return action.comments;
     case RECEIVE_COMMENT:
       return Object.assign({}, state, { [action.comment.id]: action.comment });
+    case RECEIVE_CHILD_COMMENT:
+      newState[action.comment.parent_comment_id].childComments.push(
+        action.comment
+      );
+      return newState;
     case REMOVE_COMMENT:
-      const newState = Object.assign({}, state);
+
       delete newState[action.commentId];
       return newState;
     default:

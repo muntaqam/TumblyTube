@@ -1,4 +1,4 @@
-json.extract! comment, :id, :commenter_id, :video_id, :body
+json.extract! comment, :id, :commenter_id, :parent_comment_id, :video_id, :body
 json.childComments comment.child_comments
 json.numChildComments comment.num_child_comments
 json.extract! comment.commenter, :username

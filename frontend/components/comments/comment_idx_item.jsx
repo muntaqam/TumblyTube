@@ -5,7 +5,7 @@ function CommentIndexItem(props) {
   const { comment } = props;
   const [toggled, setToggled] = useState(false);
 
-  function handleReply() {
+  function toggleReply() {
     toggled ? setToggled(false) : setToggled(true);
   }
 
@@ -15,7 +15,7 @@ function CommentIndexItem(props) {
       <div>{comment.username}</div>
       <div>{`${comment.commentedAt} ago`}</div>
       <div>{comment.body}</div>
-      <button onClick={handleReply}>REPLY</button>
+      <button onClick={toggleReply}>REPLY</button>
       {toggled ? <CommentForm parentCommentId={comment.id} /> : null}
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
       <ul>
