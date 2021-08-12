@@ -16,7 +16,9 @@ function CommentIndexItem(props) {
       <div>{`${comment.commentedAt} ago`}</div>
       <div>{comment.body}</div>
       <button onClick={toggleReply}>REPLY</button>
-      {toggled ? <CommentForm parentCommentId={comment.id} /> : null}
+      {toggled ? (
+        <CommentForm parentCommentId={comment.id} toggleReply={toggleReply} />
+      ) : null}
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
       <ul>
         {comment.childComments.map((childComment) => (
