@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 function CommentForm(props) {
-  const { currentUser, currentVideoId, createComment } = props;
+  const { currentUser, currentVideoId, createComment, parentCommentId } = props;
   const [body, setBody] = useState("");
   const [disabled, setDisabled] = useState(true);
 
@@ -24,6 +24,7 @@ function CommentForm(props) {
       body,
       commenter_id: currentUser.id,
       video_id: currentVideoId,
+      parent_comment_id: parentCommentId,
     });
     setBody("");
     setDisabled(true);
@@ -48,7 +49,9 @@ function CommentForm(props) {
         <div>
           <input
             type='text'
-            placeholder='Add a public comment...'
+            placeholder={`Add a public ${
+              parentCommentId ? "reply" : "comment"
+            }...`}
             value={body}
             onChange={handleInput}
             onFocus={requireLogin}
@@ -62,7 +65,7 @@ function CommentForm(props) {
             className={`comment__button ${disabled ? "hidden" : ""}`}
             onClick={handleSubmit}
           >
-            COMMENT
+            {parentCommentId ? "REPLY" : "COMMENT"}
           </button>
         </div>
       </div>

@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
+import CommentForm from "./comment_form_container";
 
 function CommentIndexItem(props) {
   const { comment } = props;
+  const [toggled, setToggled] = useState(false);
+
+  function handleReply() {
+    toggled ? setToggled(false) : setToggled(true);
+  }
 
   return (
     <div>
@@ -9,6 +15,8 @@ function CommentIndexItem(props) {
       <div>{comment.username}</div>
       <div>{`${comment.commentedAt} ago`}</div>
       <div>{comment.body}</div>
+      <button onClick={handleReply}>REPLY</button>
+      {toggled ? <CommentForm parentCommentId={comment.id} /> : null}
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
       <ul>
         {comment.childComments.map((childComment) => (
