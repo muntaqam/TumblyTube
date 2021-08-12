@@ -20,9 +20,9 @@ const receiveChildComment = (comment) => ({
   comment,
 });
 
-const removeComment = (comment) => ({
+const removeComment = (commentId) => ({
   type: REMOVE_COMMENT,
-  commentId: comment.id,
+  commentId,
 });
 
 export const fetchComments = (vidId) => (dispatch) => {
@@ -41,6 +41,6 @@ export const createComment = (comment) => (dispatch) => {
 
 export const deleteComment = (commentId) => (dispatch) => {
   return APIUtil.deleteComment(commentId).then((comment) =>
-    dispatch(removeComment(comment))
+    dispatch(removeComment(comment.id))
   );
 };

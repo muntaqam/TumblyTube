@@ -2,11 +2,20 @@ import React, { useState, useEffect } from "react";
 import CommentForm from "./comment_form_container";
 
 function CommentIndexItem(props) {
-  const { comment } = props;
+  const { comment, deleteComment, currentUser } = props;
   const [toggled, setToggled] = useState(false);
 
   function toggleReply() {
     toggled ? setToggled(false) : setToggled(true);
+  }
+
+  function verifyUser() {
+    return comment.commenter_id === currentUser.id;
+  }
+
+  function handleDelete(commentId) {
+    let userVerified = verifyUser();
+    if (userVerified) deleteComment(commentId);
   }
 
   return (
@@ -18,6 +27,9 @@ function CommentIndexItem(props) {
       <button onClick={toggleReply}>REPLY</button>
       {toggled ? (
         <CommentForm parentCommentId={comment.id} toggleReply={toggleReply} />
+      ) : null}
+      {verifyUser() ? (
+        <button onClick={() => handleDelete(comment.id)}>Delete</button>
       ) : null}
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
       <ul>
