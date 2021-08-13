@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CommentForm from "./comment_form_container";
 
 function CommentIndexItem(props) {
-  const { comment, deleteComment, currentUser } = props;
+  const { comment, childComments, deleteComment, currentUser } = props;
   const [toggled, setToggled] = useState(false);
 
   function toggleReply() {
@@ -10,7 +10,7 @@ function CommentIndexItem(props) {
   }
 
   function verifyUser() {
-    return comment.commenter_id === currentUser.id;
+    return comment.commenterId === currentUser.id;
   }
 
   function handleDelete(commentId) {
@@ -21,6 +21,17 @@ function CommentIndexItem(props) {
     let userVerified = verifyUser();
     if (userVerified)
       return <button onClick={() => handleDelete(commentId)}>Delete</button>;
+  };
+
+  const renderChildComments = () => {
+    return childComments.map((childComment) => (
+      <li>
+        <div>{childComment.username}</div>
+        <div>{`${childComment.commentedAt} ago`}</div>
+        <div>{childComment.body}</div>
+        <div>{renderDelete(childComment.id)}</div>
+      </li>
+    ));
   };
 
   return (
@@ -35,16 +46,8 @@ function CommentIndexItem(props) {
       ) : null}
       {renderDelete(comment.id)}
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
-      <ul>
-        {comment.childComments.map((childComment) => (
-          <li key={childComment.id}>
-            <div>{childComment.username}</div>
-            <div>{`${childComment.commentedAt} ago`}</div>
-            {childComment.body}
-            <div>{renderDelete(childComment.id)}</div>
-          </li>
-        ))}
-      </ul>
+
+      <ul>{childComments ? renderChildComments() : null}</ul>
     </div>
   );
 }
