@@ -3,6 +3,7 @@
 json.key_format! camelize: :lower
 json.deep_format_keys!
 
+json.childComments({})
 json.set! :childComments do
   comment.child_comments.each do |child_comment|
     json.set! child_comment.id do
