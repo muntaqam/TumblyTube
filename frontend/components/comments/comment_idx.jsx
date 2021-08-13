@@ -10,6 +10,9 @@ function CommentIndex(props) {
         <li key={comment.id}>
           <CommentIndexItem
             comment={comment}
+            childComments={
+              comment.childComments ? Object.values(comment.childComments) : []
+            }
             deleteComment={deleteComment}
             currentUser={currentUser}
           />

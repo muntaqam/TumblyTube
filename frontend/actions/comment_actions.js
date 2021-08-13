@@ -18,11 +18,13 @@ const receiveComment = (comment) => ({
 const receiveChildComment = (comment) => ({
   type: RECEIVE_CHILD_COMMENT,
   comment,
+  parentCommentId: comment.parentCommentId,
 });
 
-const removeComment = (commentId) => ({
+const removeComment = (comment) => ({
   type: REMOVE_COMMENT,
-  commentId,
+  commentId: comment.id,
+  parentCommentId: comment.parentCommentId,
 });
 
 export const fetchComments = (vidId) => (dispatch) => {
@@ -33,7 +35,7 @@ export const fetchComments = (vidId) => (dispatch) => {
 
 export const createComment = (comment) => (dispatch) => {
   return APIUtil.createComment(comment).then((comment) =>
-    comment.parent_comment_id
+    comment.parentCommentId
       ? dispatch(receiveChildComment(comment))
       : dispatch(receiveComment(comment))
   );
@@ -41,6 +43,6 @@ export const createComment = (comment) => (dispatch) => {
 
 export const deleteComment = (commentId) => (dispatch) => {
   return APIUtil.deleteComment(commentId).then((comment) =>
-    dispatch(removeComment(comment.id))
+    dispatch(removeComment(comment))
   );
 };
