@@ -21,11 +21,23 @@ class User < ApplicationRecord
 
   has_many :comments,
     foreign_key: :commenter_id,
-    class_name: :Comment
+    class_name: :Comment,
+    dependent: :destroy
 
   has_many :videos,
     foreign_key: :creator_id,
-    class_name: :Video
+    class_name: :Video,
+    dependent: :destroy
+
+  has_many :likes,
+    foreign_key: :liker_id,
+    class_name: :Like,
+    dependent: :destroy
+
+  has_many :liked_videos,
+    through: :likes,
+    source: :likeable,
+    source_type: :Video
 
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)

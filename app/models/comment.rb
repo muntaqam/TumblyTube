@@ -27,7 +27,10 @@ class Comment < ApplicationRecord
 
   has_many :child_comments,
     foreign_key: :parent_comment_id,
-    class_name: :Comment
+    class_name: :Comment,
+    dependent: :destroy
+
+  has_many :likes, as: :likeable
 
   def num_child_comments
     self.child_comments.count
