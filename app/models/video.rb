@@ -19,7 +19,10 @@ class Video < ApplicationRecord
 
   has_many :comments,
     foreign_key: :video_id,
-    class_name: :Comment
+    class_name: :Comment,
+    dependent: :destroy
 
+  has_many :likes, as: :likeable
+  
   has_one_attached :video_file
 end
