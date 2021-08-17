@@ -11,7 +11,7 @@
 #  updated_at        :datetime         not null
 #
 class Comment < ApplicationRecord
-  
+   
   validates :body, :commenter_id, :video_id, presence: true
 
   belongs_to :video
@@ -34,5 +34,17 @@ class Comment < ApplicationRecord
 
   def num_child_comments
     self.child_comments.count
+  end
+
+  def num_likes
+    self.likes.count
+  end
+
+  def num_dislikes
+    self.likes.where(version: "dislike").length
+  end
+
+  def is_liked?
+    
   end
 end

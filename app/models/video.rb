@@ -25,4 +25,16 @@ class Video < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
   
   has_one_attached :video_file
+
+  def num_likes
+    self.likes.where(version: "like").length
+  end
+
+  def num_dislikes
+    self.likes.where(version: "dislike").length
+  end
+
+  def is_liked?
+    !!self.likes.where(liker_id: current_user.id)
+  end
 end
