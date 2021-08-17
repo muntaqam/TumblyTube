@@ -43,8 +43,4 @@ class Comment < ApplicationRecord
   def num_dislikes
     self.likes.where(version: "dislike").length
   end
-
-  def is_liked?
-    
-  end
 end

@@ -33,8 +33,4 @@ class Video < ApplicationRecord
   def num_dislikes
     self.likes.where(version: "dislike").length
   end
-
-  def is_liked?
-    !!self.likes.where(liker_id: current_user.id)
-  end
 end
