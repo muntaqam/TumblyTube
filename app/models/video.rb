@@ -22,7 +22,15 @@ class Video < ApplicationRecord
     class_name: :Comment,
     dependent: :destroy
 
-  has_many :likes, as: :likeable
+  has_many :likes, as: :likeable, dependent: :destroy
   
   has_one_attached :video_file
+
+  def num_likes
+    self.likes.where(version: "like").length
+  end
+
+  def num_dislikes
+    self.likes.where(version: "dislike").length
+  end
 end
