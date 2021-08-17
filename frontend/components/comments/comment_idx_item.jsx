@@ -10,7 +10,7 @@ function CommentIndexItem(props) {
   }
 
   function verifyUser(commenterId) {
-    return commenterId === currentUser.id;
+    return commenterId === currentUser?.id;
   }
 
   function handleDelete(commentId) {
