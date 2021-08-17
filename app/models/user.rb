@@ -39,6 +39,10 @@ class User < ApplicationRecord
     source: :likeable,
     source_type: :Video
 
+  def likes_dislikes
+    self.likes
+  end
+
   def self.find_by_credentials(email, password)
     user = User.find_by_email(email)
     if user && user.is_password?(password)
