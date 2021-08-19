@@ -37,7 +37,7 @@ class Comment < ApplicationRecord
   end
 
   def num_likes
-    self.likes.where(version: "like").count
+    self.likes.where(version: "like").length
   end
 
   def num_dislikes
