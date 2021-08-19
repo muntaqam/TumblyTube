@@ -43,12 +43,12 @@ function CommentIndexItem(props) {
       <div>{`${comment.commentedAt} ago`}</div>
       <div>{comment.body}</div>
       <div>
-        {/* <LikeInterface
+        <LikeInterface
           likeableId={comment.id}
           likeableType='Comment'
           numLikes={comment.numLikes}
           numDislikes={comment.numDislikes}
-        /> */}
+        />
       </div>
       <button onClick={toggleReply}>REPLY</button>
       {toggled ? (
