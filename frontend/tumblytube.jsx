@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // TESTING START
-  window.createLike = createLike;
   window.deleteLike = deleteLike;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
