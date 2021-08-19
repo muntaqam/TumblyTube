@@ -39,7 +39,7 @@ class VideoShow extends React.Component {
                 numLikes={this.props.currentVideo.numLikes}
                 numDislikes={this.props.currentVideo.numDislikes}
               />
-              <div>Like Dislike Share</div>
+              <div>Share</div>
             </div>
             <div>
               <div>
