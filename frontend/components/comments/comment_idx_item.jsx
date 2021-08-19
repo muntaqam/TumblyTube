@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import LikeInterface from "../likes/like_interface_container";
 import CommentForm from "./comment_form_container";
 
 function CommentIndexItem(props) {
@@ -40,6 +41,14 @@ function CommentIndexItem(props) {
       <div>{comment.username}</div>
       <div>{`${comment.commentedAt} ago`}</div>
       <div>{comment.body}</div>
+      <div>
+        {/* <LikeInterface
+          likeableId={comment.id}
+          likeableType='Comment'
+          numLikes={comment.numLikes}
+          numDislikes={comment.numDislikes}
+        /> */}
+      </div>
       <button onClick={toggleReply}>REPLY</button>
       {toggled ? (
         <CommentForm parentCommentId={comment.id} toggleReply={toggleReply} />

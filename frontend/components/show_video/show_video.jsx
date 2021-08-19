@@ -4,16 +4,17 @@ import SideVideoIndex from "./side_vid_idx";
 import NavBar from "../main_page/nav_bar/nav_bar_container";
 import CommentIndexContainer from "../comments/comment_idx_container";
 import CommentFormContainer from "../comments/comment_form_container";
+import LikeInterface from "../likes/like_interface_container";
 
 class VideoShow extends React.Component {
   componentDidMount() {
     this.props.fetchVideos();
-    // this.props.fetchComments(this.props.currentVideoId);
-  }
-
-  componentDidUpdate() {
     this.props.fetchComments(this.props.currentVideoId);
   }
+
+  // componentDidUpdate() {
+  //   this.props.fetchComments(this.props.currentVideoId);
+  // }
 
   render() {
     if (!this.props.currentVideo) return null;
@@ -37,6 +38,12 @@ class VideoShow extends React.Component {
             <div>{this.props.currentVideo.title}</div>
             <div>
               {`${this.props.currentVideo.uploadedAt} ago`}
+              <LikeInterface
+                likeableId={this.props.currentVideoId}
+                likeableType='Video'
+                numLikes={this.props.currentVideo.numLikes}
+                numDislikes={this.props.currentVideo.numDislikes}
+              />
               <div>Like Dislike Share</div>
             </div>
             <div>
