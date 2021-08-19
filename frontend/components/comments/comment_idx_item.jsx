@@ -3,7 +3,8 @@ import LikeInterface from "../likes/like_interface_container";
 import CommentForm from "./comment_form_container";
 
 function CommentIndexItem(props) {
-  const { comment, childComments, deleteComment, currentUser } = props;
+  const { comment, currentVideoId, childComments, deleteComment, currentUser } =
+    props;
   const [toggled, setToggled] = useState(false);
 
   function toggleReply() {
@@ -51,7 +52,11 @@ function CommentIndexItem(props) {
       </div>
       <button onClick={toggleReply}>REPLY</button>
       {toggled ? (
-        <CommentForm parentCommentId={comment.id} toggleReply={toggleReply} />
+        <CommentForm
+          parentCommentId={comment.id}
+          currentVideoId={currentVideoId}
+          toggleReply={toggleReply}
+        />
       ) : null}
       {renderDelete(comment.id, comment.commenterId)}
       <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>

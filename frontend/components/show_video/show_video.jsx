@@ -9,12 +9,7 @@ import LikeInterface from "../likes/like_interface_container";
 class VideoShow extends React.Component {
   componentDidMount() {
     this.props.fetchVideos();
-    this.props.fetchComments(this.props.currentVideoId);
   }
-
-  // componentDidUpdate() {
-  //   this.props.fetchComments(this.props.currentVideoId);
-  // }
 
   render() {
     if (!this.props.currentVideo) return null;
@@ -57,8 +52,8 @@ class VideoShow extends React.Component {
               </div>
               <div>{this.props.currentVideo.description}</div>
             </div>
-            <CommentFormContainer />
-            <CommentIndexContainer />
+            <CommentFormContainer currentVideoId={this.props.currentVideoId} />
+            <CommentIndexContainer currentVideoId={this.props.currentVideoId} />
           </div>
           <div>{sideVideos}</div>
         </div>

@@ -2,7 +2,17 @@ import React, { useState, useEffect } from "react";
 import CommentIndexItem from "./comment_idx_item";
 
 function CommentIndex(props) {
-  const { comments, deleteComment, currentUser } = props;
+  const {
+    comments,
+    currentVideoId,
+    fetchComments,
+    deleteComment,
+    currentUser,
+  } = props;
+
+  useEffect(() => {
+    fetchComments(currentVideoId);
+  }, [currentVideoId]);
 
   return (
     <ul>
@@ -13,6 +23,7 @@ function CommentIndex(props) {
             childComments={
               comment.childComments ? Object.values(comment.childComments) : []
             }
+            currentVideoId={currentVideoId}
             deleteComment={deleteComment}
             currentUser={currentUser}
           />

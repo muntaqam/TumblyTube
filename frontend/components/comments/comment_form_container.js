@@ -6,7 +6,6 @@ import CommentForm from "./comment_form";
 
 const mSTP = ({ session, entities: { users } }, ownProps) => {
   return {
-    currentVideoId: ownProps.match.params.id,
     currentUser: users[session.id],
   };
 };
