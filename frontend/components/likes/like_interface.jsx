@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime";
 import React, { useState, useEffect } from "react";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -14,7 +15,7 @@ function LikeInterface(props) {
   } = props;
   const [status, setStatus] = useState("");
 
-  function handleLike(version) {
+  async function handleLike(version) {
     // set passed down properties to newLike obj for later use
     const newLike = {
       likeable_type: likeableType,
@@ -31,7 +32,7 @@ function LikeInterface(props) {
         return;
       }
       // deleteLike then create newLike, if liked and version isn't the same
-      deleteLike(liked.id);
+      await deleteLike(liked.id);
     }
     // create newLike, if not yet liked
     createLike(newLike);
