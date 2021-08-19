@@ -15,7 +15,9 @@ class Api::LikesController < ApplicationController
 
   def destroy
     @like = Like.find_by_id(params[:id])
+    
     if @like.destroy
+      render :show
     else
       render json: @like.errors.full_messages, status: :unprocessable_entity
     end
