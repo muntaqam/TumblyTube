@@ -5,6 +5,7 @@ export const RECEIVE_VIDEO = "RECEIVE_VIDEO";
 export const REMOVE_VIDEO = "REMOVE_VIDEO";
 export const RECEIVE_VIDEO_ERRORS = "RECEIVE_VIDEO_ERRORS";
 export const CLEAR_VIDEO_ERRORS = "CLEAR_VIDEO_ERRORS";
+export const ADD_VIDEO_VIEWS = "ADD_VIDEO_VIEWS";
 
 //sync
 const receiveVideos = (videos) => ({
@@ -33,6 +34,12 @@ export const clearVideoErrors = () => ({
   type: CLEAR_VIDEO_ERRORS,
 });
 
+const addVideoViews = (video) => ({
+  type: ADD_VIDEO_VIEWS,
+  video,
+  videoId: video.id,
+});
+
 //async
 export const fetchVideos = () => (dispatch) => {
   return APIUtilVid.fetchVideos().then((videos) =>
@@ -57,4 +64,8 @@ export const deleteVideo = (videoId) => (dispatch) => {
     dispatch(destroyVideo(videoId)),
     (errors) => dispatch(receiveVideoErrors(errors))
   );
+};
+
+export const addViews = (videoId) => (dispatch) => {
+  APIUtilVid.addViews(videoId).then((video) => dispatch(addVideoViews(video)));
 };

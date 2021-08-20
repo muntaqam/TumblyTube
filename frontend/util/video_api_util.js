@@ -28,3 +28,10 @@ export const deleteVideo = (videoId) => {
     url: `/api/videos/${videoId}`,
   });
 };
+
+export const addViews = (videoId) => {
+  return $.ajax({
+    method: "POST",
+    url: `/api/videos/${videoId}/add_views`,
+  });
+};

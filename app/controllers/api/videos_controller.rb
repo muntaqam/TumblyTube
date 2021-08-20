@@ -23,9 +23,16 @@ class Api::VideosController < ApplicationController
   end
 
   def destroy
-      @video = Video.find(params[:id])
-      @video.destroy
-      render :index
+    @video = Video.find(params[:id])
+    @video.destroy
+    render :index
+  end
+
+  def add_views
+    @video = Video.find_by_id(params[:id])
+    @video.views += 1
+    @video.save
+    render :show
   end
 
   private
