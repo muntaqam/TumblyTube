@@ -4,7 +4,6 @@ import configureStore from "./store/store";
 import Root from "./components/root";
 
 // TEST START
-import { deleteLike, createLike } from "./util/like_api_util";
 // TEST END
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // TESTING START
-  window.deleteLike = deleteLike;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();

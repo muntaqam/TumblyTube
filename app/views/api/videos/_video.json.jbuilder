@@ -1,4 +1,4 @@
-json.extract! video, :id, :creator_id, :title, :description
+json.extract! video, :id, :creator_id, :title, :description, :views
 json.extract! video.creator, :username
 json.numLikes video.num_likes
 json.numDislikes video.num_dislikes
