@@ -1,7 +1,6 @@
 import {
   LOGOUT_CURRENT_USER,
   RECEIVE_CURRENT_USER,
-  RECEIVE_NAME_EMAIL,
 } from "../actions/session_actions";
 import {
   RECEIVE_VIDEO_LIKE,
