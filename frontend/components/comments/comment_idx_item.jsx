@@ -3,8 +3,7 @@ import LikeInterface from "../likes/like_interface_container";
 import CommentForm from "./comment_form_container";
 
 function CommentIndexItem(props) {
-  const { comment, currentVideoId, childComments, deleteComment, currentUser } =
-    props;
+  const { comment, currentVideoId, deleteComment, currentUser } = props;
   const [toggled, setToggled] = useState(false);
 
   function toggleReply() {
@@ -25,43 +24,61 @@ function CommentIndexItem(props) {
       return <button onClick={() => handleDelete(commentId)}>Delete</button>;
   };
 
+  const renderComments = () => {
+    if (!comment.parentCommentId) {
+      return (
+        <div>
+          <div>{comment.username}</div>
+          <div>{`${comment.commentedAt} ago`}</div>
+          <div>{comment.body}</div>
+          <div>
+            <LikeInterface
+              likeableId={comment.id}
+              likeableType='Comment'
+              numLikes={comment.numLikes}
+              numDislikes={comment.numDislikes}
+            />
+          </div>
+          <button onClick={toggleReply}>REPLY</button>
+          {toggled ? (
+            <CommentForm
+              parentCommentId={comment.id}
+              currentVideoId={currentVideoId}
+              toggleReply={toggleReply}
+            />
+          ) : null}
+          {renderDelete(comment.id, comment.commenterId)}
+          <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
+        </div>
+      );
+    }
+    return <div>NO COMMENTS HERE</div>;
+  };
+
   const renderChildComments = () => {
-    return childComments.map((childComment) => (
-      <li key={childComment.id}>
-        <div>{childComment.username}</div>
-        <div>{`${childComment.commentedAt} ago`}</div>
-        <div>{childComment.body}</div>
-        <div>{renderDelete(childComment.id, childComment.commenterId)}</div>
-      </li>
-    ));
+    if (comment.parentCommentId) {
+      return (
+        <div>
+          <div>{comment.username}</div>
+          <div>{`${comment.commentedAt} ago`}</div>
+          <div>{comment.body}</div>
+          <div>
+            <LikeInterface
+              likeableId={comment.id}
+              likeableType='Comment'
+              numLikes={comment.numLikes}
+              numDislikes={comment.numDislikes}
+            />
+          </div>
+        </div>
+      );
+    }
   };
 
   return (
     <div>
-      <h3>●COMMENT●︎</h3>
-      <div>{comment.username}</div>
-      <div>{`${comment.commentedAt} ago`}</div>
-      <div>{comment.body}</div>
-      <div>
-        <LikeInterface
-          likeableId={comment.id}
-          likeableType='Comment'
-          numLikes={comment.numLikes}
-          numDislikes={comment.numDislikes}
-        />
-      </div>
-      <button onClick={toggleReply}>REPLY</button>
-      {toggled ? (
-        <CommentForm
-          parentCommentId={comment.id}
-          currentVideoId={currentVideoId}
-          toggleReply={toggleReply}
-        />
-      ) : null}
-      {renderDelete(comment.id, comment.commenterId)}
-      <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
-
-      <ul>{childComments ? renderChildComments() : null}</ul>
+      {renderComments()}
+      {renderChildComments()}
     </div>
   );
 }
