@@ -11,8 +11,15 @@ class VideoShow extends React.Component {
     this.props.fetchVideos();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentVideoId !== this.props.currentVideoId) {
+      this.props.addViews(this.props.currentVideoId);
+    }
+  }
+
   render() {
     if (!this.props.currentVideo) return null;
+
     let sideVideos = Object.values(this.props.videos).map((vid) => {
       if (vid.id != this.props.currentVideoId) {
         return <SideVideoIndex key={vid.id} video={vid} />;
