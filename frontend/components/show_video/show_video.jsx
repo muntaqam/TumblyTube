@@ -11,8 +11,15 @@ class VideoShow extends React.Component {
     this.props.fetchVideos();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentVideoId !== this.props.currentVideoId) {
+      this.props.addViews(this.props.currentVideoId);
+    }
+  }
+
   render() {
     if (!this.props.currentVideo) return null;
+
     let sideVideos = Object.values(this.props.videos).map((vid) => {
       if (vid.id != this.props.currentVideoId) {
         return <SideVideoIndex key={vid.id} video={vid} />;
@@ -26,13 +33,13 @@ class VideoShow extends React.Component {
         </div>
         <div>
           <div>
-            <VideoPlayer 
+            <VideoPlayer
               video={this.props.currentVideo}
               videoId={this.props.currentVideoId}
             />
             <div>{this.props.currentVideo.title}</div>
             <div>
-              <span>0000 views</span>
+              <span>{this.props.currentVideo.views} views</span>
               <span>●</span>
               <span>{`${this.props.currentVideo.uploadedAt} ago`}</span>
               <LikeInterface
