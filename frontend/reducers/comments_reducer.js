@@ -1,5 +1,4 @@
 import {
-  RECEIVE_CHILD_COMMENT,
   RECEIVE_COMMENT,
   RECEIVE_COMMENTS,
   REMOVE_COMMENT,
@@ -15,16 +14,7 @@ export default (state = {}, action) => {
       return action.comments;
     case RECEIVE_COMMENT:
       return Object.assign({}, state, { [action.comment.id]: action.comment });
-    case RECEIVE_CHILD_COMMENT:
-      newState[action.parentCommentId].numChildComments++;
-      newState[action.parentCommentId].childComments[action.comment.id] =
-        action.comment;
-      return newState;
     case REMOVE_COMMENT:
-      if (action.parentCommentId) {
-        newState[action.parentCommentId].numChildComments--;
-        delete newState[action.parentCommentId].childComments[action.commentId];
-      }
       delete newState[action.commentId];
       return newState;
     case RECEIVE_COMMENT_LIKE:
