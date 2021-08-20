@@ -1,4 +1,5 @@
 import {
+  ADD_VIDEO_VIEWS,
   RECEIVE_VIDEOS,
   RECEIVE_VIDEO,
   REMOVE_VIDEO,
@@ -13,20 +14,20 @@ export default (state = {}, action) => {
     case RECEIVE_VIDEOS:
       return action.videos;
     case RECEIVE_VIDEO:
-      return Object.assign({}, state, { [action.video.id]: action.video });
+      return Object.assign({}, newState, { [action.video.id]: action.video });
+    case ADD_VIDEO_VIEWS:
+      return Object.assign({}, newState, { [action.videoId]: action.video });
     case REMOVE_VIDEO:
       delete newState[action.videoId];
       return newState;
     case RECEIVE_VIDEO_LIKE:
-      if (action.version == "like") 
-        newState[action.videoId]["numLikes"]++;
+      if (action.version == "like") newState[action.videoId]["numLikes"]++;
       if (action.version == "dislike")
         newState[action.videoId]["numDislikes"]++;
       return newState;
     case REMOVE_LIKE:
       if (action.likeableType == "Video") {
-        if (action.version == "like") 
-          newState[action.likeableId]["numLikes"]--;
+        if (action.version == "like") newState[action.likeableId]["numLikes"]--;
         if (action.version == "dislike")
           newState[action.likeableId]["numDislikes"]--;
       }

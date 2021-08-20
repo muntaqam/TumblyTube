@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     resource :users, only: [:create]
     resources :videos, only: [:index, :show, :create, :destroy, :update] do
       resources :comments, only: [:index]
+      member do
+        post 'add_views'
+      end
     end
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:create, :destroy]
