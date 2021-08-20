@@ -26,13 +26,15 @@ class VideoShow extends React.Component {
         </div>
         <div>
           <div>
-            <VideoPlayer
+            <VideoPlayer 
               video={this.props.currentVideo}
               videoId={this.props.currentVideoId}
             />
             <div>{this.props.currentVideo.title}</div>
             <div>
-              {`${this.props.currentVideo.uploadedAt} ago`}
+              <span>0000 views</span>
+              <span>●</span>
+              <span>{`${this.props.currentVideo.uploadedAt} ago`}</span>
               <LikeInterface
                 likeableId={this.props.currentVideoId}
                 likeableType='Video'
