@@ -34,6 +34,7 @@ function CommentForm(props) {
     });
     setBody("");
     setDisabled(true);
+    if (parentCommentId) toggleReply();
   }
 
   function handleCancel(e) {

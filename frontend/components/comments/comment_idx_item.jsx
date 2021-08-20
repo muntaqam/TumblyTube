@@ -52,7 +52,6 @@ function CommentIndexItem(props) {
         </div>
       );
     }
-    return <div>NO COMMENTS HERE</div>;
   };
 
   const renderChildComments = () => {
@@ -70,6 +69,7 @@ function CommentIndexItem(props) {
               numDislikes={comment.numDislikes}
             />
           </div>
+          {renderDelete(comment.id, comment.commenterId)}
         </div>
       );
     }

@@ -53,6 +53,7 @@ export const login = (user) => (dispatch) => {
   );
 };
 
+// checks if username/email exists in the database
 export const identifyUser = (inputValue) => (dispatch) => {
   return APIUtil.identifyUser(inputValue).then(
     (user) => dispatch(receiveNameEmail(user)),

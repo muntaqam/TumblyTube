@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import CommentIdx from "./comment_idx";
 import { deleteComment, fetchComments } from "../../actions/comment_actions";
 
-const mSTP = ({ session, entities }, ownProps) => {
+const mSTP = ({ session, entities }) => {
   return {
     comments: Object.values(entities.comments),
     currentUser: entities.users[session.id],

@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import VideoShow from "./show_video";
-import { fetchVideos, fetchVideo } from "../../actions/videos_actions";
+import { fetchVideos } from "../../actions/videos_actions";
 import { fetchComments } from "../../actions/comment_actions";
 
 const mSTP = ({ entities }, ownProps) => {
