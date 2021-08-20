@@ -14,7 +14,8 @@ user.likes_dislikes.each do |like|
         json.extract! like, :id, :liker_id, :likeable_id, :likeable_type, :version
       end
     end
-  else
+  end
+  if like.likeable_type == "Comment"
     json.set! :likedComments do
       json.set! like.likeable_id do
         json.extract! like, :id, :liker_id, :likeable_id, :likeable_type, :version
