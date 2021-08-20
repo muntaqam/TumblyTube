@@ -27,7 +27,11 @@ function SideVideoIndex(props) {
         <div>
           <div>{props.video.title}</div>
           <div>{props.video.username}</div>
-          <div>{`${props.video.uploadedAt} ago`}</div>
+          <div>
+            <span>{props.video.views} views</span>
+            <span>●</span>
+            <span>{`${props.video.uploadedAt} ago`}</span>
+          </div>
         </div>
       </li>
     </ul>
