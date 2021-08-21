@@ -41,17 +41,13 @@ const addVideoViews = (video) => ({
 });
 
 //async
-export const fetchVideos = () => (dispatch) => {
-  return APIUtilVid.fetchVideos().then((videos) =>
+export const fetchVideos = (filter) => (dispatch) =>
+  APIUtilVid.fetchVideos(filter).then((videos) =>
     dispatch(receiveVideos(videos))
   );
-};
 
-export const fetchVideo = (vidId) => (dispatch) => {
-  return APIUtilVid.fetchVideo(vidId).then((video) =>
-    dispatch(receiveVideo(video))
-  );
-};
+export const fetchVideo = (vidId) => (dispatch) =>
+  APIUtilVid.fetchVideo(vidId).then((video) => dispatch(receiveVideo(video)));
 
 export const createVideo = (video) => (dispatch) =>
   APIUtilVid.createVideo(video).then(
@@ -66,6 +62,5 @@ export const deleteVideo = (videoId) => (dispatch) => {
   );
 };
 
-export const addViews = (videoId) => (dispatch) => {
+export const addViews = (videoId) => (dispatch) =>
   APIUtilVid.addViews(videoId).then((video) => dispatch(addVideoViews(video)));
-};

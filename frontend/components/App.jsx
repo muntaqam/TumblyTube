@@ -7,6 +7,7 @@ import SignupFormContainer from "./session_form/signup_form_container";
 import NotFound from "./notfound";
 import Modal from "../components/modal/modal";
 import VideoShow from "../components/show_video/show_video_container";
+import SearchResults from "./search/search_results_container";
 
 const App = () => {
   return (
@@ -16,7 +17,8 @@ const App = () => {
         <AuthRoute path='/login' component={LoginFormContainer} />
         <AuthRoute path='/signup' component={SignupFormContainer} />
         <Route exact path='/' component={MainPage} />
-        <Route exact path='/videos/:id' component={VideoShow} />
+        <Route exact path='/watch/:id' component={VideoShow} />
+        <Route exact path='/results' component={SearchResults} />
         <Route component={NotFound} />
       </Switch>
     </div>

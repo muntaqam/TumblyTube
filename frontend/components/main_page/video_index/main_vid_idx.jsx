@@ -1,22 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import MainVideoIndexItem from "./main_vid_idx_item";
 
 class MainVideoIndex extends React.Component {
   componentDidMount() {
     this.props.fetchVideos();
   }
+
   render() {
     if (this.props.videos.length !== 0) {
       return (
         <ul>
           {Object.values(this.props.videos).map((video) => (
             <li key={video.id}>
-              <Link to={`/videos/${video.id}`}>
-                <video height='170' width='303'>
-                  <source src={video.videoUrl} />
-                </video>
-                {video.title}
-              </Link>
+              <MainVideoIndexItem video={video} />
             </li>
           ))}
         </ul>
