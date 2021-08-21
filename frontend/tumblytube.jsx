@@ -4,6 +4,7 @@ import configureStore from "./store/store";
 import Root from "./components/root";
 
 // TEST START
+import { fetchUsers } from "./util/session_api_util";
 // TEST END
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // TESTING START
+  window.fetchUsers = fetchUsers;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();

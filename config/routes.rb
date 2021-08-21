@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
     get "/identify_username/:username", to: "sessions#identify_username", param: :username
     
-    resource :users, only: [:create]
+    resources :users, only: [:index, :create]
     resources :videos, only: [:index, :show, :create, :destroy, :update] do
       resources :comments, only: [:index]
       member do
