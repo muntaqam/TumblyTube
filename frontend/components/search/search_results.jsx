@@ -7,6 +7,9 @@ function SearchResults(props) {
   const { videos, users, fetchVideos } = props;
   const searchQuery = useQuery();
 
+  useEffect(() => {
+    if (!videos.length) fetchVideos();
+  }, []);
 
   function useQuery() {
     const query = new URLSearchParams(useLocation().search);
@@ -25,7 +28,7 @@ function SearchResults(props) {
       <NavBar />
       <h1>Search Results</h1>
       <ul>
-        {Object.values(videos).map((video) => (
+        {videos.map((video) => (
           <li key={video.id}>{filterVideo(video)}</li>
         ))}
       </ul>

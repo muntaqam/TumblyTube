@@ -8,10 +8,12 @@ import LikeInterface from "../likes/like_interface_container";
 
 class VideoShow extends React.Component {
   componentDidMount() {
-    this.props.fetchVideos();
+    if (!this.props.videos.length) this.props.fetchVideos();
+    this.props.addViews(this.props.currentVideoId);
   }
 
   componentDidUpdate(prevProps) {
+    console.log(prevProps);
     if (prevProps.currentVideoId !== this.props.currentVideoId) {
       this.props.addViews(this.props.currentVideoId);
     }
@@ -20,7 +22,7 @@ class VideoShow extends React.Component {
   render() {
     if (!this.props.currentVideo) return null;
 
-    let sideVideos = Object.values(this.props.videos).map((vid) => {
+    let sideVideos = this.props.videos.map((vid) => {
       if (vid.id != this.props.currentVideoId) {
         return <SideVideoIndex key={vid.id} video={vid} />;
       }
