@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { withRouter, useLocation } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
-import { fetchVideos } from "../../../actions/videos_actions";
-import { withRouter } from "react-router-dom";
 
 function SearchBar(props) {
-  const { fetchVideos } = props;
   const [body, setBody] = useState("");
+  const searchQuery = useQuery();
 
+  useEffect(() => {
+    if (searchQuery) setBody(searchQuery);
+    else setBody("");
+  }, [searchQuery]);
+
+  function useQuery() {
+    const query = new URLSearchParams(useLocation().search);
+    return query.get("search_query");
+  }
 
   function handleInput(e) {
     setBody(e.currentTarget.value);
@@ -15,7 +23,6 @@ function SearchBar(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // fetchVideos(body);
     props.history.push(`/results?search_query=${body}`);
   }
 

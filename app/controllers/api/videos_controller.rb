@@ -3,11 +3,7 @@ class Api::VideosController < ApplicationController
   before_action :require_login, only: [:create, :destroy]
   
   def index
-    if params[:filter]
-      @videos = Video.search(params[:filter])
-    else
-      @videos = Video.all
-    end
+    @videos = Video.all
     render :index
   end
 
