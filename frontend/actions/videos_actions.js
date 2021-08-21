@@ -41,10 +41,8 @@ const addVideoViews = (video) => ({
 });
 
 //async
-export const fetchVideos = (filter) => (dispatch) =>
-  APIUtilVid.fetchVideos(filter).then((videos) =>
-    dispatch(receiveVideos(videos))
-  );
+export const fetchVideos = () => (dispatch) =>
+  APIUtilVid.fetchVideos().then((videos) => dispatch(receiveVideos(videos)));
 
 export const fetchVideo = (vidId) => (dispatch) =>
   APIUtilVid.fetchVideo(vidId).then((video) => dispatch(receiveVideo(video)));
