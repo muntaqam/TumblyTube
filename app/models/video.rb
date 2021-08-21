@@ -26,6 +26,13 @@ class Video < ApplicationRecord
   
   has_one_attached :video_file
 
+  def self.search(filter)
+    if filter
+      filter.downcase!
+      self.where("lower(title) like ?", "%#{filter}%")
+    end    
+  end
+
   def num_likes
     self.likes.where(version: "like").length
   end
