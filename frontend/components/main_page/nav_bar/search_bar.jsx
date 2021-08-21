@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import SearchIcon from "@material-ui/icons/Search";
-import { fetchVideos } from "../../../actions/videos_actions";
 import { withRouter } from "react-router-dom";
 
 function SearchBar(props) {
-  const { fetchVideos } = props;
   const [body, setBody] = useState("");
-
 
   function handleInput(e) {
     setBody(e.currentTarget.value);
@@ -15,7 +12,6 @@ function SearchBar(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // fetchVideos(body);
     props.history.push(`/results?search_query=${body}`);
   }
 
