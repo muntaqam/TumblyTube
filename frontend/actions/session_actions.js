@@ -3,6 +3,7 @@ import * as APIUtil from "../util/session_api_util";
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_NAME_EMAIL = "RECEIVE_NAME_EMAIL";
 export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
+export const RECEIVE_USERS = "RECEIVE_USERS";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
@@ -23,6 +24,13 @@ const receiveNameEmail = (user) => {
 const logoutCurrentUser = () => {
   return {
     type: LOGOUT_CURRENT_USER,
+  };
+};
+
+const receiveUsers = (users) => {
+  return {
+    type: RECEIVE_USERS,
+    users,
   };
 };
 
@@ -64,3 +72,6 @@ export const identifyUser = (inputValue) => (dispatch) => {
 export const logout = () => (dispatch) => {
   return APIUtil.logout().then((user) => dispatch(logoutCurrentUser()));
 };
+
+export const fetchUsers = (filter) => (dispatch) =>
+  APIUtil.fetchUsers(filter).then((users) => dispatch(receiveUsers(users)));

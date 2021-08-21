@@ -1,6 +1,7 @@
 import {
   LOGOUT_CURRENT_USER,
   RECEIVE_CURRENT_USER,
+  RECEIVE_USERS,
 } from "../actions/session_actions";
 import {
   RECEIVE_VIDEO_LIKE,
@@ -14,9 +15,14 @@ const usersReducer = (state = {}, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      return Object.assign({}, state, {
+      return Object.assign({}, newState, {
         [action.currentUser.id]: action.currentUser,
       });
+    case RECEIVE_USERS:
+      Object.values(action.users).map((user) => {
+        if (!newState.hasOwnProperty(user.id)) newState[user.id] = user;
+      });
+      return newState;
     case LOGOUT_CURRENT_USER:
       return {};
     case RECEIVE_VIDEO_LIKE:
@@ -26,12 +32,10 @@ const usersReducer = (state = {}, action) => {
       newState[action.likerId]["likedComments"][action.commentId] = action.like;
       return newState;
     case REMOVE_LIKE:
-      if (action.likeableType == "Video") {
+      if (action.likeableType == "Video")
         delete newState[action.likerId]["likedVideos"][action.likeableId];
-      }
-      if (action.likeableType == "Comment") {
+      if (action.likeableType == "Comment")
         delete newState[action.likerId]["likedComments"][action.likeableId];
-      }
       return newState;
     default:
       return newState;

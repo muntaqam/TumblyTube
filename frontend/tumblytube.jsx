@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import Root from "./components/root";
+import { fetchUsers } from "./actions/session_actions";
 
-// TEST START
-import { fetchUsers } from "./util/session_api_util";
+// TEST START;
 // TEST END
 
 document.addEventListener("DOMContentLoaded", () => {
