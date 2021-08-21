@@ -1,7 +1,6 @@
 import React from "react";
 import UploadVideoDragDrop from "./upload_video_dragdrop";
 import UploadVideoDetails from "./upload_video_details";
-;
 
 class UploadVideoForm extends React.Component {
   constructor(props) {
@@ -68,7 +67,7 @@ class UploadVideoForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let formData = new FormData(); 
+    let formData = new FormData();
     formData.append("video[title]", this.state.title);
     formData.append("video[description]", this.state.description);
     formData.append("video[video_file]", this.state.videoFile);
@@ -81,23 +80,27 @@ class UploadVideoForm extends React.Component {
     const { closeModal } = this.props;
     let formStep;
     if (!this.state.videoUrl) {
-      formStep = <UploadVideoDragDrop
-        closeModal={closeModal}
-        handleDrop={this.handleDrop}
-        handleDragOver={this.handleDragOver}
-        handleDragEnter={this.handleDragEnter}
-        handleFile={this.handleFile}
-      />
+      formStep = (
+        <UploadVideoDragDrop
+          closeModal={closeModal}
+          handleDrop={this.handleDrop}
+          handleDragOver={this.handleDragOver}
+          handleDragEnter={this.handleDragEnter}
+          handleFile={this.handleFile}
+        />
+      );
     } else {
-      formStep = <UploadVideoDetails 
-        closeModal={closeModal}
-        title={title}
-        description={description}
-        videoFile={videoFile}
-        videoUrl={videoUrl}
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-      />;
+      formStep = (
+        <UploadVideoDetails
+          closeModal={closeModal}
+          title={title}
+          description={description}
+          videoFile={videoFile}
+          videoUrl={videoUrl}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+        />
+      );
     }
 
     return formStep;
