@@ -1,3 +1,11 @@
+export const fetchUsers = (filter) => {
+  return $.ajax({
+    url: "/api/users",
+    method: "GET",
+    data: { filter },
+  });
+};
+
 export const signup = (user) => {
   return $.ajax({
     url: "/api/users",

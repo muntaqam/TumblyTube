@@ -41,6 +41,19 @@ class User < ApplicationRecord
     source: :likeable,
     source_type: :Video
 
+  def self.search(filter)
+    if filter
+      users = self.where("username like ?", "%#{filter}%")
+      if users
+        users
+      else
+        self.all
+      end
+    else
+      self.all
+    end
+  end
+
   def likes_dislikes
     self.likes
   end
