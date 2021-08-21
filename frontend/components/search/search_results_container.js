@@ -4,7 +4,7 @@ import SearchResults from "./search_results";
 
 const mSTP = ({ entities: { users, videos } }) => {
   return {
-    videos: videos,
+    videos: Object.values(videos),
     users: users,
   };
 };

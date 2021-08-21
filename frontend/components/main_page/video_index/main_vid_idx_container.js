@@ -5,7 +5,7 @@ import { fetchVideos } from "../../../actions/videos_actions";
 
 const mSTP = ({ entities }) => {
   return {
-    videos: entities.videos,
+    videos: Object.values(entities.videos),
   };
 };
 
