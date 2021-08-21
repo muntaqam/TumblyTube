@@ -13,12 +13,12 @@ function SearchResults(props) {
 
   function useQuery() {
     const query = new URLSearchParams(useLocation().search);
-    return query.get("search_query").toLowerCase();
+    return query.get("search_query");
   }
 
   const filterVideo = (video) => {
     let title = video.title.toLowerCase();
-    if (title.includes(searchQuery)) {
+    if (title.includes(searchQuery.toLowerCase())) {
       return <MainVideoIndexItem video={video} />;
     }
   };
