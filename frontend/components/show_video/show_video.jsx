@@ -13,7 +13,6 @@ class VideoShow extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps);
     if (prevProps.currentVideoId !== this.props.currentVideoId) {
       this.props.addViews(this.props.currentVideoId);
     }
