@@ -7,7 +7,7 @@ import { fetchComments } from "../../actions/comment_actions";
 
 const mSTP = ({ entities }, ownProps) => {
   return {
-    videos: entities.videos,
+    videos: Object.values(entities.videos),
     currentVideo: entities.videos[ownProps.match.params.id],
     currentVideoId: ownProps.match.params.id,
   };

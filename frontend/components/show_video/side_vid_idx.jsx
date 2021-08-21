@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function SideVideoIndex(props) {
+  const { video } = props;
   function handleMouseEnter(e) {
     e.target.play();
   }
@@ -14,23 +15,23 @@ function SideVideoIndex(props) {
   return (
     <ul>
       <li>
-        <Link to={`/watch/${props.video.id}`}>
+        <Link to={`/watch/${video.id}`}>
           <video
             muted
             height='170'
             width='303'
-            src={props.video.videoUrl}
+            src={video.videoUrl}
             onMouseEnter={handleMouseEnter}
             onMouseOut={handleMouseOut}
           ></video>
         </Link>
         <div>
-          <div>{props.video.title}</div>
-          <div>{props.video.username}</div>
+          <div>{video.title}</div>
+          <div>{video.username}</div>
           <div>
-            <span>{props.video.views} views</span>
+            <span>{video.views} views</span>
             <span>●</span>
-            <span>{`${props.video.uploadedAt} ago`}</span>
+            <span>{`${video.uploadedAt} ago`}</span>
           </div>
         </div>
       </li>
