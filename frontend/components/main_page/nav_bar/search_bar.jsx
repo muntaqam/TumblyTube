@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { withRouter, useLocation } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
-import { withRouter } from "react-router-dom";
 
 function SearchBar(props) {
   const [body, setBody] = useState("");
+  const searchQuery = useQuery();
+
+  useEffect(() => {
+    if (searchQuery) setBody(searchQuery);
+    else setBody("");
+  }, [searchQuery]);
+
+  function useQuery() {
+    const query = new URLSearchParams(useLocation().search);
+    return query.get("search_query");
+  }
 
   function handleInput(e) {
     setBody(e.currentTarget.value);
