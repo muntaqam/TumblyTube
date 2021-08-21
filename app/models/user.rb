@@ -19,6 +19,8 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
   attr_reader :password
 
+  scope :filter_by_search, -> (search) { where("username like ?", "%#{search}%") }
+
   has_many :comments,
     foreign_key: :commenter_id,
     class_name: :Comment,

@@ -14,7 +14,7 @@ function SideVideoIndex(props) {
   return (
     <ul>
       <li>
-        <Link to={`/videos/${props.video.id}`}>
+        <Link to={`/watch/${props.video.id}`}>
           <video
             muted
             height='170'
