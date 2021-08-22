@@ -7,9 +7,15 @@ import SessionButtonContainer from "./session_button_container";
 import { openModal } from "../../../actions/modal_actions";
 import { connect } from "react-redux";
 
-function NavBar({ openModal, location }) {
-  if (location.pathname == "/login" || location.pathname == "/signup")
+function NavBar({ openModal, location, history, currentUser }) {
+  if (location.pathname == "/login" || location.pathname == "/signup") {
     return null;
+  }
+
+  function handleClick() {
+    if (!currentUser) history.push("/login");
+    else openModal();
+  }
 
   return (
     <div className='navbar'>
@@ -26,7 +32,7 @@ function NavBar({ openModal, location }) {
         <SearchBar />
       </div>
       <div className='navbar navbar--right'>
-        <button className='upload-button' onClick={openModal}>
+        <button className='upload-button' onClick={handleClick}>
           <VideoCallIcon
             id='upload-button-icon'
             className='navbar__icon navbar__icon--upload'
@@ -39,10 +45,16 @@ function NavBar({ openModal, location }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mSTP = ({ session }) => {
+  return {
+    currentUser: session.id,
+  };
+};
+
+const mDTP = (dispatch) => {
   return {
     openModal: () => dispatch(openModal("upload")),
   };
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(NavBar));
+export default withRouter(connect(mSTP, mDTP)(NavBar));

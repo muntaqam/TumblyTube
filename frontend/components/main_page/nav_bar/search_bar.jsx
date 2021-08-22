@@ -23,7 +23,7 @@ function SearchBar(props) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(props);
+
     if (initialClick.current) {
       initialClick.current = false;
       await props.fetchUsers(body.toLowerCase()); // fetchUsers on the first click
