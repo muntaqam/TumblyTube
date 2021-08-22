@@ -18,13 +18,14 @@
 }
 
 /*
-  LOGIN + SIGNUP CONTAINER & MEDIA QUERIES
+LOGIN + SIGNUP CONTAINER & MEDIA QUERIES
 */
 
 .signup {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  place-content: center;
 
   &__main {
     display: flex;

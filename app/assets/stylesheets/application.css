@@ -25,3 +25,16 @@ html {
 *::after {
   box-sizing: inherit;
 }
+
+:root {
+  --clr-white: #ffffff;
+  --clr-dim-white: #f9f9f9;
+  --clr-text-gray: #606060;
+  --clr-text-light-gray: #818181;
+  --clr-separator-gray: #e0e0e0;
+  --clr-hightlight-gray: #e5e5e5;
+  --clr-primary: #1a73e8;
+  --clr-secondary: #62666a;
+  --clr-placeholder: #80868b;
+  --clr-error: #d93025;
+}
