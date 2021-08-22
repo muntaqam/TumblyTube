@@ -69,9 +69,9 @@ export const identifyUser = (inputValue) => (dispatch) => {
   );
 };
 
+export const fetchUsers = (filter) => (dispatch) =>
+  APIUtil.fetchUsers(filter).then((users) => dispatch(receiveUsers(users)));
+
 export const logout = () => (dispatch) => {
   return APIUtil.logout().then((user) => dispatch(logoutCurrentUser()));
 };
-
-export const fetchUsers = (filter) => (dispatch) =>
-  APIUtil.fetchUsers(filter).then((users) => dispatch(receiveUsers(users)));

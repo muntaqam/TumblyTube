@@ -8,14 +8,16 @@ import NotFound from "./notfound";
 import Modal from "../components/modal/modal";
 import VideoShow from "../components/show_video/show_video_container";
 import SearchResults from "./search/search_results_container";
+import NavBar from "./main_page/nav_bar/nav_bar_container";
 
 const App = () => {
   return (
     <div>
       <Modal />
+      <NavBar></NavBar>
       <Switch>
         <AuthRoute path='/login' component={LoginFormContainer} />
-        <AuthRoute path='/signup' component={SignupFormContainer} />
+        <AuthRoute exact path='/signup' component={SignupFormContainer} />
         <Route exact path='/' component={MainPage} />
         <Route exact path='/watch/:id' component={VideoShow} />
         <Route exact path='/results' component={SearchResults} />

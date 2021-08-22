@@ -4,6 +4,7 @@ json.key_format! camelize: :lower
 json.deep_format_keys!
 
 json.extract! user, :id, :username, :email
+json.numVideos user.videos.count
 
 json.likedVideos({})
 json.likedComments({})
