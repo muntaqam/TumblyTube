@@ -8,20 +8,12 @@ function SearchResults(props) {
 
   useEffect(() => {
     if (!videos.length) fetchVideos();
-    // if (!checkUsersInState()) fetchUsers(searchQuery);
+    if (users.length <= 1) fetchUsers(searchQuery);
   }, []);
 
   function useQuery() {
     const query = new URLSearchParams(useLocation().search);
     return query.get("search_query");
-  }
-
-  function checkUsersInState() {
-    users.map((user) => {
-      let lowCaseUsername = user.username.toLowerCase();
-
-      return lowCaseUsername.includes(searchQuery);
-    });
   }
 
   function filterType(type, object) {

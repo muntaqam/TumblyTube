@@ -2,7 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
-import SearchBar from "./search_bar";
+import SearchBar from "./search_bar_container";
 import SessionButtonContainer from "./session_button_container";
 import { openModal } from "../../../actions/modal_actions";
 import { connect } from "react-redux";

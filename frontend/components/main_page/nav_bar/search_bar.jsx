@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { connect } from "react-redux";
-import { withRouter, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
-import { fetchUsers } from "../../../actions/session_actions";
 
 function SearchBar(props) {
   const [body, setBody] = useState("");
@@ -23,12 +21,12 @@ function SearchBar(props) {
     setBody(e.currentTarget.value);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-
-    if (initialClick.current) { // check if it's the first time being clicked
+    console.log(props);
+    if (initialClick.current) {
       initialClick.current = false;
-      props.fetchUsers(body.toLowerCase()); // fetchUsers on the first click
+      await props.fetchUsers(body.toLowerCase()); // fetchUsers on the first click
     } else {
       if (!checkUsersInState()) props.fetchUsers(body.toLowerCase());
     }
@@ -65,18 +63,4 @@ function SearchBar(props) {
   );
 }
 
-const mapStateToProps = ({ entities: { users } }) => {
-  return {
-    users: Object.values(users),
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUsers: (filter) => dispatch(fetchUsers(filter)),
-  };
-};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SearchBar)
-);
+export default SearchBar;
