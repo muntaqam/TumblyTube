@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import { withRouter, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 
 function SearchBar(props) {
   const [body, setBody] = useState("");
   const searchQuery = useQuery();
+  const initialClick = useRef(true);
 
   useEffect(() => {
     if (searchQuery) setBody(searchQuery);
@@ -21,9 +21,26 @@ function SearchBar(props) {
     setBody(e.currentTarget.value);
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
+    console.log(props);
+    if (initialClick.current) {
+      initialClick.current = false;
+      await props.fetchUsers(body.toLowerCase()); // fetchUsers on the first click
+    } else {
+      if (!checkUsersInState()) props.fetchUsers(body.toLowerCase());
+    }
+
     props.history.push(`/results?search_query=${body}`);
+  }
+
+  function checkUsersInState() {
+    let users = props.users;
+
+    return users.some((user) => {
+      let lowCaseUsername = user.username.toLowerCase();
+      return lowCaseUsername.includes(body.toLowerCase());
+    });
   }
 
   return (
@@ -46,10 +63,4 @@ function SearchBar(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchVideos: (filter) => dispatch(fetchVideos(filter)),
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(SearchBar));
+export default SearchBar;

@@ -43,7 +43,7 @@ class User < ApplicationRecord
 
   def self.search(filter)
     if filter
-      users = self.where("username like ?", "%#{filter}%")
+      users = self.where("LOWER(username) like ?", "%#{filter}%")
       if users
         users
       else

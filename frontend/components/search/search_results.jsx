@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import NavBar from "../main_page/nav_bar/nav_bar_container";
 import MainVideoIndexItem from "../main_page/video_index/main_vid_idx_item";
 
 function SearchResults(props) {
-  const { videos, users, fetchVideos } = props;
-  const searchQuery = useQuery();
+  const { videos, users, fetchVideos, fetchUsers } = props;
+  const searchQuery = useQuery().toLowerCase();
 
   useEffect(() => {
     if (!videos.length) fetchVideos();
+    if (users.length <= 1) fetchUsers(searchQuery);
   }, []);
 
   function useQuery() {
@@ -16,20 +16,38 @@ function SearchResults(props) {
     return query.get("search_query");
   }
 
-  const filterVideo = (video) => {
-    let title = video.title.toLowerCase();
-    if (title.includes(searchQuery.toLowerCase())) {
-      return <MainVideoIndexItem video={video} />;
+  function filterType(type, object) {
+    if (type === "user") {
+      let username = object.username.toLowerCase();
+
+      if (username.includes(searchQuery)) {
+        return (
+          <div>
+            <div>{object.username}</div>
+            <div>{`${object.numVideos} videos`}</div>
+          </div>
+        );
+      }
     }
-  };
+
+    if (type === "video") {
+      let title = object.title.toLowerCase();
+
+      if (title.includes(searchQuery)) {
+        return <MainVideoIndexItem video={object} />;
+      }
+    }
+  }
 
   return (
     <div>
-      <NavBar />
       <h1>Search Results</h1>
       <ul>
+        {users.map((user) => (
+          <li key={user.id}>{filterType("user", user)}</li>
+        ))}
         {videos.map((video) => (
-          <li key={video.id}>{filterVideo(video)}</li>
+          <li key={video.id}>{filterType("video", video)}</li>
         ))}
       </ul>
     </div>
