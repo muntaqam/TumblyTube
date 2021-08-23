@@ -19,7 +19,7 @@ function NavBar({ openModal, location, history, currentUser }) {
 
   return (
     <div className='navbar'>
-      <div className='navbar navbar--left'>
+      <div className='navbar__section navbar__section--left'>
         <MenuIcon
           id='menu-button'
           className='navbar__icon navbar__icon--menu'
@@ -28,10 +28,10 @@ function NavBar({ openModal, location, history, currentUser }) {
           <img className='navbar__logo' src={window.logoURL} />
         </Link>
       </div>
-      <div className='navbar navbar--center'>
+      <div className='navbar__section navbar__section--center'>
         <SearchBar />
       </div>
-      <div className='navbar navbar--right'>
+      <div className='navbar__section navbar__section--right'>
         <button className='upload-button' onClick={handleClick}>
           <VideoCallIcon
             id='upload-button-icon'
