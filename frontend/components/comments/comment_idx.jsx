@@ -15,18 +15,18 @@ function CommentIndex(props) {
   }, [currentVideoId]);
 
   return (
-    <ul>
+    <>
       {comments.map((comment) => (
-        <li key={comment.id}>
+        <div className="comments" key={comment.id}>
           <CommentIndexItem
             comment={comment}
             currentVideoId={currentVideoId}
             deleteComment={deleteComment}
             currentUser={currentUser}
           />
-        </li>
+        </div>
       ))}
-    </ul>
+    </>
   );
 }
 export default CommentIndex;

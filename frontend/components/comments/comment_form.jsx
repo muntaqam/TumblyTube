@@ -45,16 +45,12 @@ function CommentForm(props) {
   }
 
   return (
-    <div>
-      {currentUser ? (
-        <div>{currentUser.username[0].toUpperCase()}</div>
-      ) : (
-        <div>
-          <AccountCircleIcon />
-        </div>
-      )}
-      <div>
-        <div>
+    <div className='cmtform'>
+      <div className='comments__icon'>
+        <AccountCircleIcon />
+      </div>
+      <div className='cmtform__form'>
+        <div className='cmtform__input'>
           <input
             type='text'
             placeholder={`Add a public ${
@@ -65,12 +61,14 @@ function CommentForm(props) {
             onFocus={requireLogin}
           />
         </div>
-        <div>
-          <button className='comment__button' onClick={handleCancel}>
+        <div className='cmtform__buttons'>
+          <button className='cmtform__cancel' onClick={handleCancel}>
             CANCEL
           </button>
           <button
-            className={`comment__button ${disabled ? "hidden" : ""}`}
+            className={`cmtform__submit cmtform__submit--${
+              disabled ? "inactive" : ""
+            }`}
             onClick={handleSubmit}
           >
             {parentCommentId ? "REPLY" : "COMMENT"}
