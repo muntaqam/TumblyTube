@@ -4,6 +4,7 @@ import SideVideoIndex from "./side_vid_idx";
 import CommentIndexContainer from "../comments/comment_idx_container";
 import CommentFormContainer from "../comments/comment_form_container";
 import LikeInterface from "../likes/like_interface_container";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 class VideoShow extends React.Component {
   componentDidMount() {
@@ -55,6 +56,7 @@ class VideoShow extends React.Component {
             </div>
           </div>
           <div className='vdesc'>
+            <div className='vdesc__usericon'><AccountCircleIcon /></div>
             <div className='vdesc__top'>
               <div className='vdesc__top vdesc__top--split'>
                 <div className='vdesc__top vdesc__top--left'>

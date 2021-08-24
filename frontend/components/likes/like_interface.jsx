@@ -40,7 +40,7 @@ function LikeInterface(props) {
   }
 
   return (
-    <div className='vdetails__likes'>
+    <div className='likes'>
       <div className='likes__container'>
         <ThumbUpIcon
           className={`thumb thumb--${status}`}
