@@ -12,7 +12,7 @@ import NavBar from "./main_page/nav_bar/nav_bar_container";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Modal />
       <NavBar />
       <Switch>
@@ -23,7 +23,7 @@ const App = () => {
         <Route exact path='/results' component={SearchResults} />
         <Route component={NotFound} />
       </Switch>
-    </div>
+    </>
   );
 };
 
