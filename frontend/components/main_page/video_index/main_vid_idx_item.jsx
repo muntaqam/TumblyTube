@@ -12,7 +12,7 @@ function MainVideoIndexItem(props) {
         <div className='main__title'>{video.title}</div>
         <div className='main__username'>{video.username}</div>
         <div className='main__viewsdate'>
-          {video.views} views ● {video.uploadedAt} ago
+          {video.views} views <span>●</span> {video.uploadedAt} ago
         </div>
       </div>
     </Link>

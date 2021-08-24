@@ -13,29 +13,28 @@ function SideVideoIndex(props) {
   }
 
   return (
-    <ul>
-      <li>
-        <Link to={`/watch/${video.id}`}>
-          <video
-            muted
-            height='170'
-            width='303'
-            src={video.videoUrl}
-            onMouseEnter={handleMouseEnter}
-            onMouseOut={handleMouseOut}
-          ></video>
-        </Link>
-        <div>
-          <div>{video.title}</div>
-          <div>{video.username}</div>
-          <div>
-            <span>{video.views} views</span>
+    <div className='sideidx'>
+      <Link className='sideidx__card' to={`/watch/${video.id}`}>
+        <video
+          classNam='sideidx__vid'
+          muted
+          height='170'
+          width='303'
+          src={video.videoUrl}
+          onMouseEnter={handleMouseEnter}
+          onMouseOut={handleMouseOut}
+        ></video>
+        <div className='sideidx__desc'>
+          <div className='sideidx__title'>{video.title}</div>
+          <div className='sideidx__username'>{video.username}</div>
+          <div className='sideidx__viewsdate'>
+            {video.views} views
             <span>●</span>
-            <span>{`${video.uploadedAt} ago`}</span>
+            {video.uploadedAt} ago
           </div>
         </div>
-      </li>
-    </ul>
+      </Link>
+    </div>
   );
 }
 
