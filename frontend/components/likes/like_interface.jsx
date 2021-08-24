@@ -13,7 +13,7 @@ function LikeInterface(props) {
     deleteLike,
     currentUser,
   } = props;
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("inactive");
 
   async function handleLike(version) {
     // set passed down properties to newLike obj for later use
@@ -28,7 +28,7 @@ function LikeInterface(props) {
       // deleteLike, if liked and version is the same eg: dislike == dislike
       if (liked.version == version) {
         deleteLike(liked.id);
-        setStatus("");
+        setStatus("inactive");
         return;
       }
       // deleteLike then create newLike, if liked and version isn't the same
@@ -36,26 +36,28 @@ function LikeInterface(props) {
     }
     // create newLike, if not yet liked
     createLike(newLike);
-    setStatus(`${version}d`);
+    setStatus(`active`);
   }
 
   return (
-    <div className='like'>
-      <div>
+    <div className='vdetails__likes'>
+      <div className='likes__container'>
         <ThumbUpIcon
-          className={`like__button-like ${status}`}
+          className={`thumb thumb--${status}`}
           id='thumbup-icon'
           onClick={() => handleLike("like")}
         />
-        <div>{numLikes}</div>
+        <span className={`thumb__num thumb__num--${status}`}>{numLikes}</span>
       </div>
-      <div>
+      <div className='likes__container'>
         <ThumbDownIcon
-          className={`like__button-dislike ${status}`}
+          className={`thumb thumb--${status}`}
           id='thumbdown-icon'
           onClick={() => handleLike("dislike")}
         />
-        <div>{numDislikes}</div>
+        <span className={`thumb__num thumb__num--${status}`}>
+          {numDislikes}
+        </span>
       </div>
     </div>
   );
