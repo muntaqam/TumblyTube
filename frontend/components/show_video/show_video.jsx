@@ -27,42 +27,55 @@ class VideoShow extends React.Component {
     });
 
     return (
-      <div>
-        <div>
-          <div>
-            <VideoPlayer
-              video={this.props.currentVideo}
-              videoId={this.props.currentVideoId}
-            />
-            <div>{this.props.currentVideo.title}</div>
-            <div>
-              <span>{this.props.currentVideo.views} views</span>
-              <span>●</span>
-              <span>{`${this.props.currentVideo.uploadedAt} ago`}</span>
-              <LikeInterface
-                likeableId={this.props.currentVideoId}
-                likeableType='Video'
-                numLikes={this.props.currentVideo.numLikes}
-                numDislikes={this.props.currentVideo.numDislikes}
-              />
-              <div>Share</div>
+      <div className='vshow'>
+        <div className='vshow vshow--split'>
+          <VideoPlayer
+            video={this.props.currentVideo}
+            videoId={this.props.currentVideoId}
+          />
+          <div className='vdetails'>
+            <div className='vdetails__title'>
+              {this.props.currentVideo.title}
             </div>
-            <div>
-              <div>
-                <div>UserIcon</div>
-                <div>
-                  <div>{this.props.currentVideo.creator}</div>
-                  <div>1.1k Subscribers</div>
-                  <div>Subscribe</div>
+            <div className='vdetails vdetails--split'>
+              <div className='vdetails__viewsdate'>
+                {this.props.currentVideo.views} views
+                <span>●</span>
+                {this.props.currentVideo.uploadedAt} ago
+              </div>
+              <div className='vdetails__interface'>
+                <LikeInterface
+                  likeableId={this.props.currentVideoId}
+                  likeableType='Video'
+                  numLikes={this.props.currentVideo.numLikes}
+                  numDislikes={this.props.currentVideo.numDislikes}
+                />
+                <div className='vdetails__share'>Share</div>
+              </div>
+            </div>
+          </div>
+          <div className='vdesc'>
+            <div className='vdesc__top'>
+              <div className='vdesc__top vdesc__top--split'>
+                <div className='vdesc__top vdesc__top--left'>
+                  <div className='vdesc__username'>
+                    {this.props.currentVideo.creator}
+                  </div>
+                  <div className='vdesc__subcount'>1.1k Subscribers</div>
+                </div>
+                <div className='vdesc__top vdesc__top--right'>
+                  <div className='vdesc__subscribe'>Subscribe</div>
                 </div>
               </div>
-              <div>{this.props.currentVideo.description}</div>
             </div>
-            <CommentFormContainer currentVideoId={this.props.currentVideoId} />
-            <CommentIndexContainer currentVideoId={this.props.currentVideoId} />
+            <div className='vdesc__body'>
+              {this.props.currentVideo.description}
+            </div>
           </div>
-          <div>{sideVideos}</div>
+          <CommentFormContainer currentVideoId={this.props.currentVideoId} />
+          <CommentIndexContainer currentVideoId={this.props.currentVideoId} />
         </div>
+        {sideVideos}
       </div>
     );
   }
