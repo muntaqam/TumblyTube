@@ -8,13 +8,11 @@ class MainVideoIndex extends React.Component {
 
   render() {
     return (
-      <ul>
+      <div className='main__index'>
         {this.props.videos.map((video) => (
-          <li key={video.id}>
-            <MainVideoIndexItem video={video} />
-          </li>
+          <MainVideoIndexItem key={video.id} video={video} />
         ))}
-      </ul>
+      </div>
     );
   }
 }

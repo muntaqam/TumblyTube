@@ -20,6 +20,10 @@ html {
   font-size: 1em;
 }
 
+body {
+  background-color: var(--clr-dim-white);
+}
+
 *,
 *::before,
 *::after {
@@ -37,4 +41,8 @@ html {
   --clr-secondary: #62666a;
   --clr-placeholder: #80868b;
   --clr-error: #d93025;
+}
+
+#root {
+  height: 100vh;
 }

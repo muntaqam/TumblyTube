@@ -6,14 +6,8 @@ class MainPage extends React.Component {
   render() {
     return (
       <div className='main'>
-        <div className='main__center'>
-          <div className='main__center__side'>
-            <SideBar />
-          </div>
-          <div className='main__center__videos'>
-            <MainVideoIndex />
-          </div>
-        </div>
+        <SideBar />
+        <MainVideoIndex />
       </div>
     );
   }
