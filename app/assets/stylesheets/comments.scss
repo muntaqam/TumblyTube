@@ -1,0 +1,48 @@
+.cmtform {
+  display: flex;
+  flex-direction: row;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid var(--clr-secondary);
+    outline: none;
+    padding-block: 0.8em;
+    margin-block: 1em;
+    font-size: 0.925rem;
+  }
+
+  &__buttons {
+    align-self: flex-end;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+  }
+
+  &__cancel {
+    background: transparent;
+    color: var(--clr-text-gray);
+    padding: 0.8em 1.2em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__submit {
+    background: #53c1de;
+    color: white;
+    padding: 0.8em 1.2em;
+    margin-left: 0.7em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
