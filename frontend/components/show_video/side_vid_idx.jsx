@@ -16,7 +16,7 @@ function SideVideoIndex(props) {
     <div className='sideidx'>
       <Link className='sideidx__card' to={`/watch/${video.id}`}>
         <video
-          classNam='sideidx__vid'
+          className='sideidx__vid'
           muted
           height='170'
           width='303'
