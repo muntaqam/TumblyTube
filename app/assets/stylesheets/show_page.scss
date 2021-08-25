@@ -1,12 +1,23 @@
 .vshow {
   display: grid;
-  grid-template: 60rem / 70vw auto;
+  grid-template-columns: minmax(0, 1fr) 25vw;
+  grid-template-rows: max-content;
   padding: 1.5rem 1.5rem 0 1.5rem;
 
   &__split {
+    &--meta {
+      grid-row: 1;
+      grid-column: 1 / 2;
+      border-bottom: 2px solid var(--clr-separator-gray);
+      padding-bottom: 1em;
+    }
+    &--comments {
+      grid-column: 1;
+      grid-row: 2;
+    }
     &--sideidx {
       grid-column: 2;
-      grid-row: 1;
+      grid-row: 1 / span 2;
       margin-left: 1.5em;
     }
   }
@@ -107,6 +118,18 @@
   &__hide {
     &--hidden {
       display: none;
+    }
+  }
+
+  &__showmore {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--clr-text-gray);
+    display: inline-block;
+    padding: 0.5em 0.2em 0.2em 0.2em;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
