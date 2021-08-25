@@ -7,6 +7,14 @@ import LikeInterface from "../likes/like_interface_container";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 class VideoShow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showMore: false,
+    };
+
+    this.toggleShowMore = this.toggleShowMore.bind(this);
+  }
   componentDidMount() {
     if (!this.props.videos.length) this.props.fetchVideos();
     this.props.addViews(this.props.currentVideoId);
@@ -18,8 +26,17 @@ class VideoShow extends React.Component {
     }
   }
 
+  toggleShowMore() {
+    if (this.state.showMore) this.setState({ showMore: false });
+    else this.setState({ showMore: true });
+  }
+
   render() {
     if (!this.props.currentVideo) return null;
+
+    const { currentVideo, currentVideoId } = this.props;
+    const currentVidDesc = currentVideo.description;
+    const { showMore } = this.state;
 
     let sideVideos = this.props.videos.map((vid) => {
       if (vid.id != this.props.currentVideoId) {
@@ -29,27 +46,22 @@ class VideoShow extends React.Component {
 
     return (
       <div className='vshow'>
-        <div className='vshow__split vshow__split--vdetails'>
-          <VideoPlayer
-            video={this.props.currentVideo}
-            videoId={this.props.currentVideoId}
-          />
+        <div className='vshow__split vshow__split--meta'>
+          <VideoPlayer video={currentVideo} videoId={currentVideoId} />
           <div className='vdetails'>
-            <div className='vdetails__title'>
-              {this.props.currentVideo.title}
-            </div>
+            <div className='vdetails__title'>{currentVideo.title}</div>
             <div className='vdetails vdetails--split'>
               <div className='vdetails__viewsdate'>
-                {this.props.currentVideo.views} views
+                {currentVideo.views} views
                 <span>●</span>
-                {this.props.currentVideo.uploadedAt} ago
+                {currentVideo.uploadedAt} ago
               </div>
               <div className='vdetails__interface'>
                 <LikeInterface
-                  likeableId={this.props.currentVideoId}
+                  likeableId={currentVideoId}
                   likeableType='Video'
-                  numLikes={this.props.currentVideo.numLikes}
-                  numDislikes={this.props.currentVideo.numDislikes}
+                  numLikes={currentVideo.numLikes}
+                  numDislikes={currentVideo.numDislikes}
                 />
                 <div className='vdetails__item vdetails__item--share'>
                   SHARE
@@ -68,26 +80,44 @@ class VideoShow extends React.Component {
                 <div className='vdesc__top vdesc__top--split'>
                   <div className='vdesc__top vdesc__top--left'>
                     <div className='vdesc__username'>
-                      {this.props.currentVideo.username}
+                      {currentVideo.username}
                     </div>
                     <div className='vdesc__subcount'>1.1k Subscribers</div>
                   </div>
                   <div className='vdesc__subscribe'>SUBSCRIBE</div>
                 </div>
               </div>
-              <div className='vdesc__body'>
-                {this.props.currentVideo.description}
+              <div className='vdesc__expandable'>
+                {currentVidDesc.substring(0, this.strIndex())}
+                <span
+                  className={`vdesc__hide vdesc__hide--${
+                    showMore ? "" : "hidden"
+                  }`}
+                >
+                  {currentVidDesc.substring(this.strIndex())}
+                </span>
+              </div>
+              <div className='vdesc__showmore' onClick={this.toggleShowMore}>
+                SHOW {showMore ? " LESS" : " MORE"}
               </div>
             </div>
           </div>
         </div>
         <div className='vshow__split vshow__split--comments'>
-          <CommentFormContainer currentVideoId={this.props.currentVideoId} />
-          <CommentIndexContainer currentVideoId={this.props.currentVideoId} />
+          <CommentFormContainer currentVideoId={currentVideoId} />
+          <CommentIndexContainer currentVideoId={currentVideoId} />
         </div>
         <div className='vshow__split vshow__split--sideidx'>{sideVideos}</div>
       </div>
     );
+  }
+
+  strIndex() {
+    const rawDesc = String.raw`${this.props.currentVideo.description}`;
+    const firstNewLineIdx = rawDesc.indexOf("\n");
+
+    if (firstNewLineIdx < 200) return firstNewLineIdx;
+    else return 200;
   }
 }
 

@@ -1,12 +1,23 @@
 .vshow {
   display: grid;
-  grid-template: 60rem / 70vw auto;
+  grid-template-columns: minmax(0, 1fr) 25vw;
+  grid-template-rows: max-content;
   padding: 1.5rem 1.5rem 0 1.5rem;
 
   &__split {
+    &--meta {
+      grid-row: 1;
+      grid-column: 1 / 2;
+      border-bottom: 2px solid var(--clr-separator-gray);
+      padding-bottom: 1em;
+    }
+    &--comments {
+      grid-column: 1;
+      grid-row: 2;
+    }
     &--sideidx {
       grid-column: 2;
-      grid-row: 1;
+      grid-row: 1 / span 2;
       margin-left: 1.5em;
     }
   }
@@ -15,7 +26,7 @@
 .vdetails {
   display: flex;
   flex-direction: column;
-  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--clr-separator-gray);
 
   &__title {
     font-size: 1.125rem;
@@ -27,7 +38,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid var(--clr-separator-gray);
+    padding-bottom: 0.5em;
   }
 
   &__viewsdate {
@@ -79,18 +90,46 @@
   &__subscribe {
     background: #53c1de;
     align-self: center;
-    padding: 0.625em 1.5em;
-    font-weight: 900;
+    padding: 0.8em 1.2em;
+    font-size: 0.95rem;
+    font-weight: 500;
     color: white;
-    border-radius: 3px;
+    letter-spacing: 1px;
+    border-radius: 4px;
 
     &:hover {
       cursor: pointer;
     }
   }
 
-  &__body {
-    font-size: 0.937rem;
+  &__expandable {
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.25em;
+    letter-spacing: 0.5px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-width: 77ch;
     margin-top: 1.25em;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__hide {
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__showmore {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--clr-text-gray);
+    display: inline-block;
+    padding: 0.5em 0.2em 0.2em 0.2em;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
