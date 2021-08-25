@@ -131,9 +131,11 @@
     display: inline-block;
     padding: 0.2em;
     margin-top: 0.75em;
+
     &--hidden {
       display: none;
     }
+
     &:hover {
       cursor: pointer;
     }

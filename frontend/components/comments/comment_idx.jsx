@@ -15,18 +15,17 @@ function CommentIndex(props) {
   }, [currentVideoId]);
 
   return (
-    <>
+    <div className='comments'>
       {comments.map((comment) => (
-        <div className="comments" key={comment.id}>
-          <CommentIndexItem
-            comment={comment}
-            currentVideoId={currentVideoId}
-            deleteComment={deleteComment}
-            currentUser={currentUser}
-          />
-        </div>
+        <CommentIndexItem
+          key={comment.id}
+          comment={comment}
+          currentVideoId={currentVideoId}
+          deleteComment={deleteComment}
+          currentUser={currentUser}
+        />
       ))}
-    </>
+    </div>
   );
 }
 export default CommentIndex;
