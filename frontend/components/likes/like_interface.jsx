@@ -40,14 +40,14 @@ function LikeInterface(props) {
   }
 
   return (
-    <div className='vdetails__likes'>
+    <div className='likes'>
       <div className='likes__container'>
         <ThumbUpIcon
           className={`thumb thumb--${status}`}
           id='thumbup-icon'
           onClick={() => handleLike("like")}
         />
-        <span className={`thumb__num thumb__num--${status}`}>{numLikes}</span>
+        <div className={`thumb__num thumb__num--${status}`}>{numLikes}</div>
       </div>
       <div className='likes__container'>
         <ThumbDownIcon
@@ -55,9 +55,7 @@ function LikeInterface(props) {
           id='thumbdown-icon'
           onClick={() => handleLike("dislike")}
         />
-        <span className={`thumb__num thumb__num--${status}`}>
-          {numDislikes}
-        </span>
+        <div className={`thumb__num thumb__num--${status}`}>{numDislikes}</div>
       </div>
     </div>
   );

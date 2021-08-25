@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import LikeInterface from "../likes/like_interface_container";
-import CommentForm from "./comment_form_container";
+import CommentFormContainer from "./comment_form_container";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 function CommentIndexItem(props) {
   const { comment, currentVideoId, deleteComment, currentUser } = props;
-  const [toggled, setToggled] = useState(false);
+  const [toggled, setToggled] = useState({ reply: false, cComments: false });
 
-  function toggleReply() {
-    toggled ? setToggled(false) : setToggled(true);
+  function toggle(type) {
+    toggled[type]
+      ? setToggled((prevState) => ({ ...prevState, [type]: false }))
+      : setToggled((prevState) => ({ ...prevState, [type]: true }));
   }
 
   function verifyUser(commenterId) {
@@ -21,65 +24,97 @@ function CommentIndexItem(props) {
   const renderDelete = (commentId, commenterId) => {
     let userVerified = verifyUser(commenterId);
     if (userVerified)
-      return <button onClick={() => handleDelete(commentId)}>Delete</button>;
+      return (
+        <button
+          className='comments__delete'
+          onClick={() => handleDelete(commentId)}
+        >
+          Delete
+        </button>
+      );
   };
 
   const renderComments = () => {
     if (!comment.parentCommentId) {
       return (
-        <div>
-          <div>{comment.username}</div>
-          <div>{`${comment.commentedAt} ago`}</div>
-          <div>{comment.body}</div>
-          <div>
-            <LikeInterface
-              likeableId={comment.id}
-              likeableType='Comment'
-              numLikes={comment.numLikes}
-              numDislikes={comment.numDislikes}
-            />
+        <div className='comments__card'>
+          <div className='comments__usericon'>
+            <AccountCircleIcon />
           </div>
-          <button onClick={toggleReply}>REPLY</button>
-          {toggled ? (
-            <CommentForm
-              parentCommentId={comment.id}
-              currentVideoId={currentVideoId}
-              toggleReply={toggleReply}
-            />
-          ) : null}
-          {renderDelete(comment.id, comment.commenterId)}
-          <div>{`⬇︎ View ${comment.numChildComments} replies`}</div>
+          <div className='comments__details'>
+            <div className='comments__username'>
+              {comment.username}{" "}
+              <span className='comments__date'>{`${comment.commentedAt} ago`}</span>
+            </div>
+            <div className='comments__body'>{comment.body}</div>
+            <div className='comments__interface'>
+              <LikeInterface
+                likeableId={comment.id}
+                likeableType='Comment'
+                numLikes={comment.numLikes}
+                numDislikes={comment.numDislikes}
+              />
+              <button
+                className='comments__reply'
+                onClick={() => toggle("reply")}
+              >
+                REPLY
+              </button>
+            </div>
+            {toggled.reply ? (
+              <CommentFormContainer
+                parentCommentId={comment.id}
+                currentVideoId={currentVideoId}
+                toggleReply={() => toggle("reply")}
+              />
+            ) : null}
+            {renderDelete(comment.id, comment.commenterId)}
+            <div
+              className='comments__replies'
+              onClick={() => toggle("cComments")}
+            >{`⬇︎ View ${comment.numChildComments} replies`}</div>
+          </div>
         </div>
       );
     }
   };
 
   const renderChildComments = () => {
-    if (comment.parentCommentId) {
+    if (comment.parentCommentId)
       return (
-        <div>
-          <div>{comment.username}</div>
-          <div>{`${comment.commentedAt} ago`}</div>
-          <div>{comment.body}</div>
-          <div>
-            <LikeInterface
-              likeableId={comment.id}
-              likeableType='Comment'
-              numLikes={comment.numLikes}
-              numDislikes={comment.numDislikes}
-            />
+        <div
+          className={`comments__card comments__card--${
+            toggled.cComments ? "" : "hidden"
+          }`}
+        >
+          <div className='comments__usericon'>
+            <AccountCircleIcon />
           </div>
-          {renderDelete(comment.id, comment.commenterId)}
+          <div className='comments__details'>
+            <div className='comments__username'>
+              {comment.username}{" "}
+              <span className='comments__date'>{`${comment.commentedAt} ago`}</span>
+            </div>
+            <div className='comments__body'>{comment.body}</div>
+            <div className='comments__interface'>
+              <LikeInterface
+                likeableId={comment.id}
+                likeableType='Comment'
+                numLikes={comment.numLikes}
+                numDislikes={comment.numDislikes}
+              />
+            </div>
+            {renderDelete(comment.id, comment.commenterId)}
+          </div>
         </div>
       );
-    }
   };
 
   return (
-    <div>
+    <>
       {renderComments()}
       {renderChildComments()}
-    </div>
+    </>
   );
 }
 

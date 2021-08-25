@@ -17,6 +17,7 @@ const receiveComment = (comment) => ({
 const removeComment = (comment) => ({
   type: REMOVE_COMMENT,
   commentId: comment.id,
+  parentCommentId: comment.parentCommentId,
 });
 
 export const fetchComments = (vidId) => (dispatch) => {

@@ -13,20 +13,22 @@ export default (state = {}, action) => {
     case RECEIVE_COMMENTS:
       return action.comments;
     case RECEIVE_COMMENT:
-      return Object.assign({}, state, { [action.comment.id]: action.comment });
+      newState[action.comment.parentCommentId].numChildComments++;
+      return Object.assign({}, newState, {
+        [action.comment.id]: action.comment,
+      });
     case REMOVE_COMMENT:
+      newState[action.parentCommentId].numChildComments--;
       delete newState[action.commentId];
       return newState;
     case RECEIVE_COMMENT_LIKE:
-      if (action.version == "like") 
-        newState[action.commentId]["numLikes"]++;
+      if (action.version == "like") newState[action.commentId]["numLikes"]++;
       if (action.version == "dislike")
         newState[action.commentId]["numDislikes"]++;
       return newState;
     case REMOVE_LIKE:
       if (action.likeableType == "Comment") {
-        if (action.version == "like") 
-          newState[action.likeableId]["numLikes"]--;
+        if (action.version == "like") newState[action.likeableId]["numLikes"]--;
         if (action.version == "dislike")
           newState[action.likeableId]["numDislikes"]--;
       }
