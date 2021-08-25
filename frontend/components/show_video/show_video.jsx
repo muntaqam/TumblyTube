@@ -97,7 +97,12 @@ class VideoShow extends React.Component {
                   {currentVidDesc.substring(this.strIndex())}
                 </span>
               </div>
-              <div className='vdesc__showmore' onClick={this.toggleShowMore}>
+              <div
+                className={`vdesc__showmore vdesc__showmore--${
+                  currentVidDesc.length < 200 ? "hidden" : ""
+                }`}
+                onClick={this.toggleShowMore}
+              >
                 SHOW {showMore ? " LESS" : " MORE"}
               </div>
             </div>
@@ -113,11 +118,14 @@ class VideoShow extends React.Component {
   }
 
   strIndex() {
-    const rawDesc = String.raw`${this.props.currentVideo.description}`;
-    const firstNewLineIdx = rawDesc.indexOf("\n");
+    const rawStr = String.raw`${this.props.currentVideo.description}`;
+    const newLineIdx = rawStr.indexOf("\n");
+    const maxChars = 200;
 
-    if (firstNewLineIdx < 200) return firstNewLineIdx;
-    else return 200;
+    if (newLineIdx <= 0) return maxChars;
+
+    if (newLineIdx < 200) return newLineIdx;
+    else return maxChars;
   }
 }
 

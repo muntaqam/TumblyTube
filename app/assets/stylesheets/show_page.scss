@@ -89,11 +89,11 @@
 
   &__subscribe {
     background: #53c1de;
-    align-self: center;
-    padding: 0.8em 1.2em;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 500;
     color: white;
+    align-self: center;
+    padding: 0.8em 1.2em;
     letter-spacing: 1px;
     border-radius: 4px;
 
@@ -126,7 +126,12 @@
     font-weight: 700;
     color: var(--clr-text-gray);
     display: inline-block;
-    padding: 0.5em 0.2em 0.2em 0.2em;
+    padding: 0.2em;
+    margin-top: 0.75em;
+
+    &--hidden {
+      display: none;
+    }
 
     &:hover {
       cursor: pointer;
