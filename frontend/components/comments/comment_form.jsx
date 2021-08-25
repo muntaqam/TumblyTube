@@ -50,17 +50,17 @@ function CommentForm(props) {
         <AccountCircleIcon />
       </div>
       <div className='cmtform__form'>
-        <div className='cmtform__input'>
-          <input
-            type='text'
-            placeholder={`Add a public ${
-              parentCommentId ? "reply" : "comment"
-            }...`}
-            value={body}
-            onChange={handleInput}
-            onFocus={requireLogin}
-          />
-        </div>
+        <input
+          className='cmtform__input'
+          type='text'
+          placeholder={`Add a public ${
+            parentCommentId ? "reply" : "comment"
+          }...`}
+          value={body}
+          onChange={handleInput}
+          onFocus={requireLogin}
+        />
+
         <div className='cmtform__buttons'>
           <button className='cmtform__cancel' onClick={handleCancel}>
             CANCEL

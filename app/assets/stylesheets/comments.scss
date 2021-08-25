@@ -1,0 +1,145 @@
+.cmtform {
+  display: flex;
+  flex-direction: row;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid var(--clr-secondary);
+    outline: none;
+    padding-block: 0.8em;
+    margin-block: 1em;
+    font-size: 0.925rem;
+  }
+
+  &__buttons {
+    align-self: flex-end;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+  }
+
+  &__cancel {
+    background: transparent;
+    color: var(--clr-text-gray);
+    padding: 0.8em 1.2em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__submit {
+    background: #53c1de;
+    color: white;
+    padding: 0.8em 1.2em;
+    margin-left: 0.7em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+
+  &__card {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 1.125em;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__username {
+    font-size: 0.95rem;
+    font-weight: 900;
+    line-height: 1.5em;
+  }
+
+  &__date {
+    font-size: 0.8rem;
+    color: var(--clr-text-light-gray);
+    margin-left: 0.5em;
+  }
+
+  &__body {
+    width: 125ch;
+    font-size: 0.875rem;
+    padding-block: 0.7em;
+  }
+
+  &__interface {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .likes__container {
+    &--like {
+      padding-left: 0;
+    }
+
+    #thumbup-icon,
+    #thumbdown-icon {
+      padding: 0.125em;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    &:hover {
+      cursor: auto;
+    }
+  }
+
+  .thumb__num {
+    font-size: 0.9em;
+  }
+
+  &__reply {
+    background: transparent;
+    font-size: 0.8125em;
+    padding: 0.25em;
+    margin-left: 0.5em;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__delete {
+    background: transparent;
+    height: fit-content;
+    font-size: 0.75em;
+    color: var(--clr-error);
+    font-weight: 700;
+    margin-left: 1em;
+    margin-block: auto;
+    &:hover {
+      cursor: crosshair;
+    }
+  }
+
+  &__replies {
+    width: fit-content;
+    line-height: 2;
+    font-size: 0.875em;
+    color: var(--clr-primary);
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
