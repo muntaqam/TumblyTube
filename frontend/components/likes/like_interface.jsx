@@ -41,7 +41,7 @@ function LikeInterface(props) {
 
   return (
     <div className='likes'>
-      <div className='likes__container'>
+      <div className='likes__container likes__container--like'>
         <ThumbUpIcon
           className={`thumb thumb--${status}`}
           id='thumbup-icon'
@@ -49,7 +49,7 @@ function LikeInterface(props) {
         />
         <div className={`thumb__num thumb__num--${status}`}>{numLikes}</div>
       </div>
-      <div className='likes__container'>
+      <div className='likes__container likes__container--dislike'>
         <ThumbDownIcon
           className={`thumb thumb--${status}`}
           id='thumbdown-icon'
