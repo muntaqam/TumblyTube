@@ -29,7 +29,7 @@ function CommentIndexItem(props) {
           className='comments__delete'
           onClick={() => handleDelete(commentId)}
         >
-          Delete
+          DELETE
         </button>
       );
   };
@@ -60,6 +60,7 @@ function CommentIndexItem(props) {
               >
                 REPLY
               </button>
+              {renderDelete(comment.id, comment.commenterId)}
             </div>
             {toggled.reply ? (
               <CommentFormContainer
@@ -68,7 +69,6 @@ function CommentIndexItem(props) {
                 toggleReply={() => toggle("reply")}
               />
             ) : null}
-            {renderDelete(comment.id, comment.commenterId)}
             <div
               className='comments__replies'
               onClick={() => toggle("cComments")}
@@ -103,13 +103,15 @@ function CommentIndexItem(props) {
                 numLikes={comment.numLikes}
                 numDislikes={comment.numDislikes}
               />
+              {renderDelete(comment.id, comment.commenterId)}
             </div>
-            {renderDelete(comment.id, comment.commenterId)}
           </div>
         </div>
       );
   };
 
+  console.log(toggled.cComment);
+  console.log(toggled.reply);
   return (
     <>
       {renderComments()}
