@@ -51,29 +51,33 @@ class VideoShow extends React.Component {
                   numLikes={this.props.currentVideo.numLikes}
                   numDislikes={this.props.currentVideo.numDislikes}
                 />
-                <div className='vdetails__share'>Share</div>
+                <div className='vdetails__item vdetails__item--share'>
+                  SHARE
+                </div>
               </div>
             </div>
           </div>
           <div className='vdesc'>
-            <div className='vdesc__usericon'>
-              <AccountCircleIcon />
-            </div>
-            <div className='vdesc__top'>
-              <div className='vdesc__top vdesc__top--split'>
-                <div className='vdesc__top vdesc__top--left'>
-                  <div className='vdesc__username'>
-                    {this.props.currentVideo.creator}
-                  </div>
-                  <div className='vdesc__subcount'>1.1k Subscribers</div>
-                </div>
-                <div className='vdesc__top vdesc__top--right'>
-                  <div className='vdesc__subscribe'>Subscribe</div>
-                </div>
+            <div className='vdesc__split vdesc__split--left'>
+              <div className='vdesc__usericon'>
+                <AccountCircleIcon />
               </div>
             </div>
-            <div className='vdesc__body'>
-              {this.props.currentVideo.description}
+            <div className='vdesc__split vdesc__split--right'>
+              <div className='vdesc__top'>
+                <div className='vdesc__top vdesc__top--split'>
+                  <div className='vdesc__top vdesc__top--left'>
+                    <div className='vdesc__username'>
+                      {this.props.currentVideo.username}
+                    </div>
+                    <div className='vdesc__subcount'>1.1k Subscribers</div>
+                  </div>
+                  <div className='vdesc__subscribe'>SUBSCRIBE</div>
+                </div>
+              </div>
+              <div className='vdesc__body'>
+                {this.props.currentVideo.description}
+              </div>
             </div>
           </div>
         </div>
