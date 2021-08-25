@@ -1,0 +1,11 @@
+.vshow {
+  display: grid;
+  grid-template: 50rem / 1fr auto;
+
+  &__split {
+    &--sideidx {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  }
+}

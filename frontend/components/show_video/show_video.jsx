@@ -29,7 +29,7 @@ class VideoShow extends React.Component {
 
     return (
       <div className='vshow'>
-        <div className='vshow vshow--split'>
+        <div className='vshow__split vshow__split--vdetails'>
           <VideoPlayer
             video={this.props.currentVideo}
             videoId={this.props.currentVideoId}
@@ -56,7 +56,9 @@ class VideoShow extends React.Component {
             </div>
           </div>
           <div className='vdesc'>
-            <div className='vdesc__usericon'><AccountCircleIcon /></div>
+            <div className='vdesc__usericon'>
+              <AccountCircleIcon />
+            </div>
             <div className='vdesc__top'>
               <div className='vdesc__top vdesc__top--split'>
                 <div className='vdesc__top vdesc__top--left'>
@@ -74,10 +76,12 @@ class VideoShow extends React.Component {
               {this.props.currentVideo.description}
             </div>
           </div>
+        </div>
+        <div className='vshow__split vshow__split--comments'>
           <CommentFormContainer currentVideoId={this.props.currentVideoId} />
           <CommentIndexContainer currentVideoId={this.props.currentVideoId} />
         </div>
-        {sideVideos}
+        <div className='vshow__split vshow__split--sideidx'>{sideVideos}</div>
       </div>
     );
   }
