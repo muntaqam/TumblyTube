@@ -46,7 +46,7 @@ class VideoShow extends React.Component {
 
     return (
       <div className='vshow'>
-        <div className='vshow__split vshow__split--vdetails'>
+        <div className='vshow__split vshow__split--meta'>
           <VideoPlayer video={currentVideo} videoId={currentVideoId} />
           <div className='vdetails'>
             <div className='vdetails__title'>{currentVideo.title}</div>
