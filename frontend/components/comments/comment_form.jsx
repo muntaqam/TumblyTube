@@ -15,9 +15,12 @@ function CommentForm(props) {
   const [showBtn, setShowBtn] = useState(false);
   const inputRef = useRef(null);
 
-  function requireLogin() {
+  function handleFocus() {
     if (!currentUser) props.history.push("/login");
-    else setShowBtn(true);
+    else {
+      setShowBtn(true);
+      setInputLine(true);
+    }
   }
 
   function handleInput(e) {
@@ -53,19 +56,23 @@ function CommentForm(props) {
         <AccountCircleIcon />
       </div>
       <div className='cmtform__form'>
-        <input
-          className='cmtform__input'
-          ref={inputRef}
-          type='text'
-          placeholder={`Add a public ${
-            parentCommentId ? "reply" : "comment"
-          }...`}
-          value={body}
-          onChange={handleInput}
-          onFocus={requireLogin}
-        />
+        <section className='cmtform__inputBox'>
+          <input
+            className='cmtform__input'
+            ref={inputRef}
+            type='text'
+            placeholder={`Add a public ${
+              parentCommentId ? "reply" : "comment"
+            }...`}
+            value={body}
+            onChange={handleInput}
+            onFocus={handleFocus}
+            onBlur={() => setInputLine(false)}
+          />
+          {showInputLine && <div className='cmtform__inputLine'></div>}
+        </section>
         {showBtn && (
-          <div className={`cmtform__buttons cmtform__button--${showInputLine}`}>
+          <div className={`cmtform__buttons`}>
             <button className='cmtform__cancel' onClick={handleCancel}>
               CANCEL
             </button>
