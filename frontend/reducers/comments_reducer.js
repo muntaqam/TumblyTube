@@ -13,12 +13,14 @@ export default (state = {}, action) => {
     case RECEIVE_COMMENTS:
       return action.comments;
     case RECEIVE_COMMENT:
-      newState[action.comment.parentCommentId].numChildComments++;
+      if (action.comment.parentCommentId)
+        newState[action.comment.parentCommentId].numChildComments++;
       return Object.assign({}, newState, {
         [action.comment.id]: action.comment,
       });
     case REMOVE_COMMENT:
-      newState[action.parentCommentId].numChildComments--;
+      if (action.parentCommentId)
+        newState[action.parentCommentId].numChildComments--;
       delete newState[action.commentId];
       return newState;
     case RECEIVE_COMMENT_LIKE:

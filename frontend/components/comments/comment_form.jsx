@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 function CommentForm(props) {
@@ -10,18 +10,20 @@ function CommentForm(props) {
     toggleReply,
   } = props;
   const [body, setBody] = useState("");
-  const [disabled, setDisabled] = useState(true);
+  const [showInputLine, setInputLine] = useState(false);
+  const [disabledBtn, setDisabledBtn] = useState(true);
+  const [showBtn, setShowBtn] = useState(false);
+  const inputRef = useRef(null);
 
   function requireLogin() {
-    if (!currentUser) {
-      props.history.push("/login");
-    }
+    if (!currentUser) props.history.push("/login");
+    else setShowBtn(true);
   }
 
   function handleInput(e) {
     setBody(e.currentTarget.value);
-    if (!e.currentTarget.value) setDisabled(true);
-    setDisabled(false);
+    if (!e.currentTarget.value) setDisabledBtn(true);
+    else setDisabledBtn(false);
   }
 
   function handleSubmit(e) {
@@ -33,7 +35,7 @@ function CommentForm(props) {
       parent_comment_id: parentCommentId,
     });
     setBody("");
-    setDisabled(true);
+    setDisabledBtn(true);
     if (parentCommentId) toggleReply();
   }
 
@@ -41,7 +43,8 @@ function CommentForm(props) {
     e.preventDefault();
     if (parentCommentId) toggleReply();
     setBody("");
-    setDisabled(true);
+    setShowBtn(false);
+    setDisabledBtn(true);
   }
 
   return (
@@ -52,6 +55,7 @@ function CommentForm(props) {
       <div className='cmtform__form'>
         <input
           className='cmtform__input'
+          ref={inputRef}
           type='text'
           placeholder={`Add a public ${
             parentCommentId ? "reply" : "comment"
@@ -60,20 +64,22 @@ function CommentForm(props) {
           onChange={handleInput}
           onFocus={requireLogin}
         />
-
-        <div className='cmtform__buttons'>
-          <button className='cmtform__cancel' onClick={handleCancel}>
-            CANCEL
-          </button>
-          <button
-            className={`cmtform__submit cmtform__submit--${
-              disabled ? "inactive" : ""
-            }`}
-            onClick={handleSubmit}
-          >
-            {parentCommentId ? "REPLY" : "COMMENT"}
-          </button>
-        </div>
+        {showBtn && (
+          <div className={`cmtform__buttons cmtform__button--${showInputLine}`}>
+            <button className='cmtform__cancel' onClick={handleCancel}>
+              CANCEL
+            </button>
+            <button
+              className={`cmtform__submit cmtform__submit--${
+                disabledBtn ? "inactive" : ""
+              }`}
+              disabled={disabledBtn}
+              onClick={handleSubmit}
+            >
+              {parentCommentId ? "REPLY" : "COMMENT"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

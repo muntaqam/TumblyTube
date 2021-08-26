@@ -41,8 +41,16 @@
     color: white;
     padding: 0.8em 1.2em;
     margin-left: 0.7em;
+
     &:hover {
       cursor: pointer;
+    }
+
+    &--inactive {
+      background: lightgrey;
+      &:hover {
+        cursor: not-allowed;
+      }
     }
   }
 }
