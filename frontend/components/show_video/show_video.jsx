@@ -39,7 +39,7 @@ class VideoShow extends React.Component {
     const { showMore } = this.state;
 
     let sideVideos = this.props.videos.map((vid) => {
-      if (vid.id != this.props.currentVideoId) {
+      if (vid.id != currentVideoId) {
         return <SideVideoIndex key={vid.id} video={vid} />;
       }
     });
