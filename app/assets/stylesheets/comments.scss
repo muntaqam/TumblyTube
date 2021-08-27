@@ -57,10 +57,7 @@
     color: white;
     padding: 0.8em 1.2em;
     margin-left: 0.7em;
-
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
 
     &--inactive {
       background: lightgrey;
@@ -130,10 +127,9 @@
     #thumbup-icon,
     #thumbdown-icon {
       padding: 0.125em;
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
     }
+
     &:hover {
       cursor: auto;
     }
@@ -148,9 +144,7 @@
     font-size: 0.8125em;
     padding: 0.25em;
     margin-left: 0.5em;
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
   }
 
   &__delete {
@@ -161,9 +155,7 @@
     font-weight: 700;
     margin-left: 1em;
     margin-block: auto;
-    &:hover {
-      cursor: crosshair;
-    }
+    cursor: crosshair;
   }
 
   &__replies {
@@ -171,8 +163,6 @@
     line-height: 2;
     font-size: 0.875em;
     color: var(--clr-primary);
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
   }
 }
