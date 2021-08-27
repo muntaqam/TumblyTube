@@ -6,7 +6,10 @@ import {
 import {
   RECEIVE_VIDEO_LIKE,
   RECEIVE_COMMENT_LIKE,
-  REMOVE_LIKE,
+  RECEIVE_CHILD_COMMENT_LIKE,
+  REMOVE_VIDEO_LIKE,
+  REMOVE_CHILD_COMMENT_LIKE,
+  REMOVE_COMMENT_LIKE,
 } from "../actions/like_actions";
 
 const usersReducer = (state = {}, action) => {
@@ -18,25 +21,34 @@ const usersReducer = (state = {}, action) => {
       return Object.assign({}, newState, {
         [action.currentUser.id]: action.currentUser,
       });
+
     case RECEIVE_USERS:
       Object.values(action.users).map((user) => {
         if (!newState.hasOwnProperty(user.id)) newState[user.id] = user;
       });
       return newState;
+
     case LOGOUT_CURRENT_USER:
       return {};
+
     case RECEIVE_VIDEO_LIKE:
       newState[action.likerId]["likedVideos"][action.videoId] = action.like;
       return newState;
+
     case RECEIVE_COMMENT_LIKE:
+    case RECEIVE_CHILD_COMMENT_LIKE:
       newState[action.likerId]["likedComments"][action.commentId] = action.like;
       return newState;
-    case REMOVE_LIKE:
-      if (action.likeableType == "Video")
-        delete newState[action.likerId]["likedVideos"][action.likeableId];
-      if (action.likeableType == "Comment")
-        delete newState[action.likerId]["likedComments"][action.likeableId];
+
+    case REMOVE_VIDEO_LIKE:
+      delete newState[action.likerId]["likedVideos"][action.videoId];
       return newState;
+
+    case REMOVE_COMMENT_LIKE:
+    case REMOVE_CHILD_COMMENT_LIKE:
+      delete newState[action.likerId]["likedComments"][action.commentId];
+      return newState;
+
     default:
       return newState;
   }
