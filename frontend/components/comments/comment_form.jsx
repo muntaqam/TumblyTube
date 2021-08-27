@@ -1,23 +1,25 @@
 import React, { useState, useRef } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { useOpenReply } from "./comment_idx";
 
 function CommentForm(props) {
-  const {
-    currentUser,
-    currentVideoId,
-    createComment,
-    parentCommentId,
-    toggleReply,
-  } = props;
+  const { currentUser, currentVideoId, createComment, parentCommentId } = props;
+
   const [body, setBody] = useState("");
   const [showInputLine, setInputLine] = useState(false);
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [showBtn, setShowBtn] = useState(false);
   const inputRef = useRef(null);
 
-  function requireLogin() {
+  // custom hook to toggle CommentForm in CommentIdx
+  const toggleOpenReply = useOpenReply();
+
+  function handleFocus() {
     if (!currentUser) props.history.push("/login");
-    else setShowBtn(true);
+    else {
+      setShowBtn(true);
+      setInputLine(true);
+    }
   }
 
   function handleInput(e) {
@@ -35,13 +37,12 @@ function CommentForm(props) {
       parent_comment_id: parentCommentId,
     });
     setBody("");
-    setDisabledBtn(true);
-    if (parentCommentId) toggleReply();
+    if (parentCommentId) toggleOpenReply();
   }
 
   function handleCancel(e) {
     e.preventDefault();
-    if (parentCommentId) toggleReply();
+    if (parentCommentId) toggleOpenReply();
     setBody("");
     setShowBtn(false);
     setDisabledBtn(true);
@@ -53,19 +54,23 @@ function CommentForm(props) {
         <AccountCircleIcon />
       </div>
       <div className='cmtform__form'>
-        <input
-          className='cmtform__input'
-          ref={inputRef}
-          type='text'
-          placeholder={`Add a public ${
-            parentCommentId ? "reply" : "comment"
-          }...`}
-          value={body}
-          onChange={handleInput}
-          onFocus={requireLogin}
-        />
+        <section className='cmtform__inputBox'>
+          <input
+            className='cmtform__input'
+            ref={inputRef}
+            type='text'
+            placeholder={`Add a public ${
+              parentCommentId ? "reply" : "comment"
+            }...`}
+            value={body}
+            onChange={handleInput}
+            onFocus={handleFocus}
+            onBlur={() => setInputLine(false)}
+          />
+          {showInputLine && <div className='cmtform__inputLine'></div>}
+        </section>
         {showBtn && (
-          <div className={`cmtform__buttons cmtform__button--${showInputLine}`}>
+          <div className={`cmtform__buttons`}>
             <button className='cmtform__cancel' onClick={handleCancel}>
               CANCEL
             </button>
