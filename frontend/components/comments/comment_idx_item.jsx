@@ -81,7 +81,7 @@ function CommentIndex(props) {
           </toggleReply.Provider>
           {comment.numChildComments > 0 && (
             <div className='comments__replies' onClick={toggleArrow}>
-              {arrowUp ? "▲ Hide" : "▼ View"}
+              {arrowUp ? "▲ Hide " : "▼ View "}
               {`${comment.numChildComments} replies`}
             </div>
           )}

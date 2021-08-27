@@ -2,6 +2,8 @@ import * as APIUtil from "../util/comment_api_util";
 
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const RECEIVE_COMMENT = "RECEIVE_COMMENT";
+export const RECEIVE_CHILD_COMMENT = "RECEIVE_CHILD_COMMENT";
+export const REMOVE_CHILD_COMMENT = "REMOVE_CHILD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 
 const receiveComments = (comments) => ({
@@ -14,8 +16,19 @@ const receiveComment = (comment) => ({
   comment,
 });
 
+const receiveChildComment = (comment) => ({
+  type: RECEIVE_CHILD_COMMENT,
+  comment,
+  parentCommentId: comment.parentCommentId,
+});
+
 const removeComment = (comment) => ({
   type: REMOVE_COMMENT,
+  commentId: comment.id,
+});
+
+const removeChildComment = (comment) => ({
+  type: REMOVE_CHILD_COMMENT,
   commentId: comment.id,
   parentCommentId: comment.parentCommentId,
 });
@@ -27,13 +40,15 @@ export const fetchComments = (vidId) => (dispatch) => {
 };
 
 export const createComment = (comment) => (dispatch) => {
-  return APIUtil.createComment(comment).then((comment) =>
-    dispatch(receiveComment(comment))
-  );
+  return APIUtil.createComment(comment).then((comment) => {
+    if (comment.parentCommentId) dispatch(receiveChildComment(comment));
+    else dispatch(receiveComment(comment));
+  });
 };
 
 export const deleteComment = (commentId) => (dispatch) => {
-  return APIUtil.deleteComment(commentId).then((comment) =>
-    dispatch(removeComment(comment))
-  );
+  return APIUtil.deleteComment(commentId).then((comment) => {
+    if (comment.parentCommentId) dispatch(removeChildComment(comment));
+    else dispatch(removeComment(comment));
+  });
 };
