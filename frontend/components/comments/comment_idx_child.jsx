@@ -1,27 +1,12 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React from "react";
 import LikeInterface from "../likes/like_interface_container";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
-const ChildComments = forwardRef((props, ref) => {
+const ChildComments = (props) => {
   const { comment, renderDelete } = props;
-  const [toggled, setToggled] = useState(false);
-
-  const toggleComments = () => {
-    if (toggled) setToggled(false);
-    else setToggled(true);
-  };
-
-  useImperativeHandle(ref, () => {
-    return {
-      toggleComments: toggleComments,
-    };
-  });
 
   return (
-    <div
-      className={`comments__card comments__card--${toggled ? "" : "hidden"}`}
-      {...props}
-    >
+    <div className='comments__card comments__card--child'>
       <div className='comments__usericon'>
         <AccountCircleIcon />
       </div>
@@ -38,11 +23,11 @@ const ChildComments = forwardRef((props, ref) => {
             numLikes={comment.numLikes}
             numDislikes={comment.numDislikes}
           />
-          {renderDelete(comment.id, comment.commenterId)}
+          {/* {renderDelete(comment.id, comment.commenterId)} */}
         </div>
       </div>
     </div>
   );
-});
+};
 
 export default ChildComments;
