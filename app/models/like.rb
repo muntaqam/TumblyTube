@@ -9,4 +9,11 @@ class Like < ApplicationRecord
   belongs_to :user,
     foreign_key: :liker_id,
     class_name: :User
+
+  # true if liked comment is child comment
+  # flase if parent comment
+  def find_parent_comment_id
+    comment = Comment.find_by_id(self.likeable_id)
+    comment.parent_comment_id
+  end
 end
