@@ -1,9 +1,15 @@
 import React, { useState, useRef } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { useOpenReply } from "./comment_idx";
+import { useOpenReply } from "./comment_idx_item";
 
 function CommentForm(props) {
-  const { currentUser, currentVideoId, createComment, parentCommentId } = props;
+  const {
+    currentUser,
+    currentVideoId,
+    createComment,
+    parentCommentId,
+    autoFocus,
+  } = props;
 
   const [body, setBody] = useState("");
   const [showInputLine, setInputLine] = useState(false);
@@ -66,6 +72,7 @@ function CommentForm(props) {
             onChange={handleInput}
             onFocus={handleFocus}
             onBlur={() => setInputLine(false)}
+            autoFocus={autoFocus}
           />
           {showInputLine && <div className='cmtform__inputLine'></div>}
         </section>

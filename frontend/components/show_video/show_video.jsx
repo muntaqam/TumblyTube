@@ -109,7 +109,10 @@ class VideoShow extends React.Component {
           </div>
         </div>
         <div className='vshow__split vshow__split--comments'>
-          <CommentFormContainer currentVideoId={currentVideoId} />
+          <CommentFormContainer
+            currentVideoId={currentVideoId}
+            autoFocus={false}
+          />
           <CommentIndexContainer currentVideoId={currentVideoId} />
         </div>
         <div className='vshow__split vshow__split--sideidx'>{sideVideos}</div>
