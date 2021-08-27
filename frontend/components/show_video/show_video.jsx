@@ -94,7 +94,7 @@ class VideoShow extends React.Component {
                     showMore ? "" : "hidden"
                   }`}
                 >
-                  {currentVidDesc.substring(this.strIndex())}
+                  {currentVidDesc.substring(this.strIndex() + 1)}
                 </span>
               </div>
               <div

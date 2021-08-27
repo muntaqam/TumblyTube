@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { createLike, deleteLike } from "../../actions/like_actions";
 import LikeInterface from "./like_interface";
 
@@ -17,4 +18,4 @@ const mDTP = (dispatch) => {
   };
 };
 
-export default connect(mSTP, mDTP)(LikeInterface);
+export default withRouter(connect(mSTP, mDTP)(LikeInterface));
