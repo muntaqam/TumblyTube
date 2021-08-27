@@ -1,6 +1,8 @@
 import {
+  RECEIVE_CHILD_COMMENT,
   RECEIVE_COMMENT,
   RECEIVE_COMMENTS,
+  REMOVE_CHILD_COMMENT,
   REMOVE_COMMENT,
 } from "../actions/comment_actions";
 import { RECEIVE_COMMENT_LIKE, REMOVE_LIKE } from "../actions/like_actions";
@@ -13,15 +15,21 @@ export default (state = {}, action) => {
     case RECEIVE_COMMENTS:
       return action.comments;
     case RECEIVE_COMMENT:
-      if (action.comment.parentCommentId)
-        newState[action.comment.parentCommentId].numChildComments++;
       return Object.assign({}, newState, {
         [action.comment.id]: action.comment,
       });
+    case RECEIVE_CHILD_COMMENT:
+      // +1 to [numChildComments] of parent comment
+      newState[action.parentCommentId].numChildComments++;
+      newState[action.parentCommentId].childComments[action.comment.id] =
+        action.comment;
+      return newState;
     case REMOVE_COMMENT:
-      if (action.parentCommentId)
-        newState[action.parentCommentId].numChildComments--;
       delete newState[action.commentId];
+      return newState;
+    case REMOVE_CHILD_COMMENT:
+      newState[action.parentCommentId].numChildComments--;
+      delete newState[action.parentCommentId].childComments[action.commentId];
       return newState;
     case RECEIVE_COMMENT_LIKE:
       if (action.version == "like") newState[action.commentId]["numLikes"]++;
