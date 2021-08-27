@@ -35,13 +35,13 @@ const usersReducer = (state = {}, action) => {
       newState[action.likerId]["likedVideos"][action.videoId] = action.like;
       return newState;
 
+    case REMOVE_VIDEO_LIKE:
+      delete newState[action.likerId]["likedVideos"][action.videoId];
+      return newState;
+
     case RECEIVE_COMMENT_LIKE:
     case RECEIVE_CHILD_COMMENT_LIKE:
       newState[action.likerId]["likedComments"][action.commentId] = action.like;
-      return newState;
-
-    case REMOVE_VIDEO_LIKE:
-      delete newState[action.likerId]["likedVideos"][action.videoId];
       return newState;
 
     case REMOVE_COMMENT_LIKE:
