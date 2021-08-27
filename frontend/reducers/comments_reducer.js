@@ -5,7 +5,12 @@ import {
   REMOVE_CHILD_COMMENT,
   REMOVE_COMMENT,
 } from "../actions/comment_actions";
-import { RECEIVE_COMMENT_LIKE, REMOVE_LIKE } from "../actions/like_actions";
+import {
+  RECEIVE_CHILD_COMMENT_LIKE,
+  RECEIVE_COMMENT_LIKE,
+  REMOVE_COMMENT_LIKE,
+  REMOVE_CHILD_COMMENT_LIKE,
+} from "../actions/like_actions";
 
 export default (state = {}, action) => {
   Object.freeze(state);
@@ -14,35 +19,63 @@ export default (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_COMMENTS:
       return action.comments;
+
     case RECEIVE_COMMENT:
       return Object.assign({}, newState, {
         [action.comment.id]: action.comment,
       });
+
     case RECEIVE_CHILD_COMMENT:
       // +1 to [numChildComments] of parent comment
       newState[action.parentCommentId].numChildComments++;
       newState[action.parentCommentId].childComments[action.comment.id] =
         action.comment;
       return newState;
+
     case REMOVE_COMMENT:
       delete newState[action.commentId];
       return newState;
+
     case REMOVE_CHILD_COMMENT:
+      // -1 to [numChildComments] of parent comment
       newState[action.parentCommentId].numChildComments--;
       delete newState[action.parentCommentId].childComments[action.commentId];
       return newState;
+
     case RECEIVE_COMMENT_LIKE:
       if (action.version == "like") newState[action.commentId]["numLikes"]++;
       if (action.version == "dislike")
         newState[action.commentId]["numDislikes"]++;
       return newState;
-    case REMOVE_LIKE:
-      if (action.likeableType == "Comment") {
-        if (action.version == "like") newState[action.likeableId]["numLikes"]--;
-        if (action.version == "dislike")
-          newState[action.likeableId]["numDislikes"]--;
-      }
+
+    case RECEIVE_CHILD_COMMENT_LIKE:
+      if (action.version == "like")
+        newState[action.parentCommentId].childComments[action.commentId][
+          "numLikes"
+        ]++;
+      if (action.version == "dislike")
+        newState[action.parentCommentId].childComments[action.commentId][
+          "numDislikes"
+        ]++;
       return newState;
+
+    case REMOVE_COMMENT_LIKE:
+      if (action.version == "like") newState[action.commentId]["numLikes"]--;
+      if (action.version == "dislike")
+        newState[action.commentId]["numDislikes"]--;
+      return newState;
+
+    case REMOVE_CHILD_COMMENT_LIKE:
+      if (action.version == "like")
+        newState[action.parentCommentId].childComments[action.commentId][
+          "numLikes"
+        ]--;
+      if (action.version == "dislike")
+        newState[action.parentCommentId].childComments[action.commentId][
+          "numDislikes"
+        ]--;
+      return newState;
+
     default:
       return newState;
   }

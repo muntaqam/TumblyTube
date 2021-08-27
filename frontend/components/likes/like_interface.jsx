@@ -15,8 +15,9 @@ function LikeInterface(props) {
     currentUser,
   } = props;
 
+  // 0 if no likes, 1 if liked, -1 if disliked
   const [likeStatus, setLikeStatus] = useState(0);
-  // set liked, if newLike is already in users slice of state
+  // check if newLike is already in users slice of state
   const isLiked = currentUser[`liked${likeableType}s`][likeableId];
 
   useEffect(() => {
@@ -62,36 +63,29 @@ function LikeInterface(props) {
     <div className='likes'>
       <div className='likes__container likes__container--like'>
         {likeStatus == 1 ? (
-          <ThumbUpIcon
-            className={`thumb`}
-            id='thumbup-icon'
-            onClick={() => handleLike("like")}
-          />
+          <ThumbUpIcon id='thumbup-icon' onClick={() => handleLike("like")} />
         ) : (
           <ThumbUpOutlinedIcon
-            className={`thumb`}
             id='thumbup-icon'
             onClick={() => handleLike("like")}
           />
         )}
-        <div className={`thumb__num`}>{numLikes}</div>
+        <div className='thumb__num'>{numLikes}</div>
       </div>
       <div className='likes__container likes__container--dislike'>
         {likeStatus == -1 ? (
           <ThumbDownIcon
-            className={`thumb`}
-            id='thumbup-icon'
+            id='thumbdown-icon'
             onClick={() => handleLike("dislike")}
           />
         ) : (
           <ThumbDownOutlinedIcon
-            className={`thumb`}
             id='thumbdown-icon'
             onClick={() => handleLike("dislike")}
           />
         )}
 
-        <div className={`thumb__num`}>{numDislikes}</div>
+        <div className='thumb__num'>{numDislikes}</div>
       </div>
     </div>
   );
