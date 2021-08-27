@@ -1,8 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import LikeInterface from "../likes/like_interface_container";
 import CommentFormContainer from "./comment_form_container";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ChildComments from "./comment_child";
+
+const toggleReply = React.createContext();
+
+export function useOpenReply() {
+  return useContext(toggleReply);
+}
 
 function CommentIndex(props) {
   const {
@@ -12,19 +18,23 @@ function CommentIndex(props) {
     fetchComments,
     deleteComment,
   } = props;
-  const [toggled, setToggled] = useState(false);
+
+  const [openReply, setOpenReply] = useState(false);
+  const [arrowUp, setArrowUp] = useState(false);
   const childCommentRef = useRef(null);
 
   useEffect(() => {
     fetchComments(currentVideoId);
   }, [currentVideoId]);
 
-  function toggle(type) {
-    if (type == "reply" && toggled) setToggled(false);
-    else setToggled(true);
+  const toggleOpenReply = () => {
+    setOpenReply((prevState) => (prevState = !prevState));
+  };
 
-    if (type == "cComments") childCommentRef.current.toggleComments();
-  }
+  const toggleArrow = () => {
+    // childCommentRef.current.toggleComments();
+    setArrowUp((prevState) => (prevState = !prevState));
+  };
 
   function verifyUser(commenterId) {
     return commenterId === currentUser?.id;
@@ -67,26 +77,23 @@ function CommentIndex(props) {
                 numLikes={comment.numLikes}
                 numDislikes={comment.numDislikes}
               />
-              <button
-                className='comments__reply'
-                onClick={() => toggle("reply")}
-              >
+              <button className='comments__reply' onClick={toggleOpenReply}>
                 REPLY
               </button>
               {renderDelete(comment.id, comment.commenterId)}
             </div>
-            {toggled.reply ? (
-              <CommentFormContainer
-                parentCommentId={comment.id}
-                currentVideoId={currentVideoId}
-                toggleReply={() => toggle("reply")}
-              />
-            ) : null}
-            <div
-              className='comments__replies'
-              onClick={() => toggle("cComments")}
-            >
-              {`⬇︎ View ${comment.numChildComments} replies`}
+            <toggleReply.Provider value={toggleOpenReply}>
+              {openReply && (
+                <CommentFormContainer
+                  autoFocus={true}
+                  currentVideoId={currentVideoId}
+                  parentCommentId={comment.id}
+                />
+              )}
+            </toggleReply.Provider>
+            <div className='comments__replies' onClick={toggleArrow}>
+              {arrowUp ? "▲" : "▼"}
+              {`View ${comment.numChildComments} replies`}
             </div>
           </div>
         </div>
