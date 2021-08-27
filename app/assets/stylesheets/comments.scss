@@ -84,10 +84,11 @@
   &__card {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1.125em;
+    margin-top: 0.75em;
 
-    &--hidden {
-      display: none;
+    &--child {
+      padding-left: 1.5em;
+      margin-top: 0.125em;
     }
   }
 
@@ -111,7 +112,7 @@
   &__body {
     width: 125ch;
     font-size: 0.875rem;
-    padding-block: 0.7em;
+    padding-block: 0.3em;
   }
 
   &__interface {
@@ -164,5 +165,6 @@
     font-size: 0.875em;
     color: var(--clr-primary);
     cursor: pointer;
+    user-select: none;
   }
 }
