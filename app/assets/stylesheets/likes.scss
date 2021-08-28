@@ -1,21 +1,25 @@
 .likes {
   display: flex;
   flex-direction: row;
-  width: 7rem;
+  width: 7em;
   justify-content: space-between;
-  font-size: 0.875rem;
 
   &__container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0.5em;
+    padding: 0.25em;
     color: var(--clr-text-gray);
 
     &:hover {
       cursor: pointer;
     }
   }
+}
+
+#thumbup-icon,
+#thumbdown-icon {
+  font-size: 1.4rem;
 }
 
 .thumb__num {

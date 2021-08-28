@@ -8,6 +8,7 @@ function CommentForm(props) {
     currentVideoId,
     createComment,
     parentCommentId,
+    numComments,
     autoFocus,
   } = props;
 
@@ -56,42 +57,45 @@ function CommentForm(props) {
 
   return (
     <div className='cmtform'>
-      <div className='comments__icon'>
-        <AccountCircleIcon />
-      </div>
-      <div className='cmtform__form'>
-        <section className='cmtform__inputBox'>
-          <input
-            className='cmtform__input'
-            ref={inputRef}
-            type='text'
-            placeholder={`Add a public ${
-              parentCommentId ? "reply" : "comment"
-            }...`}
-            value={body}
-            onChange={handleInput}
-            onFocus={handleFocus}
-            onBlur={() => setInputLine(false)}
-            autoFocus={autoFocus}
-          />
-          {showInputLine && <div className='cmtform__inputLine'></div>}
-        </section>
-        {showBtn && (
-          <div className={`cmtform__buttons`}>
-            <button className='cmtform__cancel' onClick={handleCancel}>
-              CANCEL
-            </button>
-            <button
-              className={`cmtform__submit cmtform__submit--${
-                disabledBtn ? "inactive" : ""
-              }`}
-              disabled={disabledBtn}
-              onClick={handleSubmit}
-            >
-              {parentCommentId ? "REPLY" : "COMMENT"}
-            </button>
-          </div>
-        )}
+      <div className='cmtform__numComments'>{`${numComments} Comments`}</div>
+      <div className='cmtform__split cmtform__split--bottom'>
+        <div className='comments__icon'>
+          <AccountCircleIcon />
+        </div>
+        <div className='cmtform__form'>
+          <section className='cmtform__inputBox'>
+            <input
+              className='cmtform__input'
+              ref={inputRef}
+              type='text'
+              placeholder={`Add a public ${
+                parentCommentId ? "reply" : "comment"
+              }...`}
+              value={body}
+              onChange={handleInput}
+              onFocus={handleFocus}
+              onBlur={() => setInputLine(false)}
+              autoFocus={autoFocus}
+            />
+            {showInputLine && <div className='cmtform__inputLine'></div>}
+          </section>
+          {showBtn && (
+            <div className={`cmtform__buttons`}>
+              <button className='cmtform__cancel' onClick={handleCancel}>
+                CANCEL
+              </button>
+              <button
+                className={`cmtform__submit cmtform__submit--${
+                  disabledBtn ? "inactive" : ""
+                }`}
+                disabled={disabledBtn}
+                onClick={handleSubmit}
+              >
+                {parentCommentId ? "REPLY" : "COMMENT"}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
