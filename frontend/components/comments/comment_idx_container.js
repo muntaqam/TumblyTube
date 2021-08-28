@@ -2,7 +2,11 @@ import React from "react";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import CommentIdx from "./comment_idx";
-import { deleteComment, fetchComments } from "../../actions/comment_actions";
+import {
+  deleteComment,
+  fetchComments,
+  fetchMoreComments,
+} from "../../actions/comment_actions";
 
 const mSTP = ({ session, entities }) => {
   return {
@@ -14,6 +18,8 @@ const mSTP = ({ session, entities }) => {
 const mDTP = (dispatch) => {
   return {
     fetchComments: (videoId) => dispatch(fetchComments(videoId)),
+    fetchMoreComments: (videoId, numOffset, numLimit) =>
+      dispatch(fetchMoreComments(videoId, numOffset, numLimit)),
     deleteComment: (commentId) => dispatch(deleteComment(commentId)),
   };
 };

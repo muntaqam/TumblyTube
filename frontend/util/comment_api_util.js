@@ -1,7 +1,19 @@
-export const fetchComments = (vidId) => {
+export const fetchComments = (vidId, numLimit) => {
   return $.ajax({
     method: "GET",
     url: `api/videos/${vidId}/comments`,
+    data: { numLimit },
+  });
+};
+
+export const fetchMoreComments = (vidId, numOffset, numLimit) => {
+  return $.ajax({
+    method: "POST",
+    url: `api/videos/${vidId}/more_comments`,
+    data: {
+      numOffset: numOffset,
+      numLimit: numLimit,
+    },
   });
 };
 

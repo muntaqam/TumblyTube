@@ -3,7 +3,21 @@ class Api::CommentsController < ApplicationController
   before_action :require_login, only: [:create, :destroy]
 
   def index 
-    @comments = Video.find_by_id(params[:video_id]).comments
+    num_limit = params[:numLimit]
+    
+    video = Video.find_by_id(params[:video_id])
+    @comments = video.comments.where(parent_comment_id: nil).limit(num_limit)
+  end
+  
+  # send more comments for Intersection Observer
+  def more_comments
+    num_offset = params[:numOffset]
+    num_limit = params[:numLimit]
+    
+    video = Video.find_by_id(params[:video_id])
+    @comments = video.comments.where(parent_comment_id: nil).offset(num_offset).limit(num_limit)
+
+    render :index
   end
 
   def create
