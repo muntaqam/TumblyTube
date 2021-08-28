@@ -63,7 +63,7 @@ export const createLike = (like) => (dispatch) => {
 
     if (like.likeableType == "Comment" && like.parentCommentId) {
       dispatch(receiveChildCommentLike(like));
-    } else if (like.parentCommentId) {
+    } else if (!like.parentCommentId) {
       dispatch(receiveCommentLike(like));
     }
   });
@@ -75,7 +75,7 @@ export const deleteLike = (likeId) => (dispatch) => {
 
     if (like.likeableType == "Comment" && like.parentCommentId) {
       dispatch(removeChildCommentLike(like));
-    } else if (like.parentCommentId) {
+    } else if (!like.parentCommentId) {
       dispatch(removeCommentLike(like));
     }
   });

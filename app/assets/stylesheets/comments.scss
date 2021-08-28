@@ -138,6 +138,10 @@
 
   .thumb__num {
     font-size: 0.9em;
+
+    &--dislikes {
+      display: none;
+    }
   }
 
   &__reply {
