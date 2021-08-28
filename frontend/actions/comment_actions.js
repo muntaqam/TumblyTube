@@ -52,6 +52,7 @@ export const fetchMoreComments = (vidId, numOffset, numLimit) => (dispatch) => {
     (comments) => {
       const newCommentsLength = Object.keys(comments).length;
       if (newCommentsLength > 0) {
+        // setTimeout to render loading animation, if more comments
         setTimeout(() => {
           dispatch(receiveMoreComments(comments));
         }, 600);
