@@ -1,6 +1,7 @@
 import * as APIUtil from "../util/comment_api_util";
 
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
+export const RECEIVE_MORE_COMMENTS = "RECEIVE_MORE_COMMENTS";
 export const RECEIVE_COMMENT = "RECEIVE_COMMENT";
 export const RECEIVE_CHILD_COMMENT = "RECEIVE_CHILD_COMMENT";
 export const REMOVE_CHILD_COMMENT = "REMOVE_CHILD_COMMENT";
@@ -10,6 +11,13 @@ const receiveComments = (comments) => ({
   type: RECEIVE_COMMENTS,
   comments,
 });
+
+const receiveMoreComments = (comments) => {
+  return {
+    type: RECEIVE_MORE_COMMENTS,
+    comments,
+  };
+};
 
 const receiveComment = (comment) => ({
   type: RECEIVE_COMMENT,
@@ -33,9 +41,23 @@ const removeChildComment = (comment) => ({
   parentCommentId: comment.parentCommentId,
 });
 
-export const fetchComments = (vidId) => (dispatch) => {
-  return APIUtil.fetchComments(vidId).then((comments) =>
+export const fetchComments = (vidId, numLimit) => (dispatch) => {
+  return APIUtil.fetchComments(vidId, numLimit).then((comments) =>
     dispatch(receiveComments(comments))
+  );
+};
+
+export const fetchMoreComments = (vidId, numOffset, numLimit) => (dispatch) => {
+  return APIUtil.fetchMoreComments(vidId, numOffset, numLimit).then(
+    (comments) => {
+      const newCommentsLength = Object.keys(comments).length;
+      if (newCommentsLength > 0) {
+        setTimeout(() => {
+          dispatch(receiveMoreComments(comments));
+        }, 600);
+      }
+      return newCommentsLength;
+    }
   );
 };
 

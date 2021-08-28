@@ -2,6 +2,7 @@ import {
   RECEIVE_CHILD_COMMENT,
   RECEIVE_COMMENT,
   RECEIVE_COMMENTS,
+  RECEIVE_MORE_COMMENTS,
   REMOVE_CHILD_COMMENT,
   REMOVE_COMMENT,
 } from "../actions/comment_actions";
@@ -19,6 +20,9 @@ export default (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_COMMENTS:
       return action.comments;
+
+    case RECEIVE_MORE_COMMENTS:
+      return Object.assign({}, newState, action.comments);
 
     case RECEIVE_COMMENT:
       return Object.assign({}, newState, {
