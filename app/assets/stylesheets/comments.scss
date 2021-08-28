@@ -168,3 +168,19 @@
     user-select: none;
   }
 }
+
+// COMMENT SCROLL
+.bottomLoaderBar {
+  display: flex;
+  width: 100%;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 5px solid #ededed;
+  border-top: 5px solid #53c1de;
+}

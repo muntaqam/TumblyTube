@@ -17,7 +17,8 @@ const mDTP = (dispatch) => {
   return {
     addViews: (vidId) => dispatch(addViews(vidId)),
     fetchVideos: () => dispatch(fetchVideos()),
-    fetchComments: (vidId) => dispatch(fetchComments(vidId)),
+    fetchComments: (vidId, numLimit) =>
+      dispatch(fetchComments(vidId, numLimit)),
   };
 };
 

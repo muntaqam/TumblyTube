@@ -24,22 +24,29 @@ Rails.application.routes.draw do
   
   namespace :api, defaults: {format: :json} do
     resource :session, only: [:create, :destroy, :show]
+
+    # check if email exists in User for 2-step login action
     get "/identify_email/:email", 
       to: "sessions#identify_email", 
       format: false, 
       constraints: { email: %r{[^\/]+}}, 
       param: :email
 
+    # check if username exists in User for 2-step login action
     get "/identify_username/:username", to: "sessions#identify_username", param: :username
     
     resources :users, only: [:index, :create]
+
     resources :videos, only: [:index, :show, :create, :destroy, :update] do
       resources :comments, only: [:index]
-      member do
-        post 'add_views'
-      end
+      # send more comments for Intersection Observer
+      post 'more_comments' => 'comments#more_comments'
+      # add views to Video
+      post 'add_views', on: :member
     end
+
     resources :comments, only: [:create, :destroy]
+
     resources :likes, only: [:create, :destroy]
   end
 
