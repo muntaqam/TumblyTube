@@ -6,7 +6,7 @@ class Api::CommentsController < ApplicationController
     num_limit = params[:numLimit]
     
     video = Video.find_by_id(params[:video_id])
-    @comments = video.comments.where(parent_comment_id: nil).limit(num_limit)
+    @comments = video.comments.where(parent_comment_id: nil).order(:id).limit(num_limit)
   end
   
   # send more comments for Intersection Observer
@@ -15,7 +15,7 @@ class Api::CommentsController < ApplicationController
     num_limit = params[:numLimit]
     
     video = Video.find_by_id(params[:video_id])
-    @comments = video.comments.where(parent_comment_id: nil).offset(num_offset).limit(num_limit)
+    @comments = video.comments.where(parent_comment_id: nil).order(:id).offset(num_offset).limit(num_limit)
 
     render :index
   end

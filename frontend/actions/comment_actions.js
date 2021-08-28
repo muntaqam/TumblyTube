@@ -50,8 +50,13 @@ export const fetchComments = (vidId, numLimit) => (dispatch) => {
 export const fetchMoreComments = (vidId, numOffset, numLimit) => (dispatch) => {
   return APIUtil.fetchMoreComments(vidId, numOffset, numLimit).then(
     (comments) => {
-      dispatch(receiveMoreComments(comments));
-      return comments;
+      const newCommentsLength = Object.keys(comments).length;
+      if (newCommentsLength > 0) {
+        setTimeout(() => {
+          dispatch(receiveMoreComments(comments));
+        }, 600);
+      }
+      return newCommentsLength;
     }
   );
 };

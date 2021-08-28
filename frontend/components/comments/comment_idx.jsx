@@ -14,28 +14,25 @@ function CommentIndex(props) {
   const [showBottomBar, setShowBottomBar] = useState(true);
 
   // ensure comments length value in callback of Intersectional Observer is == comments.length
-  const [numComments, setNumComments] = useState(10);
+  const numComments = useRef(10);
 
   useEffect(() => {
     setShowBottomBar(true);
-    setNumComments(comments.length);
+    numComments.current = comments.length;
   }, [comments.length]); //when new comments posted
-
-  console.log("top" + " " + numComments);
 
   // INTRERSECTION OVSERVER
   const observer = React.useRef(
     new IntersectionObserver((entries) => {
       const first = entries[0];
       if (first.isIntersecting) {
-        fetchMoreComments(currentVideoId, numComments, 10).then(
-          (newComments) => {
-            if (Object.keys(newComments) > 0) {
-              setTimeout(() => {}, 6000);
-            } else {
+        // fetchMoreComments returns length of newly fetched comments
+        fetchMoreComments(currentVideoId, numComments.current, 10).then(
+          (newCommentsLength) => {
+            if (newCommentsLength <= 0) {
               setTimeout(() => {
                 setShowBottomBar(false);
-              }, 3000);
+              }, 1500);
             }
           }
         );
