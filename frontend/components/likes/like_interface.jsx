@@ -70,7 +70,7 @@ function LikeInterface(props) {
             onClick={() => handleLike("like")}
           />
         )}
-        <div className='thumb__num'>{numLikes}</div>
+        <div className='thumb__num thumb__num--likes'>{numLikes}</div>
       </div>
       <div className='likes__container likes__container--dislike'>
         {likeStatus == -1 ? (
@@ -85,7 +85,7 @@ function LikeInterface(props) {
           />
         )}
 
-        <div className='thumb__num'>{numDislikes}</div>
+        <div className='thumb__num thumb__num--dislikes'>{numDislikes}</div>
       </div>
     </div>
   );
