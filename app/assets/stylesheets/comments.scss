@@ -1,6 +1,16 @@
 .cmtform {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  &__numComments {
+    padding-block: 1.5em;
+    font-size: 1rem;
+  }
+
+  &__split--bottom {
+    display: flex;
+    flex-direction: row;
+  }
 
   &__form {
     display: flex;
@@ -16,7 +26,7 @@
     width: 100%;
     border: none;
     background: transparent;
-    border-bottom: 1px solid var(--clr-secondary);
+    border-bottom: 1px solid var(--clr-separator-gray);
     outline: none;
     padding-block: 0.8em;
     font-size: 0.925rem;
@@ -87,7 +97,7 @@
     margin-top: 0.75em;
 
     &--child {
-      padding-left: 1.5em;
+      padding-left: 2.25em;
       margin-top: 0.125em;
     }
   }
@@ -95,6 +105,7 @@
   &__details {
     display: flex;
     flex-direction: column;
+    padding-left: 0.8em;
   }
 
   &__username {
@@ -112,12 +123,17 @@
   &__body {
     width: 125ch;
     font-size: 0.875rem;
-    padding-block: 0.3em;
+    padding-top: 0.3em;
+    padding-bottom: 0.6em;
   }
 
   &__interface {
     display: flex;
     flex-direction: row;
+  }
+
+  .likes {
+    width: 4.3em;
   }
 
   .likes__container {
@@ -127,6 +143,7 @@
 
     #thumbup-icon,
     #thumbdown-icon {
+      font-size: 1.25rem;
       padding: 0.125em;
       cursor: pointer;
     }
@@ -137,7 +154,8 @@
   }
 
   .thumb__num {
-    font-size: 0.9em;
+    font-size: 0.8em;
+    margin-left: 0.25em;
 
     &--dislikes {
       display: none;
@@ -146,7 +164,7 @@
 
   &__reply {
     background: transparent;
-    font-size: 0.8125em;
+    font-size: 0.8em;
     padding: 0.25em;
     margin-left: 0.5em;
     cursor: pointer;
@@ -155,7 +173,7 @@
   &__delete {
     background: transparent;
     height: fit-content;
-    font-size: 0.75em;
+    font-size: 0.7em;
     color: var(--clr-error);
     font-weight: 700;
     margin-left: 1em;
@@ -165,7 +183,7 @@
 
   &__replies {
     width: fit-content;
-    line-height: 2;
+    margin-block: 0.8em;
     font-size: 0.875em;
     color: var(--clr-primary);
     cursor: pointer;

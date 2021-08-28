@@ -55,7 +55,7 @@ class VideoShow extends React.Component {
             <div className='vdetails vdetails--split'>
               <div className='vdetails__viewsdate'>
                 {currentVideo.views} views
-                <span>●</span>
+                <span className='vdetails__dot'>●</span>
                 {currentVideo.uploadedAt} ago
               </div>
               <div className='vdetails__interface'>
