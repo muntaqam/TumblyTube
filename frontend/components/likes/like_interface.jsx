@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
@@ -19,11 +19,16 @@ function LikeInterface(props) {
   const [likeStatus, setLikeStatus] = useState(0);
   // check if newLike is already in users slice of state
   const isLiked = currentUser[`liked${likeableType}s`][likeableId];
+  const likesRatioRef = useRef();
 
   useEffect(() => {
     if (isLiked) changeLikeStatus(isLiked.version);
     else changeLikeStatus("nolikes");
   }, [props.match.params.id]);
+
+  useEffect(() => {
+    if (likeableType == "Video") handleLikeBar();
+  }, [numLikes, numDislikes]);
 
   const changeLikeStatus = (type) => {
     if (type == "like") setLikeStatus(1);
@@ -59,34 +64,51 @@ function LikeInterface(props) {
     createLike(newLike);
   }
 
+  const handleLikeBar = () => {
+    let percentLikes = (numLikes / (numLikes + numDislikes)) * 100;
+    if (numLikes == 0 && numDislikes == 0) return;
+
+    likesRatioRef.current.style.flexBasis = `${percentLikes}%`;
+  };
+
   return (
     <div className='likes'>
-      <div className='likes__container likes__container--like'>
-        {likeStatus == 1 ? (
-          <ThumbUpIcon id='thumbup-icon' onClick={() => handleLike("like")} />
-        ) : (
-          <ThumbUpOutlinedIcon
-            id='thumbup-icon'
-            onClick={() => handleLike("like")}
-          />
-        )}
-        <div className='thumb__num thumb__num--likes'>{numLikes}</div>
-      </div>
-      <div className='likes__container likes__container--dislike'>
-        {likeStatus == -1 ? (
-          <ThumbDownIcon
-            id='thumbdown-icon'
-            onClick={() => handleLike("dislike")}
-          />
-        ) : (
-          <ThumbDownOutlinedIcon
-            id='thumbdown-icon'
-            onClick={() => handleLike("dislike")}
-          />
-        )}
+      <div className='likes__buttons'>
+        <div className='likes__container likes__container--like'>
+          {likeStatus == 1 ? (
+            <ThumbUpIcon id='thumbup-icon' onClick={() => handleLike("like")} />
+          ) : (
+            <ThumbUpOutlinedIcon
+              id='thumbup-icon'
+              onClick={() => handleLike("like")}
+            />
+          )}
+          <div className='thumb__num thumb__num--likes'>{numLikes}</div>
+        </div>
+        <div className='likes__container likes__container--dislike'>
+          {likeStatus == -1 ? (
+            <ThumbDownIcon
+              id='thumbdown-icon'
+              onClick={() => handleLike("dislike")}
+            />
+          ) : (
+            <ThumbDownOutlinedIcon
+              id='thumbdown-icon'
+              onClick={() => handleLike("dislike")}
+            />
+          )}
 
-        <div className='thumb__num thumb__num--dislikes'>{numDislikes}</div>
+          <div className='thumb__num thumb__num--dislikes'>{numDislikes}</div>
+        </div>
       </div>
+      {likeableType == "Video" && (
+        <div className='likes__bar'>
+          <div
+            className='likes__bar likes__bar--filled'
+            ref={likesRatioRef}
+          ></div>
+        </div>
+      )}
     </div>
   );
 }

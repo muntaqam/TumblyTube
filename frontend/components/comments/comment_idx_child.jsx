@@ -6,7 +6,7 @@ const ChildComments = (props) => {
   const { comment, renderDelete } = props;
 
   return (
-    <div className='comments__card comments__card--child'>
+    <div className='comments__card'>
       <div className='comments__usericon'>
         <AccountCircleIcon />
       </div>
