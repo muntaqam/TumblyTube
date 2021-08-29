@@ -15,6 +15,7 @@ class VideoShow extends React.Component {
 
     this.toggleShowMore = this.toggleShowMore.bind(this);
   }
+
   componentDidMount() {
     if (!this.props.videos.length) this.props.fetchVideos();
     this.props.addViews(this.props.currentVideoId);
@@ -96,7 +97,7 @@ class VideoShow extends React.Component {
                     showMore ? "" : "hidden"
                   }`}
                 >
-                  {currentVidDesc.substring(this.strIndex() + 1)}
+                  4{currentVidDesc.substring(this.strIndex() + 1)}
                 </span>
               </div>
               <div
@@ -115,9 +116,13 @@ class VideoShow extends React.Component {
             currentVideoId={currentVideoId}
             autoFocus={false}
           />
-          <CommentIndexContainer currentVideoId={currentVideoId} />
+          <div className='comments'>
+            <CommentIndexContainer currentVideoId={currentVideoId} />
+          </div>
         </div>
-        <div className='vshow__split vshow__split--sideidx'>{sideVideos}</div>
+        <div className='vshow__split vshow__split--sideidx'>
+          <div className='sideidx'>{sideVideos}</div>
+        </div>
       </div>
     );
   }

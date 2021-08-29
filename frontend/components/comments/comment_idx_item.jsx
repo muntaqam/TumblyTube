@@ -47,50 +47,48 @@ function CommentIndex(props) {
   }
 
   return (
-    <div className='comments'>
-      <div className='comments__card'>
-        <div className='comments__usericon'>
-          <AccountCircleIcon />
-        </div>
-        <div className='comments__details'>
-          <div className='comments__username'>
-            {comment.username}{" "}
-            <span className='comments__date'>{`${comment.commentedAt} ago`}</span>
-          </div>
-          <div className='comments__body'>{comment.body}</div>
-          <div className='comments__interface'>
-            <LikeInterface
-              likeableId={comment.id}
-              likeableType='Comment'
-              numLikes={comment.numLikes}
-              numDislikes={comment.numDislikes}
-            />
-            <button className='comments__reply' onClick={toggleOpenReply}>
-              REPLY
-            </button>
-            {renderDelete(comment.id, comment.commenterId)}
-          </div>
-          <toggleReply.Provider value={toggleOpenReply}>
-            {openReply && (
-              <CommentFormContainer
-                autoFocus={true}
-                currentVideoId={currentVideoId}
-                parentCommentId={comment.id}
-              />
-            )}
-          </toggleReply.Provider>
-          {comment.numChildComments > 0 && (
-            <div className='comments__replies' onClick={toggleArrow}>
-              {arrowUp ? "▲ Hide " : "▼ View "}
-              {`${comment.numChildComments} replies`}
-            </div>
-          )}
-        </div>
+    <div className='comments__card'>
+      <div className='comments__usericon'>
+        <AccountCircleIcon />
       </div>
-      {arrowUp &&
-        childComments.map((comment) => (
-          <ChildComments key={comment.id} comment={comment} />
-        ))}
+      <div className='comments__details'>
+        <div className='comments__username'>
+          {comment.username}{" "}
+          <span className='comments__date'>{`${comment.commentedAt} ago`}</span>
+        </div>
+        <div className='comments__body'>{comment.body}</div>
+        <div className='comments__interface'>
+          <LikeInterface
+            likeableId={comment.id}
+            likeableType='Comment'
+            numLikes={comment.numLikes}
+            numDislikes={comment.numDislikes}
+          />
+          <button className='comments__reply' onClick={toggleOpenReply}>
+            REPLY
+          </button>
+          {renderDelete(comment.id, comment.commenterId)}
+        </div>
+        <toggleReply.Provider value={toggleOpenReply}>
+          {openReply && (
+            <CommentFormContainer
+              autoFocus={true}
+              currentVideoId={currentVideoId}
+              parentCommentId={comment.id}
+            />
+          )}
+        </toggleReply.Provider>
+        {comment.numChildComments > 0 && (
+          <div className='comments__replies' onClick={toggleArrow}>
+            {arrowUp ? "▲ Hide " : "▼ View "}
+            {`${comment.numChildComments} replies`}
+          </div>
+        )}
+        {arrowUp &&
+          childComments.map((comment) => (
+            <ChildComments key={comment.id} comment={comment} />
+          ))}
+      </div>
     </div>
   );
 }
