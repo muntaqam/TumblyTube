@@ -61,11 +61,10 @@ export const createLike = (like) => (dispatch) => {
   return APIUtil.createLike(like).then((like) => {
     if (like.likeableType == "Video") dispatch(receiveVideoLike(like));
 
-    if (like.likeableType == "Comment" && like.parentCommentId) {
+    if (like.likeableType == "Comment" && like.parentCommentId)
       dispatch(receiveChildCommentLike(like));
-    } else if (!like.parentCommentId) {
+    if (like.likeableType == "Comment" && !like.parentCommentId)
       dispatch(receiveCommentLike(like));
-    }
   });
 };
 
@@ -73,10 +72,9 @@ export const deleteLike = (likeId) => (dispatch) => {
   return APIUtil.deleteLike(likeId).then((like) => {
     if (like.likeableType == "Video") dispatch(removeVideoLike(like));
 
-    if (like.likeableType == "Comment" && like.parentCommentId) {
+    if (like.likeableType == "Comment" && like.parentCommentId)
       dispatch(removeChildCommentLike(like));
-    } else if (!like.parentCommentId) {
+    if (like.likeableType == "Comment" && !like.parentCommentId)
       dispatch(removeCommentLike(like));
-    }
   });
 };

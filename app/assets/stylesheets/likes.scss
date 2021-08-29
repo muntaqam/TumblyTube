@@ -1,8 +1,7 @@
 .likes {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 7em;
-  justify-content: space-between;
 
   &__container {
     display: flex;
@@ -10,10 +9,13 @@
     align-items: center;
     padding: 0.25em;
     color: var(--clr-text-gray);
+    cursor: pointer;
+  }
 
-    &:hover {
-      cursor: pointer;
-    }
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 
@@ -26,4 +28,20 @@
   margin-left: 0.6em;
   font-size: 0.875rem;
   font-weight: 900;
+}
+
+//
+// LIKES RATIO BAR
+//
+.likes__bar {
+  height: 0.139em;
+  background: #c8c8c8;
+  display: flex;
+  flex-direction: row;
+
+  &--filled {
+    background: black;
+    flex-basis: 50%;
+    transition: 1s ease-in-out;
+  }
 }

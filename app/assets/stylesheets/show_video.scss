@@ -27,10 +27,12 @@
   }
 }
 
+//
+// VIDEO DETAILS
+//
 .vdetails {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid var(--clr-separator-gray);
 
   &__title {
     font-size: 1.125rem;
@@ -42,7 +44,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid var(--clr-separator-gray);
   }
 
   &__viewsdate {
@@ -69,6 +72,9 @@
   }
 }
 
+//
+// VIDEO DESCRIPTION
+//
 .vdesc {
   display: flex;
   flex-direction: row;
