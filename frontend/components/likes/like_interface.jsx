@@ -66,7 +66,7 @@ function LikeInterface(props) {
 
   const handleLikeBar = () => {
     let percentLikes = (numLikes / (numLikes + numDislikes)) * 100;
-    if (numLikes == 0 && numDislikes == 0) return;
+    if (numLikes == 0 && numDislikes == 0) percentLikes = 50;
 
     likesRatioRef.current.style.flexBasis = `${percentLikes}%`;
   };
