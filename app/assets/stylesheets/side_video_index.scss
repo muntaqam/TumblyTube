@@ -6,10 +6,45 @@
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    text-decoration: none;
+    margin-top: 0.8125em;
   }
 
   &__vid {
     max-height: 6em;
     max-width: 10.5em;
+    margin-right: 0.5em;
+  }
+
+  &__desc {
+    text-decoration: none;
+    padding-right: 1.5em;
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: black;
+    line-height: 1.25rem;
+    letter-spacing: 0.25px;
+    margin-bottom: 0.2857em;
+    text-size-adjust: 100%;
+  }
+
+  &__viewsdate,
+  &__username {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    color: var(--clr-text-light-gray);
+    letter-spacing: 0.3px;
+    line-height: 1.125rem;
+    font-weight: 400;
+  }
+
+  &__dot {
+    font-size: 0.4rem;
+    margin-inline: 0.3125em;
   }
 }

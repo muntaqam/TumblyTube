@@ -61,6 +61,9 @@ function CommentIndex(props) {
 
   return (
     <>
+      {comments.length == 0 && (
+        <div className='comments__empty'>No comments here :(</div>
+      )}
       {comments.map((comment) => (
         <ParentComments
           key={comment.id}
