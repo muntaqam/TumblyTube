@@ -6,8 +6,8 @@ import {
   volumeUpIcon,
   volumeOffIcon,
   fullScreenIcon,
-  fullScreenExitIcon,
 } from "./video_control_icons";
+import RangeInput from "./video_control_range";
 
 class VideoPlayer extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class VideoPlayer extends React.Component {
       ended: false,
       duration: "0:00",
       currentTime: "0:00",
+      volume: 50,
     };
 
     this.videoRef = React.createRef();
@@ -57,21 +58,21 @@ class VideoPlayer extends React.Component {
 
     if (vol == 0) {
       this.videoRef.current.volume = halfVol;
-      this.volRef.current.value = halfVol;
+      this.handleVolume(halfVol * 100);
       this.setState({ muted: false });
     }
     if (vol > 0) {
       this.videoRef.current.volume = zeroVol;
-      this.volRef.current.value = zeroVol;
+      this.handleVolume(zeroVol);
       this.setState({ muted: true });
     }
   }
 
-  handleVolume() {
-    const rangeVal = this.volRef.current.value;
-    this.videoRef.current.volume = rangeVal;
+  handleVolume(volume) {
+    this.setState({ volume: volume });
+    this.videoRef.current.volume = volume / 100;
 
-    if (rangeVal > 0) {
+    if (volume > 0) {
       this.setState({ muted: false });
     } else {
       this.setState({ muted: true });
@@ -123,12 +124,8 @@ class VideoPlayer extends React.Component {
 
   render() {
     let playPauseReplay = pauseIcon;
-    if (this.state.ended) {
-      playPauseReplay = replayIcon;
-    }
-    if (this.state.paused) {
-      playPauseReplay = playIcon;
-    }
+    if (this.state.ended) playPauseReplay = replayIcon;
+    if (this.state.paused) playPauseReplay = playIcon;
 
     return (
       <div className='player'>
@@ -150,6 +147,7 @@ class VideoPlayer extends React.Component {
           >
             <div className='progress__filled' ref={this.progressBarRef}></div>
           </div>
+
           <button
             className='player__button toggle'
             title={this.state.paused ? "Play" : "Pause"}
@@ -158,21 +156,15 @@ class VideoPlayer extends React.Component {
             {playPauseReplay}
           </button>
           <button
-            className='player__button player__button-mute toggle'
+            className='player__button player__button--mute toggle'
             onClick={this.toggleMute}
             title={this.state.muted ? "Unmute" : "Mute"}
           >
             {this.state.muted ? volumeOffIcon : volumeUpIcon}
           </button>
-          <input
-            type='range'
-            name='volume'
-            className='player__slider'
-            ref={this.volRef}
-            min='0'
-            max='1'
-            step='0.05'
+          <RangeInput
             onChange={this.handleVolume}
+            defaultValue={this.state.volume}
           />
           <div className='player__time'>
             <span>{this.state.currentTime}</span>
@@ -180,7 +172,7 @@ class VideoPlayer extends React.Component {
             <span>{this.state.duration}</span>
           </div>
           <button
-            className='player__button player__button-fs'
+            className='player__button player__button--fs'
             onClick={this.toggleFullScreen}
           >
             {fullScreenIcon}
