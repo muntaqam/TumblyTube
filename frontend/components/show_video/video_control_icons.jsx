@@ -5,7 +5,6 @@ import ReplayIcon from "@material-ui/icons/Replay";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
 import VolumeOffIcon from "@material-ui/icons/VolumeOff";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
-import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 
 export const playIcon = <PlayArrowIcon id='playarrow-icon' />;
 
@@ -18,7 +17,3 @@ export const volumeUpIcon = <VolumeUpIcon id='volumeup-icon' />;
 export const volumeOffIcon = <VolumeOffIcon id='volumeoff-icon' />;
 
 export const fullScreenIcon = <FullscreenIcon id='fullscreen-icon' />;
-
-export const fullScreenExitIcon = (
-  <FullscreenExitIcon id='fullscreenexit-icon' />
-);

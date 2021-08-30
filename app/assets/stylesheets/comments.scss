@@ -87,6 +87,23 @@
   }
 }
 
+//
+// NO COMMENTS
+//
+.comments__empty {
+  max-height: 15vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vw;
+  font-size: 1.25rem;
+  color: var(--clr-text-light-gray);
+  letter-spacing: 1px;
+}
+
+//
+// COMMENTS
+//
 .comments {
   display: flex;
   flex-direction: column;
@@ -190,7 +207,9 @@
   }
 }
 
+//
 // COMMENT SCROLL
+//
 .bottomLoaderBar {
   display: flex;
   width: 100%;

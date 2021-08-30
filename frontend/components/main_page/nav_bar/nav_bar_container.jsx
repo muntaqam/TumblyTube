@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
-import VideoCallIcon from "@material-ui/icons/VideoCall";
+import VideoCallOutlineIcon from "@material-ui/icons/VideoCallOutlined";
 import SearchBar from "./search_bar_container";
 import SessionButtonContainer from "./session_button_container";
 import { openModal } from "../../../actions/modal_actions";
@@ -33,7 +33,7 @@ function NavBar({ openModal, location, history, currentUser }) {
       </div>
       <div className='navbar__section navbar__section--right'>
         <button className='upload-button' onClick={handleClick}>
-          <VideoCallIcon
+          <VideoCallOutlineIcon
             id='upload-button-icon'
             className='navbar__icon navbar__icon--upload'
           />
