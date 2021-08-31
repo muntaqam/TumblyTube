@@ -18,7 +18,8 @@ export default (state = {}, action) => {
       return Object.assign({}, newState, { [action.video.id]: action.video });
 
     case ADD_VIDEO_VIEWS:
-      return Object.assign({}, newState, { [action.videoId]: action.video });
+      newState[action.videoId]["views"]++;
+      return newState;
 
     case REMOVE_VIDEO:
       delete newState[action.videoId];
