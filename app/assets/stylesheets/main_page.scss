@@ -1,17 +1,21 @@
 .main {
+  position: relative;
+  top: 57.8px;
   display: grid;
-  grid-template-columns: 4em 1fr;
-  height: calc(100% - 57.8px);
+  grid-template-columns: 72px 1fr;
 
   &__sidebar {
     background: #fff;
+    position: fixed;
+    height: 100%;
+    grid-column: 1;
+    width: 72px;
   }
 
   &__index {
-    flex-grow: 1;
+    grid-column: 2;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(304px, 1fr));
-    height: fit-content;
     gap: 1em;
     padding-inline: min(5vw, 4em);
     padding-top: 2em;

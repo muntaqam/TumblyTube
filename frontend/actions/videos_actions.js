@@ -23,26 +23,27 @@ const receiveVideoErrors = (errors) => ({
   errors,
 });
 
-const destroyVideo = (videoId) => {
-  return {
-    type: REMOVE_VIDEO,
-    videoId,
-  };
-};
+const destroyVideo = (videoId) => ({
+  type: REMOVE_VIDEO,
+  videoId,
+});
 
 export const clearVideoErrors = () => ({
   type: CLEAR_VIDEO_ERRORS,
 });
 
-const addVideoViews = (video) => ({
+const addVideoViews = (videoId) => ({
   type: ADD_VIDEO_VIEWS,
-  video,
-  videoId: video.id,
+  videoId,
 });
 
 //async
-export const fetchVideos = () => (dispatch) =>
-  APIUtilVid.fetchVideos().then((videos) => dispatch(receiveVideos(videos)));
+export const fetchVideos = (addViewId) => (dispatch) =>
+  APIUtilVid.fetchVideos()
+    .then((videos) => dispatch(receiveVideos(videos)))
+    .then(() => {
+      if (addViewId) dispatch(addVideoViews(addViewId));
+    });
 
 export const fetchVideo = (vidId) => (dispatch) =>
   APIUtilVid.fetchVideo(vidId).then((video) => dispatch(receiveVideo(video)));
@@ -53,12 +54,11 @@ export const createVideo = (video) => (dispatch) =>
     (errors) => dispatch(receiveVideoErrors(errors.responseJSON))
   );
 
-export const deleteVideo = (videoId) => (dispatch) => {
-  return APIUtilVid.deleteVideo(videoId).then(
+export const deleteVideo = (videoId) => (dispatch) =>
+  APIUtilVid.deleteVideo(videoId).then(
     dispatch(destroyVideo(videoId)),
     (errors) => dispatch(receiveVideoErrors(errors))
   );
-};
 
 export const addViews = (videoId) => (dispatch) =>
-  APIUtilVid.addViews(videoId).then((video) => dispatch(addVideoViews(video)));
+  APIUtilVid.addViews(videoId).then(dispatch(addVideoViews(videoId)));
