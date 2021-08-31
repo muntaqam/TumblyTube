@@ -15,11 +15,12 @@ function LikeInterface(props) {
     currentUser,
   } = props;
 
+  const likesRatioRef = useRef();
   // 0 if no likes, 1 if liked, -1 if disliked
   const [likeStatus, setLikeStatus] = useState(0);
   // check if newLike is already in users slice of state
-  const isLiked = currentUser[`liked${likeableType}s`][likeableId];
-  const likesRatioRef = useRef();
+  let isLiked;
+  if (currentUser) isLiked = currentUser[`liked${likeableType}s`][likeableId];
 
   useEffect(() => {
     if (isLiked) changeLikeStatus(isLiked.version);
