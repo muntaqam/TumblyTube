@@ -18,7 +18,7 @@ const RangeInput = ({
 
   const getPercent = useMemo(
     () => (value) => ((value - min) / (max - min)) * 100,
-    [max, min]
+    [max, min, defaultValue]
   );
 
   const changeInputProgressPercentStyle = useCallback(() => {

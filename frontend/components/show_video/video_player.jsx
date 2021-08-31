@@ -52,18 +52,17 @@ class VideoPlayer extends React.Component {
   }
 
   toggleMute() {
-    const vol = this.videoRef.current.volume;
+    const vol = this.state.volume;
     const halfVol = 0.5;
-    const zeroVol = 0;
 
     if (vol == 0) {
-      this.videoRef.current.volume = halfVol;
-      this.handleVolume(halfVol * 100);
+      this.videoRef.current.volume = halfVol; // videoRef value = [0,1]
+      this.handleVolume(halfVol * 100); // RangeInput value = [0, 100]
       this.setState({ muted: false });
     }
     if (vol > 0) {
-      this.videoRef.current.volume = zeroVol;
-      this.handleVolume(zeroVol);
+      this.videoRef.current.volume = 0;
+      this.handleVolume(0);
       this.setState({ muted: true });
     }
   }
