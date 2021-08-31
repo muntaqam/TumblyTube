@@ -7,6 +7,7 @@ import React, {
 } from "react";
 
 const RangeInput = ({
+  isMounted,
   min = 0,
   max = 100,
   step = 1,
@@ -18,7 +19,7 @@ const RangeInput = ({
 
   const getPercent = useMemo(
     () => (value) => ((value - min) / (max - min)) * 100,
-    [max, min]
+    [max, min, defaultValue]
   );
 
   const changeInputProgressPercentStyle = useCallback(() => {
@@ -55,6 +56,15 @@ const RangeInput = ({
     changeInputProgressPercentStyle();
   }, [inputRef, changeInputProgressPercentStyle]);
 
+  // animation on mounted and unmounted
+  const mountedRangeStyle = {
+    animation: "inAnimation 250ms ease-in",
+    animationFillMode: "forwards",
+  };
+  const unmountedRangeStyle = {
+    animation: "outAnimation 0.5s ease-out",
+  };
+
   return (
     <>
       <input
@@ -66,6 +76,7 @@ const RangeInput = ({
         step={step}
         value={defaultValue}
         onChange={(e) => onChange(e.currentTarget.value)}
+        style={isMounted ? mountedRangeStyle : unmountedRangeStyle}
       />
     </>
   );

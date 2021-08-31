@@ -16,12 +16,13 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: 0.5em;
   }
 }
 
 #thumbup-icon,
 #thumbdown-icon {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 .thumb__num {

@@ -6,8 +6,11 @@ import { addViews, fetchVideos } from "../../actions/videos_actions";
 import { fetchComments } from "../../actions/comment_actions";
 
 const mSTP = ({ entities }, ownProps) => {
+  const videos = Object.values(entities.videos);
+
   return {
-    videos: Object.values(entities.videos),
+    videos: videos,
+    sideVideos: videos.sort(() => Math.random() - Math.random()).slice(0, 10),
     currentVideo: entities.videos[ownProps.match.params.id],
     currentVideoId: ownProps.match.params.id,
   };

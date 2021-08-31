@@ -41,7 +41,7 @@ class VideoShow extends React.Component {
     const currentVidDesc = currentVideo.description;
     const { showMore } = this.state;
 
-    let sideVideos = this.props.videos.map((vid) => {
+    let sideVideos = this.props.sideVideos.map((vid) => {
       if (vid.id != currentVideoId) {
         return <SideVideoIndex key={vid.id} video={vid} />;
       }
@@ -97,7 +97,7 @@ class VideoShow extends React.Component {
                     showMore ? "" : "hidden"
                   }`}
                 >
-                  4{currentVidDesc.substring(this.strIndex() + 1)}
+                  {currentVidDesc.substring(this.strIndex() + 1)}
                 </span>
               </div>
               <div

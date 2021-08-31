@@ -2,11 +2,17 @@
   max-width: 100%;
   position: relative;
   font-size: 0;
-  overflow: hidden;
-}
+  // overflow: hidden;
 
-.player__video {
-  width: 100%;
+  &__video {
+    width: 100%;
+  }
+
+  &__volume {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
 }
 
 .player__button {
@@ -21,19 +27,27 @@
   max-width: 50px;
   margin-inline: 12px;
   margin-block: 6px;
+
+  // Select play button + fullscreen button
+  &:first-of-type {
+    margin-left: 16px;
+  }
+  &:last-of-type {
+    margin-right: 16px;
+  }
 }
 
 .player__button:focus {
   border-color: #ffffff;
 }
 
-#playIcon,
-#pauseIcon,
-#replayIcon,
-#volumeUpIcon,
-#volumeOffIcon,
-#fullScreenIcon {
-  font-size: 1.75rem;
+#playarrow-icon,
+#pause-icon,
+#replay-icon,
+#volumeup-icon,
+#volumeoff-icon,
+#fullscreen-icon {
+  font-size: 1.85rem;
 }
 
 .player__controls {
@@ -41,35 +55,39 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  // transform: translateY(100%) translateY(-5px);
-  transition: all 0.3s;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
   flex-wrap: wrap;
-  background: transparent;
-  box-shadow: inset 0px -5px 20px 0px #000000b5;
+  background: linear-gradient(0deg, #00000091, transparent);
   align-items: center;
+
+  &--hidden {
+    opacity: 0;
+  }
 }
 
-// .player:hover .player__controls {
-//   transform: translateY(0);
-// }
+.player:hover .player__controls {
+  opacity: 1;
+}
 
-// .player:hover .progress {
-//   height: 15px;
-// }
+.progress:hover {
+  height: 10px;
+}
 
 .progress {
   flex: 10;
   position: relative;
   display: flex;
   flex-basis: 100%;
-  height: 5px;
-  transition: height 0.3s;
+  height: 4px;
+  margin-inline: 10px;
+  transition: height 0.1s linear;
   background: rgba(255, 255, 255, 0.753);
   cursor: pointer;
 }
 
 .progress__filled {
-  background: #74f7f8;
+  background: #01ffff;
   flex: 0;
   flex-basis: 0.5%;
 }
@@ -83,13 +101,13 @@
 }
 
 //
-// VOLUME RANGE
+// VOLUME RANGE 🤬
 //
 .player__range {
   --thumbSize: 12px;
   --trackSize: 4px;
   --thumbBg: #fff;
-  --trackBg: #f2f2f298;
+  --trackBg: #e9e9e95e;
   --progressBg: #ffffff;
 
   /* webkit progress workaround */
@@ -104,7 +122,8 @@
   width: 60px;
   margin: 0;
   padding: 0;
-  background-color: transparent;
+  background-color: var(--trackBg);
+  transition: all 0.5s linear;
 
   &:focus {
     outline: none;
@@ -123,7 +142,7 @@
     border: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     margin-top: calc(((var(--thumbSize) - var(--trackSize)) / 2) * -1);
-    cursor: pointer;
+    cursor: grab;
   }
 
   &::-moz-range-thumb {
@@ -136,7 +155,7 @@
     border: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     margin-top: calc(((var(--thumbSize) - var(--trackSize)) / 2) * -1);
-    cursor: pointer;
+    cursor: grab;
   }
 
   &::-ms-thumb {
@@ -149,7 +168,7 @@
     border: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     margin-top: calc(((var(--thumbSize) - var(--trackSize)) / 2) * -1);
-    cursor: pointer;
+    cursor: grab;
   }
 }
 
@@ -163,6 +182,7 @@
       var(--trackBg) var(--webkitProgressPercent)
     );
     border-radius: calc(var(--trackSize) / 2);
+    cursor: grab;
   }
 
   &::-moz-range-track {
@@ -178,7 +198,7 @@
   }
 }
 
-// PROGRESS
+// FF + IE PROGRESS
 .player__range {
   &::-moz-progress {
     height: var(--trackSize);
@@ -189,5 +209,25 @@
     height: var(--trackSize);
     background-color: var(--progressBg);
     border-radius: calc(var(--trackSize) / 2) 0 0 calc(var(--trackSize) / 2);
+  }
+}
+
+// RANGE animation on mount/unmount
+@keyframes inAnimation {
+  0% {
+    width: 0px;
+    transform-origin: left;
+  }
+  100% {
+    width: 60px;
+  }
+}
+
+@keyframes outAnimation {
+  0% {
+    width: 60px;
+  }
+  100% {
+    width: 0px;
   }
 }
