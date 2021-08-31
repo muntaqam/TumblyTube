@@ -14,6 +14,7 @@
     width: 2em;
     object-fit: contain;
     display: block;
+    margin-left: 2em;
   }
 
   &__icon:hover {
@@ -45,7 +46,7 @@
 
 #menu-button {
   font-size: 1.5rem;
-  margin: 0 0.8em 0 0.3em;
+  margin-left: 0.5em;
   color: var(--clr-text-gray);
 }
 
