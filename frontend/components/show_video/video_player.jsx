@@ -18,7 +18,8 @@ class VideoPlayer extends React.Component {
       ended: false,
       duration: "0:00",
       currentTime: "0:00",
-      volume: 50,
+      volume: 30,
+      mountedRange: false,
     };
 
     this.videoRef = React.createRef();
@@ -52,18 +53,17 @@ class VideoPlayer extends React.Component {
   }
 
   toggleMute() {
-    const vol = this.videoRef.current.volume;
+    const vol = this.state.volume;
     const halfVol = 0.5;
-    const zeroVol = 0;
 
     if (vol == 0) {
-      this.videoRef.current.volume = halfVol;
-      this.handleVolume(halfVol * 100);
+      this.videoRef.current.volume = halfVol; // videoRef value = [0,1]
+      this.handleVolume(halfVol * 100); // RangeInput value = [0, 100]
       this.setState({ muted: false });
     }
     if (vol > 0) {
-      this.videoRef.current.volume = zeroVol;
-      this.handleVolume(zeroVol);
+      this.videoRef.current.volume = 0;
+      this.handleVolume(0);
       this.setState({ muted: true });
     }
   }
@@ -139,7 +139,11 @@ class VideoPlayer extends React.Component {
           onEnded={this.handleEnded}
           // autoPlay
         ></video>
-        <div className='player__controls'>
+        <div
+          className={`player__controls player__controls--${
+            this.state.paused ? "" : "hidden"
+          }`}
+        >
           <div
             className='progress'
             ref={this.progressRef}
@@ -155,17 +159,26 @@ class VideoPlayer extends React.Component {
           >
             {playPauseReplay}
           </button>
-          <button
-            className='player__button player__button--mute toggle'
-            onClick={this.toggleMute}
-            title={this.state.muted ? "Unmute" : "Mute"}
+          <div
+            className='player__volume'
+            onMouseEnter={() => this.setState({ mountedRange: true })}
+            onMouseLeave={() => this.setState({ mountedRange: false })}
           >
-            {this.state.muted ? volumeOffIcon : volumeUpIcon}
-          </button>
-          <RangeInput
-            onChange={this.handleVolume}
-            defaultValue={this.state.volume}
-          />
+            <button
+              className='player__button player__button--mute toggle'
+              onClick={this.toggleMute}
+              title={this.state.muted ? "Unmute" : "Mute"}
+            >
+              {this.state.muted ? volumeOffIcon : volumeUpIcon}
+            </button>
+            {this.state.mountedRange && (
+              <RangeInput
+                onChange={this.handleVolume}
+                defaultValue={this.state.volume}
+                isMounted={this.state.mountedRange}
+              />
+            )}
+          </div>
           <div className='player__time'>
             <span>{this.state.currentTime}</span>
             <span>/</span>
