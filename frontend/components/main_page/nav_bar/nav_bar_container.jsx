@@ -20,13 +20,18 @@ function NavBar({ openModal, location, history, currentUser }) {
     else openModal();
   };
 
+  const handleOpenSidebar = () => {
+    if (location.pathname.includes("watch")) console.log("WATCHPAGE");
+    else toggleExpanded();
+  };
+
   return (
     <div className='navbar'>
       <div className='navbar__section navbar__section--left'>
         <MenuIcon
           id='menu-button'
           className='navbar__icon navbar__icon--menu'
-          onClick={toggleExpanded}
+          onClick={handleOpenSidebar}
         />
         <Link to='/'>
           <img className='navbar__logo' src={window.logoURL} />
