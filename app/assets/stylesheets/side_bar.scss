@@ -1,3 +1,18 @@
+.main__sidebar {
+  &--expanded {
+    .sidebar {
+      &__item {
+        flex-direction: row;
+        align-items: center;
+        padding: 1em 0.75em;
+      }
+      &__title {
+        margin: 0;
+      }
+    }
+  }
+}
+
 .sidebar {
   &__item {
     font-size: 0.75rem;
