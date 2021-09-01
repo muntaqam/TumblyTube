@@ -7,6 +7,7 @@ class MainPage extends React.Component {
     return (
       <div className='main'>
         <SideBar />
+        <div className='main__borderTop'></div>
         <MainVideoIndex />
       </div>
     );
