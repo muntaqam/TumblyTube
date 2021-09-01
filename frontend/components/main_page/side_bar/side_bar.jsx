@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import HomeIcon from "@material-ui/icons/Home";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
@@ -7,12 +7,18 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
 import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
 import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
+import { SidebarContext } from "../../root";
 
 export default function SideBar() {
   const [showToggled, setShowToggled] = useState("home");
+  const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
 
   return (
-    <div className='main__sidebar'>
+    <div
+      className={`main__sidebar main__sidebar--${
+        sidebarExpanded ? "expanded" : null
+      }`}
+    >
       <div
         className='sidebar__item sidebar__item--home'
         onClick={() => setShowToggled("home")}
