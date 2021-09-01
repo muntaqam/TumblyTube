@@ -1,4 +1,6 @@
 .vshow {
+  position: relative;
+  top: 57.8px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 25.358vw;
   grid-template-rows: max-content;

@@ -17,8 +17,12 @@ class VideoShow extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.videos.length) this.props.fetchVideos();
-    this.props.addViews(this.props.currentVideoId);
+    // if no videos, fetchVideos and +1 views to currentVideoId
+    // if videos, +1 views to currentVideoId
+    if (!this.props.videos.length)
+      this.props.fetchVideos(this.props.currentVideoId);
+    else this.props.addViews(this.props.currentVideoId);
+
     this.props.fetchComments(this.props.currentVideoId, 10);
   }
 
