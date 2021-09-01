@@ -1,17 +1,30 @@
 .main {
+  position: relative;
+  top: 56.8px;
   display: grid;
-  grid-template-columns: 4em 1fr;
-  height: calc(100% - 57.8px);
+  grid-template-columns: 78px 1fr;
 
   &__sidebar {
     background: #fff;
+    position: fixed;
+    height: 100%;
+    grid-column: 1;
+    width: 78px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__borderTop {
+    border-bottom: 1px solid #d3d3d3;
+    position: fixed;
+    width: 100%;
+    left: 78px;
   }
 
   &__index {
-    flex-grow: 1;
+    grid-column: 2;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(304px, 1fr));
-    height: fit-content;
     gap: 1em;
     padding-inline: min(5vw, 4em);
     padding-top: 2em;

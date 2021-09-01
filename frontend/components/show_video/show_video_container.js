@@ -19,7 +19,7 @@ const mSTP = ({ entities }, ownProps) => {
 const mDTP = (dispatch) => {
   return {
     addViews: (vidId) => dispatch(addViews(vidId)),
-    fetchVideos: () => dispatch(fetchVideos()),
+    fetchVideos: (addViewId) => dispatch(fetchVideos(addViewId)),
     fetchComments: (vidId, numLimit) =>
       dispatch(fetchComments(vidId, numLimit)),
   };

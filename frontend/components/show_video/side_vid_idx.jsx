@@ -13,6 +13,32 @@ function SideVideoIndex(props) {
     e.target.pause();
   }
 
+  const viewsFormatted = () => {
+    const views = video.views;
+
+    if (views < 999) return views;
+
+    if (views >= 1000) {
+      let dividedT = views / 1000;
+      if (dividedT > Math.floor(dividedT)) {
+        return `${dividedT.toFixed(1)}K`;
+      } else {
+        // no decimals if dividedThousands is a whole num
+        return `${dividedT}K`;
+      }
+    }
+
+    if (views >= 1000000) {
+      let dividedM = views / 1000000;
+      if (dividedM > Math.floor(dividedM)) {
+        return `${dividedM.toFixed(1)}M`;
+      } else {
+        // no decimals if dividedMillions is a whole num
+        return `${dividedM}M`;
+      }
+    }
+  };
+
   return (
     <Link className='sideidx__card' to={`/watch/${video.id}`}>
       <video
@@ -26,7 +52,7 @@ function SideVideoIndex(props) {
         <div className='sideidx__title'>{video.title}</div>
         <div className='sideidx__username'>{video.username}</div>
         <div className='sideidx__viewsdate'>
-          {video.views} views
+          {viewsFormatted()} views
           <span className='sideidx__dot'>●</span>
           {video.uploadedAt} ago
         </div>
