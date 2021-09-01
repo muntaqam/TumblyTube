@@ -8,7 +8,6 @@
   top: 0;
   z-index: 50;
   background-color: var(--clr-white);
-  border-bottom: 1px solid #d3d3d3;
 
   &__logo {
     width: 2em;
@@ -19,6 +18,11 @@
 
   &__icon:hover {
     cursor: pointer;
+  }
+
+  &__borderBottom {
+    position: absolute;
+    border-bottom: 1px solid #d3d3d3;
   }
 }
 
