@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import HomeIcon from "@material-ui/icons/Home";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
@@ -13,17 +14,22 @@ export default function SideBar() {
   const [showToggled, setShowToggled] = useState("home");
   const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
 
+  const handleClick = (dir) => {
+    setShowToggled(dir);
+  };
+
   return (
     <div
       className={`main__sidebar main__sidebar--${
         sidebarExpanded ? "expanded" : null
       }`}
     >
-      <div
+      <Link
+        to='/'
         className={`sidebar__item sidebar__item--${
           showToggled == "home" ? "active" : null
         }`}
-        onClick={() => setShowToggled("home")}
+        onClick={() => handleClick("home")}
       >
         {showToggled == "home" ? (
           <HomeIcon id='home-icon' />
@@ -31,12 +37,13 @@ export default function SideBar() {
           <HomeOutlinedIcon id='home-outline-icon' />
         )}
         <p className='sidebar__title'>Home</p>
-      </div>
-      <div
+      </Link>
+      <Link
+        to='/feed/subscriptions'
         className={`sidebar__item sidebar__item--${
           showToggled == "subscriptions" ? "active" : null
         }`}
-        onClick={() => setShowToggled("subscriptions")}
+        onClick={() => handleClick("subscriptions")}
       >
         {showToggled == "subscriptions" ? (
           <SubscriptionsIcon id='subscriptions-icon' />
@@ -44,12 +51,13 @@ export default function SideBar() {
           <SubscriptionsOutlinedIcon id='subscriptions-outline-icon' />
         )}
         <p className='sidebar__title'>Subscriptions</p>
-      </div>
-      <div
+      </Link>
+      <Link
+        to='/feed/library'
         className={`sidebar__item sidebar__item--${
           showToggled == "library" ? "active" : null
         }`}
-        onClick={() => setShowToggled("library")}
+        onClick={() => handleClick("library")}
       >
         {showToggled == "library" ? (
           <VideoLibraryIcon id='library-icon' />
@@ -57,12 +65,13 @@ export default function SideBar() {
           <VideoLibraryOutlinedIcon id='library-outline-icon' />
         )}
         <p className='sidebar__title'>Library</p>
-      </div>
-      <div
+      </Link>
+      <Link
+        to='/feed/ryannaing'
         className={`sidebar__item sidebar__item--${
           showToggled == "ryan" ? "active" : null
         }`}
-        onClick={() => setShowToggled("ryan")}
+        onClick={() => handleClick("ryan")}
       >
         {showToggled == "ryan" ? (
           <SentimentVerySatisfiedIcon id='ryan-icon' />
@@ -70,7 +79,7 @@ export default function SideBar() {
           <SentimentSatisfiedAltIcon id='ryan-outline-icon' />
         )}
         <p className='sidebar__title'>Ryan Naing</p>
-      </div>
+      </Link>
     </div>
   );
 }
