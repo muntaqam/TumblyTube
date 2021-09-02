@@ -1,6 +1,11 @@
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
-import MainVideoIndexItem from "../main_page/video_index/main_vid_idx_item";
+import { useLocation, Link } from "react-router-dom";
+import {
+  handleAutoPlayIn,
+  handleAutoPlayOut,
+  viewsFormatted,
+} from "../../util/video_util";
 
 function SearchResults(props) {
   const { videos, users, fetchVideos, fetchUsers } = props;
@@ -8,7 +13,7 @@ function SearchResults(props) {
 
   useEffect(() => {
     if (!videos.length) fetchVideos();
-    if (users.length <= 1) fetchUsers(searchQuery);
+    if (users.length <= 1) fetchUsers(searchQuery); // logged-in user already in state. Hence, users.length <= 1
   }, []);
 
   function useQuery() {
@@ -16,15 +21,21 @@ function SearchResults(props) {
     return query.get("search_query");
   }
 
-  function filterType(type, object) {
+  // filter users and videos based on search query string
+  function filterByType(type, object) {
     if (type === "user") {
       let username = object.username.toLowerCase();
 
       if (username.includes(searchQuery)) {
         return (
-          <div>
-            <div>{object.username}</div>
-            <div>{`${object.numVideos} videos`}</div>
+          <div key={object.id} className='results__item results__item--user'>
+            <div className='results__split results__split--left'>
+              <AccountCircleIcon id='results-user-icon' />
+            </div>
+            <div className='results__split results__split--right'>
+              <div className='results__title'>{object.username}</div>
+              <div className='results__meta results__meta--numVideos'>{`${object.numVideos} videos`}</div>
+            </div>
           </div>
         );
       }
@@ -34,22 +45,49 @@ function SearchResults(props) {
       let title = object.title.toLowerCase();
 
       if (title.includes(searchQuery)) {
-        return <MainVideoIndexItem video={object} />;
+        return (
+          <Link
+            key={object.id}
+            className='results__item results__item--video'
+            to={`/watch/${object.id}`}
+          >
+            <div className='results__split results__split--left'>
+              <video
+                className='results__video'
+                muted
+                onMouseEnter={handleAutoPlayIn}
+                onMouseOut={handleAutoPlayOut}
+              >
+                <source src={object.videoUrl} />
+              </video>
+            </div>
+            <div className='results__split results__split--right'>
+              <div className='results__title'>{object.title}</div>
+              <div className='results__meta results__meta--views'>
+                {viewsFormatted(object.views)} views
+                <span className='results__dot'> ● </span>
+                {object.uploadedAt} ago
+              </div>
+              <div className='results__meta results__meta--username'>
+                {object.username}
+              </div>
+              <div className='results__meta results__meta--desc'>
+                {object.description}
+              </div>
+            </div>
+          </Link>
+        );
       }
     }
   }
 
   return (
-    <div>
-      <h1>Search Results</h1>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>{filterType("user", user)}</li>
-        ))}
-        {videos.map((video) => (
-          <li key={video.id}>{filterType("video", video)}</li>
-        ))}
-      </ul>
+    <div className='results'>
+      <div className='results__header'>Search Results</div>
+      <div className='results__items'>
+        {users.map((user) => filterByType("user", user))}
+        {videos.map((video) => filterByType("video", video))}
+      </div>
     </div>
   );
 }
