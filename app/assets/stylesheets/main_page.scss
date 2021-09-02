@@ -1,9 +1,4 @@
 .main {
-  --sidebar-width: 78px;
-  --sidebar-expanded-width: 240px;
-}
-
-.main {
   position: relative;
   top: 56.8px;
   display: grid;
@@ -38,8 +33,14 @@
     left: var(--sidebar-width);
   }
 
-  &__index {
+  &__index,
+  &__library,
+  &__subscriptions,
+  &__ryan {
     grid-column: 2;
+  }
+
+  &__index {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(304px, 1fr));
     gap: 1em;
