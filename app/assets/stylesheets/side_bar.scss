@@ -6,12 +6,14 @@
       align-items: center;
       padding-left: 2.7em;
       padding-block: 1.2em;
+      font-weight: 400;
       &:hover {
         background-color: #d5d4d4;
       }
 
       &--active {
         background-color: var(--clr-hightlight-gray);
+        font-weight: 900;
       }
     }
 
