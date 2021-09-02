@@ -8,7 +8,7 @@ import NotFound from "./notfound";
 import Modal from "../components/modal/modal";
 import VideoShow from "../components/show_video/show_video_container";
 import SearchResults from "./search/search_results_container";
-import NavBar from "./main_page/nav_bar/nav_bar_container";
+import NavBar from "./nav_bar/nav_bar_container";
 
 const App = () => {
   return (
@@ -19,6 +19,9 @@ const App = () => {
         <AuthRoute path='/login' component={LoginFormContainer} />
         <AuthRoute exact path='/signup' component={SignupFormContainer} />
         <Route exact path='/' component={MainPage} />
+        <Route exact path='/feed/subscriptions' component={MainPage} />
+        <Route exact path='/feed/library' component={MainPage} />
+        <Route exact path='/feed/ryannaing' component={MainPage} />
         <Route exact path='/watch/:id' component={VideoShow} />
         <Route exact path='/results' component={SearchResults} />
         <Route component={NotFound} />

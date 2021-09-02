@@ -20,46 +20,54 @@ export default function SideBar() {
       }`}
     >
       <div
-        className='sidebar__item sidebar__item--home'
+        className={`sidebar__item sidebar__item--${
+          showToggled == "home" ? "active" : null
+        }`}
         onClick={() => setShowToggled("home")}
       >
         {showToggled == "home" ? (
           <HomeIcon id='home-icon' />
         ) : (
-          <HomeOutlinedIcon id='home-icon' />
+          <HomeOutlinedIcon id='home-outline-icon' />
         )}
         <p className='sidebar__title'>Home</p>
       </div>
       <div
-        className='sidebar__item sidebar__item--subscriptions'
+        className={`sidebar__item sidebar__item--${
+          showToggled == "subscriptions" ? "active" : null
+        }`}
         onClick={() => setShowToggled("subscriptions")}
       >
         {showToggled == "subscriptions" ? (
           <SubscriptionsIcon id='subscriptions-icon' />
         ) : (
-          <SubscriptionsOutlinedIcon id='subscriptions-icon' />
+          <SubscriptionsOutlinedIcon id='subscriptions-outline-icon' />
         )}
         <p className='sidebar__title'>Subscriptions</p>
       </div>
       <div
-        className='sidebar__item sidebar__item--library'
+        className={`sidebar__item sidebar__item--${
+          showToggled == "library" ? "active" : null
+        }`}
         onClick={() => setShowToggled("library")}
       >
         {showToggled == "library" ? (
           <VideoLibraryIcon id='library-icon' />
         ) : (
-          <VideoLibraryOutlinedIcon id='library-icon' />
+          <VideoLibraryOutlinedIcon id='library-outline-icon' />
         )}
         <p className='sidebar__title'>Library</p>
       </div>
       <div
-        className='sidebar__item sidebar__item--ryan'
+        className={`sidebar__item sidebar__item--${
+          showToggled == "ryan" ? "active" : null
+        }`}
         onClick={() => setShowToggled("ryan")}
       >
         {showToggled == "ryan" ? (
           <SentimentVerySatisfiedIcon id='ryan-icon' />
         ) : (
-          <SentimentSatisfiedAltIcon id='ryan-icon' />
+          <SentimentSatisfiedAltIcon id='ryan-outline-icon' />
         )}
         <p className='sidebar__title'>Ryan Naing</p>
       </div>
