@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallOutlineIcon from "@material-ui/icons/VideoCallOutlined";
@@ -10,10 +10,20 @@ import { SidebarContext } from "../root";
 
 function NavBar({ openModal, location, history, currentUser }) {
   const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
   if (location.pathname == "/login" || location.pathname == "/signup") {
     return null;
   }
+
+  const updateMedia = () => {
+    setViewportWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  }, [viewportWidth]);
 
   const handleUpload = () => {
     if (!currentUser) history.push("/login");
@@ -22,13 +32,15 @@ function NavBar({ openModal, location, history, currentUser }) {
 
   const handleOpenSidebar = () => {
     if (location.pathname.includes("watch")) {
-      console.log(sidebarExpanded);
-      if (!sidebarExpanded) {
-        toggleExpanded();
-      }
+      if (!sidebarExpanded) toggleExpanded();
       openModal("sidebar");
     } else {
       toggleExpanded();
+    }
+
+    if (viewportWidth <= 650) {
+      if (!sidebarExpanded) toggleExpanded();
+      openModal("sidebar");
     }
   };
 
