@@ -4,9 +4,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallOutlineIcon from "@material-ui/icons/VideoCallOutlined";
 import SearchBar from "./search_bar_container";
 import SessionButtonContainer from "./session_button_container";
-import { openModal } from "../../../actions/modal_actions";
+import { openModal } from "../../actions/modal_actions";
 import { connect } from "react-redux";
-import { SidebarContext } from "../../root";
+import { SidebarContext } from "../root";
 
 function NavBar({ openModal, location, history, currentUser }) {
   const { sidebarExpended, toggleExpanded } = useContext(SidebarContext);

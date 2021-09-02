@@ -1,13 +1,25 @@
 .main__sidebar {
+  // when expended
   &--expanded {
     .sidebar {
       &__item {
         flex-direction: row;
         align-items: center;
-        padding: 1em 0.75em;
+        padding-left: 2.7em;
+        padding-block: 1.2em;
+        &:hover {
+          background-color: #d5d4d4;
+        }
+
+        &--active {
+          background-color: var(--clr-hightlight-gray);
+        }
       }
+
       &__title {
         margin: 0;
+        margin-left: 0.75em;
+        font-size: 0.875rem;
       }
     }
   }
@@ -15,7 +27,7 @@
 
 .sidebar {
   &__item {
-    font-size: 0.75rem;
+    font-size: 0.625rem;
     font-weight: 200;
     padding: 1.5em 0;
     display: flex;
@@ -23,7 +35,6 @@
     align-items: center;
     width: 100%;
     cursor: pointer;
-
     &:hover {
       background-color: var(--clr-hightlight-gray);
     }
@@ -35,8 +46,12 @@
 }
 
 #home-icon,
+#home-outline-icon,
 #subscriptions-icon,
+#subscriptions-outline-icon,
 #library-icon,
-#ryan-icon {
+#library-outline-icon,
+#ryan-icon,
+#ryan-outline-icon {
   font-size: 1.5rem;
 }
