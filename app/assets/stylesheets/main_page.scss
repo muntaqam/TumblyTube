@@ -90,7 +90,7 @@
     grid-template-columns: 1fr;
 
     &__sidebar {
-      display: none;
+      display: none; // display none to flex in modal.scss when modal rendered
     }
 
     &__borderTop {
