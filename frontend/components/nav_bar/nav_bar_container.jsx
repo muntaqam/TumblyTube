@@ -15,13 +15,13 @@ function NavBar({ openModal, location, history, currentUser }) {
     return null;
   }
 
-  const handleClick = () => {
+  const handleUpload = () => {
     if (!currentUser) history.push("/login");
-    else openModal();
+    else openModal("upload");
   };
 
   const handleOpenSidebar = () => {
-    if (location.pathname.includes("watch")) console.log("WATCHPAGE");
+    if (location.pathname.includes("watch")) openModal("sidebar");
     else toggleExpanded();
   };
 
@@ -41,7 +41,7 @@ function NavBar({ openModal, location, history, currentUser }) {
         <SearchBar />
       </div>
       <div className='navbar__section navbar__section--right'>
-        <button className='upload-button' onClick={handleClick}>
+        <button className='upload-button' onClick={handleUpload}>
           <VideoCallOutlineIcon
             id='upload-button-icon'
             className='navbar__icon navbar__icon--upload'
@@ -62,7 +62,7 @@ const mSTP = ({ session }) => {
 
 const mDTP = (dispatch) => {
   return {
-    openModal: () => dispatch(openModal("upload")),
+    openModal: (type) => dispatch(openModal(type)),
   };
 };
 
