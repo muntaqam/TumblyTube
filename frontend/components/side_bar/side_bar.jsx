@@ -20,38 +20,49 @@ function SideBar({ modal, closeModal }) {
   const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
 
   useEffect(() => {
-    // extend sidebar if it's a modal
-    if (modal) toggleExpanded();
-
     // setShowToggled on mount based on feedType param
     if (location.pathname == "/") {
       setShowToggled("home");
     } else {
       setShowToggled(feedtype);
     }
-  }, []);
 
-  const handleClick = (dir) => {
+    return () => setShowToggled("");
+  }, [location.pathname]);
+
+  const changeFeed = (dir) => {
     setShowToggled(dir);
   };
 
+  const handleCloseModal = () => {
+    closeModal;
+    toggleExpanded();
+  };
+
+  // animation on mounted and unmounted
+  const mountedModalStyle = {
+    animation: "sidebarAnimation 300ms ease-in",
+  };
+
+  // conditional class names for each sidebar__item
   const isHome = showToggled == "home";
   const isSubscriptions = showToggled == "subscriptions";
   const isLibrary = showToggled == "library";
-  const isRyan = showToggled == "ryan";
+  const isRyan = showToggled == "ryannaing";
 
   return (
     <div
       className={`main__sidebar main__sidebar--${
         sidebarExpanded ? "expanded" : null
       }`}
+      style={modal && mountedModalStyle}
     >
       {modal && (
         <div className='sidebar__modalNav'>
           <MenuIcon
             id='menu-button'
             className='navbar__icon navbar__icon--menu'
-            onClick={closeModal}
+            onClick={handleCloseModal}
           />
           <Link to='/'>
             <img className='navbar__logo' src={window.logoURL} />
@@ -61,7 +72,7 @@ function SideBar({ modal, closeModal }) {
       <Link
         to='/'
         className={`sidebar__item sidebar__item--${isHome ? "active" : null}`}
-        onClick={() => handleClick("home")}
+        onClick={() => changeFeed("home")}
       >
         {isHome ? (
           <HomeIcon id='home-icon' />
@@ -75,7 +86,7 @@ function SideBar({ modal, closeModal }) {
         className={`sidebar__item sidebar__item--${
           isSubscriptions ? "active" : null
         }`}
-        onClick={() => handleClick("subscriptions")}
+        onClick={() => changeFeed("subscriptions")}
       >
         {isSubscriptions ? (
           <SubscriptionsIcon id='subscriptions-icon' />
@@ -89,7 +100,7 @@ function SideBar({ modal, closeModal }) {
         className={`sidebar__item sidebar__item--${
           isLibrary ? "active" : null
         }`}
-        onClick={() => handleClick("library")}
+        onClick={() => changeFeed("library")}
       >
         {isLibrary ? (
           <VideoLibraryIcon id='library-icon' />
@@ -101,7 +112,7 @@ function SideBar({ modal, closeModal }) {
       <Link
         to='/feed/ryannaing'
         className={`sidebar__item sidebar__item--${isRyan ? "active" : null}`}
-        onClick={() => handleClick("ryan")}
+        onClick={() => changeFeed("ryannaing")}
       >
         {isRyan ? (
           <SentimentVerySatisfiedIcon id='ryan-icon' />
