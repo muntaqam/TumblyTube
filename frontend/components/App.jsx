@@ -20,8 +20,8 @@ const App = () => {
         <AuthRoute exact path='/signup' component={SignupFormContainer} />
         <Route exact path='/' component={MainPage} />
         <Route exact path='/feed/:feedtype' component={MainPage} />
+        <Route exact path='/results' component={MainPage} />
         <Route exact path='/watch/:id' component={VideoShow} />
-        <Route exact path='/results' component={SearchResults} />
         <Route component={NotFound} />
       </Switch>
     </>
