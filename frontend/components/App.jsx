@@ -19,9 +19,7 @@ const App = () => {
         <AuthRoute path='/login' component={LoginFormContainer} />
         <AuthRoute exact path='/signup' component={SignupFormContainer} />
         <Route exact path='/' component={MainPage} />
-        <Route exact path='/feed/subscriptions' component={MainPage} />
-        <Route exact path='/feed/library' component={MainPage} />
-        <Route exact path='/feed/ryannaing' component={MainPage} />
+        <Route exact path='/feed/:feedtype' component={MainPage} />
         <Route exact path='/watch/:id' component={VideoShow} />
         <Route exact path='/results' component={SearchResults} />
         <Route component={NotFound} />

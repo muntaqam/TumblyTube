@@ -41,6 +41,9 @@ body {
   --clr-secondary: #62666a;
   --clr-placeholder: #80868b;
   --clr-error: #d93025;
+
+  --sidebar-width: 78px;
+  --sidebar-expanded-width: 240px;
 }
 
 #root {
