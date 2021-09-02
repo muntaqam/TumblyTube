@@ -1,5 +1,4 @@
 .results {
-  grid-column: 2;
   width: min(95vw - var(--sidebar-width), 1096px);
   margin-inline: auto;
   padding-top: 1.5rem;
@@ -18,7 +17,7 @@
   }
 
   &__title {
-    font-size: 1.125rem;
+    font-size: min(3vw, 1.125rem);
     font-weight: 900;
     line-height: 1.5em;
   }
@@ -53,7 +52,7 @@
 .results__item {
   display: flex;
   width: inherit;
-  max-height: fit-content;
+  min-height: 136px;
   margin-bottom: 1em;
   color: black;
   text-decoration: none;
@@ -65,8 +64,6 @@
   }
 
   &--user {
-    min-height: 136px;
-
     .results__split--left {
       width: max(246px, 360px);
       min-height: 136px;

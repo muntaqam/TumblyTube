@@ -2,9 +2,11 @@
   position: relative;
   top: 57.8px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 25.358vw;
+  grid-template-columns: minmax(0, 1fr) 402px;
   grid-template-rows: max-content;
-  padding: 1.5rem 1.5rem 0 1.5rem;
+  padding-top: 1.5em;
+  width: min(95vw, 1754px);
+  margin-inline: auto;
 
   &__split {
     &--meta {
