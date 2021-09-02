@@ -6,14 +6,14 @@ import MainVideoIndex from "./video_index/main_vid_idx_container";
 import Subscriptions from "./subscriptions/subscriptions";
 import Library from "./library/library";
 import RyanNaing from "./ryan_naing/ryan_naing";
+import SearchResults from "../search/search_results_container";
 
 const MainPage = () => {
   const { sidebarExpanded } = useContext(SidebarContext);
   const location = useLocation();
-  const { feedtype } = useParams();
 
-  const isLocation = (url) => {
-    if (feedtype == url) return true;
+  const isLocation = (pathname) => {
+    if (location.pathname == pathname) return true;
     else return false;
   };
 
@@ -21,10 +21,11 @@ const MainPage = () => {
     <div className={`main main--${sidebarExpanded ? "sidebarExpanded" : null}`}>
       <SideBar />
       <div className='main__borderTop'></div>
-      {location.pathname == "/" && <MainVideoIndex />}
-      {isLocation("subscriptions") && <Subscriptions />}
-      {isLocation("library") && <Library />}
-      {isLocation("ryannaing") && <RyanNaing />}
+      {isLocation("/") && <MainVideoIndex />}
+      {isLocation("/feed/subscriptions") && <Subscriptions />}
+      {isLocation("/feed/library") && <Library />}
+      {isLocation("/feed/ryannaing") && <RyanNaing />}
+      {isLocation("/results") && <SearchResults />}
     </div>
   );
 };
