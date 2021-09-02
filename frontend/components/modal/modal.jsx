@@ -1,31 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import { closeModal } from "../../actions/modal_actions";
 import { connect } from "react-redux";
 import UploadVideoFormContainer from "../upload_video/upload_video_form_container";
-// import SidebarContainer from "../side_bar/side_bar_container";
+import SideBar from "../side_bar/side_bar";
+import { SidebarContext } from "../root";
 
 function Modal({ modal, closeModal }) {
-  if (!modal) {
-    return null;
-  }
+  if (!modal) return null;
+
+  const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
+
+  const handleClose = () => {
+    closeModal();
+    if (modal == "sidebar") toggleExpanded();
+  };
 
   let component;
   switch (modal) {
     case "upload":
       component = <UploadVideoFormContainer />;
       break;
-    // case "sidebar":
-    //   component = <SidebarContainer />;
-    //   break;
+    case "sidebar":
+      component = <SideBar modal={true} />; // toggleExpanded if modal
+      break;
     default:
       return null;
   }
 
   return (
-    <div className="modal-background" onClick={closeModal}>
-      <div className="modal-child" onClick={(e) => e.stopPropagation()}>
-        {component}
-      </div>
+    <div className='modal-background' onClick={handleClose}>
+      {component}
     </div>
   );
 }
