@@ -6,12 +6,14 @@
       align-items: center;
       padding-left: 2.7em;
       padding-block: 1.2em;
+      font-weight: 400;
       &:hover {
         background-color: #d5d4d4;
       }
 
       &--active {
         background-color: var(--clr-hightlight-gray);
+        font-weight: 900;
       }
     }
 
@@ -60,4 +62,16 @@
 #ryan-icon,
 #ryan-outline-icon {
   font-size: 1.5rem;
+}
+
+// modal sidebar animation
+// styled in react
+@keyframes sidebarAnimation {
+  0% {
+    transform: translateX(-100px);
+    transform-origin: left 0%;
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
