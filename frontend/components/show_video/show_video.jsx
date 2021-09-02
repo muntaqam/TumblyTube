@@ -45,7 +45,10 @@ class VideoShow extends React.Component {
     const currentVidDesc = currentVideo.description;
     const { showMore } = this.state;
 
-    let sideVideos = this.props.sideVideos.map((vid) => {
+    const sortedVideos = this.props.videos
+      .sort(() => Math.random() - Math.random())
+      .slice(0, 10);
+    let sideVideos = sortedVideos.map((vid) => {
       if (vid.id != currentVideoId) {
         return <SideVideoIndex key={vid.id} video={vid} />;
       }
