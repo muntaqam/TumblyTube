@@ -63,3 +63,15 @@
 #ryan-outline-icon {
   font-size: 1.5rem;
 }
+
+// modal sidebar animation
+// styled in react
+@keyframes sidebarAnimation {
+  0% {
+    transform: translateX(-100px);
+    transform-origin: left 0%;
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}

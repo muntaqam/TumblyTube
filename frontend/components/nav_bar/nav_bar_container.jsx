@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { SidebarContext } from "../root";
 
 function NavBar({ openModal, location, history, currentUser }) {
-  const { sidebarExpended, toggleExpanded } = useContext(SidebarContext);
+  const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
 
   if (location.pathname == "/login" || location.pathname == "/signup") {
     return null;
@@ -21,8 +21,15 @@ function NavBar({ openModal, location, history, currentUser }) {
   };
 
   const handleOpenSidebar = () => {
-    if (location.pathname.includes("watch")) openModal("sidebar");
-    else toggleExpanded();
+    if (location.pathname.includes("watch")) {
+      console.log(sidebarExpanded);
+      if (!sidebarExpanded) {
+        toggleExpanded();
+      }
+      openModal("sidebar");
+    } else {
+      toggleExpanded();
+    }
   };
 
   return (
