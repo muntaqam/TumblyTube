@@ -59,9 +59,12 @@ class UploadVideoForm extends React.Component {
     const fileReader = new FileReader();
 
     fileReader.onloadend = () => {
-      this.setState({ videoUrl: fileReader.result, videoFile: file });
+      this.setState({
+        videoUrl: fileReader.result,
+        videoFile: file,
+      });
     };
-
+ 
     if (file) {
       fileReader.readAsDataURL(file);
     } else {
