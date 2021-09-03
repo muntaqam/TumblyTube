@@ -119,6 +119,7 @@ class VideoShow extends React.Component {
           </div>
         </div>
         <div className='vshow__split vshow__split--comments'>
+          <div className='vshow__numComments'>{`${currentVideo.numComments} Comments`}</div>
           <CommentFormContainer
             currentVideoId={currentVideoId}
             autoFocus={false}

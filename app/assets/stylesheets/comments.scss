@@ -2,11 +2,6 @@
   display: flex;
   flex-direction: column;
 
-  &__numComments {
-    padding-block: 1.5em;
-    font-size: 1rem;
-  }
-
   &__split--bottom {
     display: flex;
     flex-direction: row;
@@ -123,6 +118,7 @@
   &__details {
     display: flex;
     flex-direction: column;
+    width: 90%;
     padding-left: 0.8em;
   }
 
@@ -139,7 +135,7 @@
   }
 
   &__body {
-    width: 125ch;
+    width: min(125ch, 100%);
     font-size: 0.9375rem;
     padding-top: 0.4em;
   }
