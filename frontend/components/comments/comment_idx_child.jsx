@@ -3,7 +3,7 @@ import LikeInterface from "../likes/like_interface_container";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const ChildComments = (props) => {
-  const { comment, renderDelete } = props;
+  const { comment, renderDelete, handleDelete } = props;
 
   return (
     <div className='comments__card'>
@@ -23,7 +23,14 @@ const ChildComments = (props) => {
             numLikes={comment.numLikes}
             numDislikes={comment.numDislikes}
           />
-          {/* {renderDelete(comment.id, comment.commenterId)} */}
+          {renderDelete(comment.commenterId) && (
+            <button
+              className='comments__delete'
+              onClick={() => handleDelete(comment.id)}
+            >
+              DELETE
+            </button>
+          )}
         </div>
       </div>
     </div>

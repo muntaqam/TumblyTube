@@ -25,26 +25,19 @@ function CommentIndex(props) {
     setArrowUp((prevState) => (prevState = !prevState));
   };
 
-  function verifyUser(commenterId) {
+  const verifyUser = (commenterId) => {
     return commenterId === currentUser?.id;
-  }
+  };
 
-  function handleDelete(commentId) {
+  const handleDelete = (commentId) => {
     deleteComment(commentId);
-  }
+  };
 
-  function renderDelete(commentId, commenterId) {
+  const renderDelete = (commenterId) => {
     let userVerified = verifyUser(commenterId);
-    if (userVerified)
-      return (
-        <button
-          className='comments__delete'
-          onClick={() => handleDelete(commentId)}
-        >
-          DELETE
-        </button>
-      );
-  }
+    if (userVerified) return true;
+    else false;
+  };
 
   return (
     <div className='comments__card'>
@@ -67,7 +60,14 @@ function CommentIndex(props) {
           <button className='comments__reply' onClick={toggleOpenReply}>
             REPLY
           </button>
-          {renderDelete(comment.id, comment.commenterId)}
+          {renderDelete(comment.commenterId) && (
+            <button
+              className='comments__delete'
+              onClick={() => handleDelete(comment.id)}
+            >
+              DELETE
+            </button>
+          )}
         </div>
         <toggleReply.Provider value={toggleOpenReply}>
           {openReply && (
@@ -86,7 +86,12 @@ function CommentIndex(props) {
         )}
         {arrowUp &&
           childComments.map((comment) => (
-            <ChildComments key={comment.id} comment={comment} />
+            <ChildComments
+              key={comment.id}
+              comment={comment}
+              handleDelete={handleDelete}
+              renderDelete={renderDelete}
+            />
           ))}
       </div>
     </div>
