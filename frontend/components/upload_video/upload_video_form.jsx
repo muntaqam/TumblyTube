@@ -22,8 +22,9 @@ class UploadVideoForm extends React.Component {
 
   componentDidUpdate() {
     let uploadBtn = document.getElementById("upload-video-submit-btn");
+    const title = this.state.title;
 
-    if (this.state.title.length === 0) {
+    if (title.length == 0 || !/\S/.test(title)) {
       uploadBtn.setAttribute("disabled", "");
     } else {
       uploadBtn.removeAttribute("disabled", "");
@@ -64,7 +65,7 @@ class UploadVideoForm extends React.Component {
         videoFile: file,
       });
     };
- 
+
     if (file) {
       fileReader.readAsDataURL(file);
     } else {
