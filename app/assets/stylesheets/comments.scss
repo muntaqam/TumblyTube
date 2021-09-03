@@ -138,6 +138,8 @@
     width: min(125ch, 100%);
     font-size: 0.9375rem;
     padding-top: 0.4em;
+    word-break: break-word;
+    line-height: 1.2em;
   }
 
   &__interface {
