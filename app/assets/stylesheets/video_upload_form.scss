@@ -1,6 +1,9 @@
+//
+// STEP 2
+//
 .vid-upload {
-  width: 60vw;
-  height: 70vh;
+  width: min(80vw, 1000px);
+  height: min(70vh, 658px);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -91,5 +94,143 @@
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+//
+// STEP 2
+//
+.uploadDetails {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  padding-inline: 2em;
+
+  &__split {
+    &--left {
+      width: 60%;
+    }
+
+    &--right {
+      margin-inline: auto;
+    }
+  }
+
+  &__header {
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding-top: 1.5em;
+  }
+
+  &__textarea {
+    width: 100%;
+    position: relative;
+    margin-top: 1.5em;
+  }
+
+  &__input {
+    width: inherit;
+    padding: 2em 0.75em 1.5em 0.75em;
+    font-size: 1rem;
+    border: 1px solid #cfcfcf;
+    border-radius: 5px;
+    color: black;
+    outline: none;
+    &:hover {
+      border: 1px solid var(--clr-text-gray);
+    }
+    &:focus {
+      border: 1px solid var(--clr-primary);
+    }
+    &:focus + .uploadDetails__title {
+      color: var(--clr-primary);
+    }
+    &::placeholder {
+      color: var(--clr-placeholder);
+      font-size: 1em;
+      font-weight: 200;
+    }
+
+    &--desc {
+      font-family: inherit;
+      resize: vertical;
+      max-height: 315px;
+      min-height: 145px;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    top: 12px;
+    left: 13px;
+    font-size: 0.75em;
+    color: var(--clr-placeholder);
+    font-weight: 200;
+  }
+
+  &__preview {
+    width: 304px;
+    margin-top: 5.25em;
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &__video {
+    width: inherit;
+    max-height: 171px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  &__meta {
+    padding: 1em 0.5em;
+  }
+
+  &__fileinfo {
+    font-size: 0.75rem;
+    color: var(--clr-text-light-gray);
+  }
+
+  &__filename {
+    font-size: 0.875rem;
+    line-height: 2em;
+  }
+
+  &__footer {
+    padding: 1em 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--clr-separator-gray);
+  }
+
+  &__submit {
+    padding: 1em 1.5em;
+    font-size: 1rem;
+    color: white;
+    background: var(--clr-primary);
+    border-radius: 3px;
+    cursor: pointer;
+
+    &:disabled {
+      background: var(--clr-placeholder);
+      cursor: not-allowed;
+    }
+  }
+}
+
+#uploadDetails-uploaded {
+  color: var(--clr-primary);
+}
+
+@media only screen and (max-width: 1100) {
+  .uploadDetails__split {
+    &--left {
+      width: 100%;
+    }
+
+    &--right {
+      display: none;
+    }
   }
 }
