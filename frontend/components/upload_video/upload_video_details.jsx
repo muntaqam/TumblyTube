@@ -3,6 +3,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import PublishIcon from "@material-ui/icons/Publish";
 
 export default class UploadVideoDetails extends React.Component {
+  disableBtn() {
+    if (this.props.title.length === 0 || !/\S/.test(this.props.title)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     return (
       <div className='vid-upload' onClick={(e) => e.stopPropagation()}>
@@ -63,6 +71,7 @@ export default class UploadVideoDetails extends React.Component {
             id='upload-video-submit-btn'
             className='uploadDetails__submit'
             onClick={this.props.handleSubmit}
+            disabled={this.disableBtn()}
           >
             Upload
           </button>

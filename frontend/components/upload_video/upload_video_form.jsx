@@ -20,17 +20,6 @@ class UploadVideoForm extends React.Component {
     this.handleDragOver = this.handleDragOver.bind(this);
   }
 
-  componentDidUpdate() {
-    let uploadBtn = document.getElementById("upload-video-submit-btn");
-    const title = this.state.title;
-
-    if (title.length == 0 || !/\S/.test(title)) {
-      uploadBtn.setAttribute("disabled", "");
-    } else {
-      uploadBtn.removeAttribute("disabled", "");
-    }
-  }
-
   handleChange(type) {
     return (e) => {
       this.setState({ [type]: e.target.value });
