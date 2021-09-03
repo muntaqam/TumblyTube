@@ -22,6 +22,7 @@ html {
 
 body {
   background-color: var(--clr-dim-white);
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 *,

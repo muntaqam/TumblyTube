@@ -1,70 +1,70 @@
 import React from "react";
 import CloseIcon from "@material-ui/icons/Close";
+import PublishIcon from "@material-ui/icons/Publish";
 
 export default class UploadVideoDetails extends React.Component {
   render() {
     return (
       <div className='vid-upload' onClick={(e) => e.stopPropagation()}>
         <header className='vid-upload__header'>
-          <span className='vid-upload__header__title '>Details</span>
+          <span className='vid-upload__header__title '>{this.props.title}</span>
           <div className='vid-upload__header__btns'>
             <CloseIcon id='upload-close-btn' onClick={this.props.closeModal} />
           </div>
         </header>
-
-        <div>
-          <form>
-            <input
-              type='text'
-              id='video-upload-title-input'
-              onChange={this.props.handleChange("title")}
-              value={this.props.title}
-              placeholder='Add a title that describes your video'
-              required
-            />
-            <label>Title (required)</label>
-            <textarea
-              cols='30'
-              rows='10'
-              onChange={this.props.handleChange("description")}
-              value={this.props.description}
-              placeholder='Tell viewers about your video'
-            ></textarea>
-            <label>Description</label>
-          </form>
-          <div>
-            <video height='170' width='303' controls>
-              <source src={this.props.videoUrl} type='video/mp4' />
-              <source src={this.props.videoUrl} type='video/ogg' />
-              <source src={this.props.videoUrl} type='video/webm' />
-              There was a problem rendering the video
-            </video>
-            <div>
-              <div>
-                <div>
-                  <label>Video Link</label>
-                  <a>Availble after successful upload</a>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <label>Filename</label>
-                  <p>{this.props.fileName}</p>
-                </div>
-              </div>
+        <section className='uploadDetails'>
+          <section className='uploadDetails__split uploadDetails__split--left'>
+            <div className='uploadDetails__header'>Details</div>
+            <div className='uploadDetails__textarea uploadDetails__textarea--title'>
+              <input
+                type='text'
+                id='uploadDetails-titleInput'
+                value={this.props.title}
+                onChange={this.props.handleChange("title")}
+                className='uploadDetails__input uploadDetails__input--title'
+                placeholder='Add a title that describes your video'
+                required
+                autoFocus
+              />
+              <label className='uploadDetails__title'>Title (required)</label>
             </div>
-          </div>
-        </div>
-
-        <footer>
-          <div>
-            <p>Finished processing</p>
-          </div>
+            <div className='uploadDetails__textarea uploadDetails__textarea--desc'>
+              <textarea
+                name='description'
+                id='uploadDetails-descInput'
+                cols='30'
+                rows='10'
+                onChange={this.props.handleChange("description")}
+                className='uploadDetails__input uploadDetails__input--desc'
+                placeholder='Tell viewers about your video'
+              />
+              <label className='uploadDetails__title'>Description</label>
+            </div>
+          </section>
+          <section className='uploadDetails__split uploadDetails__split--right'>
+            <div className='uploadDetails__preview'>
+              <video className='uploadDetails__video' controls>
+                <source src={this.props.videoUrl} type='video/mp4' />
+                <source src={this.props.videoUrl} type='video/ogg' />
+                <source src={this.props.videoUrl} type='video/webm' />
+              </video>
+              <section className='uploadDetails__meta'>
+                <div className='uploadDetails__fileinfo'>Filename</div>
+                <div className='uploadDetails__filename'>
+                  {this.props.videoFile.name}
+                </div>
+              </section>
+            </div>
+          </section>
+        </section>
+        <footer className='uploadDetails__footer'>
+          <PublishIcon id='uploadDetails-uploaded' />
           <button
             id='upload-video-submit-btn'
+            className='uploadDetails__submit'
             onClick={this.props.handleSubmit}
           >
-            Upload!
+            Upload
           </button>
         </footer>
       </div>
