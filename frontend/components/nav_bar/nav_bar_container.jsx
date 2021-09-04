@@ -12,10 +12,6 @@ function NavBar({ openModal, location, history, currentUser }) {
   const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
-  if (location.pathname == "/login" || location.pathname == "/signup") {
-    return null;
-  }
-
   const updateMedia = () => {
     setViewportWidth(window.innerWidth);
   };
@@ -44,6 +40,9 @@ function NavBar({ openModal, location, history, currentUser }) {
     }
   };
 
+  if (location.pathname == "/login" || location.pathname == "/signup") {
+    return null;
+  }
   return (
     <div className='navbar'>
       <div className='navbar__section navbar__section--left'>

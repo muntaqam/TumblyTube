@@ -71,10 +71,10 @@
 #upload-close-btn {
   font-size: 1.4rem;
   color: var(--clr-text-gray);
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
-    color: #4b4949;
+    color: red;
   }
 }
 
@@ -126,6 +126,11 @@
     width: 100%;
     position: relative;
     margin-top: 1.5em;
+
+    &--desc {
+      min-height: 145px;
+      max-height: 20vh;
+    }
   }
 
   &__input {
@@ -154,8 +159,8 @@
     &--desc {
       font-family: inherit;
       resize: vertical;
-      max-height: 315px;
-      min-height: 145px;
+      max-height: inherit;
+      min-height: inherit;
     }
   }
 
@@ -223,7 +228,7 @@
   color: var(--clr-primary);
 }
 
-@media only screen and (max-width: 1100) {
+@media only screen and (max-width: 1100px) {
   .uploadDetails__split {
     &--left {
       width: 100%;

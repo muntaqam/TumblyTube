@@ -8,7 +8,6 @@ function CommentForm(props) {
     currentVideoId,
     createComment,
     parentCommentId,
-    numComments,
     autoFocus,
   } = props;
 
@@ -57,7 +56,6 @@ function CommentForm(props) {
 
   return (
     <div className='cmtform'>
-      <div className='cmtform__numComments'>{`${numComments} Comments`}</div>
       <div className='cmtform__split cmtform__split--bottom'>
         <div className='comments__icon'>
           <AccountCircleIcon />

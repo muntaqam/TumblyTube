@@ -3,7 +3,7 @@
 json.key_format! camelize: :lower
 json.deep_format_keys!
 
-json.extract! user, :id, :username, :email
+json.extract! user, :id, :username, :email, :color
 json.numVideos user.videos.count
 
 json.likedVideos({})
@@ -16,6 +16,7 @@ user.likes_dislikes.each do |like|
       end
     end
   end
+
   if like.likeable_type == "Comment"
     json.set! :likedComments do
       json.set! like.likeable_id do

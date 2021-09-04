@@ -17,13 +17,13 @@
   }
 
   &__title {
-    font-size: min(3vw, 1.125rem);
+    font-size: min(3.5vw, 1.125rem);
     font-weight: 900;
     line-height: 1.5em;
   }
 
   &__meta {
-    font-size: min(2.5vw, 0.875rem);
+    font-size: min(2.8vw, 0.875rem);
     color: var(--clr-text-gray);
 
     &--username {
@@ -81,6 +81,28 @@
   &--video {
     .results__split--left {
       width: max(240px, 360px);
+    }
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .results {
+    width: 90vw;
+
+    &__item {
+      margin-bottom: 4vw;
+
+      &--video {
+        flex-direction: column;
+
+        .results__split--left {
+          width: 100%;
+        }
+
+        .results__split--right {
+          margin: 0;
+        }
+      }
     }
   }
 }
