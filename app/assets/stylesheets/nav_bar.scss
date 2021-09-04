@@ -161,45 +161,19 @@
   margin-left: 3em;
 
   &__avatar {
-    width: 2.3em;
-    height: 2.3em;
+    cursor: pointer;
+    display: block;
     border-radius: 50%;
-    border: 1px solid #74f7f9;
-    background-color: #74f7f9;
-    color: #ffff;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &:focus + .navbar__session__dd,
-    & + .navbar__session__dd:hover,
-    & + .navbar__session__dd:focus-within {
-      display: flex;
-    }
-
-    &:focus {
-      outline: none;
-    }
 
     &--dd {
-      width: 0.4em;
-      height: 0.4em;
-      font-size: 1.5rem;
-      padding: 0.96em;
-      margin: 0;
+      width: 50px;
+      border-radius: 50%;
     }
   }
 
   &__dd {
-    display: none;
+    display: flex;
     flex-direction: column;
-    display: none;
     position: absolute;
     top: 49px;
     right: 0px;
