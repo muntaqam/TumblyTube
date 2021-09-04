@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { generateRandomColor } from "../../util/avatar_util";
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -35,12 +36,14 @@ class SignUpForm extends React.Component {
     } else if (this.state.password !== this.state.confirmPW) {
       this.setState({ errors: ["Passwords do not match"] });
     } else {
+      const color = generateRandomColor();
       const user = Object.assign(
         {},
         {
           username: this.state.username,
           email: this.state.email,
           password: this.state.password,
+          color: color,
         }
       );
       this.props.signup(user);
@@ -63,107 +66,107 @@ class SignUpForm extends React.Component {
 
       if (errorType === "Username") {
         usernameErr = (
-          <div className="session__errors">
-            <span className="material-icons">error</span>
-            <span className="session__errors__type">{errors[i]}</span>
+          <div className='session__errors'>
+            <span className='material-icons'>error</span>
+            <span className='session__errors__type'>{errors[i]}</span>
           </div>
         );
       } else if (errorType === "Email") {
         emailErr = (
-          <div className="session__errors">
-            <span className="material-icons">error</span>
-            <span className="session__errors__type">{errors[i]}</span>
+          <div className='session__errors'>
+            <span className='material-icons'>error</span>
+            <span className='session__errors__type'>{errors[i]}</span>
           </div>
         );
       } else if (errorType === "Password") {
         passwordErr = (
-          <div className="session__errors">
-            <span className="material-icons">error</span>
-            <span className="session__errors__type">{errors[i]}</span>
+          <div className='session__errors'>
+            <span className='material-icons'>error</span>
+            <span className='session__errors__type'>{errors[i]}</span>
           </div>
         );
       } else {
         passwordMatchErr = (
-          <div className="session__errors session__errors--pw-match">
-            <span className="material-icons">error</span>
-            <span className="session__errors__type">{errors[i]}</span>
+          <div className='session__errors session__errors--pw-match'>
+            <span className='material-icons'>error</span>
+            <span className='session__errors__type'>{errors[i]}</span>
           </div>
         );
       }
     }
 
     return (
-      <div className="session">
-        <div className="signup">
-          <div className="signup__main">
-            <div className="signup__left">
-              <header className="session__header session__header__signup">
-                <Link to="/" className="session__header__logo__container">
+      <div className='session'>
+        <div className='signup'>
+          <div className='signup__main'>
+            <div className='signup__left'>
+              <header className='session__header session__header__signup'>
+                <Link to='/' className='session__header__logo__container'>
                   <img
-                    className="session__header__logo__img"
+                    className='session__header__logo__img'
                     src={window.tumbleLogoURL}
                   />
                 </Link>
-                <h2 className="session__header__title">
+                <h2 className='session__header__title'>
                   Create your Tumble Account
                 </h2>
-                <span className="session__header__subtitle">
+                <span className='session__header__subtitle'>
                   to continue to TumblyTube
                 </span>
               </header>
-              <form className="signup__form">
-                <div className="signup__form__input">
+              <form className='signup__form'>
+                <div className='signup__form__input'>
                   <input
                     className={
                       "signup__form__input__item" +
                       (usernameErr ? " signup__form__input__item--error" : "")
                     }
                     onChange={this.handleChange("username")}
-                    placeholder=" "
+                    placeholder=' '
                     value={this.state.username}
                   />
-                  <label className="signup__form__input__label">Username</label>
+                  <label className='signup__form__input__label'>Username</label>
                   {usernameErr}
                 </div>
-                <div className="signup__form__input">
+                <div className='signup__form__input'>
                   <input
-                    type="email"
+                    type='email'
                     className={
                       "signup__form__input__item" +
                       (emailErr ? " signup__form__input__item--error" : "")
                     }
                     onChange={this.handleChange("email")}
-                    placeholder=" "
+                    placeholder=' '
                     value={this.state.email}
                   />
-                  <label className="signup__form__input__label">
+                  <label className='signup__form__input__label'>
                     Your email address
                   </label>
                   {emailErr}
                 </div>
-                <a className="signup__form__demo" onClick={this.handleDemo}>
+                <a className='signup__form__demo' onClick={this.handleDemo}>
                   Sign in as Demo user instead
                 </a>
-                <div className="signup__form__password">
-                  <div className="signup__form__input">
+                <div className='signup__form__password'>
+                  <div className='signup__form__input'>
                     <input
-                      type="password"
+                      type='password'
                       className={
                         "signup__form__input__item" +
                         (passwordErr ? " signup__form__input__item--error" : "")
                       }
                       onChange={this.handleChange("password")}
-                      placeholder=" "
+                      placeholder=' '
                       value={this.state.password}
                     />
-                    <label className="signup__form__input__label">
+                    <label className='signup__form__input__label'>
                       Password
                     </label>
                     {passwordErr}
                   </div>
-                  <div className="signup__form__input">
+                  <div className='signup__form__input'>
                     <input
-                      type="password"
+                      type='password'
                       className={
                         "signup__form__input__item" +
                         (passwordMatchErr
@@ -171,27 +174,27 @@ class SignUpForm extends React.Component {
                           : "")
                       }
                       onChange={this.handleChange("confirmPW")}
-                      placeholder=" "
+                      placeholder=' '
                       value={this.state.confirmPW}
                     />
-                    <label className="signup__form__input__label">
+                    <label className='signup__form__input__label'>
                       Confirm
                     </label>
                     {passwordMatchErr}
                   </div>
                 </div>
-                <div className="signup__form__input__pw-confirm">
+                <div className='signup__form__input__pw-confirm'>
                   <span>
                     Use 6 or more characters with a mix of letters, numbers &
                     symbols
                   </span>
                 </div>
-                <div className="signup__form__btn">
-                  <div className="signup__form__btn__link">
+                <div className='signup__form__btn'>
+                  <div className='signup__form__btn__link'>
                     {this.props.formLink}
                   </div>
                   <button
-                    className="signup__form__btn__item"
+                    className='signup__form__btn__item'
                     onClick={this.handleSubmit}
                   >
                     Sign Up
@@ -199,45 +202,45 @@ class SignUpForm extends React.Component {
                 </div>
               </form>
             </div>
-            <div className="signup__right">
+            <div className='signup__right'>
               <figure>
-                <img src={window.signupURL} width="244" height="244" />
+                <img src={window.signupURL} width='244' height='244' />
                 <figcaption>
                   One account. All of Tumble working for you.
                 </figcaption>
               </figure>
             </div>
           </div>
-          <footer className="session__footer session__footer--signup">
-            <span className="session__footer__lang">
+          <footer className='session__footer session__footer--signup'>
+            <span className='session__footer__lang'>
               English (United States)
-              <span className="material-icons">arrow_drop_down</span>
+              <span className='material-icons'>arrow_drop_down</span>
             </span>
-            <ul className="session__footer__list">
+            <ul className='session__footer__list'>
               <li>
                 <a
-                  href="https://github.com/nyan9/TumblyTube"
-                  className="session__footer__list__item"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href='https://github.com/nyan9/TumblyTube'
+                  className='session__footer__list__item'
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   ProjectRepo
                 </a>
               </li>
               <li>
                 <a
-                  href="https://github.com/nyan9"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href='https://github.com/nyan9'
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   Github
                 </a>
               </li>
               <li>
                 <a
-                  href="https://www.linkedin.com/in/nyannaing/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href='https://www.linkedin.com/in/nyannaing/'
+                  target='_blank'
+                  rel='noopener noreferrer'
                 >
                   LinkedIn
                 </a>
