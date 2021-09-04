@@ -1,20 +1,23 @@
-export const avatarFromInitials = (initial, color, size) => {
-  if (initial == null) return;
+export const avatarFromInitials = (user, size) => {
+  if (user == null) return;
 
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   canvas.width = canvas.height = size;
 
+  const initial = user.username[0].toUpperCase();
+  const color = user.color;
+
   // draw background
-  context.fillStyle = `${color}50`;
+  context.fillStyle = color;
   context.fillRect(0, 0, size, size);
 
   // draw text
   context.font = `${size / 2}px Roboto`;
-  context.fillStyle = color;
+  context.fillStyle = "#ffffff";
   context.textBaseline = "middle";
   context.textAlign = "center";
-  context.fillText(initial, size / 2, size / 2);
+  context.fillText(initial, size / 2, size / 1.8);
 
   return canvas.toDataURL("image/png");
 };
