@@ -7,7 +7,6 @@ import SignupFormContainer from "./session_form/signup_form_container";
 import NotFound from "./notfound";
 import Modal from "../components/modal/modal";
 import VideoShow from "../components/show_video/show_video_container";
-import SearchResults from "./search/search_results_container";
 import NavBar from "./nav_bar/nav_bar_container";
 
 const App = () => {

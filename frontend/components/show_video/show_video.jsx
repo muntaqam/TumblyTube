@@ -42,15 +42,15 @@ class VideoShow extends React.Component {
     if (!this.props.currentVideo) return null;
 
     const { currentVideo, currentVideoId } = this.props;
+    const creator = currentVideo.creator;
     const currentVidDesc = currentVideo.description;
     const { showMore } = this.state;
 
-    const sortedVideos = this.props.videos
-      .sort(() => Math.random() - Math.random())
-      .slice(0, 10);
-    let sideVideos = sortedVideos.map((vid) => {
+    let sideVideos = this.props.videos.map((vid) => {
       if (vid.id != currentVideoId) {
-        return <SideVideoIndex key={vid.id} video={vid} />;
+        return (
+          <SideVideoIndex key={vid.id} video={vid} creator={vid.creator} />
+        );
       }
     });
 
@@ -89,9 +89,7 @@ class VideoShow extends React.Component {
               <div className='vdesc__top'>
                 <div className='vdesc__top vdesc__top--split'>
                   <div className='vdesc__top vdesc__top--left'>
-                    <div className='vdesc__username'>
-                      {currentVideo.username}
-                    </div>
+                    <div className='vdesc__username'>{creator.username}</div>
                     <div className='vdesc__subcount'>1.1k Subscribers</div>
                   </div>
                   <div className='vdesc__subscribe'>SUBSCRIBE</div>

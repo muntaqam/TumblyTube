@@ -43,6 +43,7 @@ function SearchResults(props) {
 
     if (type === "video") {
       let title = object.title.toLowerCase();
+      const creator = object.creator;
 
       if (title.includes(searchQuery)) {
         return (
@@ -69,7 +70,7 @@ function SearchResults(props) {
                 {object.uploadedAt} ago
               </div>
               <div className='results__meta results__meta--username'>
-                {object.username}
+                {creator.username}
               </div>
               <div className='results__meta results__meta--desc'>
                 {object.description}

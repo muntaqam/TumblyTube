@@ -7,7 +7,7 @@ import {
 } from "../../util/video_util";
 
 function SideVideoIndex(props) {
-  const { video } = props;
+  const { video, creator } = props;
 
   return (
     <Link className='sideidx__card' to={`/watch/${video.id}`}>
@@ -20,7 +20,7 @@ function SideVideoIndex(props) {
       ></video>
       <div className='sideidx__desc'>
         <div className='sideidx__title'>{video.title}</div>
-        <div className='sideidx__username'>{video.username}</div>
+        <div className='sideidx__username'>{creator.username}</div>
         <div className='sideidx__viewsdate'>
           {viewsFormatted(video.views)} views
           <span className='sideidx__dot'> ● </span>
