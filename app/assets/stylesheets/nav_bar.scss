@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 0.625em 1em;
+  justify-content: space-between;
+  padding: 0.75em 1.75em;
   position: fixed;
   top: 0;
   z-index: 50;
@@ -29,28 +30,23 @@
 .navbar__section {
   display: flex;
   flex-direction: row;
-  flex-grow: 1;
 
   &--left {
     align-items: center;
-    justify-content: flex-start;
   }
 
   &--center {
-    align-items: center;
+    flex-grow: 1;
     max-width: 45%;
-    justify-content: center;
   }
 
   &--right {
     align-items: center;
-    justify-content: flex-end;
   }
 }
 
 #menu-button {
   font-size: 1.5rem;
-  margin-left: 0.5em;
   color: var(--clr-text-gray);
 }
 
@@ -103,9 +99,9 @@
     display: flex;
     align-items: center;
     position: relative;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background: var(--clr-hightlight-gray);
     }
 
@@ -153,12 +149,12 @@
 }
 
 #signin-button {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   color: #065fd4;
 }
 
 .navbar__session {
-  margin-left: 3em;
+  margin-left: min(5vw, 3em);
 
   &__avatar {
     cursor: pointer;
@@ -215,10 +211,7 @@
       width: 100%;
       justify-content: flex-start;
       padding: 1em;
-
-      &:hover {
-        cursor: pointer;
-      }
+      cursor: pointer;
 
       &-text {
         margin: 0 0 0 1em;
@@ -231,11 +224,12 @@
     display: flex;
     border: 1px solid #065fd4;
     align-items: center;
-    padding: 0.3em 0.7em;
+    padding: 0.1875em 0.7em;
     text-align: center;
     border-radius: 2px;
-    margin-left: 3em;
+    margin-left: min(5vw, 3em);
     text-decoration: none;
+    cursor: pointer;
 
     &__text {
       margin-left: 0.3em;
@@ -243,55 +237,29 @@
       font-weight: 600;
       color: #065fd4;
     }
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 }
 
-@media only screen and (max-width: 655px) {
+@media only screen and (max-width: 650px) {
+  .navbar__session__login__text {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 470px) {
   .navbar {
-    justify-content: space-between;
-    padding: 0.625em 0.5em;
+    padding-inline: 0;
 
     &__section {
-      flex-grow: 0;
-    }
-
-    &__section--center {
+      justify-content: space-evenly;
       flex-grow: 1;
-      max-width: 60%;
     }
   }
 
+  .navbar__logo,
+  .navbar__session,
   .navbar__session__login {
-    margin-left: 1em;
-
-    &__text {
-      display: none;
-    }
-  }
-
-  .navbar__sessiona {
-    margin-left: 1em;
-  }
-}
-@media only screen and (max-width: 550px) {
-  .navbar__search__input {
-    margin-left: 0.625em;
-  }
-
-  .navbar__session {
-    margin-left: 0.3em;
-  }
-
-  .navbar__session__login {
-    margin-left: 0.2em;
-  }
-
-  #menu-button {
-    margin: 0 0.3em 0 0em;
+    margin-left: 0;
   }
 }
 
