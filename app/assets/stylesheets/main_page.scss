@@ -65,13 +65,29 @@
   }
 
   &__desc {
-    word-spacing: 0.5px;
+    display: flex;
+
+    &--meta {
+      flex-direction: column;
+      word-spacing: 0.5px;
+    }
+  }
+
+  &__user {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    height: min-content;
+    width: max-content;
+    margin-top: 0.25em;
+    margin-right: 0.75em;
+    background-color: var(--clr-placeholder);
   }
 
   &__title {
     font-size: 1rem;
     font-weight: 900;
     line-height: 1.5;
+    margin-bottom: 0.125em;
   }
 
   &__username,
