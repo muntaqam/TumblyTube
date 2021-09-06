@@ -10,10 +10,19 @@
     color: var(--clr-text-gray);
     border-bottom: 1px solid var(--clr-separator-gray);
     padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
   }
 
   &__items {
     width: inherit;
+  }
+
+  &__user {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    height: min-content;
+    width: max-content;
+    background-color: var(--clr-placeholder);
   }
 
   &__title {
@@ -28,6 +37,12 @@
 
     &--username {
       margin-block: 1.5em;
+      display: flex;
+      align-items: center;
+
+      .results__user {
+        margin-right: 0.5em;
+      }
     }
 
     &--desc {

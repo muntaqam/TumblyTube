@@ -5,6 +5,7 @@ import CommentIndexContainer from "../comments/comment_idx_container";
 import CommentFormContainer from "../comments/comment_form_container";
 import LikeInterface from "../likes/like_interface_container";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import { avatarFromInitials } from "../../util/avatar_util";
 
 class VideoShow extends React.Component {
   constructor(props) {
@@ -42,15 +43,15 @@ class VideoShow extends React.Component {
     if (!this.props.currentVideo) return null;
 
     const { currentVideo, currentVideoId } = this.props;
+    const creator = currentVideo.creator;
     const currentVidDesc = currentVideo.description;
     const { showMore } = this.state;
 
-    const sortedVideos = this.props.videos
-      .sort(() => Math.random() - Math.random())
-      .slice(0, 10);
-    let sideVideos = sortedVideos.map((vid) => {
+    let sideVideos = this.props.videos.map((vid) => {
       if (vid.id != currentVideoId) {
-        return <SideVideoIndex key={vid.id} video={vid} />;
+        return (
+          <SideVideoIndex key={vid.id} video={vid} creator={vid.creator} />
+        );
       }
     });
 
@@ -82,16 +83,18 @@ class VideoShow extends React.Component {
           <div className='vdesc'>
             <div className='vdesc__split vdesc__split--left'>
               <div className='vdesc__usericon'>
-                <AccountCircleIcon />
+                <img
+                  src={avatarFromInitials(creator, 48)}
+                  alt='avatar'
+                  className='vdesc__user'
+                />
               </div>
             </div>
             <div className='vdesc__split vdesc__split--right'>
               <div className='vdesc__top'>
                 <div className='vdesc__top vdesc__top--split'>
                   <div className='vdesc__top vdesc__top--left'>
-                    <div className='vdesc__username'>
-                      {currentVideo.username}
-                    </div>
+                    <div className='vdesc__username'>{creator.username}</div>
                     <div className='vdesc__subcount'>1.1k Subscribers</div>
                   </div>
                   <div className='vdesc__subscribe'>SUBSCRIBE</div>
