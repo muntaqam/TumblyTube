@@ -6,6 +6,7 @@ import {
   handleAutoPlayOut,
   viewsFormatted,
 } from "../../util/video_util";
+import { avatarFromInitials } from "../../util/avatar_util";
 
 function SearchResults(props) {
   const { videos, users, fetchVideos, fetchUsers } = props;
@@ -30,7 +31,11 @@ function SearchResults(props) {
         return (
           <div key={object.id} className='results__item results__item--user'>
             <div className='results__split results__split--left'>
-              <AccountCircleIcon id='results-user-icon' />
+              <img
+                src={avatarFromInitials(object, 130)}
+                alt='avatar'
+                className='results__user'
+              />
             </div>
             <div className='results__split results__split--right'>
               <div className='results__title'>{object.username}</div>
@@ -43,6 +48,7 @@ function SearchResults(props) {
 
     if (type === "video") {
       let title = object.title.toLowerCase();
+      const creator = object.creator;
 
       if (title.includes(searchQuery)) {
         return (
@@ -69,7 +75,12 @@ function SearchResults(props) {
                 {object.uploadedAt} ago
               </div>
               <div className='results__meta results__meta--username'>
-                {object.username}
+                <img
+                  src={avatarFromInitials(object.creator, 24)}
+                  alt='avatar'
+                  className='results__user'
+                />
+                {creator.username}
               </div>
               <div className='results__meta results__meta--desc'>
                 {object.description}
