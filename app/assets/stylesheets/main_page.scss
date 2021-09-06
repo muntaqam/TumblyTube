@@ -1,4 +1,4 @@
-.main__index {
+.main {
   --content-width: 2256px;
 }
 
@@ -46,12 +46,18 @@
     grid-column: 2;
   }
 
-  &__index {
+  &__index,
+  .library__split--videos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(304px, 1fr));
     gap: 1em;
     padding-top: 2em;
     padding-inline: max(2em, 50vw - var(--content-width) / 2);
+  }
+
+  &__library {
+    display: grid;
+    grid-template-columns: var(--content-width) 1fr;
   }
 
   &__card {
