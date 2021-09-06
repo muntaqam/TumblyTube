@@ -1,16 +1,19 @@
 .cmtform {
   display: flex;
-  flex-direction: column;
 
-  &__split--bottom {
-    display: flex;
-    flex-direction: row;
+  &__user {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    height: min-content;
+    width: max-content;
+    background-color: var(--clr-placeholder);
   }
 
   &__form {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    margin-left: 0.8em;
   }
 
   &__inputBox {
@@ -23,7 +26,7 @@
     background: transparent;
     border-bottom: 1px solid var(--clr-separator-gray);
     outline: none;
-    padding-block: 0.8em;
+    padding-block: 0.4em;
     font-size: 0.925rem;
     position: relative;
   }
@@ -101,17 +104,23 @@
 .comments {
   display: flex;
   flex-direction: column;
-  margin-bottom: 4em;
+  margin-bottom: 2em;
+
+  &__user {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    height: min-content;
+    width: max-content;
+    background-color: var(--clr-placeholder);
+  }
 
   &__card {
     display: flex;
     flex-direction: row;
-    margin-top: 1em;
+    margin-top: 2em;
 
     &--child {
-      flex-direction: column;
-      padding-left: 2.25em;
-      margin-top: 0.125em;
+      margin-top: 1em;
     }
   }
 
@@ -119,7 +128,7 @@
     display: flex;
     flex-direction: column;
     width: 90%;
-    padding-left: 0.8em;
+    margin-left: 0.8em;
   }
 
   &__username {
@@ -145,7 +154,7 @@
   &__interface {
     display: flex;
     flex-direction: row;
-    margin-top: 0.75em;
+    margin-top: 0.5em;
   }
 
   .likes {
@@ -197,8 +206,10 @@
 
   &__replies {
     width: fit-content;
-    margin-block: 0.8em;
+    margin-top: 0.5em;
     font-size: 0.875em;
+    font-weight: 900;
+    letter-spacing: 0.5px;
     color: var(--clr-primary);
     cursor: pointer;
     user-select: none;
