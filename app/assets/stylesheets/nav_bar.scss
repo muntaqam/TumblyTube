@@ -241,6 +241,7 @@
 }
 
 @media only screen and (max-width: 650px) {
+  // hide only navbar's login button text
   .navbar .navbar__session__login__text {
     display: none;
   }
