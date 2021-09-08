@@ -17,6 +17,11 @@ export default function Library({ currentUser, videos, fetchVideos }) {
   if (isVideosEmpty()) return null;
   return (
     <div className='main__library'>
+      <div className='library__title'>
+        <ThumbUpOutlinedIcon id='library-likeicon' />
+        Liked videos{" "}
+        <span className='library__subtitle'>{likedVideos.length}</span>
+      </div>
       <div className='library__split library__split--videos'>
         {likedVideos.map((likedId) => (
           <MainVideoIndexItem
@@ -35,15 +40,15 @@ export default function Library({ currentUser, videos, fetchVideos }) {
           />
         </div>
         <div className='library__username'>{currentUser.username}</div>
-        <div className='library__usermeta'>
-          <div className='library__subscriptions'>
+        <div className='library__useritems'>
+          <div className='library__useritem library__useritem--subs'>
             <span className='library__tag'>Subscriptions</span>
             111k
           </div>
-          <div className='library__uploads'>
+          <div className='library__useritem library__useritem--uploads'>
             <span className='library__tag'>Uploads</span>2
           </div>
-          <div className='library__likes'>
+          <div className='library__useritem library__useritem--likes'>
             <span className='library__tag'>Likes</span>
             {likedVideos.length}
           </div>
