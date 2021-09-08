@@ -9,6 +9,7 @@ export default function Library({
   currentUser,
   loggedIn,
   videos,
+  likedVideosArr,
   fetchVideos,
 }) {
   if (!loggedIn) {
@@ -33,7 +34,10 @@ export default function Library({
   const isVideosEmpty = () => {
     return Object.keys(videos).length === 0;
   };
-  const likedVideos = Object.keys(currentUser.likedVideos);
+
+  const filteredLikedVideos = likedVideosArr.filter(
+    (video) => video.version === "like"
+  );
 
   if (isVideosEmpty()) return null;
   else
@@ -42,13 +46,15 @@ export default function Library({
         <div className='library__title'>
           <ThumbUpOutlinedIcon id='library-likeicon' />
           Liked videos{" "}
-          <span className='library__subtitle'>{likedVideos.length}</span>
+          <span className='library__subtitle'>
+            {filteredLikedVideos.length}
+          </span>
         </div>
         <div className='library__split library__split--videos'>
-          {likedVideos.map((likedId) => (
+          {filteredLikedVideos.map((video) => (
             <MainVideoIndexItem
-              key={likedId}
-              video={videos[likedId]}
+              key={video.likeableId}
+              video={videos[video.likeableId]}
               creator={currentUser}
             />
           ))}
@@ -73,7 +79,7 @@ export default function Library({
             </div>
             <div className='library__useritem library__useritem--likes'>
               <span className='library__tag'>Likes</span>
-              {likedVideos.length}
+              {filteredLikedVideos.length}
             </div>
           </div>
         </div>
