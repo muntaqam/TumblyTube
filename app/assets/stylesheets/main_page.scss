@@ -1,5 +1,6 @@
 .main {
   --content-width: 2256px;
+  --like-content-width: 1384px;
 }
 
 .main {
@@ -46,18 +47,13 @@
     grid-column: 2;
   }
 
-  &__index,
-  .library__split--videos {
+  // video index for main
+  &__index {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(304px, 1fr));
     gap: 1em;
     padding-top: 2em;
     padding-inline: max(2em, 50vw - var(--content-width) / 2);
-  }
-
-  &__library {
-    display: grid;
-    grid-template-columns: var(--content-width) 1fr;
   }
 
   &__card {
@@ -106,6 +102,13 @@
   &__dot {
     font-size: 0.5rem;
   }
+
+  // LIBRARY LAYOUT
+  &__library {
+    display: grid;
+    grid-template-columns: 1fr 210px;
+    padding-inline: max(2em, 50vw - var(--like-content-width) / 2);
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -126,6 +129,120 @@
     &__subscriptions,
     &__ryan {
       grid-column: 1;
+    }
+  }
+}
+
+//
+// LIBRARY
+//
+.library {
+  &__title {
+    grid-row: 1;
+    grid-column: 1;
+    margin-top: 2em;
+    font-size: 1rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    color: var(--clr-text-light-gray);
+    margin-left: 0.5em;
+  }
+
+  &__split {
+    &--videos {
+      grid-row: 2;
+      grid-column: 1;
+
+      // library videos layout
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1em;
+      padding-top: 2em;
+
+      // hide video user icon
+      .main__user {
+        display: none;
+      }
+    }
+
+    &--user {
+      grid-row: 1 / span 2;
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 85%;
+      margin-top: 6em;
+      margin-left: auto;
+    }
+  }
+
+  &__user {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    height: max-content;
+    width: max-content;
+    background-color: var(--clr-placeholder);
+  }
+
+  &__username {
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+    margin-top: 1em;
+  }
+
+  &__useritems {
+    margin-top: 2em;
+    width: 100%;
+  }
+
+  &__useritem {
+    font-size: 0.75rem;
+    letter-spacing: 0.2px;
+    color: var(--clr-text-gray);
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--clr-hightlight-gray);
+    padding-block: 1em;
+
+    &--likes {
+      border-bottom: 1px solid var(--clr-hightlight-gray);
+    }
+  }
+}
+
+#library-likeicon {
+  margin-right: 0.5em;
+}
+
+@media only screen and (max-width: 450px) {
+  .main__library {
+    grid-template-columns: 1fr;
+  }
+
+  .library__split {
+    // move user above liked videos
+    &--user {
+      grid-row: 1 / span 1;
+      grid-column: 1;
+
+      margin-top: 2em;
+      margin-inline: auto;
+    }
+
+    &--videos {
+      grid-row: 3;
+    }
+  }
+
+  .library {
+    &__title {
+      grid-row: 2;
     }
   }
 }
