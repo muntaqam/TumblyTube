@@ -126,6 +126,7 @@
     .results,
     &__index,
     &__library,
+    .library__session,
     &__subscriptions,
     &__ryan {
       grid-column: 1;
@@ -137,6 +138,32 @@
 // LIBRARY
 //
 .library {
+  &__session {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10em auto;
+
+    // remove left margin to navbar__session__login
+    .navbar__session__login {
+      margin: 2em 0;
+    }
+  }
+
+  &__sessionItem {
+    &--title {
+      font-size: 1.5em;
+      font-weight: 900;
+      line-height: 3em;
+    }
+
+    &--subtitle {
+      font-size: 0.875em;
+    }
+  }
+
   &__title {
     grid-row: 1;
     grid-column: 1;
@@ -214,6 +241,10 @@
       border-bottom: 1px solid var(--clr-hightlight-gray);
     }
   }
+}
+
+#library-session-logo {
+  font-size: 7em;
 }
 
 #library-likeicon {

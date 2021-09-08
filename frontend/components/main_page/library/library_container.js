@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import Library from "./library";
 import { fetchVideos } from "../../../actions/videos_actions";
 
-const mSTP = ({ entities, session }) => {
+const mSTP = ({ session, entities: { users, videos } }) => {
   return {
-    currentUser: entities.users[session.id],
-    videos: entities.videos,
+    currentUser: users[session.id],
+    loggedIn: session.id,
+    videos: videos,
   };
 };
 
