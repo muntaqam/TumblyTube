@@ -7,4 +7,5 @@ json.uploadedAt time_ago_in_words(video.created_at)
 
 json.set! :creator do
   json.extract! video.creator, :id, :username, :color
+  json.numSubscribers video.creator.subscribers.length
 end
