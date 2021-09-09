@@ -1,11 +1,11 @@
 import React from "react";
 import VideoPlayer from "./video_player";
-import SideVideoIndex from "./side_vid_idx";
+import { avatarFromInitials } from "../../util/avatar_util";
+import SubscribeButtonContainer from "../subscribe_button/subscribe_btn_container";
+import LikeInterface from "../likes/like_interface_container";
 import CommentIndexContainer from "../comments/comment_idx_container";
 import CommentFormContainer from "../comments/comment_form_container";
-import LikeInterface from "../likes/like_interface_container";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { avatarFromInitials } from "../../util/avatar_util";
+import SideVideoIndex from "./side_vid_idx";
 
 class VideoShow extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class VideoShow extends React.Component {
   render() {
     if (!this.props.currentVideo) return null;
 
-    const { currentVideo, currentVideoId } = this.props;
+    const { currentVideo, currentVideoId, currentUserId } = this.props;
     const creator = currentVideo.creator;
     const currentVidDesc = currentVideo.description;
     const { showMore } = this.state;
@@ -95,9 +95,13 @@ class VideoShow extends React.Component {
                 <div className='vdesc__top vdesc__top--split'>
                   <div className='vdesc__top vdesc__top--left'>
                     <div className='vdesc__username'>{creator.username}</div>
-                    <div className='vdesc__subcount'>1.1k Subscribers</div>
+                    <div className='vdesc__subcount'>
+                      {creator.numSubscribers} Subscribers
+                    </div>
                   </div>
-                  <div className='vdesc__subscribe'>SUBSCRIBE</div>
+                  {currentUserId != creator.id && (
+                    <SubscribeButtonContainer creator={creator} />
+                  )}
                 </div>
               </div>
               <div className='vdesc__expandable'>
