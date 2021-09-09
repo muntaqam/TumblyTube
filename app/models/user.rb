@@ -21,6 +21,22 @@ class User < ApplicationRecord
 
   scope :filter_by_search, -> (search) { where("username like ?", "%#{search}%") }
 
+  # a user (subscriber) can subscribe as many user as they want
+  has_many :users_subscribed,
+  foreign_key: :subscriber_id,
+  class_name: :Subscription
+  
+  has_many :subscribees,
+  through: :users_subscribed
+
+  # a user (subscribee) can have as many subscribers as they get
+  has_many :users_subscribing,
+    foreign_key: :subscribee_id,
+    class_name: :Subscription
+
+  has_many :subscribers,
+    through: :users_subscribing
+    
   has_many :comments,
     foreign_key: :commenter_id,
     class_name: :Comment,
