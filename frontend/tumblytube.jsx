@@ -4,6 +4,8 @@ import configureStore from "./store/store";
 import Root from "./components/root";
 
 // TEST START;
+import { subscribe, unsubscribe } from "./util/subscription_api_util";
+
 // TEST END
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // TESTING START
+  window.subscribe = subscribe;
+  window.unsubscribe = unsubscribe;
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
