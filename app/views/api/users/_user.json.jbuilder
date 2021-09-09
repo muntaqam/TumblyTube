@@ -5,6 +5,17 @@ json.deep_format_keys!
 
 json.extract! user, :id, :username, :email, :color
 json.numVideos user.videos.count
+json.numSubscribers user.subscribers.length
+json.numSubscribees user.subscribees.length
+
+json.subscribees({})
+user.subscribees.each do |subscribee|
+  json.set! :subscribees do
+    json.set! subscribee.username do
+      json.extract! subscribee, :id, :username, :color
+    end
+  end
+end
 
 json.likedVideos({})
 json.likedComments({})
