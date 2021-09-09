@@ -3,7 +3,7 @@ import { useParams, useLocation } from "react-router";
 import { SidebarContext } from "../root";
 import SideBar from "../side_bar/side_bar";
 import MainVideoIndex from "./video_index/main_vid_idx_container";
-import Subscriptions from "./subscriptions/subscriptions";
+import SubscriptionsContainer from "./subscriptions/subscriptions_container";
 import LibraryContainer from "./library/library_container";
 import RyanNaing from "./ryan_naing/ryan_naing";
 import SearchResults from "../search/search_results_container";
@@ -22,7 +22,7 @@ const MainPage = () => {
       <SideBar />
       <div className='main__borderTop'></div>
       {isLocation("/") && <MainVideoIndex />}
-      {isLocation("/feed/subscriptions") && <Subscriptions />}
+      {isLocation("/feed/subscriptions") && <SubscriptionsContainer />}
       {isLocation("/feed/library") && <LibraryContainer />}
       {isLocation("/feed/ryannaing") && <RyanNaing />}
       {isLocation("/results") && <SearchResults />}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SubscriptionsOutlinedIcon from "@material-ui/icons/SubscriptionsOutlined";
 import LoginButton from "../login_button";
 
