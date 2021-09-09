@@ -1,0 +1,16 @@
+.subscribe {
+  background: #53c1de;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: white;
+  align-self: center;
+  padding: 0.8em 1.2em;
+  letter-spacing: 1px;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &__inactive {
+    background: var(--clr-hightlight-gray);
+    color: var(--clr-text-light-gray);
+  }
+}

@@ -162,18 +162,8 @@
     color: var(--clr-text-light-gray);
   }
 
-  &__subscribe {
-    background: #53c1de;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: white;
-    align-self: center;
-    padding: 0.8em 1.2em;
-    letter-spacing: 1px;
-    border-radius: 3px;
-    &:hover {
-      cursor: pointer;
-    }
+  .subscribe {
+    margin-right: 1.25em;
   }
 
   &__expandable {
