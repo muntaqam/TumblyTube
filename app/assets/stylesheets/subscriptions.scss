@@ -1,0 +1,46 @@
+.subs {
+  &__session {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10em auto;
+
+    // remove left margin of navbar__session__login
+    .navbar__session__login {
+      margin: 2em 0;
+    }
+  }
+
+  &__sessionItem {
+    &--title {
+      font-size: 1.5em;
+      font-weight: 900;
+      line-height: 3em;
+    }
+
+    &--subtitle {
+      font-size: 0.875em;
+    }
+  }
+
+  &__title {
+    grid-row: 1;
+    grid-column: 1;
+    margin-top: 2em;
+    font-size: 1rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+  }
+
+  &__subtitle {
+    font-weight: 400;
+    color: var(--clr-text-light-gray);
+    margin-left: 0.5em;
+  }
+}
+
+#subs-session-logo {
+  font-size: 7em;
+}
