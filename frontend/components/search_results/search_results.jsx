@@ -1,4 +1,3 @@
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
 import {
@@ -39,7 +38,9 @@ function SearchResults(props) {
             </div>
             <div className='results__split results__split--right'>
               <div className='results__title'>{object.username}</div>
-              <div className='results__meta results__meta--numVideos'>{`${object.numVideos} videos`}</div>
+              <div className='results__meta results__meta--numVideos'>
+                {`${object.numSubscribees} subscribers • ${object.numVideos} videos`}
+              </div>
             </div>
           </div>
         );
