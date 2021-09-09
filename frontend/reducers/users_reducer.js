@@ -11,6 +11,10 @@ import {
   REMOVE_CHILD_COMMENT_LIKE,
   REMOVE_COMMENT_LIKE,
 } from "../actions/like_actions";
+import {
+  RECEIVE_SUBSCRIPTION,
+  REMOVE_SUBSCRIPTION,
+} from "../actions/subscription_actions";
 
 const usersReducer = (state = {}, action) => {
   Object.freeze(state);
@@ -47,6 +51,15 @@ const usersReducer = (state = {}, action) => {
     case REMOVE_COMMENT_LIKE:
     case REMOVE_CHILD_COMMENT_LIKE:
       delete newState[action.likerId]["likedComments"][action.commentId];
+      return newState;
+
+    case RECEIVE_SUBSCRIPTION:
+      newState[action.subscriberId].subscribees[action.subscribee] =
+        action.subscription;
+      return newState;
+
+    case REMOVE_SUBSCRIPTION:
+      delete newState[action.subscriberId].subscribees[action.subscribee];
       return newState;
 
     default:
