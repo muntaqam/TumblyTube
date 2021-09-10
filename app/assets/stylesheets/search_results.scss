@@ -26,7 +26,7 @@
   }
 
   &__title {
-    font-size: min(3.5vw, 1.125rem);
+    font-size: min(4vw, 1.125rem);
     font-weight: 900;
     line-height: 1.5em;
     display: -webkit-box;
@@ -95,7 +95,7 @@
   &--user {
     .results__split--left {
       flex-shrink: 2;
-      flex-basis: max(30%, 360px);
+      flex-basis: min(33%, 360px);
       min-height: 136px;
       display: flex;
       align-items: center;
