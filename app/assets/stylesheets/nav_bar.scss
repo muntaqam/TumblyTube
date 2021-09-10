@@ -10,15 +10,18 @@
   z-index: 50;
   background-color: var(--clr-white);
 
+  &__icon {
+    cursor: pointer;
+  }
+
+  &__logoCont {
+    margin-left: 1.5em;
+  }
+
   &__logo {
     width: 2em;
     object-fit: contain;
     display: block;
-    margin-left: 1.5em;
-  }
-
-  &__icon:hover {
-    cursor: pointer;
   }
 
   &__borderBottom {
@@ -257,7 +260,7 @@
     }
   }
 
-  .navbar__logo,
+  .navbar__logoCont,
   .navbar__session,
   .navbar__session__login {
     margin-left: 0;
