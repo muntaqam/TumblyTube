@@ -25,19 +25,76 @@
   }
 
   &__title {
-    grid-row: 1;
-    grid-column: 1;
     margin-top: 2em;
     font-size: 1rem;
     font-weight: 900;
-    display: flex;
-    align-items: center;
+
+    &--channel {
+      margin-top: 4em;
+    }
   }
 
   &__subtitle {
     font-weight: 400;
     color: var(--clr-text-light-gray);
     margin-left: 0.5em;
+  }
+
+  &__split {
+    &--videos {
+      // subs videos layout
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1em;
+      margin-top: 2em;
+
+      // hide video user icon
+      .main__user {
+        display: none;
+      }
+    }
+
+    &--users {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 2em;
+
+      // overwrite global subscribe button
+      .subscribe {
+        margin-top: 1em;
+        font-size: 0.75rem;
+        padding: 0.5em 0.75em;
+      }
+    }
+  }
+
+  // individual user card
+  &__user {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: max-content;
+  }
+
+  &__usericon {
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    height: max-content;
+    width: max-content;
+    background-color: var(--clr-placeholder);
+  }
+
+  &__username {
+    font-size: 1rem;
+    letter-spacing: 0.2px;
+    line-height: 2em;
+  }
+
+  &__userstats {
+    font-size: 0.75rem;
+    letter-spacing: 0.2px;
+    color: var(--clr-text-gray);
   }
 }
 

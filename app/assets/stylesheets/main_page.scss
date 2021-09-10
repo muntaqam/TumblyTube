@@ -1,6 +1,7 @@
 .main {
   --content-width: 2256px;
   --like-content-width: 1384px;
+  --subs-content-width: 1284px;
 }
 
 .main {
@@ -29,7 +30,7 @@
   &__index,
   &__library,
   .library__session,
-  &__subscriptions,
+  &__subs,
   .subs__session,
   &__ryan {
     grid-column: 2;
@@ -96,6 +97,11 @@
     display: grid;
     grid-template-columns: 1fr 210px;
     padding-inline: max(2em, 50vw - var(--like-content-width) / 2);
+  }
+
+  // SUBSCRIPTIONS LAYOUT
+  &__subs {
+    padding-inline: max(2em, 50vw - var(--subs-content-width) / 2);
   }
 }
 
