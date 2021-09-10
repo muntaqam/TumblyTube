@@ -109,6 +109,10 @@
   .main {
     grid-template-columns: 1fr;
 
+    &__library {
+      grid-template-columns: 1fr;
+    }
+
     &__borderTop {
       left: 0;
     }
