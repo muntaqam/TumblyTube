@@ -17,20 +17,6 @@
     }
   }
 
-  &__sidebar {
-    background: #fff;
-    position: fixed;
-    height: 100%;
-    grid-column: 1;
-    width: var(--sidebar-width);
-    display: flex;
-    flex-direction: column;
-
-    &--expanded {
-      width: var(--sidebar-expanded-width);
-    }
-  }
-
   &__borderTop {
     position: fixed;
     width: 100%;
@@ -116,10 +102,6 @@
 @media only screen and (max-width: 650px) {
   .main {
     grid-template-columns: 1fr;
-
-    &__sidebar {
-      display: none; // display none to flex in modal.scss when modal rendered
-    }
 
     &__borderTop {
       left: 0;
