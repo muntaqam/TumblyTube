@@ -6,3 +6,5 @@ json.deep_format_keys!
 json.extract! @subscription, :subscriber_id, :subscribee_id
 json.username @subscription.subscribee.username
 json.color @subscription.subscribee.color
+json.numSubscribers @subscription.subscribee.subscribers.size
+json.numVideos @subscription.subscribee.videos.size
