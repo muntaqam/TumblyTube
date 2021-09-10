@@ -51,7 +51,7 @@ function NavBar({ openModal, location, history, currentUser }) {
           className='navbar__icon navbar__icon--menu'
           onClick={handleOpenSidebar}
         />
-        <Link to='/'>
+        <Link to='/' className="navbar__logoCont">
           <img className='navbar__logo' src={window.logoURL} />
         </Link>
       </div>

@@ -77,7 +77,7 @@ function SideBar({ modal, closeModal }) {
             className='navbar__icon navbar__icon--menu'
             onClick={handleCloseModal}
           />
-          <Link to='/'>
+          <Link to='/' className='navbar__logoCont'>
             <img className='navbar__logo' src={window.logoURL} />
           </Link>
         </div>
