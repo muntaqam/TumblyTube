@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 export default function SubscribeButton(props) {
-  const {
-    creator,
-    currentUserId,
-    currentUserSubscribees,
-    subscribe,
-    unsubscribe,
-  } = props;
+  const { creator, currentUser, currentUserId, subscribe, unsubscribe } = props;
   const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     if (
       currentUserId &&
-      currentUserSubscribees[creator.username.toLowerCase()]
+      currentUser.subscribees[creator.username.toLowerCase()]
     ) {
       setSubscribed(true);
     }
     if (
       currentUserId &&
-      !currentUserSubscribees[creator.username.toLowerCase()]
+      !currentUser.subscribees[creator.username.toLowerCase()]
     ) {
       setSubscribed(false);
     }

@@ -5,7 +5,7 @@ import { subscribe, unsubscribe } from "../../actions/subscription_actions";
 const mSTP = ({ entities: { users }, session }) => {
   return {
     currentUserId: session.id,
-    currentUserSubscribees: users[session.id].subscribees,
+    currentUser: users[session.id],
   };
 };
 
