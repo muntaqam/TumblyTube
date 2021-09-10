@@ -43,8 +43,11 @@ function SearchResults(props) {
                 {`${object.numSubscribees} subscribers • ${object.numVideos} videos`}
               </div>
             </div>
-            {currentUserId != object.id && (
+            {currentUserId != object.id ? (
               <SubscribeButtonContainer creator={object} />
+            ) : (
+              // add empty subscription for styling consistency
+              <div className='results__emptysub'></div>
             )}
           </div>
         );
