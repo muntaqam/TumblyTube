@@ -4,15 +4,17 @@ json.key_format! camelize: :lower
 json.deep_format_keys!
 
 json.extract! user, :id, :username, :email, :color
-json.numVideos user.videos.count
-json.numSubscribers user.subscribers.length
-json.numSubscribees user.subscribees.length
+json.numVideos user.videos.size
+json.numSubscribers user.subscribers.size
+json.numSubscribees user.subscribees.size
 
 json.subscribees({})
 user.subscribees.each do |subscribee|
   json.set! :subscribees do
     json.set! subscribee.username do
       json.extract! subscribee, :id, :username, :color
+      json.numSubscribers subscribee.subscribers.size
+      json.numVideos subscribee.videos.size
     end
   end
 end

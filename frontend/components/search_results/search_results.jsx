@@ -40,7 +40,7 @@ function SearchResults(props) {
             <div className='results__split results__split--right'>
               <div className='results__title'>{object.username}</div>
               <div className='results__meta results__meta--numVideos'>
-                {`${object.numSubscribees} subscribers • ${object.numVideos} videos`}
+                {`${object.numSubscribers} subscribers • ${object.numVideos} videos`}
               </div>
             </div>
             {currentUserId != object.id ? (

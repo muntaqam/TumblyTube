@@ -103,7 +103,7 @@
     }
     .results__split--right {
       flex-shrink: 0;
-      flex-basis: max(148px, 20%);
+      flex-basis: max(20%, 148px);
       margin-inline: 1em;
       display: flex;
       flex-direction: column;

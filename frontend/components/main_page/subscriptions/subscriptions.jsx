@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import SubscriptionsOutlinedIcon from "@material-ui/icons/SubscriptionsOutlined";
 import LoginButton from "../login_button";
+import MainVideoIndexItem from "../video_index/main_vid_idx_item";
+import { avatarFromInitials } from "../../../util/avatar_util";
+import SubscribeButtonContainer from "../../subscribe_button/subscribe_btn_container";
 
 export default function Subscriptions({
   currentUserId,
@@ -31,11 +34,50 @@ export default function Subscriptions({
     return Object.keys(videos).length === 0;
   };
 
+  const filteredSubVideosArr = Object.values(videos).filter(
+    // subscribee username(keys) are not Capitalized but video.creator username is
+    (vid) => currentUser.subscribees[vid.creator.username.toLowerCase()]
+  );
+
+  const subUsersArr = Object.values(currentUser.subscribees);
+
   if (isVideosEmpty()) return null;
   else
     return (
-      <div className='main__subscriptions'>
-        <h1>SUBSCRIPTIONS</h1>
+      <div className='main__subs'>
+        <div className='subs__title subs__title--video'>Latest Videos</div>
+        <div className='subs__split subs__split--videos'>
+          {filteredSubVideosArr.reverse().map((vid) => (
+            <MainVideoIndexItem
+              key={vid.id}
+              video={vid}
+              creator={vid.creator}
+            />
+          ))}
+        </div>
+
+        <div className='subs__title subs__title--channel'>
+          Channels
+          <span className='subs__subtitle'>{currentUser.numSubscribees}</span>
+        </div>
+        <div className='subs__split subs__split--users'>
+          {subUsersArr.reverse().map((user) => (
+            <div key={user.id} className='subs__user'>
+              <div className='subs__usericonContainer'>
+                <img
+                  src={avatarFromInitials(user, 110)}
+                  alt='avatar'
+                  className='subs__usericon'
+                />
+              </div>
+              <div className='subs__username'>{user.username}</div>
+              <div className='subs__userstats'>
+                {`${user.numSubscribers} subscribers • ${user.numVideos} videos`}
+              </div>
+              <SubscribeButtonContainer creator={user} />
+            </div>
+          ))}
+        </div>
       </div>
     );
 }
