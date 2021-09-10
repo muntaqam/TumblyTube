@@ -71,7 +71,7 @@ export default function Library({
           <div className='library__useritems'>
             <div className='library__useritem library__useritem--subs'>
               <span className='library__tag'>Subscriptions</span>
-              TBD
+              {currentUser.numSubscribees}
             </div>
             <div className='library__useritem library__useritem--uploads'>
               <span className='library__tag'>Uploads</span>

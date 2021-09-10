@@ -6,7 +6,7 @@ import MainVideoIndex from "./video_index/main_vid_idx_container";
 import SubscriptionsContainer from "./subscriptions/subscriptions_container";
 import LibraryContainer from "./library/library_container";
 import RyanNaing from "./ryan_naing/ryan_naing";
-import SearchResults from "../search/search_results_container";
+import SearchResults from "../search_results/search_results_container";
 
 const MainPage = () => {
   const { sidebarExpanded } = useContext(SidebarContext);
