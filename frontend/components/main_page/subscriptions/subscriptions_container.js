@@ -5,8 +5,8 @@ import { fetchVideos } from "../../../actions/videos_actions";
 
 const mSTP = ({ session, entities: { users, videos } }) => {
   return {
+    currentUserId: session.id,
     currentUser: users[session.id],
-    loggedIn: session.id,
     videos: videos,
   };
 };

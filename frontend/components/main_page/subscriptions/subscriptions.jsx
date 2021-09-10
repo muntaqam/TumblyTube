@@ -3,12 +3,12 @@ import SubscriptionsOutlinedIcon from "@material-ui/icons/SubscriptionsOutlined"
 import LoginButton from "../login_button";
 
 export default function Subscriptions({
+  currentUserId,
   currentUser,
-  loggedIn,
   videos,
   fetchVideos,
 }) {
-  if (!loggedIn) {
+  if (!currentUserId) {
     return (
       <div className='subs__session'>
         <SubscriptionsOutlinedIcon id='subs-session-logo' />
