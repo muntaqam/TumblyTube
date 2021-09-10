@@ -6,13 +6,12 @@ import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
 import { avatarFromInitials } from "../../../util/avatar_util";
 
 export default function Library({
+  currentUserId,
   currentUser,
-  loggedIn,
   videos,
-  likedVideosArr,
   fetchVideos,
 }) {
-  if (!loggedIn) {
+  if (!currentUserId) {
     return (
       <div className='library__session'>
         <VideoLibraryOutlinedIcon id='library-session-logo' />
@@ -35,7 +34,7 @@ export default function Library({
     return Object.keys(videos).length === 0;
   };
 
-  const filteredLikedVideos = likedVideosArr.filter(
+  const filteredLikedVideos = currentUser.likedVideos.filter(
     (video) => video.version === "like"
   );
 
