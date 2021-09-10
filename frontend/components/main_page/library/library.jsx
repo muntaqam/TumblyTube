@@ -34,7 +34,7 @@ export default function Library({
     return Object.keys(videos).length === 0;
   };
 
-  const filteredLikedVideos = currentUser.likedVideos.filter(
+  const filteredLikedVideos = Object.values(currentUser.likedVideos).filter(
     (video) => video.version === "like"
   );
 
