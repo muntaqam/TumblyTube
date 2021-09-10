@@ -3,10 +3,11 @@ import { fetchUsers } from "../../actions/session_actions";
 import { fetchVideos } from "../../actions/videos_actions";
 import SearchResults from "./search_results";
 
-const mSTP = ({ entities: { users, videos } }) => {
+const mSTP = ({ entities: { users, videos }, session }) => {
   return {
     videos: Object.values(videos),
     users: Object.values(users),
+    currentUserId: session.id,
   };
 };
 
