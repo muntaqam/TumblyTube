@@ -3,8 +3,8 @@
   next if current_user && (user.id == current_user.id)
     json.set! user.id do
       json.extract! user, :id, :username, :color
-      json.numVideos user.videos.count
-      json.numSubscribers user.subscribers.length
-      json.numSubscribees user.subscribees.length
+      json.numVideos user.videos.size
+      json.numSubscribers user.subscribers.size
+      json.numSubscribees user.subscribees.size
     end
 end

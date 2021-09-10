@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import LoginButton from "../login_button";
-import MainVideoIndexItem from "../video_index/main_vid_idx_item";
-import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
+import LoginButton from "../login_button";
+import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
+import MainVideoIndexItem from "../video_index/main_vid_idx_item";
 import { avatarFromInitials } from "../../../util/avatar_util";
 
 export default function Library({
@@ -34,8 +34,8 @@ export default function Library({
     return Object.keys(videos).length === 0;
   };
 
-  const filteredLikedVideos = Object.values(currentUser.likedVideos).filter(
-    (video) => video.version === "like"
+  const filteredLikedVideosArr = Object.values(currentUser.likedVideos).filter(
+    (liked) => liked.version === "like"
   );
 
   if (isVideosEmpty()) return null;
@@ -46,14 +46,14 @@ export default function Library({
           <ThumbUpOutlinedIcon id='library-likeicon' />
           Liked videos{" "}
           <span className='library__subtitle'>
-            {filteredLikedVideos.length}
+            {filteredLikedVideosArr.length}
           </span>
         </div>
         <div className='library__split library__split--videos'>
-          {filteredLikedVideos.map((video) => (
+          {filteredLikedVideosArr.map((liked) => (
             <MainVideoIndexItem
-              key={video.likeableId}
-              video={videos[video.likeableId]}
+              key={liked.likeableId}
+              video={videos[liked.likeableId]} // liked object doesn't have videoUrl
               creator={currentUser}
             />
           ))}
@@ -78,7 +78,7 @@ export default function Library({
             </div>
             <div className='library__useritem library__useritem--likes'>
               <span className='library__tag'>Likes</span>
-              {filteredLikedVideos.length}
+              {filteredLikedVideosArr.length}
             </div>
           </div>
         </div>

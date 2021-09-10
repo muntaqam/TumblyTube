@@ -1,6 +1,17 @@
 .main__sidebar {
-  // when expended
-  &--expanded {
+  background: #fff;
+  position: fixed;
+  height: 100%;
+  grid-column: 1;
+  width: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+
+  // when expended and modal rendered
+  &--expanded,
+  &--modal {
+    min-width: var(--sidebar-expanded-width);
+
     .sidebar__item {
       flex-direction: row;
       align-items: center;
@@ -73,5 +84,11 @@
   }
   100% {
     transform: translateX(0px);
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .main__sidebar {
+    display: none; // display none to flex in modal.scss when modal rendered
   }
 }
