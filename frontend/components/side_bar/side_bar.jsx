@@ -18,9 +18,10 @@ function SideBar({ modal, closeModal }) {
   const { feedtype } = useParams();
   const [showToggled, setShowToggled] = useState("");
   const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
+  // setShowToggled on mount based on feedType param
   useEffect(() => {
-    // setShowToggled on mount based on feedType param
     if (location.pathname == "/") {
       setShowToggled("home");
     } else {
@@ -30,12 +31,24 @@ function SideBar({ modal, closeModal }) {
     return () => setShowToggled("");
   }, [location.pathname]);
 
+  const updateMedia = () => {
+    setViewportWidth(window.innerWidth);
+  };
+
+  // listen and set browser width
+  useEffect(() => {
+    window.addEventListener("resize", updateMedia);
+    if (viewportWidth <= 1312 && sidebarExpanded) toggleExpanded();
+
+    return () => window.removeEventListener("resize", updateMedia);
+  }, [viewportWidth]);
+
   const changeFeed = (dir) => {
     setShowToggled(dir);
   };
 
   const handleCloseModal = () => {
-    closeModal;
+    closeModal();
     toggleExpanded();
   };
 
@@ -54,7 +67,7 @@ function SideBar({ modal, closeModal }) {
     <div
       className={`main__sidebar main__sidebar--${
         sidebarExpanded ? "expanded" : null
-      }`}
+      } ${modal ? "main__sidebar--modal" : null}`}
       style={modal && mountedModalStyle}
     >
       {modal && (
