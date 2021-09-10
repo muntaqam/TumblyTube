@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import VideoShow from "./show_video";
 import { addViews, fetchVideos } from "../../actions/videos_actions";
 import { fetchComments } from "../../actions/comment_actions";
-import { subscribe, unsubscribe } from "../../actions/subscription_actions";
 
 const mSTP = ({ entities, session }, ownProps) => {
   return {
@@ -21,8 +20,6 @@ const mDTP = (dispatch) => {
     fetchVideos: (addViewId) => dispatch(fetchVideos(addViewId)),
     fetchComments: (vidId, numLimit) =>
       dispatch(fetchComments(vidId, numLimit)),
-    // subscribe: (subscription) => dispatch(subscribe(subscription)),
-    // unsubscribe: (subscribeeId) => dispatch(unsubscribe(subscribeeId)),
   };
 };
 
