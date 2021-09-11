@@ -193,6 +193,11 @@
     cursor: pointer;
   }
 
+  // reply comment form
+  .cmtform {
+    margin-top: 1em;
+  }
+
   &__delete {
     background: transparent;
     height: fit-content;
