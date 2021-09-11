@@ -59,14 +59,17 @@ class VideoShow extends React.Component {
       <div className='vshow'>
         <div className='vshow__split vshow__split--meta'>
           <VideoPlayer video={currentVideo} videoId={currentVideoId} />
+
           <div className='vdetails'>
             <div className='vdetails__title'>{currentVideo.title}</div>
+
             <div className='vdetails vdetails--split'>
               <div className='vdetails__viewsdate'>
                 {currentVideo.views} views
                 <span className='vdetails__dot'>●</span>
                 {currentVideo.uploadedAt} ago
               </div>
+
               <div className='vdetails__interface'>
                 <LikeInterface
                   likeableId={currentVideoId}
@@ -74,6 +77,7 @@ class VideoShow extends React.Component {
                   numLikes={currentVideo.numLikes}
                   numDislikes={currentVideo.numDislikes}
                 />
+
                 <div className='vdetails__item vdetails__item--share'>
                   SHARE
                 </div>
@@ -90,20 +94,24 @@ class VideoShow extends React.Component {
                 />
               </div>
             </div>
+
             <div className='vdesc__split vdesc__split--right'>
               <div className='vdesc__top'>
                 <div className='vdesc__top vdesc__top--split'>
                   <div className='vdesc__top vdesc__top--left'>
                     <div className='vdesc__username'>{creator.username}</div>
+
                     <div className='vdesc__subcount'>
                       {creator.numSubscribers} Subscribers
                     </div>
                   </div>
+
                   {currentUserId != creator.id && (
                     <SubscribeButtonContainer creator={creator} />
                   )}
                 </div>
               </div>
+
               <div className='vdesc__expandable'>
                 {currentVidDesc.substring(0, this.strIndex())}
                 <span
@@ -114,6 +122,7 @@ class VideoShow extends React.Component {
                   {currentVidDesc.substring(this.strIndex() + 1)}
                 </span>
               </div>
+
               <div
                 className={`vdesc__showmore vdesc__showmore--${
                   currentVidDesc.length < 200 ? "hidden" : ""
@@ -127,14 +136,17 @@ class VideoShow extends React.Component {
         </div>
         <div className='vshow__split vshow__split--comments'>
           <div className='vshow__numComments'>{`${currentVideo.numComments} Comments`}</div>
+
           <CommentFormContainer
             currentVideoId={currentVideoId}
             autoFocus={false}
           />
+
           <div className='comments'>
             <CommentIndexContainer currentVideoId={currentVideoId} />
           </div>
         </div>
+
         <div className='vshow__split vshow__split--sideidx'>
           <div className='sideidx'>{sideVideos}</div>
         </div>
