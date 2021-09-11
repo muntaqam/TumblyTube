@@ -4,9 +4,9 @@ import {
   handleAutoPlayIn,
   handleAutoPlayOut,
   viewsFormatted,
-} from "../../util/video_util";
-import { avatarFromInitials } from "../../util/avatar_util";
-import SubscribeButtonContainer from "../subscribe_button/subscribe_btn_container";
+} from "../../../util/video_util";
+import { avatarFromInitials } from "../../../util/avatar_util";
+import SubscribeButtonContainer from "../../subscribe_button/subscribe_btn_container";
 
 function SearchResults(props) {
   const { videos, users, currentUserId, fetchVideos, fetchUsers } = props;
