@@ -1,7 +1,7 @@
 .noti {
   display: flex;
   flex-direction: column;
-  width: 350px;
+  width: 300px;
 
   &__item {
     width: inherit;
@@ -11,16 +11,37 @@
     text-align: center;
     cursor: pointer;
 
+    -webkit-box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 8px -1px rgba(0, 0, 0, 0.75);
+
+    transition: 0.2s;
+    animation: fadeIn 0.75s;
+
     &--success {
-      background-color: green;
+      background-color: var(--clr-primary);
     }
 
     &--fail {
-      background-color: red;
+      background-color: var(--clr-error);
     }
   }
 
   &__message {
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
     color: white;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 20px;
+    opacity: 1;
   }
 }
