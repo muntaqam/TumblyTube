@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { avatarFromInitials } from "../../util/avatar_util";
+import { avatarFromInitials } from "../../../util/avatar_util";
 import SessionButtonDropDown from "./session_dropdown";
-import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+import { useHandleClickOutside } from "../../../hooks/useHandleClickOutside";
 
 const SessionButton = ({ logout, currentUser }) => {
   const [showDropDown, setShowDropDown] = useState(false);

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, withRouter } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallOutlineIcon from "@material-ui/icons/VideoCallOutlined";
-import SearchBar from "./search_bar_container";
-import SessionButtonContainer from "./session_button_container";
+import SearchBarContainer from "./search_bar/search_bar_container";
+import SessionButtonContainer from "./session_button/session_button_container";
 import { openModal } from "../../actions/modal_actions";
 import { connect } from "react-redux";
 import { SidebarContext } from "../root";
@@ -51,12 +51,12 @@ function NavBar({ openModal, location, history, currentUser }) {
           className='navbar__icon navbar__icon--menu'
           onClick={handleOpenSidebar}
         />
-        <Link to='/' className="navbar__logoCont">
+        <Link to='/' className='navbar__logoCont'>
           <img className='navbar__logo' src={window.logoURL} />
         </Link>
       </div>
       <div className='navbar__section navbar__section--center'>
-        <SearchBar />
+        <SearchBarContainer />
       </div>
       <div className='navbar__section navbar__section--right'>
         <button className='upload-button' onClick={handleUpload}>

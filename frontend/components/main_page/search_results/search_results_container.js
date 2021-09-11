@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { fetchUsers } from "../../actions/session_actions";
-import { fetchVideos } from "../../actions/videos_actions";
+import { fetchUsers } from "../../../actions/session_actions";
+import { fetchVideos } from "../../../actions/videos_actions";
 import SearchResults from "./search_results";
 
 const mSTP = ({ entities: { users, videos }, session }) => {
