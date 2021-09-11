@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import LikeInterface from "../likes/like_interface_container";
-import CommentFormContainer from "./comment_form_container";
+import CommentFormContainer from "./comment_form/comment_form_container";
 import { avatarFromInitials } from "../../util/avatar_util";
 import ChildComments from "./comment_idx_child";
 

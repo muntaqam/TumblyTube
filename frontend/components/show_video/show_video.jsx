@@ -4,7 +4,7 @@ import { avatarFromInitials } from "../../util/avatar_util";
 import SubscribeButtonContainer from "../subscribe_button/subscribe_btn_container";
 import LikeInterface from "../likes/like_interface_container";
 import CommentIndexContainer from "../comments/comment_idx_container";
-import CommentFormContainer from "../comments/comment_form_container";
+import CommentFormContainer from "../comments/comment_form/comment_form_container";
 import SideVideoIndex from "./side_vid_idx";
 
 class VideoShow extends React.Component {

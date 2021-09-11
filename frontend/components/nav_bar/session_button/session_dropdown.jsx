@@ -1,6 +1,6 @@
 import React from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { avatarFromInitials } from "../../util/avatar_util";
+import { avatarFromInitials } from "../../../util/avatar_util";
 
 const SessionButtonDropDown = ({ currentUser, logout }) => {
   return (
