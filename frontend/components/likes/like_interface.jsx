@@ -138,9 +138,7 @@ function LikeInterface(props) {
         </div>
       )}
 
-      {likeableType == "Video" && (
-        <NotiPortal ref={notiRef} autoClose={true} autoCloseTime={1500} />
-      )}
+      {likeableType == "Video" && <NotiPortal ref={notiRef} autoClose={true} />}
     </div>
   );
 }
