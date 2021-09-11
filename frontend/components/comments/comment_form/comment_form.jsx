@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { useOpenReply } from "./comment_idx_item";
-import { avatarFromInitials } from "../../util/avatar_util";
+import { useOpenReply } from "../comment_idx_item";
+import { avatarFromInitials } from "../../../util/avatar_util";
 
 function CommentForm(props) {
   const {

@@ -3,10 +3,10 @@ import { useParams, useLocation } from "react-router";
 import { SidebarContext } from "../root";
 import SideBar from "../side_bar/side_bar";
 import MainVideoIndex from "./video_index/main_vid_idx_container";
+import SearchResultsContainer from "./search_results/search_results_container";
 import SubscriptionsContainer from "./subscriptions/subscriptions_container";
 import LibraryContainer from "./library/library_container";
 import RyanNaing from "./ryan_naing/ryan_naing";
-import SearchResults from "../search_results/search_results_container";
 
 const MainPage = () => {
   const { sidebarExpanded } = useContext(SidebarContext);
@@ -25,7 +25,7 @@ const MainPage = () => {
       {isLocation("/feed/subscriptions") && <SubscriptionsContainer />}
       {isLocation("/feed/library") && <LibraryContainer />}
       {isLocation("/feed/ryannaing") && <RyanNaing />}
-      {isLocation("/results") && <SearchResults />}
+      {isLocation("/results") && <SearchResultsContainer />}
     </div>
   );
 };
