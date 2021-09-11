@@ -18,7 +18,7 @@ const NotiPortal = forwardRef(({ autoClose, autoCloseTime = 3000 }, ref) => {
   useImperativeHandle(ref, () => ({
     // takes in message and mode; generates unique id
     addMessage(noti) {
-      setNotis([...notis, { ...noti, id: uuid() }]);
+      setNotis([{ ...noti, id: uuid() }, ...notis]);
     },
   }));
 
