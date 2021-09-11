@@ -3,6 +3,7 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import ThumbDownIcon from "@material-ui/icons/ThumbDown";
 import ThumbDownOutlinedIcon from "@material-ui/icons/ThumbDownOutlined";
+import NotiPortal from "../noti_portal/noti_portal";
 
 function LikeInterface(props) {
   const {
@@ -15,9 +16,11 @@ function LikeInterface(props) {
     currentUser,
   } = props;
 
+  const notiRef = useRef();
   const likesRatioRef = useRef();
-  // 0 if no likes, 1 if liked, -1 if disliked
+  // 0 == no likes, 1 == liked, -1 == disliked
   const [likeStatus, setLikeStatus] = useState(0);
+
   // check if newLike is already in users slice of state
   let isLiked;
   if (currentUser) isLiked = currentUser[`liked${likeableType}s`][likeableId];
@@ -37,6 +40,12 @@ function LikeInterface(props) {
     if (type == "nolikes") setLikeStatus(0);
   };
 
+  // calls addNoti from NotiPortal
+  const addNoti = ({ mode, message }) => {
+    notiRef.current.addMessage({ mode, message });
+  };
+
+  // HANDLE LIKE BEGINS //
   async function handleLike(version) {
     // set passed down properties to newLike obj for later use
     const newLike = {
@@ -45,25 +54,43 @@ function LikeInterface(props) {
       version: version,
     };
 
-    // deleteLike, if liked and version is the same {eg: dislike == dislike}
+    // deleteLike, if liked version and liking version is the same {eg: dislike == dislike}
     if (isLiked && isLiked.version == version) {
       changeLikeStatus("nolikes");
-      deleteLike(isLiked.id);
+      await deleteLike(isLiked.id);
+
+      if (likeableType == "Video" && version == "like")
+        addNoti({ mode: "success", message: "Removed from Liked videos" });
+      if (likeableType == "Video" && version == "dislike")
+        addNoti({ mode: "success", message: "Dislike removed" });
+
       return;
     }
 
-    // deleteLike then create newLike, if liked and version isn't the same
+    // deleteLike then create newLike, if liked version and liking version isn't the same
     if (isLiked && isLiked.version != version) {
       changeLikeStatus(version);
       await deleteLike(isLiked.id);
-      createLike(newLike);
+      await createLike(newLike);
+
+      if (likeableType == "Video" && version == "like")
+        addNoti({ mode: "success", message: "Added to Liked videos" });
+      if (likeableType == "Video" && version == "dislike")
+        addNoti({ mode: "success", message: "Removed from Liked videos" });
+
       return;
     }
 
     // create new like, if not yet liked
     changeLikeStatus(version);
-    createLike(newLike);
+    await createLike(newLike);
+
+    if (likeableType == "Video" && version == "like")
+      addNoti({ mode: "success", message: "Added to Liked videos" });
+    if (likeableType == "Video" && version == "dislike")
+      addNoti({ mode: "success", message: "You Dislike this video" });
   }
+  // HANDLE LIKE ENDS //
 
   const handleLikeBar = () => {
     let percentLikes = (numLikes / (numLikes + numDislikes)) * 100;
@@ -110,6 +137,8 @@ function LikeInterface(props) {
           ></div>
         </div>
       )}
+
+      {likeableType == "Video" && <NotiPortal ref={notiRef} autoClose={true} />}
     </div>
   );
 }
