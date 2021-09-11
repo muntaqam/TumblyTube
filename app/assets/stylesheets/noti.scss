@@ -1,0 +1,26 @@
+.noti {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+
+  &__item {
+    width: inherit;
+    margin-top: 1em;
+    border-radius: 3px;
+    padding-block: 1em;
+    text-align: center;
+    cursor: pointer;
+
+    &--success {
+      background-color: green;
+    }
+
+    &--fail {
+      background-color: red;
+    }
+  }
+
+  &__message {
+    color: white;
+  }
+}
