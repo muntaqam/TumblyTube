@@ -14,6 +14,7 @@ function LikeInterface(props) {
     createLike,
     deleteLike,
     currentUser,
+    currentUserId,
   } = props;
 
   const notiRef = useRef();
@@ -23,22 +24,30 @@ function LikeInterface(props) {
 
   // check if newLike is already in users slice of state
   let isLiked;
-  if (currentUser) isLiked = currentUser[`liked${likeableType}s`][likeableId];
-
-  useEffect(() => {
-    if (isLiked) changeLikeStatus(isLiked.version);
-    else changeLikeStatus("nolikes");
-  }, [props.match.params.id]);
-
-  useEffect(() => {
-    if (likeableType == "Video") handleLikeBar();
-  }, [numLikes, numDislikes]);
+  if (currentUserId) isLiked = currentUser[`liked${likeableType}s`][likeableId];
 
   const changeLikeStatus = (type) => {
-    if (type == "like") setLikeStatus(1);
-    if (type == "dislike") setLikeStatus(-1);
-    if (type == "nolikes") setLikeStatus(0);
+    if (type === "like") setLikeStatus(1);
+    if (type === "dislike") setLikeStatus(-1);
+    if (type === "nolikes") setLikeStatus(0);
   };
+
+  // if not liked and not logged in, set likeStatus to 0
+  useEffect(() => {
+    if (currentUserId && isLiked) changeLikeStatus(isLiked.version);
+    else changeLikeStatus("nolikes");
+  }, [props.match.params.id, currentUserId, likeableType]);
+
+  const handleLikeBar = () => {
+    let percentLikes = (numLikes / (numLikes + numDislikes)) * 100;
+    if (numLikes === 0 && numDislikes === 0) percentLikes = 50;
+
+    likesRatioRef.current.style.flexBasis = `${percentLikes}%`;
+  };
+
+  useEffect(() => {
+    if (likeableType === "Video") handleLikeBar();
+  }, [numLikes, numDislikes]);
 
   // calls addNoti from NotiPortal
   const addNoti = ({ mode, message }) => {
@@ -54,50 +63,45 @@ function LikeInterface(props) {
       version: version,
     };
 
-    // deleteLike, if liked version and liking version is the same {eg: dislike == dislike}
-    if (isLiked && isLiked.version == version) {
-      changeLikeStatus("nolikes");
+    if (isLiked && isLiked.version === version) {
+      // deleteLike, if liked version and liking version is the same {eg: dislike == dislike}
       await deleteLike(isLiked.id);
+      changeLikeStatus("nolikes");
 
-      if (likeableType == "Video" && version == "like")
+      if (likeableType === "Video" && version === "like")
         addNoti({ mode: "success", message: "Removed from Liked videos" });
-      if (likeableType == "Video" && version == "dislike")
+      if (likeableType === "Video" && version === "dislike")
         addNoti({ mode: "success", message: "Dislike removed" });
 
       return;
     }
 
-    // deleteLike then create newLike, if liked version and liking version isn't the same
+    // deleteLike then createLike, if liked version and liking version isn't the same
     if (isLiked && isLiked.version != version) {
-      changeLikeStatus(version);
       await deleteLike(isLiked.id);
       await createLike(newLike);
+      changeLikeStatus(version);
 
-      if (likeableType == "Video" && version == "like")
+      if (likeableType === "Video" && version === "like")
         addNoti({ mode: "success", message: "Added to Liked videos" });
-      if (likeableType == "Video" && version == "dislike")
+      if (likeableType === "Video" && version === "dislike")
         addNoti({ mode: "success", message: "Removed from Liked videos" });
 
       return;
     }
 
     // create new like, if not yet liked
-    changeLikeStatus(version);
     await createLike(newLike);
+    changeLikeStatus(version);
 
-    if (likeableType == "Video" && version == "like")
+    if (likeableType === "Video" && version === "like")
       addNoti({ mode: "success", message: "Added to Liked videos" });
-    if (likeableType == "Video" && version == "dislike")
+    if (likeableType === "Video" && version === "dislike")
       addNoti({ mode: "success", message: "You Dislike this video" });
   }
   // HANDLE LIKE ENDS //
 
-  const handleLikeBar = () => {
-    let percentLikes = (numLikes / (numLikes + numDislikes)) * 100;
-    if (numLikes == 0 && numDislikes == 0) percentLikes = 50;
-
-    likesRatioRef.current.style.flexBasis = `${percentLikes}%`;
-  };
+  console.log({ likeableType, numLikes, numDislikes });
 
   return (
     <div className='likes'>

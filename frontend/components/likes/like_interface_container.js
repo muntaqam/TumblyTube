@@ -8,6 +8,7 @@ const mSTP = ({ session, entities: { videos, comments, users } }) => {
     comments,
     videos,
     currentUser: users[session.id],
+    currentUserId: session.id,
   };
 };
 
