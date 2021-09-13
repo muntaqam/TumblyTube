@@ -160,6 +160,7 @@
   margin-left: min(5vw, 3em);
 
   &__avatar {
+    position: relative;
     cursor: pointer;
     display: block;
     border-radius: 50%;
