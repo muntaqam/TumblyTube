@@ -1,0 +1,38 @@
+.requireLoginDD {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+
+  &__split {
+    &--top {
+      padding: 1.5em 0 2em 1.5em;
+      border-bottom: 1px solid var(--clr-hightlight-gray);
+      flex-grow: 1;
+    }
+    &--bottom {
+      padding: 0 1.5em;
+    }
+  }
+
+  &__title {
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 2em;
+    margin-bottom: 1em;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: var(--clr-text-light-gray);
+  }
+
+  &__button {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 900;
+    color: #53c1de;
+    padding: 1.5em 0;
+    margin-right: auto;
+    cursor: pointer;
+  }
+}
