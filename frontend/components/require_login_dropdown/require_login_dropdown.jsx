@@ -1,4 +1,5 @@
 import React from "react";
+import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
 
 const RequireLoginDD = ({ mode, blockPos = "bottom", leftPos = 0 }) => {
   const styles = {
@@ -30,6 +31,8 @@ const RequireLoginDD = ({ mode, blockPos = "bottom", leftPos = 0 }) => {
       subtitle = "Sign in to upload your video";
       break;
   }
+
+  // useHandleClickOutside()
 
   return (
     <div style={styles} className='requireLoginDD'>

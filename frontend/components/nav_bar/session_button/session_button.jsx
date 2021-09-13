@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { avatarFromInitials } from "../../../util/avatar_util";
 import SessionButtonDropDown from "./session_dropdown";
-import { useHandleClickOutside } from "../../../hooks/useHandleClickOutside";
 
 const SessionButton = ({ logout, currentUser }) => {
-  const [showDropDown, setShowDropDown] = useState(false);
   const dropDownRef = useRef();
 
-  useHandleClickOutside({ dropDownRef, showDropDown, setShowDropDown });
+  const handleClick = (e) => {
+    e.stopPropagation();
+    dropDownRef.current.toggleDropDown();
+  };
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -25,17 +26,14 @@ const SessionButton = ({ logout, currentUser }) => {
           className='navbar__session__avatar'
           src={avatarFromInitials(currentUser, 32)}
           alt='avatar'
-          onClick={() => setShowDropDown(!showDropDown)}
+          onClick={handleClick}
         />
 
-        {showDropDown && (
-          <div ref={dropDownRef} className='navbar__session__dd'>
-            <SessionButtonDropDown
-              currentUser={currentUser}
-              logout={handleLogout}
-            />
-          </div>
-        )}
+        <SessionButtonDropDown
+          ref={dropDownRef}
+          currentUser={currentUser}
+          logout={handleLogout}
+        />
       </div>
     );
   } else {
