@@ -6,8 +6,13 @@ import SessionButtonDropDown from "./session_dropdown";
 import { useHandleClickOutside } from "../../../hooks/useHandleClickOutside";
 
 const SessionButton = ({ logout, currentUser }) => {
-  const [showDropDown, setShowDropDown] = useState(false);
   const dropDownRef = useRef();
+  const [showDropDown, setShowDropDown] = useState(false);
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    setShowDropDown(!showDropDown);
+  };
 
   useHandleClickOutside({ dropDownRef, showDropDown, setShowDropDown });
 
@@ -17,24 +22,21 @@ const SessionButton = ({ logout, currentUser }) => {
   };
 
   let display;
-
   if (currentUser) {
     display = (
-      <div className='navbar__session'>
+      <div ref={dropDownRef} className='navbar__session'>
         <img
           className='navbar__session__avatar'
           src={avatarFromInitials(currentUser, 32)}
           alt='avatar'
-          onClick={() => setShowDropDown(!showDropDown)}
+          onClick={handleClick}
         />
 
         {showDropDown && (
-          <div ref={dropDownRef} className='navbar__session__dd'>
-            <SessionButtonDropDown
-              currentUser={currentUser}
-              logout={handleLogout}
-            />
-          </div>
+          <SessionButtonDropDown
+            currentUser={currentUser}
+            logout={handleLogout}
+          />
         )}
       </div>
     );

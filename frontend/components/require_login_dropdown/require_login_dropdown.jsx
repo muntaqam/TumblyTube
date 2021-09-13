@@ -1,6 +1,13 @@
 import React from "react";
+import { useRef, useState } from "react";
+import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
 
 const RequireLoginDD = ({ mode, blockPos = "bottom", leftPos = 0 }) => {
+  const dropDownRef = useRef();
+  const [showDropDown, setShowDropDown] = useState(false);
+
+  useHandleClickOutside(dropDownRef, showDropDown, setShowDropDown);
+
   const styles = {
     position: "absolute",
     width: "378px",
@@ -32,7 +39,7 @@ const RequireLoginDD = ({ mode, blockPos = "bottom", leftPos = 0 }) => {
   }
 
   return (
-    <div style={styles} className='requireLoginDD'>
+    <div ref={dropDownRef} style={styles} className='requireLoginDD'>
       <section className='requireLoginDD__split requireLoginDD__split--top'>
         <div className='requireLoginDD__title'>{title}</div>
         <div className='requireLoginDD__subtitle'>{subtitle}</div>

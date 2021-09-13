@@ -4,7 +4,7 @@ import { avatarFromInitials } from "../../../util/avatar_util";
 
 const SessionButtonDropDown = ({ currentUser, logout }) => {
   return (
-    <>
+    <div className='navbar__session__dd'>
       <div className='navbar__session__dd__user'>
         <img
           src={avatarFromInitials(currentUser, 50)}
@@ -27,7 +27,7 @@ const SessionButtonDropDown = ({ currentUser, logout }) => {
         />
         <div className='navbar__session__dd__signout-text'>Sign out</div>
       </div>
-    </>
+    </div>
   );
 };
 
