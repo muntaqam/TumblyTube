@@ -1,55 +1,34 @@
-import React, {
-  forwardRef,
-  useState,
-  useRef,
-  useImperativeHandle,
-} from "react";
+import React from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { avatarFromInitials } from "../../../util/avatar_util";
-import { useHandleClickOutside } from "../../../hooks/useHandleClickOutside";
 
-const SessionButtonDropDown = forwardRef(({ currentUser, logout }, ref) => {
-  const dropDownRef = useRef();
-  const [showDropDown, setShowDropDown] = useState(false);
-
-  useHandleClickOutside({ dropDownRef, showDropDown, setShowDropDown });
-
-  useImperativeHandle(ref, () => ({
-    toggleDropDown() {
-      setShowDropDown(!showDropDown);
-    },
-  }));
-
-  if (showDropDown) {
-    return (
-      <div className='navbar__session__dd'>
-        <div ref={dropDownRef} className='navbar__session__dd__user'>
-          <img
-            src={avatarFromInitials(currentUser, 50)}
-            alt='avatar'
-            className='navbar__session__avatar navbar__session__avatar--dd'
-          />
-          <div className='navbar__session__dd__info'>
-            <div className='navbar__session__dd__info__name'>
-              {currentUser.username}
-            </div>
-            <div className='navbar__session__dd__info__email'>
-              {currentUser.email}
-            </div>
+const SessionButtonDropDown = ({ currentUser, logout }) => {
+  return (
+    <div className='navbar__session__dd'>
+      <div className='navbar__session__dd__user'>
+        <img
+          src={avatarFromInitials(currentUser, 50)}
+          alt='avatar'
+          className='navbar__session__avatar navbar__session__avatar--dd'
+        />
+        <div className='navbar__session__dd__info'>
+          <div className='navbar__session__dd__info__name'>
+            {currentUser.username}
+          </div>
+          <div className='navbar__session__dd__info__email'>
+            {currentUser.email}
           </div>
         </div>
-        <div className='navbar__session__dd__signout' onClick={logout}>
-          <ExitToAppIcon
-            id='signout-button'
-            className='navbar__icon navbar__icon--signout'
-          />
-          <div className='navbar__session__dd__signout-text'>Sign out</div>
-        </div>
       </div>
-    );
-  } else {
-    return null;
-  }
-});
+      <div className='navbar__session__dd__signout' onClick={logout}>
+        <ExitToAppIcon
+          id='signout-button'
+          className='navbar__icon navbar__icon--signout'
+        />
+        <div className='navbar__session__dd__signout-text'>Sign out</div>
+      </div>
+    </div>
+  );
+};
 
 export default SessionButtonDropDown;
