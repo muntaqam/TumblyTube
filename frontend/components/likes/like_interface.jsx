@@ -58,6 +58,11 @@ function LikeInterface(props) {
   // HANDLE LIKE BEGINS //
   ///////////////////////
   async function handleLike(version) {
+
+    if (!currentUserId) {
+      
+    }
+
     // set passed down properties to newLike obj for later use
     const newLike = {
       likeable_type: likeableType,
