@@ -5,8 +5,6 @@ import LikeInterface from "./like_interface";
 
 const mSTP = ({ session, entities: { videos, comments, users } }) => {
   return {
-    comments,
-    videos,
     currentUser: users[session.id],
     currentUserId: session.id,
   };

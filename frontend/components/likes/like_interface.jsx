@@ -54,8 +54,15 @@ function LikeInterface(props) {
     notiRef.current.addMessage({ mode, message });
   };
 
+  /////////////////////////
   // HANDLE LIKE BEGINS //
+  ///////////////////////
   async function handleLike(version) {
+
+    if (!currentUserId) {
+      
+    }
+
     // set passed down properties to newLike obj for later use
     const newLike = {
       likeable_type: likeableType,
@@ -65,8 +72,8 @@ function LikeInterface(props) {
 
     if (isLiked && isLiked.version === version) {
       // deleteLike, if liked version and liking version is the same {eg: dislike == dislike}
-      await deleteLike(isLiked.id);
       changeLikeStatus("nolikes");
+      await deleteLike(isLiked.id);
 
       if (likeableType === "Video" && version === "like")
         addNoti({ mode: "success", message: "Removed from Liked videos" });
@@ -91,17 +98,17 @@ function LikeInterface(props) {
     }
 
     // create new like, if not yet liked
-    await createLike(newLike);
     changeLikeStatus(version);
+    await createLike(newLike);
 
     if (likeableType === "Video" && version === "like")
       addNoti({ mode: "success", message: "Added to Liked videos" });
     if (likeableType === "Video" && version === "dislike")
       addNoti({ mode: "success", message: "You Dislike this video" });
   }
+  ///////////////////////
   // HANDLE LIKE ENDS //
-
-  console.log({ likeableType, numLikes, numDislikes });
+  /////////////////////
 
   return (
     <div className='likes'>
