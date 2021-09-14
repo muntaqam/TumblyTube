@@ -1,19 +1,9 @@
-.main__ryan {
-  display: flex;
-  justify-content: space-around;
-
-  &--like,
-  &--dislike {
-    position: relative;
-  }
-}
-
 .requireLoginDD {
   display: flex;
   flex-direction: column;
+  position: absolute;
   background-color: white;
-  right: 0;
-  bottom: 35px;
+  z-index: 999;
 
   &__split {
     &--top {
