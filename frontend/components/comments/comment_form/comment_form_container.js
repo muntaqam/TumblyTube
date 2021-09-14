@@ -7,6 +7,7 @@ import CommentForm from "./comment_form";
 const mSTP = ({ session, entities: { users } }, ownProps) => {
   return {
     currentUser: users[session.id],
+    currentUserId: session.id,
   };
 };
 
