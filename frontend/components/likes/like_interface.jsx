@@ -6,11 +6,8 @@ import LikeButton from "./like_button";
 
 function LikeInterface(props) {
   const {
-    dropdown,
     currentUser,
     currentUserId,
-    openDropdown,
-    closeDropdown,
     likeableType,
     likeableId,
     numLikes,
