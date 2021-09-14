@@ -1,25 +1,14 @@
 import React from "react";
-import { useRef, useState } from "react";
-import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+import { connect } from "react-redux";
 
-const RequireLoginDD = ({ mode, blockPos = "bottom", leftPos = 0 }) => {
-  const dropDownRef = useRef();
-  const [showDropDown, setShowDropDown] = useState(false);
-
-  useHandleClickOutside(dropDownRef, showDropDown, setShowDropDown);
-
+const Dropdown = ({ dropdown, blockPos = "top", leftPos = 0 }) => {
   const styles = {
     position: "absolute",
     width: "378px",
     height: "175px",
-    top: `${blockPos === "top" ? "0" : null}`,
-    bottom: `${blockPos === "bottom" ? "0" : null}`,
-    left: leftPos,
   };
 
-  let title;
-  let subtitle;
-  switch (mode) {
+  switch (dropdown) {
     case "like":
       title = "Like this video?";
       subtitle = "Sign in to make your opinion count.";
@@ -38,8 +27,11 @@ const RequireLoginDD = ({ mode, blockPos = "bottom", leftPos = 0 }) => {
       break;
   }
 
+  let title;
+  let subtitle;
+
   return (
-    <div ref={dropDownRef} style={styles} className='requireLoginDD'>
+    <div style={styles} className='requireLoginDD'>
       <section className='requireLoginDD__split requireLoginDD__split--top'>
         <div className='requireLoginDD__title'>{title}</div>
         <div className='requireLoginDD__subtitle'>{subtitle}</div>
@@ -51,4 +43,10 @@ const RequireLoginDD = ({ mode, blockPos = "bottom", leftPos = 0 }) => {
   );
 };
 
-export default RequireLoginDD;
+const mapStateToProps = ({ ui }) => {
+  return {
+    dropdown: ui.dropdown,
+  };
+};
+
+export default connect(mapStateToProps, null)(Dropdown);
