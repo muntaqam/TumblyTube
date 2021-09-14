@@ -8,10 +8,15 @@ import VideoCallOutlineIcon from "@material-ui/icons/VideoCallOutlined";
 import SearchBarContainer from "./search_bar/search_bar_container";
 import SessionButtonContainer from "./session_button/session_button_container";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+import Dropdown from "../dropdown/dropdown";
 
 function NavBar({ openModal, location, history, currentUserId }) {
   const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+
+  const { showDropdown, triggerRef, dropdownRef } =
+    useHandleClickOutside(false);
 
   const updateMedia = () => {
     setViewportWidth(window.innerWidth);
@@ -23,8 +28,8 @@ function NavBar({ openModal, location, history, currentUserId }) {
   }, [viewportWidth]);
 
   const handleUpload = () => {
-    if (!currentUserId) history.push("/login");
-    else openModal("upload");
+    if (!currentUserId) return;
+    openModal("upload");
   };
 
   const handleOpenSidebar = () => {
@@ -60,12 +65,21 @@ function NavBar({ openModal, location, history, currentUserId }) {
         <SearchBarContainer />
       </div>
       <div className='navbar__section navbar__section--right'>
-        <button className='upload-button' onClick={handleUpload}>
-          <VideoCallOutlineIcon
-            id='upload-button-icon'
-            className='navbar__icon navbar__icon--upload'
-          />
-        </button>
+        <div style={{ position: "relative" }}>
+          <button
+            ref={triggerRef}
+            className='upload-button'
+            onClick={handleUpload}
+          >
+            <VideoCallOutlineIcon
+              id='upload-button-icon'
+              className='navbar__icon navbar__icon--upload'
+            />
+          </button>
+          {!currentUserId && showDropdown && (
+            <Dropdown ref={dropdownRef} mode='upload' />
+          )}
+        </div>
         <div className='navbar__tooltip navbar__tooltip--upload'>Upload</div>
         {currentUserId ? (
           <SessionButtonContainer />
