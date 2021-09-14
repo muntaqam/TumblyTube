@@ -4,7 +4,13 @@ import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import Dropdown from "../dropdown/dropdown";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
 
-const LikeButton = ({ likeStatus, loggedIn, numLikes, handleLike }) => {
+const LikeButton = ({
+  likeStatus,
+  loggedIn,
+  likeableType,
+  numLikes,
+  handleLike,
+}) => {
   const { showDropdown, triggerRef, dropdownRef } =
     useHandleClickOutside(false);
 
@@ -22,7 +28,9 @@ const LikeButton = ({ likeStatus, loggedIn, numLikes, handleLike }) => {
         )}
         <div className='thumb__num thumb__num--likes'>{numLikes}</div>
       </div>
-      {!loggedIn && showDropdown && <Dropdown ref={dropdownRef} mode='like' />}
+      {!loggedIn && showDropdown && (
+        <Dropdown ref={dropdownRef} mode={`${likeableType}Like`} />
+      )}
     </div>
   );
 };
