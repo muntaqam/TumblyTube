@@ -1,47 +1,28 @@
 import React, { useState, useEffect, useRef } from "react";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
-import ThumbDownIcon from "@material-ui/icons/ThumbDown";
-import ThumbDownOutlinedIcon from "@material-ui/icons/ThumbDownOutlined";
-import Dropdown from "../dropdown/dropdown";
-import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+
 import NotiPortal from "../noti_portal/noti_portal";
+import DislikeButton from "./dislike_button";
+import LikeButton from "./like_button";
 
 function LikeInterface(props) {
   const {
+    dropdown,
+    currentUser,
+    currentUserId,
+    openDropdown,
+    closeDropdown,
     likeableType,
     likeableId,
     numLikes,
     numDislikes,
     createLike,
     deleteLike,
-    currentUser,
-    currentUserId,
-    dropdown,
-    openDropdown,
-    closeDropdown,
   } = props;
 
-  const likeRef = useRef();
-  const dislikeRef = useRef();
-  const notiRef = useRef();
-  const likesRatioRef = useRef();
-
+  const notiRef = useRef(null);
+  const likesRatioRef = useRef(null);
   // 0 == no likes, 1 == liked, -1 == disliked
   const [likeStatus, setLikeStatus] = useState(0);
-  const [showDropDown, setShowDropDown] = useState(false);
-
-  // useHandleClickOutside({
-  //   dropDownRef: dropdown === "like" ? likeRef : dislikeRef,
-  //   showDropDown,
-  //   setShowDropDown,
-  // });
-
-  // dispatch closeDropdown when !showDropdown
-  // we dispatch it here because when there is a dropdown state, we want to close current dropdown and open a new one
-  // useEffect(() => {
-  //   if (!showDropDown) closeDropdown();
-  // }, [showDropDown]);
 
   // check if newLike is already in users slice of state
   let isLiked;
@@ -57,7 +38,7 @@ function LikeInterface(props) {
   useEffect(() => {
     if (currentUserId && isLiked) changeLikeStatus(isLiked.version);
     else changeLikeStatus("nolikes");
-  }, [props.match.params.id, currentUserId, likeableType]);
+  }, [currentUserId, likeableType]);
 
   const handleLikeBar = () => {
     let percentLikes = (numLikes / (numLikes + numDislikes)) * 100;
@@ -79,18 +60,9 @@ function LikeInterface(props) {
   // HANDLE LIKE BEGINS //
   ///////////////////////
   async function handleLike(version) {
-    if (!currentUserId) {
-      if (dropdown) {
-        setShowDropDown(false);
-        closeDropdown();
-      } else {
-        openDropdown(version);
-        setShowDropDown(true);
-      }
-      return;
-    }
+    if (!currentUserId) return;
 
-    // set passed down properties to newLike obj for later use
+    // create newLike obj from passed down props for later use
     const newLike = {
       likeable_type: likeableType,
       likeable_id: likeableId,
@@ -140,44 +112,25 @@ function LikeInterface(props) {
   return (
     <div className='likes'>
       <div className='likes__buttons'>
-        <div ref={likeRef} style={{ position: "relative" }}>
-          <div
-            className='likes__container likes__container--like'
-            onClick={() => handleLike("like")}
-          >
-            {likeStatus == 1 ? (
-              <ThumbUpIcon id='thumbup-icon' />
-            ) : (
-              <ThumbUpOutlinedIcon id='thumbup-icon' />
-            )}
-            <div className='thumb__num thumb__num--likes'>{numLikes}</div>
-          </div>
-
-          {showDropDown && dropdown === "like" ? <Dropdown /> : null}
-        </div>
-
-        <div ref={dislikeRef} style={{ position: "relative" }}>
-          <div
-            className='likes__container likes__container--dislike'
-            onClick={() => handleLike("dislike")}
-          >
-            {likeStatus == -1 ? (
-              <ThumbDownIcon id='thumbdown-icon' />
-            ) : (
-              <ThumbDownOutlinedIcon id='thumbdown-icon' />
-            )}
-            <div className='thumb__num thumb__num--dislikes'>{numDislikes}</div>
-          </div>
-
-          {showDropDown && dropdown === "dislike" ? <Dropdown /> : null}
-        </div>
+        <LikeButton
+          numLikes={numLikes}
+          loggedIn={currentUserId}
+          likeStatus={likeStatus}
+          handleLike={handleLike}
+        />
+        <DislikeButton
+          numDislikes={numDislikes}
+          loggedIn={currentUserId}
+          likeStatus={likeStatus}
+          handleLike={handleLike}
+        />
       </div>
 
       {likeableType == "Video" && (
         <div className='likes__bar'>
           <div
-            className='likes__bar likes__bar--filled'
             ref={likesRatioRef}
+            className='likes__bar likes__bar--filled'
           ></div>
         </div>
       )}

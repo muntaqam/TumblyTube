@@ -4,11 +4,11 @@ import { closeDropdown, openDropdown } from "../../actions/dropdown_actions";
 import { createLike, deleteLike } from "../../actions/like_actions";
 import LikeInterface from "./like_interface";
 
-const mSTP = ({ session, entities: { users }, ui }) => {
+const mSTP = ({ ui, session, entities: { users } }) => {
   return {
-    currentUser: users[session.id],
-    currentUserId: session.id,
     dropdown: ui.dropdown,
+    currentUserId: session.id,
+    currentUser: users[session.id],
   };
 };
 
@@ -21,4 +21,4 @@ const mDTP = (dispatch) => {
   };
 };
 
-export default withRouter(connect(mSTP, mDTP)(LikeInterface));
+export default connect(mSTP, mDTP)(LikeInterface);

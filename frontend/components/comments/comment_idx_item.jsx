@@ -55,12 +55,12 @@ function CommentIndex(props) {
         </div>
         <div className='comments__body'>{comment.body}</div>
         <div className='comments__interface'>
-          <LikeInterface
+          {/* <LikeInterface
             likeableId={comment.id}
             likeableType='Comment'
             numLikes={comment.numLikes}
             numDislikes={comment.numDislikes}
-          />
+          /> */}
           <button className='comments__reply' onClick={toggleOpenReply}>
             REPLY
           </button>

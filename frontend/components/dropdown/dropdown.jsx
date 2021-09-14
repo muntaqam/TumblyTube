@@ -1,14 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { forwardRef } from "react";
 
-const Dropdown = ({ dropdown, blockPos = "top", leftPos = 0 }) => {
+const Dropdown = forwardRef(({ mode }, ref) => {
   const styles = {
     position: "absolute",
     width: "378px",
     height: "175px",
   };
 
-  switch (dropdown) {
+  let title;
+  let subtitle;
+  switch (mode) {
     case "like":
       title = "Like this video?";
       subtitle = "Sign in to make your opinion count.";
@@ -27,11 +28,8 @@ const Dropdown = ({ dropdown, blockPos = "top", leftPos = 0 }) => {
       break;
   }
 
-  let title;
-  let subtitle;
-
   return (
-    <div style={styles} className='requireLoginDD'>
+    <div ref={ref} style={styles} className='requireLoginDD'>
       <section className='requireLoginDD__split requireLoginDD__split--top'>
         <div className='requireLoginDD__title'>{title}</div>
         <div className='requireLoginDD__subtitle'>{subtitle}</div>
@@ -41,12 +39,6 @@ const Dropdown = ({ dropdown, blockPos = "top", leftPos = 0 }) => {
       </section>
     </div>
   );
-};
+});
 
-const mapStateToProps = ({ ui }) => {
-  return {
-    dropdown: ui.dropdown,
-  };
-};
-
-export default connect(mapStateToProps, null)(Dropdown);
+export default Dropdown;
