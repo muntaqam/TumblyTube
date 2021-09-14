@@ -24,7 +24,7 @@ const Dropdown = forwardRef(({ mode }, ref) => {
       break;
     case "upload":
       title = "Want to upload a video?";
-      subtitle = "Sign in to upload your video";
+      subtitle = "Sign in to share your video with the world.";
       break;
   }
 
