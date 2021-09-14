@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
+import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import { openModal } from "../../actions/modal_actions";
+import { SidebarContext } from "../root";
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallOutlineIcon from "@material-ui/icons/VideoCallOutlined";
 import SearchBarContainer from "./search_bar/search_bar_container";
 import SessionButtonContainer from "./session_button/session_button_container";
-import { openModal } from "../../actions/modal_actions";
-import { connect } from "react-redux";
-import { SidebarContext } from "../root";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
-function NavBar({ openModal, location, history, currentUser }) {
+function NavBar({ openModal, location, history, currentUserId }) {
   const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
   const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
 
@@ -22,7 +23,7 @@ function NavBar({ openModal, location, history, currentUser }) {
   }, [viewportWidth]);
 
   const handleUpload = () => {
-    if (!currentUser) history.push("/login");
+    if (!currentUserId) history.push("/login");
     else openModal("upload");
   };
 
@@ -66,7 +67,14 @@ function NavBar({ openModal, location, history, currentUser }) {
           />
         </button>
         <div className='navbar__tooltip navbar__tooltip--upload'>Upload</div>
-        <SessionButtonContainer />
+        {currentUserId ? (
+          <SessionButtonContainer />
+        ) : (
+          <Link to='/login' className='navbar__session__login'>
+            <AccountCircle id='signin-button' />
+            <div className='navbar__session__login__text'>SIGN IN</div>
+          </Link>
+        )}
       </div>
     </div>
   );
@@ -74,7 +82,7 @@ function NavBar({ openModal, location, history, currentUser }) {
 
 const mSTP = ({ session }) => {
   return {
-    currentUser: session.id,
+    currentUserId: session.id,
   };
 };
 
