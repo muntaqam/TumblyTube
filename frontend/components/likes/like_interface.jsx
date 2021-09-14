@@ -110,12 +110,14 @@ function LikeInterface(props) {
     <div className='likes'>
       <div className='likes__buttons'>
         <LikeButton
+          likeableType={likeableType}
           numLikes={numLikes}
           loggedIn={currentUserId}
           likeStatus={likeStatus}
           handleLike={handleLike}
         />
         <DislikeButton
+          likeableType={likeableType}
           numDislikes={numDislikes}
           loggedIn={currentUserId}
           likeStatus={likeStatus}

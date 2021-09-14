@@ -10,12 +10,20 @@ const Dropdown = forwardRef(({ mode }, ref) => {
   let title;
   let subtitle;
   switch (mode) {
-    case "like":
+    case "VideoLike":
       title = "Like this video?";
       subtitle = "Sign in to make your opinion count.";
       break;
-    case "dislike":
+    case "VideoDislike":
       title = "Dislike this video?";
+      subtitle = "Sign in to make your opinion count.";
+      break;
+    case "CommentLike":
+      title = "Like this comment?";
+      subtitle = "Sign in to make your opinion count.";
+      break;
+    case "CommentDislike":
+      title = "Dislike this comment?";
       subtitle = "Sign in to make your opinion count.";
       break;
     case "subscribe":
