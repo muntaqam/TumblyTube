@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { Link } from "react-router-dom";
 
 const Dropdown = forwardRef(({ mode }, ref) => {
   const styles = {
@@ -43,7 +44,9 @@ const Dropdown = forwardRef(({ mode }, ref) => {
         <div className='requireLoginDD__subtitle'>{subtitle}</div>
       </section>
       <section className='requireLoginDD__split requireLoginDD__split--bottom'>
-        <div className='requireLoginDD__button'>SIGN IN</div>
+        <Link to='/login' className='requireLoginDD__button'>
+          SIGN IN
+        </Link>
       </section>
     </div>
   );
