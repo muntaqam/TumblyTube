@@ -7,7 +7,7 @@ function CommentIndex(props) {
     currentVideoId,
     currentUser,
     fetchMoreComments,
-    deleteComment,
+    openModal,
   } = props;
 
   // determines whether .bottomLoaderBar is seen or not
@@ -71,7 +71,7 @@ function CommentIndex(props) {
           childComments={Object.values(comment.childComments)}
           currentVideoId={currentVideoId}
           currentUser={currentUser}
-          deleteComment={deleteComment}
+          openModal={openModal}
         />
       ))}
       {comments.length > 9 && showBottomBar ? (

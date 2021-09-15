@@ -22,9 +22,13 @@ const ConfirmationModal = ({
   }
 
   const handleConfirm = () => {
-    if (mode === "unsubscribe") {
-      unsubscribe(meta.subscribeeId);
-      closeModal();
+    switch (mode) {
+      case "unsubscribe":
+        unsubscribe(meta.subscribeeId);
+        closeModal();
+      case "deleteComment":
+        deleteComment(meta.commentId);
+        closeModal();
     }
   };
 
@@ -50,7 +54,7 @@ const ConfirmationModal = ({
   );
 };
 
-const mapStateToProps = ({ users }, ownProps) => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) => {
   return {
