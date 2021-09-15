@@ -54,13 +54,28 @@ const usersReducer = (state = {}, action) => {
       return newState;
 
     case RECEIVE_SUBSCRIPTION:
-      newState[action.subscriberId].subscribees[action.subscribee] =
-        action.subscription;
-      return newState;
+      return {
+        ...state,
+        [action.subscriberId]: {
+          ...state[action.subscriberId],
+          ["subscribees"]: {
+            ...state[action.subscriberId]["subscribees"],
+            [action.subscribee]: action.subscription,
+          },
+        },
+      };
 
     case REMOVE_SUBSCRIPTION:
-      delete newState[action.subscriberId].subscribees[action.subscribee];
-      return newState;
+      return {
+        ...state,
+        [action.subscriberId]: {
+          ...state[action.subscriberId],
+          ["subscribees"]: {
+            ...state[action.subscriberId]["subscribees"],
+            [action.subscribee]: null,
+          },
+        },
+      };
 
     default:
       return newState;
