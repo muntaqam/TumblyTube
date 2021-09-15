@@ -96,6 +96,10 @@
     color: var(--clr-text-gray);
   }
 
+  &__username:hover {
+    color: var(--cl-secondary);
+  }
+
   &__dot {
     font-size: 0.5rem;
   }
