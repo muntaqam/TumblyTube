@@ -6,7 +6,7 @@
   &__wrapper {
     display: inline-block;
     position: relative;
-    max-width: fit-content;
+    // max-width: fit-content;
   }
 
   &__tip {
@@ -30,5 +30,12 @@
     &--top {
       top: calc(var(--tooltip-margin) * -1);
     }
+  }
+}
+
+// padding for likesbar tooltip wrapper for better hover area
+.likes {
+  .tooltip__wrapper {
+    padding-top: 0.25em;
   }
 }
