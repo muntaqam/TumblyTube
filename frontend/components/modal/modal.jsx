@@ -13,7 +13,7 @@ function Modal({ modal, closeModal }) {
 
   const handleClose = () => {
     closeModal();
-    if (modal === "sidebar") toggleExpanded();
+    if (modal.mode === "sidebar") toggleExpanded();
   };
 
   let component;
