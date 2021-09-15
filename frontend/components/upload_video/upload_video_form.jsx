@@ -75,7 +75,7 @@ class UploadVideoForm extends React.Component {
 
   render() {
     const { title, description, videoFile, videoUrl } = this.state;
-    const { closeModal, currentUser } = this.props;
+    const { closeModal } = this.props;
 
     let formStep;
     if (!this.state.videoUrl) {
