@@ -1,10 +1,10 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { avatarFromInitials } from "../../../util/avatar_util";
 
-const SessionButtonDropDown = ({ currentUser, logout }) => {
+const SessionButtonDropDown = forwardRef(({ currentUser, logout }, ref) => {
   return (
-    <div className='navbar__session__dd'>
+    <div ref={ref} className='navbar__session__dd'>
       <div className='navbar__session__dd__user'>
         <img
           src={avatarFromInitials(currentUser, 50)}
@@ -29,6 +29,6 @@ const SessionButtonDropDown = ({ currentUser, logout }) => {
       </div>
     </div>
   );
-};
+});
 
 export default SessionButtonDropDown;
