@@ -7,6 +7,7 @@ import {
 } from "../../../util/video_util";
 import { avatarFromInitials } from "../../../util/avatar_util";
 import SubscribeButtonContainer from "../../subscribe_button/subscribe_btn_container";
+import Tooltip from "../../tooltip/tooltip";
 
 function SearchResults(props) {
   const { videos, users, currentUserId, fetchVideos, fetchUsers } = props;
@@ -37,12 +38,15 @@ function SearchResults(props) {
                 className='results__user'
               />
             </div>
+
             <div className='results__split results__split--right'>
               <div className='results__title'>{object.username}</div>
+
               <div className='results__meta results__meta--numVideos'>
                 {`${object.numSubscribers} subscribers • ${object.numVideos} videos`}
               </div>
             </div>
+
             {currentUserId != object.id ? (
               <SubscribeButtonContainer creator={object} />
             ) : (
@@ -77,22 +81,32 @@ function SearchResults(props) {
             </div>
             <div className='results__split results__split--right'>
               <div className='results__title'>{object.title}</div>
+
               <div className='results__meta results__meta--views'>
                 {viewsFormatted(object.views)} views
                 <span className='results__dot'> ● </span>
                 {object.uploadedAt} ago
               </div>
+
               <div className='results__meta results__meta--username'>
                 <img
                   src={avatarFromInitials(object.creator, 24)}
                   alt='avatar'
                   className='results__user'
                 />
-                {creator.username}
+
+                <Tooltip content={creator.username} position='top'>
+                  {creator.username}
+                </Tooltip>
               </div>
-              <div className='results__meta results__meta--desc'>
-                {object.description}
-              </div>
+
+              <Tooltip content='From the video description'>
+                <div style={{ width: "100%" }}>
+                  <div className='results__meta results__meta--desc'>
+                    {object.description}
+                  </div>
+                </div>
+              </Tooltip>
             </div>
           </Link>
         );
