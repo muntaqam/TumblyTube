@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
+import Tooltip from "../../tooltip/tooltip";
 
 function SearchBar(props) {
   const [body, setBody] = useState("");
@@ -52,13 +53,14 @@ function SearchBar(props) {
         value={body}
         onChange={handleInput}
       />
-      <button className='navbar__search__button' onClick={handleSubmit}>
-        <SearchIcon
-          id='search-button'
-          className='navbar__icon navbar__icon--search'
-        />
-        <div className='navbar__tooltip navbar__tooltip--search'>Search</div>
-      </button>
+      <Tooltip content='Search'>
+        <button className='navbar__search__button' onClick={handleSubmit}>
+          <SearchIcon
+            id='search-button'
+            className='navbar__icon navbar__icon--search'
+          />
+        </button>
+      </Tooltip>
     </form>
   );
 }

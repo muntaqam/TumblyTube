@@ -1,0 +1,29 @@
+.tooltip__tip {
+  --tooltip-margin: 2.5rem;
+}
+
+.tooltip {
+  &__wrapper {
+    display: inline-block;
+    position: relative;
+  }
+
+  &__tip {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+
+    border-radius: 3px;
+    padding: 1em;
+    background: #0101017a;
+
+    color: white;
+    font-size: 0.75rem;
+    white-space: nowrap;
+
+    &--bottom {
+      bottom: calc(var(--tooltip-margin) * -1);
+    }
+  }
+}
