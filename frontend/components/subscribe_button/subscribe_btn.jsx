@@ -57,7 +57,7 @@ export default function SubscribeButton(props) {
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", alignSelf: "center" }}>
       <button
         ref={triggerRef}
         className={subscribed ? "subscribe subscribe__inactive" : "subscribe"}
