@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router";
 import NotiPortal from "../noti_portal/noti_portal";
 import DislikeButton from "./dislike_button";
 import LikeButton from "./like_button";
@@ -19,6 +20,7 @@ function LikeInterface(props) {
   const likesRatioRef = useRef(null);
   // 0 == no likes, 1 == liked, -1 == disliked
   const [likeStatus, setLikeStatus] = useState(0);
+  let { id } = useParams();
 
   // check if newLike is already in users slice of state
   let isLiked;
@@ -34,7 +36,7 @@ function LikeInterface(props) {
   useEffect(() => {
     if (currentUserId && isLiked) changeLikeStatus(isLiked.version);
     else changeLikeStatus("nolikes");
-  }, [currentUserId, likeableType]);
+  }, [id, currentUserId]);
 
   const handleLikeBar = () => {
     let percentLikes = (numLikes / (numLikes + numDislikes)) * 100;
