@@ -125,8 +125,15 @@ class VideoPlayer extends React.Component {
 
   render() {
     let playPauseReplay = pauseIcon;
-    if (this.state.ended) playPauseReplay = replayIcon;
-    if (this.state.paused) playPauseReplay = playIcon;
+    let playTitle = "Pause";
+    if (this.state.ended) {
+      playTitle = "Replay";
+      playPauseReplay = replayIcon;
+    }
+    if (this.state.paused) {
+      playTitle = "Play";
+      playPauseReplay = playIcon;
+    }
 
     return (
       <div className='player'>
@@ -153,15 +160,8 @@ class VideoPlayer extends React.Component {
             <div className='progress__filled' ref={this.progressBarRef}></div>
           </div>
 
-          <Tooltip
-            content={this.state.paused ? "Play" : "Pause"}
-            position='top'
-          >
-            <button
-              className='player__button toggle'
-              title={this.state.paused ? "Play" : "Pause"}
-              onClick={this.togglePlay}
-            >
+          <Tooltip content={playTitle} position='top'>
+            <button className='player__button toggle' onClick={this.togglePlay}>
               {playPauseReplay}
             </button>
           </Tooltip>
@@ -178,7 +178,6 @@ class VideoPlayer extends React.Component {
               <button
                 className='player__button player__button--mute toggle'
                 onClick={this.toggleMute}
-                title={this.state.muted ? "Unmute" : "Mute"}
               >
                 {this.state.muted ? volumeOffIcon : volumeUpIcon}
               </button>
