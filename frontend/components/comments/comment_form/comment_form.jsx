@@ -6,6 +6,7 @@ import { avatarFromInitials } from "../../../util/avatar_util";
 function CommentForm(props) {
   const {
     currentUser,
+    currentUserId,
     currentVideoId,
     createComment,
     parentCommentId,
@@ -58,11 +59,15 @@ function CommentForm(props) {
   return (
     <div className='cmtform'>
       <div className='cmtform__icon'>
-        <img
-          src={avatarFromInitials(currentUser, 40)}
-          alt='avatar'
-          className='cmtform__user'
-        />
+        {currentUserId ? (
+          <img
+            src={avatarFromInitials(currentUser, 40)}
+            alt='avatar'
+            className='cmtform__user'
+          />
+        ) : (
+          <AccountCircleIcon id='form-signin-button' />
+        )}
       </div>
       <div className='cmtform__form'>
         <section className='cmtform__inputBox'>
