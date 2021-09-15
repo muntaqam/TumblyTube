@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { openModal } from "../../actions/modal_actions";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
 import Dropdown from "../dropdown/dropdown";
 
@@ -11,6 +10,7 @@ export default function SubscribeButton(props) {
     useHandleClickOutside(false);
 
   useEffect(() => {
+    if (!currentUserId) setSubscribed(false);
     if (
       currentUserId &&
       currentUser.subscribees[creator.username.toLowerCase()]
@@ -23,7 +23,7 @@ export default function SubscribeButton(props) {
     ) {
       setSubscribed(false);
     }
-  }, []);
+  }, [currentUserId, currentUser]);
 
   const handleSubscribe = () => {
     if (!currentUserId) return;
@@ -41,10 +41,7 @@ export default function SubscribeButton(props) {
           subscribeeId: subscription.subscribee_id,
         },
       });
-      // setSubscribed(false);
-      // unsubscribe(subscription.subscribee_id);
     } else {
-      setSubscribed(true);
       subscribe(subscription);
     }
   };
