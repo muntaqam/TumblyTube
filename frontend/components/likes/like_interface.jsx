@@ -57,7 +57,12 @@ function LikeInterface(props) {
   // HANDLE LIKE BEGINS //
   ///////////////////////
   async function handleLike(version) {
-    if (!currentUserId) return;
+    if (!currentUserId) {
+      return addNoti({
+        mode: "fail",
+        message: `Must sign-in to ${version} this ${likeableType.toLowerCase()}`,
+      });
+    }
 
     // create newLike obj from passed down props for later use
     const newLike = {
