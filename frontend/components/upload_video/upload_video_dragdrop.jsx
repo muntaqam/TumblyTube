@@ -1,6 +1,7 @@
 import React from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import PublishIcon from "@material-ui/icons/Publish";
+import Tooltip from "../tooltip/tooltip";
 
 export default class UploadVideoDragDrop extends React.Component {
   render() {
@@ -9,7 +10,12 @@ export default class UploadVideoDragDrop extends React.Component {
         <header className='vid-upload__header'>
           <span className='vid-upload__header__title '>Upload videos</span>
           <div className='vid-upload__header__btns'>
-            <CloseIcon id='upload-close-btn' onClick={this.props.closeModal} />
+            <Tooltip content='close'>
+              <CloseIcon
+                id='upload-close-btn'
+                onClick={this.props.closeModal}
+              />
+            </Tooltip>
           </div>
         </header>
         <div

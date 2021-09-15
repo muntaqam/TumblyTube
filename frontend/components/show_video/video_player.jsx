@@ -1,4 +1,5 @@
 import React from "react";
+import Tooltip from "../tooltip/tooltip";
 import {
   playIcon,
   pauseIcon,
@@ -124,8 +125,15 @@ class VideoPlayer extends React.Component {
 
   render() {
     let playPauseReplay = pauseIcon;
-    if (this.state.ended) playPauseReplay = replayIcon;
-    if (this.state.paused) playPauseReplay = playIcon;
+    let playTitle = "Pause";
+    if (this.state.ended) {
+      playTitle = "Replay";
+      playPauseReplay = replayIcon;
+    }
+    if (this.state.paused) {
+      playTitle = "Play";
+      playPauseReplay = playIcon;
+    }
 
     return (
       <div className='player'>
@@ -152,25 +160,29 @@ class VideoPlayer extends React.Component {
             <div className='progress__filled' ref={this.progressBarRef}></div>
           </div>
 
-          <button
-            className='player__button toggle'
-            title={this.state.paused ? "Play" : "Pause"}
-            onClick={this.togglePlay}
-          >
-            {playPauseReplay}
-          </button>
+          <Tooltip content={playTitle} position='top'>
+            <button className='player__button toggle' onClick={this.togglePlay}>
+              {playPauseReplay}
+            </button>
+          </Tooltip>
+
           <div
             className='player__volume'
             onMouseEnter={() => this.setState({ mountedRange: true })}
             onMouseLeave={() => this.setState({ mountedRange: false })}
           >
-            <button
-              className='player__button player__button--mute toggle'
-              onClick={this.toggleMute}
-              title={this.state.muted ? "Unmute" : "Mute"}
+            <Tooltip
+              content={this.state.muted ? "Unmute" : "Mute"}
+              position='top'
             >
-              {this.state.muted ? volumeOffIcon : volumeUpIcon}
-            </button>
+              <button
+                className='player__button player__button--mute toggle'
+                onClick={this.toggleMute}
+              >
+                {this.state.muted ? volumeOffIcon : volumeUpIcon}
+              </button>
+            </Tooltip>
+
             {this.state.mountedRange && (
               <RangeInput
                 onChange={this.handleVolume}
@@ -184,12 +196,15 @@ class VideoPlayer extends React.Component {
             <span>/</span>
             <span>{this.state.duration}</span>
           </div>
-          <button
-            className='player__button player__button--fs'
-            onClick={this.toggleFullScreen}
-          >
-            {fullScreenIcon}
-          </button>
+
+          <Tooltip content='Full screen' position='top'>
+            <button
+              className='player__button player__button--fs'
+              onClick={this.toggleFullScreen}
+            >
+              {fullScreenIcon}
+            </button>
+          </Tooltip>
         </div>
       </div>
     );

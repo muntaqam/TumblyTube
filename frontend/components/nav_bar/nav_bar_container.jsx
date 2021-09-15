@@ -9,6 +9,7 @@ import SearchBarContainer from "./search_bar/search_bar_container";
 import SessionButtonContainer from "./session_button/session_button_container";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+import Tooltip from "../tooltip/tooltip";
 import Dropdown from "../dropdown/dropdown";
 
 function NavBar({ openModal, location, history, currentUserId }) {
@@ -66,21 +67,22 @@ function NavBar({ openModal, location, history, currentUserId }) {
       </div>
       <div className='navbar__section navbar__section--right'>
         <div style={{ position: "relative" }}>
-          <button
-            ref={triggerRef}
-            className='upload-button'
-            onClick={handleUpload}
-          >
-            <VideoCallOutlineIcon
-              id='upload-button-icon'
-              className='navbar__icon navbar__icon--upload'
-            />
-          </button>
+          <Tooltip content='Upload'>
+            <button
+              ref={triggerRef}
+              className='upload-button'
+              onClick={handleUpload}
+            >
+              <VideoCallOutlineIcon
+                id='upload-button-icon'
+                className='navbar__icon navbar__icon--upload'
+              />
+            </button>
+          </Tooltip>
           {!currentUserId && showDropdown && (
             <Dropdown ref={dropdownRef} mode='upload' />
           )}
         </div>
-        <div className='navbar__tooltip navbar__tooltip--upload'>Upload</div>
         {currentUserId ? (
           <SessionButtonContainer />
         ) : (
