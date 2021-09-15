@@ -35,7 +35,7 @@ function NavBar({ openModal, location, history, currentUserId }) {
   const handleOpenSidebar = () => {
     if (location.pathname.includes("watch")) {
       if (!sidebarExpanded) toggleExpanded();
-      openModal("sidebar");
+      openModal({ mode: "sidebar" });
     } else {
       toggleExpanded();
     }
