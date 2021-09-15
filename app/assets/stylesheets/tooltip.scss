@@ -1,11 +1,12 @@
 .tooltip__tip {
-  --tooltip-margin: 3rem;
+  --tooltip-margin: 2.5rem;
 }
 
 .tooltip {
   &__wrapper {
     display: inline-block;
     position: relative;
+    max-width: fit-content;
   }
 
   &__tip {
@@ -24,6 +25,10 @@
 
     &--bottom {
       bottom: calc(var(--tooltip-margin) * -1);
+    }
+
+    &--top {
+      top: calc(var(--tooltip-margin) * -1);
     }
   }
 }
