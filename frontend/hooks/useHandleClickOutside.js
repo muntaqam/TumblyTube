@@ -1,28 +1,29 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 
-export const useHandleClickOutside = ({
-  dropDownRef,
-  showDropDown,
-  setShowDropDown,
-}) => {
+export const useHandleClickOutside = (initState) => {
+  const triggerRef = useRef(null);
+  const dropdownRef = useRef(null);
+  const [showDropdown, setShowDropdown] = useState(initState);
+
   const handleClickOutside = (e) => {
-    if (dropDownRef.current.contains(e.target)) {
-      // inside click
-      return;
+    if (triggerRef.current && triggerRef.current.contains(e.target)) {
+      // toggle for triggerRef
+      return setShowDropdown(!showDropdown);
     }
-    // outside click
-    setShowDropDown(false);
+
+    // close dropdown when it's rendered and clicked outside
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      return setShowDropdown(false);
+    }
   };
 
   useEffect(() => {
-    if (showDropDown) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
+    document.addEventListener("click", handleClickOutside, true);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [showDropDown]);
+  });
+
+  return { showDropdown, triggerRef, dropdownRef };
 };
