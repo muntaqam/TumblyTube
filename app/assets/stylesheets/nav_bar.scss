@@ -61,7 +61,6 @@
 #upload-button-icon {
   font-size: 1.7rem;
   color: var(--clr-text-gray);
-  position: relative;
 }
 
 .navbar__search {
@@ -95,13 +94,11 @@
     border-bottom-right-radius: 2px;
     padding: 0.2em 1.4em;
     background: var(--clr-dim-white);
-    position: relative;
     height: 100%;
     flex-shrink: 1;
     outline: none;
     display: flex;
     align-items: center;
-    position: relative;
     cursor: pointer;
 
     &:hover {
@@ -115,28 +112,6 @@
     &:hover > .navbar__tooltip {
       display: inline-block;
     }
-  }
-}
-
-.navbar__tooltip {
-  display: none;
-  position: absolute;
-  background: #0101017a;
-  color: white;
-  padding: 10px;
-  font-size: 0.75rem;
-  border-radius: 3px;
-  transition-duration: 0.5s;
-  text-align: center;
-
-  &--search {
-    left: 7px;
-    top: 45px;
-  }
-
-  &--upload {
-    top: 58px;
-    right: 152px;
   }
 }
 
