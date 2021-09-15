@@ -70,22 +70,26 @@
 .vdetails {
   display: flex;
   flex-direction: column;
+  margin-top: 0.75rem;
 
   &__title {
     font-size: 1.125rem;
     font-weight: 600;
-    line-height: 3em;
+    line-height: 1.5em;
   }
 
   &--split {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
     margin-bottom: 0.5em;
     border-bottom: 1px solid var(--clr-separator-gray);
   }
 
   &__viewsdate {
+    align-self: center;
+
     font-size: 0.875rem;
     letter-spacing: 0.03125em;
     color: var(--clr-text-gray);
@@ -119,6 +123,7 @@
 .vdesc {
   display: flex;
   flex-direction: row;
+
   padding-top: 1em;
   height: 7em;
   flex-basis: 100%;
