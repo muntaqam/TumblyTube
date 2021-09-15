@@ -42,7 +42,7 @@ function NavBar({ openModal, location, history, currentUserId }) {
 
     if (viewportWidth <= 650) {
       if (!sidebarExpanded) toggleExpanded();
-      openModal("sidebar");
+      openModal({ mode: "sidebar" });
     }
   };
 
