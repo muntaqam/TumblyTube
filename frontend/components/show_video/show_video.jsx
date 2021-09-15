@@ -6,6 +6,7 @@ import LikeInterface from "../likes/like_interface_container";
 import CommentIndexContainer from "../comments/comment_idx_container";
 import CommentFormContainer from "../comments/comment_form/comment_form_container";
 import SideVideoIndex from "./side_vid_idx";
+import Tooltip from "../tooltip/tooltip";
 
 class VideoShow extends React.Component {
   constructor(props) {
@@ -99,7 +100,9 @@ class VideoShow extends React.Component {
               <div className='vdesc__top'>
                 <div className='vdesc__top vdesc__top--split'>
                   <div className='vdesc__top vdesc__top--left'>
-                    <div className='vdesc__username'>{creator.username}</div>
+                    <Tooltip content={creator.username} position='top'>
+                      <div className='vdesc__username'>{creator.username}</div>
+                    </Tooltip>
 
                     <div className='vdesc__subcount'>
                       {creator.numSubscribers} Subscribers
