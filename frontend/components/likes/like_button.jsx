@@ -17,7 +17,7 @@ const LikeButton = ({
 
   return (
     <div style={{ position: "relative" }}>
-      <Tooltip content='I like this'>
+      <Tooltip content={likeableType === "Video" ? "I like this" : "Like"}>
         <div
           ref={triggerRef}
           className='likes__container likes__container--like'
