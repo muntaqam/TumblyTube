@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
 import NotiPortal from "../noti_portal/noti_portal";
 import DislikeButton from "./dislike_button";
 import LikeButton from "./like_button";
@@ -57,7 +56,12 @@ function LikeInterface(props) {
   // HANDLE LIKE BEGINS //
   ///////////////////////
   async function handleLike(version) {
-    if (!currentUserId) return;
+    if (!currentUserId) {
+      return addNoti({
+        mode: "fail",
+        message: `Must sign-in to ${version} ${likeableType.toLowerCase()}s`,
+      });
+    }
 
     // create newLike obj from passed down props for later use
     const newLike = {
@@ -134,7 +138,7 @@ function LikeInterface(props) {
         </div>
       )}
 
-      {likeableType == "Video" && <NotiPortal ref={notiRef} autoClose={true} />}
+      <NotiPortal ref={notiRef} autoClose={true} />
     </div>
   );
 }

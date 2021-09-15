@@ -3,10 +3,10 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import CommentIdx from "./comment_idx";
 import {
-  deleteComment,
   fetchComments,
   fetchMoreComments,
 } from "../../actions/comment_actions";
+import { openModal } from "../../actions/modal_actions";
 
 const mSTP = ({ session, entities }) => {
   return {
@@ -20,7 +20,7 @@ const mDTP = (dispatch) => {
     fetchComments: (videoId) => dispatch(fetchComments(videoId)),
     fetchMoreComments: (videoId, numOffset, numLimit) =>
       dispatch(fetchMoreComments(videoId, numOffset, numLimit)),
-    deleteComment: (commentId) => dispatch(deleteComment(commentId)),
+    openModal: (modal) => dispatch(openModal(modal)),
   };
 };
 
