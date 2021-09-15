@@ -6,6 +6,7 @@ import {
   handleAutoPlayOut,
   viewsFormatted,
 } from "../../../util/video_util";
+import Tooltip from "../../tooltip/tooltip";
 
 function MainVideoIndexItem(props) {
   const { video, creator } = props;
@@ -28,7 +29,9 @@ function MainVideoIndexItem(props) {
         />
         <div className='main__desc main__desc--meta'>
           <div className='main__title'>{video.title}</div>
-          <div className='main__username'>{creator.username}</div>
+          <Tooltip content={creator.username} position='top'>
+            <div className='main__username'>{creator.username}</div>
+          </Tooltip>
           <div className='main__viewsdate'>
             {viewsFormatted(video.views)} views
             <span className='main__dot'> ● </span>

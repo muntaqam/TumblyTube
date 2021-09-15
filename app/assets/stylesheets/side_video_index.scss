@@ -49,6 +49,10 @@
     font-weight: 400;
   }
 
+  &__username:hover {
+    color: var(--clr-text-gray);
+  }
+
   &__dot {
     font-size: 0.4rem;
     margin-inline: 0.3125em;

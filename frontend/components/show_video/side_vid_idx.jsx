@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { avatarFromInitials } from "../../util/avatar_util";
 import {
   viewsFormatted,
   handleAutoPlayIn,
   handleAutoPlayOut,
 } from "../../util/video_util";
+import Tooltip from "../tooltip/tooltip";
 
 function SideVideoIndex(props) {
   const { video, creator } = props;
@@ -19,9 +19,14 @@ function SideVideoIndex(props) {
         onMouseEnter={handleAutoPlayIn}
         onMouseOut={handleAutoPlayOut}
       ></video>
+
       <div className='sideidx__desc'>
         <div className='sideidx__title'>{video.title}</div>
-        <div className='sideidx__username'>{creator.username}</div>
+
+        <Tooltip content={creator.username} position='top'>
+          <div className='sideidx__username'>{creator.username}</div>
+        </Tooltip>
+
         <div className='sideidx__viewsdate'>
           {viewsFormatted(video.views)} views
           <span className='sideidx__dot'> ● </span>

@@ -1,6 +1,7 @@
 import React from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import PublishIcon from "@material-ui/icons/Publish";
+import Tooltip from "../tooltip/tooltip";
 
 export default class UploadVideoDetails extends React.Component {
   disableBtn() {
@@ -16,8 +17,14 @@ export default class UploadVideoDetails extends React.Component {
       <div className='vid-upload' onClick={(e) => e.stopPropagation()}>
         <header className='vid-upload__header'>
           <span className='vid-upload__header__title '>{this.props.title}</span>
+
           <div className='vid-upload__header__btns'>
-            <CloseIcon id='upload-close-btn' onClick={this.props.closeModal} />
+            <Tooltip content='discard and close'>
+              <CloseIcon
+                id='upload-close-btn'
+                onClick={this.props.closeModal}
+              />
+            </Tooltip>
           </div>
         </header>
         <section className='uploadDetails'>
@@ -66,7 +73,10 @@ export default class UploadVideoDetails extends React.Component {
           </section>
         </section>
         <footer className='uploadDetails__footer'>
-          <PublishIcon id='uploadDetails-uploaded' />
+          <Tooltip content='Video upload complete' position='top'>
+            <PublishIcon id='uploadDetails-uploaded' />
+          </Tooltip>
+
           <button
             id='upload-video-submit-btn'
             className='uploadDetails__submit'
