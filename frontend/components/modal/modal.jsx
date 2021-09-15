@@ -28,7 +28,8 @@ function Modal({ modal, closeModal }) {
       component = <ConfirmationModal mode={modal.mode} meta={modal.meta} />;
       break;
     case "deleteComment":
-      component = <ConfirmationModal mode='deleteComment' />;
+      component = <ConfirmationModal mode={modal.mode} meta={modal.meta} />;
+      break;
     default:
       return null;
   }
