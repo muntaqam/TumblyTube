@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import NotiPortal from "../noti_portal/noti_portal";
+import Tooltip from "../tooltip/tooltip";
 import DislikeButton from "./dislike_button";
 import LikeButton from "./like_button";
 
@@ -132,12 +133,14 @@ function LikeInterface(props) {
       </div>
 
       {likeableType == "Video" && (
-        <div className='likes__bar'>
-          <div
-            ref={likesRatioRef}
-            className='likes__bar likes__bar--filled'
-          ></div>
-        </div>
+        <Tooltip content={`${numLikes} / ${numDislikes}`} position='top'>
+          <div className='likes__bar'>
+            <div
+              ref={likesRatioRef}
+              className='likes__bar likes__bar--filled'
+            ></div>
+          </div>
+        </Tooltip>
       )}
 
       <NotiPortal ref={notiRef} autoClose={true} />
