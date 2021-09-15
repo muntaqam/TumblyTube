@@ -11,7 +11,7 @@ export function useOpenReply() {
 }
 
 function CommentIndex(props) {
-  const { comment, childComments, currentVideoId, currentUser, deleteComment } =
+  const { comment, childComments, currentVideoId, currentUser, openModal } =
     props;
 
   const [openReply, setOpenReply] = useState(false);
@@ -30,7 +30,10 @@ function CommentIndex(props) {
   };
 
   const handleDelete = (commentId) => {
-    deleteComment(commentId);
+    openModal({
+      mode: "deleteComment",
+      meta: { commentId: commentId },
+    });
   };
 
   const renderDelete = (commenterId) => {

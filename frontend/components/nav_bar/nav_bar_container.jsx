@@ -29,7 +29,7 @@ function NavBar({ openModal, location, history, currentUserId }) {
 
   const handleUpload = () => {
     if (!currentUserId) return;
-    openModal("upload");
+    openModal({ mode: "upload" });
   };
 
   const handleOpenSidebar = () => {
@@ -42,7 +42,7 @@ function NavBar({ openModal, location, history, currentUserId }) {
 
     if (viewportWidth <= 650) {
       if (!sidebarExpanded) toggleExpanded();
-      openModal("sidebar");
+      openModal({ mode: "sidebar" });
     }
   };
 
