@@ -29,7 +29,7 @@ function NavBar({ openModal, location, history, currentUserId }) {
 
   const handleUpload = () => {
     if (!currentUserId) return;
-    openModal("upload");
+    openModal({ mode: "upload" });
   };
 
   const handleOpenSidebar = () => {
