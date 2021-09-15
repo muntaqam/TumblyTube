@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import UploadVideoFormContainer from "../upload_video/upload_video_form_container";
 import SideBar from "../side_bar/side_bar";
 import { SidebarContext } from "../root";
+import ConfirmationModal from "./confirmation_modal";
 
 function Modal({ modal, closeModal }) {
   if (!modal) return null;
@@ -12,17 +13,22 @@ function Modal({ modal, closeModal }) {
 
   const handleClose = () => {
     closeModal();
-    if (modal == "sidebar") toggleExpanded();
+    if (modal === "sidebar") toggleExpanded();
   };
 
   let component;
-  switch (modal) {
+  switch (modal.mode) {
     case "upload":
       component = <UploadVideoFormContainer />;
       break;
     case "sidebar":
       component = <SideBar modal={true} />; // toggleExpanded if modal
       break;
+    case "unsubscribe":
+      component = <ConfirmationModal mode={modal.mode} meta={modal.meta} />;
+      break;
+    case "deleteComment":
+      component = <ConfirmationModal mode='deleteComment' />;
     default:
       return null;
   }

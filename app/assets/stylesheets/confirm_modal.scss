@@ -1,0 +1,61 @@
+.confirmModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 266px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 3px;
+
+  &__split {
+    display: flex;
+
+    &--top {
+      flex-grow: 1;
+      align-items: center;
+      border-bottom: 1px solid var(--clr-separator-gray);
+    }
+    &--bottom {
+      justify-content: space-around;
+      padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    }
+  }
+
+  &__message {
+    font-size: 0.875rem;
+    color: var(--clr-text-light-gray);
+    padding-inline: 1.5rem;
+    width: 100%;
+  }
+
+  &__cancel,
+  &__submit {
+    background: none;
+    font-size: 0.875rem;
+    padding: 0.75em 1.15em;
+    cursor: pointer;
+  }
+
+  &__cancel {
+    font-weight: 900;
+    color: var(--clr-text-gray);
+    letter-spacing: 0.5px;
+  }
+
+  &__submit {
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    &--unsubscribe {
+      color: #53c1de;
+    }
+
+    &--delete {
+      color: var(--clr-error);
+    }
+  }
+}

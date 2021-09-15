@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { openModal } from "../../actions/modal_actions";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
 import Dropdown from "../dropdown/dropdown";
 
 export default function SubscribeButton(props) {
-  const { creator, currentUser, currentUserId, subscribe, unsubscribe } = props;
+  const { creator, currentUser, currentUserId, subscribe, openModal } = props;
   const [subscribed, setSubscribed] = useState(false);
 
   const { showDropdown, triggerRef, dropdownRef } =
@@ -33,8 +34,15 @@ export default function SubscribeButton(props) {
     };
 
     if (subscribed) {
-      setSubscribed(false);
-      unsubscribe(subscription.subscribee_id);
+      openModal({
+        mode: "unsubscribe",
+        meta: {
+          subscribeeName: creator.username,
+          subscribeeId: subscription.subscribee_id,
+        },
+      });
+      // setSubscribed(false);
+      // unsubscribe(subscription.subscribee_id);
     } else {
       setSubscribed(true);
       subscribe(subscription);
