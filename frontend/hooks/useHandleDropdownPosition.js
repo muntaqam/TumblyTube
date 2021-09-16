@@ -35,8 +35,8 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
   };
 
   useEffect(() => {
-    if (!currentUserId) handleDropdownPosition();
-  }, [currentUserId, rightAvailable, bottomAvailabe]);
+    if (!currentUserId && triggerRef.current) handleDropdownPosition();
+  }, [currentUserId, triggerRef.current, rightAvailable, bottomAvailabe]);
 
   const updateAvailableSpace = () => {
     // dropdown's dimensions
@@ -62,11 +62,11 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
   };
 
   useEffect(() => {
-    if (!currentUserId) updateAvailableSpace();
-  }, [currentUserId, viewportWidth, viewportHeight]);
+    if (!currentUserId && triggerRef.current) updateAvailableSpace();
+  }, [currentUserId, triggerRef.current, viewportWidth, viewportHeight]);
 
   useEffect(() => {
-    if (triggerRef.current && !currentUserId) {
+    if (!currentUserId && triggerRef.current) {
       // listens to scroll for when dropdown touches the top window while position on top
       // position dropdown on bottom of triggerRef, if it's touching the top window
       window.addEventListener("scroll", updateAvailableSpace);
@@ -75,7 +75,7 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
     }
 
     return () => window.removeEventListener("scroll", updateAvailableSpace);
-  }, [triggerRef.current, currentUserId]);
+  }, [currentUserId, triggerRef.current]);
 
   return { rightPosition, bottomPosition, leftPosition };
 };
