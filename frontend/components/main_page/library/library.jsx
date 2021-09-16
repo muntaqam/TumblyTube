@@ -49,6 +49,11 @@ export default function Library({
             {filteredLikedVideosArr.length}
           </span>
         </div>
+        {!filteredLikedVideosArr.length && (
+          <div className="library__empty">
+            Your Liked videos will go here
+          </div>
+        )}
         <div className='library__split library__split--videos'>
           {filteredLikedVideosArr.map((liked) => (
             <MainVideoIndexItem

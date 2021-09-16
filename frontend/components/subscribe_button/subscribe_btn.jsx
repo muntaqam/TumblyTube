@@ -37,10 +37,7 @@ export default function SubscribeButton(props) {
 
   const handleSubscribe = () => {
     if (!currentUserId) {
-      // return addNoti({
-      //   mode: "fail",
-      //   message: `Must sign-in to subscribe to ${creator.username}!`,
-      // });
+      return;
     }
     const subscription = {
       subscriber_id: currentUserId,
