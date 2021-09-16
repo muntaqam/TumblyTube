@@ -37,10 +37,10 @@ export default function SubscribeButton(props) {
 
   const handleSubscribe = () => {
     if (!currentUserId) {
-      return addNoti({
-        mode: "fail",
-        message: `Must sign-in to subscribe to ${creator.username}!`,
-      });
+      // return addNoti({
+      //   mode: "fail",
+      //   message: `Must sign-in to subscribe to ${creator.username}!`,
+      // });
     }
     const subscription = {
       subscriber_id: currentUserId,
@@ -52,7 +52,7 @@ export default function SubscribeButton(props) {
         mode: "unsubscribe",
         meta: {
           subscribeeName: creator.username,
-          subscribeeId: subscription.subscribee_id,
+          subscribeeId: creator.id,
         },
       });
     } else {
