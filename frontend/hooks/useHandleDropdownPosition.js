@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { useListenViewport } from "./useListenViewport";
 
 export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
-  if (currentUserId) return;
-
   // hook that listens to viewport size changes
   const { viewportWidth, viewportHeight } = useListenViewport();
 
@@ -37,8 +35,8 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
   };
 
   useEffect(() => {
-    handleDropdownPosition();
-  }, [rightAvailable, bottomAvailabe]);
+    if (!currentUserId) handleDropdownPosition();
+  }, [currentUserId, rightAvailable, bottomAvailabe]);
 
   const updateAvailableSpace = () => {
     // dropdown's dimensions
@@ -64,11 +62,11 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
   };
 
   useEffect(() => {
-    updateAvailableSpace();
-  }, [viewportWidth, viewportHeight]);
+    if (!currentUserId) updateAvailableSpace();
+  }, [currentUserId, viewportWidth, viewportHeight]);
 
   useEffect(() => {
-    if (triggerRef.current) {
+    if (triggerRef.current && !currentUserId) {
       // listens to scroll for when dropdown touches the top window while position on top
       // position dropdown on bottom of triggerRef, if it's touching the top window
       window.addEventListener("scroll", updateAvailableSpace);
@@ -77,7 +75,7 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
     }
 
     return () => window.removeEventListener("scroll", updateAvailableSpace);
-  }, [triggerRef.current]);
+  }, [triggerRef.current, currentUserId]);
 
   return { rightPosition, bottomPosition, leftPosition };
 };

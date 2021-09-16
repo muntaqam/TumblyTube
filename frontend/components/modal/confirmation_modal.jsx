@@ -26,9 +26,11 @@ const ConfirmationModal = ({
       case "unsubscribe":
         unsubscribe(meta.subscribeeId);
         closeModal();
+        break;
       case "deleteComment":
         deleteComment(meta.commentId);
         closeModal();
+        break;
     }
   };
 
