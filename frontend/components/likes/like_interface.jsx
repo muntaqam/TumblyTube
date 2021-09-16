@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router";
-// import NotiPortal from "../noti_portal/noti_portal";
 import { NotiContext } from "../root";
 import Tooltip from "../tooltip/tooltip";
 import DislikeButton from "./dislike_button";
@@ -18,12 +17,11 @@ function LikeInterface(props) {
     deleteLike,
   } = props;
 
-  const { addNoti } = useContext(NotiContext);
-  // const notiRef = useRef(null);
+  let { id } = useParams();
   const likesRatioRef = useRef(null);
+  const { addNoti } = useContext(NotiContext);
   // 0 == no likes, 1 == liked, -1 == disliked
   const [likeStatus, setLikeStatus] = useState(0);
-  let { id } = useParams();
 
   // check if newLike is already in users slice of state
   let isLiked;
@@ -52,11 +50,6 @@ function LikeInterface(props) {
     if (likeableType === "Video") handleLikeBar();
   }, [numLikes, numDislikes]);
 
-  // calls addNoti from NotiPortal
-  // const addNoti = ({ mode, message }) => {
-  //   notiRef.current.addMessage({ mode, message });
-  // };
-
   /////////////////////////
   // HANDLE LIKE BEGINS //
   ///////////////////////
@@ -80,10 +73,10 @@ function LikeInterface(props) {
       changeLikeStatus("nolikes");
       await deleteLike(isLiked.id);
 
-      // if (likeableType === "Video" && version === "like")
-      //   addNoti({ mode: "success", message: "Removed from Liked videos" });
-      // if (likeableType === "Video" && version === "dislike")
-      //   addNoti({ mode: "success", message: "Dislike removed" });
+      if (likeableType === "Video" && version === "like")
+        addNoti({ mode: "success", message: "Removed from Liked videos" });
+      if (likeableType === "Video" && version === "dislike")
+        addNoti({ mode: "success", message: "Dislike removed" });
 
       return;
     }
@@ -94,10 +87,10 @@ function LikeInterface(props) {
       await createLike(newLike);
       changeLikeStatus(version);
 
-      // if (likeableType === "Video" && version === "like")
-      //   addNoti({ mode: "success", message: "Added to Liked videos" });
-      // if (likeableType === "Video" && version === "dislike")
-      //   addNoti({ mode: "success", message: "Removed from Liked videos" });
+      if (likeableType === "Video" && version === "like")
+        addNoti({ mode: "success", message: "Added to Liked videos" });
+      if (likeableType === "Video" && version === "dislike")
+        addNoti({ mode: "success", message: "Removed from Liked videos" });
 
       return;
     }
@@ -106,10 +99,10 @@ function LikeInterface(props) {
     changeLikeStatus(version);
     await createLike(newLike);
 
-    // if (likeableType === "Video" && version === "like")
-    //   addNoti({ mode: "success", message: "Added to Liked videos" });
-    // if (likeableType === "Video" && version === "dislike")
-    //   addNoti({ mode: "success", message: "You Dislike this video" });
+    if (likeableType === "Video" && version === "like")
+      addNoti({ mode: "success", message: "Added to Liked videos" });
+    if (likeableType === "Video" && version === "dislike")
+      addNoti({ mode: "success", message: "You Dislike this video" });
   }
   ///////////////////////
   // HANDLE LIKE ENDS //
@@ -146,8 +139,6 @@ function LikeInterface(props) {
           </div>
         </Tooltip>
       )}
-
-      {/* <NotiPortal ref={notiRef} autoClose={true} /> */}
     </div>
   );
 }
