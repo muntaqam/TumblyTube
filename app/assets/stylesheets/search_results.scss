@@ -70,6 +70,10 @@
   &__video {
     width: 100%;
     max-height: 100%;
+
+    background: var(--clr-hightlight-gray);
+    border-radius: 1px;
+    aspect-ratio: 16 / 9;
   }
 
   &__dot {
