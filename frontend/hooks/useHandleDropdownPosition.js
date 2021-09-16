@@ -6,36 +6,67 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
 
   const { viewportWidth, viewportHeight } = useListenViewport();
 
+  const [rightAvailable, setRightAvailable] = useState(true);
+  const [bottomAvailabe, setBottomAvailable] = useState(true);
+
+  // returned variables
   // top is always default
   const [rightPosition, setRightPosition] = useState(null);
   const [bottomPosition, setBottomPosition] = useState(null);
   const [leftPosition, setLeftPosition] = useState(null);
 
   const handleDropdownPosition = () => {
-    const rightAvailable =
-      viewportWidth - triggerRef.current.getBoundingClientRect().right;
-
-    const bottomAvailabe =
-      viewportHeight - triggerRef.current.getBoundingClientRect().bottom;
-
     const triggerRefHeight = triggerRef.current.getBoundingClientRect().height;
-    const dropdownWidth = 378;
-    const dropdownHeight = 175;
     const heightMargin = 3;
 
-    if (rightAvailable < dropdownWidth) setRightPosition(0);
-    else setLeftPosition(0);
+    if (rightAvailable) {
+      setLeftPosition(0);
+      setRightPosition(null);
+    } else {
+      setRightPosition(0);
+      setLeftPosition(null);
+    }
 
-    if (bottomAvailabe < dropdownHeight) {
+    if (bottomAvailabe) {
+      setBottomPosition(null);
+    } else {
       setBottomPosition(triggerRefHeight + heightMargin);
     }
   };
 
   useEffect(() => {
-    if (triggerRef.current) handleDropdownPosition();
-  }, [triggerRef.current, viewportWidth]);
+    handleDropdownPosition();
+  }, [rightAvailable, bottomAvailabe]);
 
-  console.log({ rightPosition, bottomPosition, leftPosition });
+  const updateAvailableSpace = () => {
+    const dropdownWidth = 378;
+    const dropdownHeight = 175;
+
+    let right =
+      viewportWidth - triggerRef.current.getBoundingClientRect().right;
+    let bottom =
+      viewportHeight - triggerRef.current.getBoundingClientRect().bottom;
+
+    right < dropdownWidth ? setRightAvailable(false) : setRightAvailable(true);
+
+    bottom < dropdownHeight
+      ? setBottomAvailable(false)
+      : setBottomAvailable(true);
+  };
+
+  useEffect(() => {
+    updateAvailableSpace();
+  }, [viewportWidth, viewportHeight]);
+
+  useEffect(() => {
+    if (triggerRef.current) {
+      window.addEventListener("scroll", updateAvailableSpace);
+    } else {
+      window.removeEventListener("scroll", updateAvailableSpace);
+    }
+
+    return () => window.removeEventListener("scroll", updateAvailableSpace);
+  }, [triggerRef.current]);
 
   return { rightPosition, bottomPosition, leftPosition };
 };

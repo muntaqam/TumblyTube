@@ -3,6 +3,7 @@ import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbUpOutlinedIcon from "@material-ui/icons/ThumbUpOutlined";
 import Dropdown from "../dropdown/dropdown";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+import { useHandleDropdownPosition } from "../../hooks/useHandleDropdownPosition";
 import Tooltip from "../tooltip/tooltip";
 
 const LikeButton = ({
@@ -11,9 +12,13 @@ const LikeButton = ({
   likeableType,
   numLikes,
   handleLike,
+  currentUserId,
 }) => {
   const { showDropdown, triggerRef, dropdownRef } =
     useHandleClickOutside(false);
+
+  const { rightPosition, bottomPosition, leftPosition } =
+    useHandleDropdownPosition({ triggerRef, currentUserId });
 
   return (
     <div style={{ position: "relative" }}>
@@ -32,7 +37,13 @@ const LikeButton = ({
         </div>
       </Tooltip>
       {!loggedIn && showDropdown && (
-        <Dropdown ref={dropdownRef} mode={`${likeableType}Like`} />
+        <Dropdown
+          ref={dropdownRef}
+          mode={`${likeableType}Like`}
+          right={rightPosition}
+          bottom={bottomPosition}
+          left={leftPosition}
+        />
       )}
     </div>
   );

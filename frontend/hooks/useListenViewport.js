@@ -14,7 +14,7 @@ export const useListenViewport = () => {
     window.addEventListener("resize", updateMedia);
 
     return () => window.removeEventListener("resize", updateMedia);
-  }, [viewportWidth]);
+  }, [viewportWidth, viewportHeight]);
 
   return { viewportWidth, viewportHeight };
 };
