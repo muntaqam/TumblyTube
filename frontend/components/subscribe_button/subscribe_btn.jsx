@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+import { useHandleDropdownPosition } from "../../hooks/useHandleDropdownPosition";
 import Dropdown from "../dropdown/dropdown";
 import NotiPortal from "../noti_portal/noti_portal";
 
@@ -10,6 +11,9 @@ export default function SubscribeButton(props) {
 
   const { showDropdown, triggerRef, dropdownRef } =
     useHandleClickOutside(false);
+
+  const { rightPosition, bottomPosition, leftPosition } =
+    useHandleDropdownPosition({ triggerRef, currentUserId });
 
   useEffect(() => {
     if (!currentUserId) setSubscribed(false);
@@ -67,7 +71,13 @@ export default function SubscribeButton(props) {
       </button>
 
       {!currentUserId && showDropdown && (
-        <Dropdown ref={dropdownRef} mode='subscribe' />
+        <Dropdown
+          ref={dropdownRef}
+          mode='subscribe'
+          right={rightPosition}
+          bottom={bottomPosition}
+          left={leftPosition}
+        />
       )}
 
       <NotiPortal ref={notiRef} autoClose={true} />
