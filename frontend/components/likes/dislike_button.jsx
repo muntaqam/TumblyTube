@@ -17,7 +17,9 @@ const DislikeButton = ({
 
   return (
     <div style={{ position: "relative" }}>
-      <Tooltip content='I dislike this'>
+      <Tooltip
+        content={likeableType === "Video" ? "I dislike this" : "Dislike"}
+      >
         <div
           ref={triggerRef}
           className='likes__container likes__container--dislike'

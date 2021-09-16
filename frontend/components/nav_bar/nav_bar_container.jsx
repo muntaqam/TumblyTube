@@ -1,32 +1,33 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { openModal } from "../../actions/modal_actions";
-import { SidebarContext } from "../root";
+import Tooltip from "../tooltip/tooltip";
+import Dropdown from "../dropdown/dropdown";
+import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
+import { expandSidebar, shrinkSidebar } from "../../actions/sidebar_actions";
+import { useHandleDropdownPosition } from "../../hooks/useHandleDropdownPosition";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import VideoCallOutlineIcon from "@material-ui/icons/VideoCallOutlined";
 import SearchBarContainer from "./search_bar/search_bar_container";
 import SessionButtonContainer from "./session_button/session_button_container";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
-import Tooltip from "../tooltip/tooltip";
-import Dropdown from "../dropdown/dropdown";
 
-function NavBar({ openModal, location, history, currentUserId }) {
-  const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-
+function NavBar({
+  openModal,
+  sidebarExpanded,
+  shrinkSidebar,
+  expandSidebar,
+  location,
+  history,
+  currentUserId,
+}) {
   const { showDropdown, triggerRef, dropdownRef } =
     useHandleClickOutside(false);
 
-  const updateMedia = () => {
-    setViewportWidth(window.innerWidth);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", updateMedia);
-    return () => window.removeEventListener("resize", updateMedia);
-  }, [viewportWidth]);
+  const { rightPosition, bottomPosition, leftPosition } =
+    useHandleDropdownPosition({ triggerRef, currentUserId });
 
   const handleUpload = () => {
     if (!currentUserId) return;
@@ -34,16 +35,13 @@ function NavBar({ openModal, location, history, currentUserId }) {
   };
 
   const handleOpenSidebar = () => {
-    if (location.pathname.includes("watch")) {
-      if (!sidebarExpanded) toggleExpanded();
+    if (location.pathname.includes("watch") || window.innerWidth <= 650) {
+      // open sidebar (Modal) when not in watch page or window width <= 650px
+      expandSidebar();
       openModal({ mode: "sidebar" });
     } else {
-      toggleExpanded();
-    }
-
-    if (viewportWidth <= 650) {
-      if (!sidebarExpanded) toggleExpanded();
-      openModal({ mode: "sidebar" });
+      // else toggle regular sidebar
+      sidebarExpanded ? shrinkSidebar() : expandSidebar();
     }
   };
 
@@ -58,13 +56,16 @@ function NavBar({ openModal, location, history, currentUserId }) {
           className='navbar__icon navbar__icon--menu'
           onClick={handleOpenSidebar}
         />
+
         <Link to='/' className='navbar__logoCont'>
           <img className='navbar__logo' src={window.logoURL} />
         </Link>
       </div>
+
       <div className='navbar__section navbar__section--center'>
         <SearchBarContainer />
       </div>
+
       <div className='navbar__section navbar__section--right'>
         <div style={{ position: "relative" }}>
           <Tooltip content='Upload'>
@@ -79,15 +80,24 @@ function NavBar({ openModal, location, history, currentUserId }) {
               />
             </button>
           </Tooltip>
+
           {!currentUserId && showDropdown && (
-            <Dropdown ref={dropdownRef} mode='upload' />
+            <Dropdown
+              ref={dropdownRef}
+              mode='upload'
+              right={rightPosition}
+              bottom={bottomPosition}
+              left={leftPosition}
+            />
           )}
         </div>
+
         {currentUserId ? (
           <SessionButtonContainer />
         ) : (
           <Link to='/login' className='navbar__session__login'>
             <AccountCircle id='signin-button' />
+
             <div className='navbar__session__login__text'>SIGN IN</div>
           </Link>
         )}
@@ -96,15 +106,18 @@ function NavBar({ openModal, location, history, currentUserId }) {
   );
 }
 
-const mSTP = ({ session }) => {
+const mSTP = ({ session, ui: { sidebar } }) => {
   return {
     currentUserId: session.id,
+    sidebarExpanded: sidebar === "expanded",
   };
 };
 
 const mDTP = (dispatch) => {
   return {
     openModal: (type) => dispatch(openModal(type)),
+    shrinkSidebar: () => dispatch(shrinkSidebar()),
+    expandSidebar: () => dispatch(expandSidebar()),
   };
 };
 

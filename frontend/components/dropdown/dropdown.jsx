@@ -1,11 +1,14 @@
 import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
-const Dropdown = forwardRef(({ mode }, ref) => {
+const Dropdown = forwardRef(({ mode, right, bottom, left }, ref) => {
   const styles = {
     position: "absolute",
     width: "378px",
     height: "175px",
+    right: right,
+    bottom: bottom,
+    left: left,
   };
 
   let title;

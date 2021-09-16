@@ -122,6 +122,7 @@ function LikeInterface(props) {
           loggedIn={currentUserId}
           likeStatus={likeStatus}
           handleLike={handleLike}
+          currentUserId={currentUserId}
         />
         <DislikeButton
           likeableType={likeableType}
@@ -129,6 +130,7 @@ function LikeInterface(props) {
           loggedIn={currentUserId}
           likeStatus={likeStatus}
           handleLike={handleLike}
+          currentUserId={currentUserId}
         />
       </div>
 
