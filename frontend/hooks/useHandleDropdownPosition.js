@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { useListenViewport } from "./useListenViewport";
 
 export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
-  if (currentUserId) return;
-
+  // hook that listens to viewport size changes
   const { viewportWidth, viewportHeight } = useListenViewport();
 
   const [rightAvailable, setRightAvailable] = useState(true);
@@ -16,6 +15,7 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
   const [leftPosition, setLeftPosition] = useState(null);
 
   const handleDropdownPosition = () => {
+    // get the height of triggerRef for dropdown's accurate Bottom positioning
     const triggerRefHeight = triggerRef.current.getBoundingClientRect().height;
     const heightMargin = 3;
 
@@ -35,19 +35,26 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
   };
 
   useEffect(() => {
-    handleDropdownPosition();
-  }, [rightAvailable, bottomAvailabe]);
+    if (!currentUserId) handleDropdownPosition();
+  }, [currentUserId, rightAvailable, bottomAvailabe]);
 
   const updateAvailableSpace = () => {
+    // dropdown's dimensions
     const dropdownWidth = 378;
     const dropdownHeight = 175;
 
+    // empty space between right window broder and triggerRef's right position
     let right =
       viewportWidth - triggerRef.current.getBoundingClientRect().right;
+
+    // empty space between bottom window broder and triggerRef's bottom position
     let bottom =
       viewportHeight - triggerRef.current.getBoundingClientRect().bottom;
 
-    right < dropdownWidth ? setRightAvailable(false) : setRightAvailable(true);
+    // if empty space is smaller than dropdown, set false : true
+    right < dropdownWidth 
+      ? setRightAvailable(false) 
+      : setRightAvailable(true);
 
     bottom < dropdownHeight
       ? setBottomAvailable(false)
@@ -55,18 +62,20 @@ export const useHandleDropdownPosition = ({ triggerRef, currentUserId }) => {
   };
 
   useEffect(() => {
-    updateAvailableSpace();
-  }, [viewportWidth, viewportHeight]);
+    if (!currentUserId) updateAvailableSpace();
+  }, [currentUserId, viewportWidth, viewportHeight]);
 
   useEffect(() => {
-    if (triggerRef.current) {
+    if (triggerRef.current && !currentUserId) {
+      // listens to scroll for when dropdown touches the top window while position on top
+      // position dropdown on bottom of triggerRef, if it's touching the top window
       window.addEventListener("scroll", updateAvailableSpace);
     } else {
       window.removeEventListener("scroll", updateAvailableSpace);
     }
 
     return () => window.removeEventListener("scroll", updateAvailableSpace);
-  }, [triggerRef.current]);
+  }, [triggerRef.current, currentUserId]);
 
   return { rightPosition, bottomPosition, leftPosition };
 };
