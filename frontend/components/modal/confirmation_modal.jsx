@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { connect } from "react-redux";
 import { deleteComment } from "../../actions/comment_actions";
 import { closeModal } from "../../actions/modal_actions";
 import { unsubscribe } from "../../actions/subscription_actions";
+import { NotiContext } from "../../context/noti_context";
 
 const ConfirmationModal = ({
   mode,
@@ -11,13 +12,15 @@ const ConfirmationModal = ({
   unsubscribe,
   deleteComment,
 }) => {
+  const { addNoti } = useContext(NotiContext);
+
   let message;
   switch (mode) {
     case "unsubscribe":
       message = `Unsubscribe from ${meta.subscribeeName} ?`;
       break;
     case "deleteComment":
-      message = "Delete your comment?";
+      message = "Delete your comment permanently?";
       break;
   }
 
@@ -26,10 +29,15 @@ const ConfirmationModal = ({
       case "unsubscribe":
         unsubscribe(meta.subscribeeId);
         closeModal();
+        addNoti({
+          mode: "success",
+          message: `Removed ${meta.subscribeeName} from subscriptions`,
+        });
         break;
       case "deleteComment":
         deleteComment(meta.commentId);
         closeModal();
+        addNoti({ mode: "success", message: "Comment deleted" });
         break;
     }
   };
