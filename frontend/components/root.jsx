@@ -5,8 +5,6 @@ import App from "./App";
 import NotiPortal from "./noti_portal/noti_portal";
 import { NotiContext } from "../context/noti_context";
 
-// export const NotiContext = createContext(null);
-
 const Root = ({ store }) => {
   const notiRef = useRef(null);
 

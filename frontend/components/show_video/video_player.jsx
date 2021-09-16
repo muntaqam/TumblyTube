@@ -145,7 +145,7 @@ class VideoPlayer extends React.Component {
           onDoubleClick={this.toggleFullScreen}
           onTimeUpdate={this.setTime}
           onEnded={this.handleEnded}
-          autoPlay
+          autoPlay={true}
         ></video>
         <div
           className={`player__controls player__controls--${
