@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
 import { useHandleDropdownPosition } from "../../hooks/useHandleDropdownPosition";
 import Dropdown from "../dropdown/dropdown";
-import NotiPortal from "../noti_portal/noti_portal";
+import { NotiContext } from "../../context/noti_context";
 
 export default function SubscribeButton(props) {
   const { creator, currentUser, currentUserId, subscribe, openModal } = props;
   const [subscribed, setSubscribed] = useState(false);
-  // const notiRef = useRef(null);
+  const { addNoti } = useContext(NotiContext);
 
   const { showDropdown, triggerRef, dropdownRef } =
     useHandleClickOutside(false);
@@ -31,14 +31,14 @@ export default function SubscribeButton(props) {
     }
   }, [currentUserId, currentUser]);
 
-  // const addNoti = ({ mode, message }) => {
-  //   notiRef.current.addMessage({ mode, message });
-  // };
-
   const handleSubscribe = () => {
     if (!currentUserId) {
-      return;
+      return addNoti({
+        mode: "fail",
+        message: `Must sign-in to subscribe to ${creator.username}`,
+      });
     }
+
     const subscription = {
       subscriber_id: currentUserId,
       subscribee_id: creator.id,
@@ -54,6 +54,10 @@ export default function SubscribeButton(props) {
       });
     } else {
       subscribe(subscription);
+      addNoti({
+        mode: "success",
+        message: `${creator.username} added to subscriptions`,
+      });
     }
   };
 
@@ -76,8 +80,6 @@ export default function SubscribeButton(props) {
           left={leftPosition}
         />
       )}
-
-      {/* <NotiPortal ref={notiRef} autoClose={true} /> */}
     </div>
   );
 }
