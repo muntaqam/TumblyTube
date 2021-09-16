@@ -46,6 +46,11 @@ export default function Subscriptions({
     return (
       <div className='main__subs'>
         <div className='subs__title subs__title--video'>Latest Videos</div>
+        {!filteredSubVideosArr.length && (
+          <div className='subs__nosubs'>
+            Videos from your subscriptions will go here
+          </div>
+        )}
         <div className='subs__split subs__split--videos'>
           {filteredSubVideosArr.reverse().map((vid) => (
             <MainVideoIndexItem
@@ -60,6 +65,11 @@ export default function Subscriptions({
           Channels
           <span className='subs__subtitle'>{currentUser.numSubscribees}</span>
         </div>
+        {!subUsersArr.length && (
+          <div className='subs__nosubs'>
+            Your subscribed channels will go here
+          </div>
+        )}
         <div className='subs__split subs__split--users'>
           {subUsersArr.reverse().map((user) => (
             <div key={user.id} className='subs__user'>

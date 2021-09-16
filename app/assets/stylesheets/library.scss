@@ -40,6 +40,15 @@
     margin-left: 0.5em;
   }
 
+  // no likes
+  &__empty {
+    grid-row: 2;
+    grid-column: 1;
+
+    font-size: 0.875rem;
+    color: var(--clr-text-light-gray);
+  }
+
   &__split {
     &--videos {
       grid-row: 2;
