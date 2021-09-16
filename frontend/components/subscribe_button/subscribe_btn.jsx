@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from "react";
 import { useHandleClickOutside } from "../../hooks/useHandleClickOutside";
 import { useHandleDropdownPosition } from "../../hooks/useHandleDropdownPosition";
 import Dropdown from "../dropdown/dropdown";
-import { NotiContext } from "../root";
+import { NotiContext } from "../../context/noti_context";
 
 export default function SubscribeButton(props) {
   const { creator, currentUser, currentUserId, subscribe, openModal } = props;
@@ -54,6 +54,10 @@ export default function SubscribeButton(props) {
       });
     } else {
       subscribe(subscription);
+      addNoti({
+        mode: "success",
+        message: `${creator.username} added to subscriptions`,
+      });
     }
   };
 
