@@ -68,6 +68,13 @@
     }
   }
 
+  // 0 Subscriptions
+  &__nosubs {
+    font-size: 0.875rem;
+    color: var(--clr-text-light-gray);
+    margin-top: 1em;
+  }
+
   // individual user card
   &__user {
     display: flex;
