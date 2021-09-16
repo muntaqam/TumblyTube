@@ -1,15 +1,14 @@
 import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
-const Dropdown = forwardRef(({ mode, direction }, ref) => {
+const Dropdown = forwardRef(({ mode, right, bottom, left }, ref) => {
   const styles = {
     position: "absolute",
     width: "378px",
     height: "175px",
-    top: direction === "top" && "0",
-    right: direction === "right" && "0",
-    bottom: direction === "bottom" && "0",
-    left: direction === "left" && "0",
+    right: right,
+    bottom: bottom,
+    left: left,
   };
 
   let title;
