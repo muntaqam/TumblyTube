@@ -10,6 +10,7 @@ function CommentIndex(props) {
     openModal,
   } = props;
 
+  // INFINITE SCROLL BEGINS //
   // determines whether .bottomLoaderBar is seen or not
   const [showBottomBar, setShowBottomBar] = useState(true);
 
@@ -21,7 +22,6 @@ function CommentIndex(props) {
     numComments.current = comments.length;
   }, [comments.length]); //when new comments posted
 
-  // INTRERSECTION OVSERVER
   const observer = React.useRef(
     new IntersectionObserver((entries) => {
       const first = entries[0];
@@ -53,11 +53,13 @@ function CommentIndex(props) {
     }
 
     return () => {
-      if (currentBottomLoaderBar) {
+      if (!currentBottomLoaderBar) {
         currentObserver.unobserve(currentBottomLoaderBar);
       }
     };
   }, [bottomLoaderBar]);
+
+  // INFINITE SCROLL ENDS //
 
   return (
     <>
