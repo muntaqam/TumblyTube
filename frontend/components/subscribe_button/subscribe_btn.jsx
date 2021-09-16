@@ -7,7 +7,7 @@ import NotiPortal from "../noti_portal/noti_portal";
 export default function SubscribeButton(props) {
   const { creator, currentUser, currentUserId, subscribe, openModal } = props;
   const [subscribed, setSubscribed] = useState(false);
-  const notiRef = useRef(null);
+  // const notiRef = useRef(null);
 
   const { showDropdown, triggerRef, dropdownRef } =
     useHandleClickOutside(false);
@@ -31,9 +31,9 @@ export default function SubscribeButton(props) {
     }
   }, [currentUserId, currentUser]);
 
-  const addNoti = ({ mode, message }) => {
-    notiRef.current.addMessage({ mode, message });
-  };
+  // const addNoti = ({ mode, message }) => {
+  //   notiRef.current.addMessage({ mode, message });
+  // };
 
   const handleSubscribe = () => {
     if (!currentUserId) {
@@ -77,7 +77,7 @@ export default function SubscribeButton(props) {
         />
       )}
 
-      <NotiPortal ref={notiRef} autoClose={true} />
+      {/* <NotiPortal ref={notiRef} autoClose={true} /> */}
     </div>
   );
 }
