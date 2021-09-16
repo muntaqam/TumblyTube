@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { useParams, useLocation } from "react-router";
-import { SidebarContext } from "../root";
+import React from "react";
+import { connect } from "react-redux";
+import { useLocation } from "react-router";
 import SideBar from "../side_bar/side_bar";
 import MainVideoIndex from "./video_index/main_vid_idx_container";
 import SearchResultsContainer from "./search_results/search_results_container";
@@ -8,8 +8,7 @@ import SubscriptionsContainer from "./subscriptions/subscriptions_container";
 import LibraryContainer from "./library/library_container";
 import RyanNaing from "./ryan_naing/ryan_naing";
 
-const MainPage = () => {
-  const { sidebarExpanded } = useContext(SidebarContext);
+const MainPage = ({ sidebarExpanded }) => {
   const location = useLocation();
 
   const isLocation = (pathname) => {
@@ -30,4 +29,8 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+const mapStateToProps = ({ ui: { sidebar } }) => ({
+  sidebarExpanded: sidebar === "expanded",
+});
+
+export default connect(mapStateToProps, null)(MainPage);

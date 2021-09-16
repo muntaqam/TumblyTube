@@ -1,19 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { closeModal } from "../../actions/modal_actions";
 import { connect } from "react-redux";
 import UploadVideoFormContainer from "../upload_video/upload_video_form_container";
 import SideBar from "../side_bar/side_bar";
-import { SidebarContext } from "../root";
 import ConfirmationModal from "./confirmation_modal";
+import { shrinkSidebar } from "../../actions/sidebar_actions";
 
-function Modal({ modal, closeModal }) {
+function Modal({ modal, shrinkSidebar, closeModal }) {
   if (!modal) return null;
-
-  const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
 
   const handleClose = () => {
     closeModal();
-    if (modal.mode === "sidebar") toggleExpanded();
+    if (modal.mode === "sidebar") shrinkSidebar();
   };
 
   let component;
@@ -22,7 +20,7 @@ function Modal({ modal, closeModal }) {
       component = <UploadVideoFormContainer />;
       break;
     case "sidebar":
-      component = <SideBar modal={true} />; // toggleExpanded if modal
+      component = <SideBar modal={true} />; // expandSidebar if modal
       break;
     case "unsubscribe":
       component = <ConfirmationModal mode={modal.mode} meta={modal.meta} />;
@@ -50,6 +48,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     closeModal: () => dispatch(closeModal()),
+    shrinkSidebar: () => dispatch(shrinkSidebar()),
   };
 };
 

@@ -1,6 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { Link, useParams, useLocation } from "react-router-dom";
+import { closeModal } from "../../actions/modal_actions";
+import { shrinkSidebar } from "../../actions/sidebar_actions";
+import { useListenViewport } from "../../hooks/useListenViewport";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
@@ -10,15 +14,13 @@ import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
 import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
 import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
-import { SidebarContext } from "../root";
-import { closeModal } from "../../actions/modal_actions";
 
-function SideBar({ modal, closeModal }) {
+function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
+  const sidebarRef = useRef(null);
   const location = useLocation();
   const { feedtype } = useParams();
   const [showToggled, setShowToggled] = useState("");
-  const { sidebarExpanded, toggleExpanded } = useContext(SidebarContext);
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+  const { viewportWidth } = useListenViewport();
 
   // setShowToggled on mount based on feedType param
   useEffect(() => {
@@ -31,16 +33,11 @@ function SideBar({ modal, closeModal }) {
     return () => setShowToggled("");
   }, [location.pathname]);
 
-  const updateMedia = () => {
-    setViewportWidth(window.innerWidth);
-  };
-
-  // listen and set browser width
+  // shrink sidebar at 1312px, if not modal and expanded
   useEffect(() => {
-    window.addEventListener("resize", updateMedia);
-    if (viewportWidth <= 1312 && sidebarExpanded) toggleExpanded();
-
-    return () => window.removeEventListener("resize", updateMedia);
+    if (viewportWidth < 1312) {
+      if (!modal && sidebarExpanded) shrinkSidebar();
+    }
   }, [viewportWidth]);
 
   const changeFeed = (dir) => {
@@ -49,7 +46,7 @@ function SideBar({ modal, closeModal }) {
 
   const handleCloseModal = () => {
     closeModal();
-    toggleExpanded();
+    shrinkSidebar();
   };
 
   // animation on mounted and unmounted
@@ -58,17 +55,19 @@ function SideBar({ modal, closeModal }) {
   };
 
   // conditional class names for each sidebar__item
-  const isHome = showToggled == "home";
-  const isSubscriptions = showToggled == "subscriptions";
-  const isLibrary = showToggled == "library";
-  const isRyan = showToggled == "ryannaing";
+  const isHome = showToggled === "home";
+  const isSubscriptions = showToggled === "subscriptions";
+  const isLibrary = showToggled === "library";
+  const isRyan = showToggled === "ryannaing";
 
   return (
     <div
+      ref={sidebarRef}
       className={`main__sidebar main__sidebar--${
-        sidebarExpanded ? "expanded" : null
-      } ${modal ? "main__sidebar--modal" : null}`}
+        sidebarExpanded && "expanded"
+      } ${modal && "main__sidebar--modal"}`}
       style={modal && mountedModalStyle}
+      onClick={(e) => e.stopPropagation()}
     >
       {modal && (
         <div className='sidebar__modalNav'>
@@ -138,10 +137,17 @@ function SideBar({ modal, closeModal }) {
   );
 }
 
-const mDTP = (dispatch) => {
+const mSTP = ({ ui: { sidebar } }) => {
   return {
-    closeModal: () => dispatch(closeModal("sidebar")),
+    sidebarExpanded: sidebar === "expanded",
   };
 };
 
-export default connect(null, mDTP)(SideBar);
+const mDTP = (dispatch) => {
+  return {
+    closeModal: () => dispatch(closeModal("sidebar")),
+    shrinkSidebar: () => dispatch(shrinkSidebar()),
+  };
+};
+
+export default connect(mSTP, mDTP)(SideBar);
