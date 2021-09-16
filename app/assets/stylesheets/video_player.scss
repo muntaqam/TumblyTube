@@ -4,6 +4,10 @@
   font-size: 0;
   // overflow: hidden;
 
+  background: var(--clr-hightlight-gray);
+  border-radius: 1px;
+  aspect-ratio: 16 / 9;
+
   &__video {
     width: 100%;
   }
@@ -72,7 +76,7 @@
 
 .progress:hover {
   height: 10px;
-   background: rgba(255, 255, 255, 0.884);
+  background: rgba(255, 255, 255, 0.884);
 }
 
 .progress {
