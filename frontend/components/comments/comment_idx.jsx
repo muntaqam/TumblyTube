@@ -53,7 +53,7 @@ function CommentIndex(props) {
     }
 
     return () => {
-      if (!currentBottomLoaderBar) {
+      if (currentBottomLoaderBar) {
         currentObserver.unobserve(currentBottomLoaderBar);
       }
     };
