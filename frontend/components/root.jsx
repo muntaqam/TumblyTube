@@ -1,10 +1,11 @@
-import React, { createContext, useRef } from "react";
+import React, { useRef } from "react";
 import { Provider } from "react-redux";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
 import NotiPortal from "./noti_portal/noti_portal";
+import { NotiContext } from "../context/noti_context";
 
-export const NotiContext = createContext(null);
+// export const NotiContext = createContext(null);
 
 const Root = ({ store }) => {
   const notiRef = useRef(null);

@@ -73,7 +73,7 @@ export default class UploadVideoDetails extends React.Component {
           </section>
         </section>
         <footer className='uploadDetails__footer'>
-          <Tooltip content='Video upload complete' position='top'>
+          <Tooltip content='Video upload processed' position='top'>
             <PublishIcon id='uploadDetails-uploaded' />
           </Tooltip>
 

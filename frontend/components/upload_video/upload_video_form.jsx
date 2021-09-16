@@ -1,6 +1,7 @@
 import React from "react";
 import UploadVideoDragDrop from "./upload_video_dragdrop";
 import UploadVideoDetails from "./upload_video_details";
+import { NotiContext } from "../../context/noti_context";
 
 class UploadVideoForm extends React.Component {
   constructor(props) {
@@ -45,6 +46,8 @@ class UploadVideoForm extends React.Component {
   }
 
   handleFile(e) {
+    let { addNoti } = this.context;
+
     const file = e.currentTarget.files[0];
     const fileReader = new FileReader();
 
@@ -55,6 +58,11 @@ class UploadVideoForm extends React.Component {
       });
     };
 
+    addNoti({
+      mode: "success",
+      message: "Video upload processed",
+    });
+
     if (file) {
       fileReader.readAsDataURL(file);
     } else {
@@ -64,6 +72,7 @@ class UploadVideoForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    let { addNoti } = this.context;
 
     let formData = new FormData();
     formData.append("video[title]", this.state.title);
@@ -71,6 +80,7 @@ class UploadVideoForm extends React.Component {
     formData.append("video[video_file]", this.state.videoFile);
     this.props.upload(formData);
     this.props.closeModal();
+    addNoti({ mode: "success", message: "Video upload complete" });
   }
 
   render() {
@@ -105,5 +115,7 @@ class UploadVideoForm extends React.Component {
     return formStep;
   }
 }
+
+UploadVideoForm.contextType = NotiContext;
 
 export default UploadVideoForm;

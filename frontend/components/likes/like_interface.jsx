@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router";
-import { NotiContext } from "../root";
+import { NotiContext } from "../../context/noti_context";
 import Tooltip from "../tooltip/tooltip";
 import DislikeButton from "./dislike_button";
 import LikeButton from "./like_button";
