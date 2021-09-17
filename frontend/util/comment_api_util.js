@@ -25,6 +25,14 @@ export const createComment = (comment) => {
   });
 };
 
+export const editComment = (commentId, comment) => {
+  return $.ajax({
+    method: "PATCH",
+    url: `api/comments/${commentId}`,
+    data: { comment },
+  });
+};
+
 export const deleteComment = (commentId) => {
   return $.ajax({
     method: "DELETE",

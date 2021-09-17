@@ -69,6 +69,12 @@ export const createComment = (comment) => (dispatch) => {
   });
 };
 
+export const editComment = (commentId, comment) => (dispatch) => {
+  return APIUtil.editComment(commentId, comment).then((comment) => {
+    dispatch(receiveComment(comment));
+  });
+};
+
 export const deleteComment = (commentId) => (dispatch) => {
   return APIUtil.deleteComment(commentId).then((comment) => {
     if (comment.parentCommentId) dispatch(removeChildComment(comment));

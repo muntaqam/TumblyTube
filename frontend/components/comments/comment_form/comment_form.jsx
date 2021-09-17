@@ -1,26 +1,27 @@
 import React, { useState, useRef } from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import { useOpenReply } from "../comment_idx_item";
 import { avatarFromInitials } from "../../../util/avatar_util";
 
-function CommentForm(props) {
+const CommentForm = (props) => {
   const {
     currentUser,
     currentUserId,
     currentVideoId,
     createComment,
+    editComment,
+    commentId,
     parentCommentId,
     autoFocus,
+    toggleOpenReply,
+    toggleEditing,
   } = props;
 
   const [body, setBody] = useState("");
   const [showInputLine, setInputLine] = useState(false);
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [showBtn, setShowBtn] = useState(false);
-  const inputRef = useRef(null);
 
-  // custom hook to toggle CommentForm in CommentIdx
-  const toggleOpenReply = useOpenReply();
+  const inputRef = useRef(null);
 
   function handleFocus() {
     if (!currentUser) props.history.push("/login");
@@ -37,7 +38,17 @@ function CommentForm(props) {
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
+    // EDIT
+    if (commentId) {
+      editComment(commentId, {
+        body,
+        commenter_id: currentUser.id,
+        video_id: currentVideoId,
+      });
+      toggleEditing();
+      return;
+    }
+
     createComment({
       body,
       commenter_id: currentUser.id,
@@ -51,9 +62,19 @@ function CommentForm(props) {
   function handleCancel(e) {
     e.preventDefault();
     if (parentCommentId) toggleOpenReply();
+    if (commentId) toggleEditing();
     setBody("");
     setShowBtn(false);
     setDisabledBtn(true);
+  }
+
+  let buttonName;
+  if (commentId) {
+    buttonName = "SAVE";
+  } else if (parentCommentId) {
+    buttonName = "REPLY";
+  } else {
+    buttonName = "COMMENT";
   }
 
   return (
@@ -98,13 +119,13 @@ function CommentForm(props) {
               disabled={disabledBtn}
               onClick={handleSubmit}
             >
-              {parentCommentId ? "REPLY" : "COMMENT"}
+              {buttonName}
             </button>
           </div>
         )}
       </div>
     </div>
   );
-}
+};
 
 export default CommentForm;

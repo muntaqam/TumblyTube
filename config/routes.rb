@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       post 'add_views', on: :member
     end
 
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :update, :destroy]
 
     resources :likes, only: [:create, :destroy]
   end
