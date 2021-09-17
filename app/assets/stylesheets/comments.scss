@@ -55,9 +55,7 @@
     background: transparent;
     color: var(--clr-text-gray);
     padding: 0.8em 1.2em;
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
   }
 
   &__submit {
@@ -212,6 +210,17 @@
     margin-left: 1em;
     margin-block: auto;
     cursor: crosshair;
+  }
+
+  &__edit {
+    background: transparent;
+    height: fit-content;
+    font-size: 0.7em;
+    color: var(--clr-text-gray);
+    font-weight: 700;
+    margin-left: 1em;
+    margin-block: auto;
+    cursor: pointer;
   }
 
   &__replies {
