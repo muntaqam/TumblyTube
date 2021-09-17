@@ -1,10 +1,9 @@
 import React from "react";
 import LikeInterface from "../likes/like_interface_container";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import { avatarFromInitials } from "../../util/avatar_util";
 
 const ChildComments = (props) => {
-  const { comment, renderDelete, handleDelete } = props;
+  const { comment, userLoggedin, handleDelete } = props;
 
   return (
     <div className='comments__card comments__card--child'>
@@ -28,7 +27,7 @@ const ChildComments = (props) => {
             numLikes={comment.numLikes}
             numDislikes={comment.numDislikes}
           />
-          {renderDelete(comment.commenterId) && (
+          {userLoggedin(comment.commenterId) && (
             <button
               className='comments__delete'
               onClick={() => handleDelete(comment.id)}
