@@ -75,7 +75,7 @@ export default function Subscriptions({
             <div key={user.id} className='subs__user'>
               <div className='subs__usericonContainer'>
                 <img
-                  src={avatarFromInitials(user, 110)}
+                  src={avatarFromInitials(user, 96)}
                   alt='avatar'
                   className='subs__usericon'
                 />
