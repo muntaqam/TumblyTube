@@ -44,10 +44,11 @@ const CommentIndex = (props) => {
     <>
       {editing ? (
         <CommentFormContainer
-          autoFocus={true}
-          currentVideoId={currentVideoId}
+          message={comment.body}
           commentId={comment.id}
+          currentVideoId={currentVideoId}
           toggleEditing={toggleEditing}
+          autoFocus={true}
         />
       ) : (
         <div className='comments__card'>
