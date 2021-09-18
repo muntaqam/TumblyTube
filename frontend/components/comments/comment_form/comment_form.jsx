@@ -9,14 +9,15 @@ const CommentForm = (props) => {
     currentVideoId,
     createComment,
     editComment,
+    toggleOpenReply,
+    toggleEditing,
+    message,
     commentId,
     parentCommentId,
     autoFocus,
-    toggleOpenReply,
-    toggleEditing,
   } = props;
 
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState(message || "");
   const [showInputLine, setInputLine] = useState(false);
   const [disabledBtn, setDisabledBtn] = useState(true);
   const [showBtn, setShowBtn] = useState(false);
