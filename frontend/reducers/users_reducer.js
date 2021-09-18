@@ -66,13 +66,15 @@ const usersReducer = (state = {}, action) => {
       };
 
     case REMOVE_SUBSCRIPTION:
+      const dupSubscribees = { ...newState[action.subscriberId].subscribees };
+      delete dupSubscribees[action.subscribee];
+
       return {
         ...state,
         [action.subscriberId]: {
           ...state[action.subscriberId],
           ["subscribees"]: {
-            ...state[action.subscriberId]["subscribees"],
-            [action.subscribee]: null,
+            ...dupSubscribees,
           },
         },
       };
