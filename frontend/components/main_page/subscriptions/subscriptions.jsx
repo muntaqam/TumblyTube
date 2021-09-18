@@ -26,31 +26,30 @@ export default function Subscriptions({
     );
   }
 
-  useEffect(() => {
-    if (isVideosEmpty()) fetchVideos();
-  }, []);
-
   const isVideosEmpty = () => {
     return Object.keys(videos).length === 0;
   };
+
+  useEffect(() => {
+    if (isVideosEmpty()) fetchVideos();
+  }, []);
 
   const filteredSubVideosArr = Object.values(videos).filter(
     // subscribee username(keys) are not Capitalized but video.creator username is
     (vid) => currentUser.subscribees[vid.creator.username.toLowerCase()]
   );
 
-  const subUsersArr = Object.values(currentUser.subscribees);
+  const filteredSubUsersArr = Object.values(currentUser.subscribees);
 
   if (isVideosEmpty()) return null;
-  else
-    return (
-      <div className='main__subs'>
-        <div className='subs__title subs__title--video'>Latest Videos</div>
-        {!filteredSubVideosArr.length && (
-          <div className='subs__nosubs'>
-            Videos from your subscriptions will go here
-          </div>
-        )}
+  return (
+    <div className='main__subs'>
+      <div className='subs__title subs__title--video'>Latest Videos</div>
+      {!filteredSubVideosArr.length ? (
+        <div className='subs__nosubs'>
+          Videos from your subscriptions will go here
+        </div>
+      ) : (
         <div className='subs__split subs__split--videos'>
           {filteredSubVideosArr.reverse().map((vid) => (
             <MainVideoIndexItem
@@ -60,18 +59,19 @@ export default function Subscriptions({
             />
           ))}
         </div>
+      )}
 
-        <div className='subs__title subs__title--channel'>
-          Channels
-          <span className='subs__subtitle'>{currentUser.numSubscribees}</span>
+      <div className='subs__title subs__title--channel'>
+        Channels
+        <span className='subs__subtitle'>{currentUser.numSubscribees}</span>
+      </div>
+      {!filteredSubUsersArr.length ? (
+        <div className='subs__nosubs'>
+          Your subscribed channels will go here
         </div>
-        {!subUsersArr.length && (
-          <div className='subs__nosubs'>
-            Your subscribed channels will go here
-          </div>
-        )}
+      ) : (
         <div className='subs__split subs__split--users'>
-          {subUsersArr.reverse().map((user) => (
+          {filteredSubUsersArr.reverse().map((user) => (
             <div key={user.id} className='subs__user'>
               <div className='subs__usericonContainer'>
                 <img
@@ -88,6 +88,7 @@ export default function Subscriptions({
             </div>
           ))}
         </div>
-      </div>
-    );
+      )}
+    </div>
+  );
 }
