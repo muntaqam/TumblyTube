@@ -72,7 +72,7 @@ export default function Subscriptions({
       ) : (
         <div className='subs__split subs__split--users'>
           {filteredSubUsersArr.reverse().map((user) => (
-            <div key={user.id} className='subs__user'>
+            <div className='subs__user'>
               <div className='subs__usericonContainer'>
                 <img
                   src={avatarFromInitials(user, 110)}
@@ -84,7 +84,7 @@ export default function Subscriptions({
               <div className='subs__userstats'>
                 {`${user.numSubscribers} subscribers • ${user.numVideos} videos`}
               </div>
-              <SubscribeButtonContainer creator={user} />
+              <SubscribeButtonContainer key={user.id} creator={user} />
             </div>
           ))}
         </div>
