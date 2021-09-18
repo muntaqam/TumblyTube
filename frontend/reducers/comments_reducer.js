@@ -30,8 +30,6 @@ export default (state = {}, action) => {
       });
 
     case RECEIVE_CHILD_COMMENT:
-      // +1 to [numChildComments] of parent comment
-      newState[action.parentCommentId].numChildComments++;
       newState[action.parentCommentId].childComments[action.comment.id] =
         action.comment;
       return newState;
@@ -41,8 +39,6 @@ export default (state = {}, action) => {
       return newState;
 
     case REMOVE_CHILD_COMMENT:
-      // -1 to [numChildComments] of parent comment
-      newState[action.parentCommentId].numChildComments--;
       delete newState[action.parentCommentId].childComments[action.commentId];
       return newState;
 

@@ -75,17 +75,18 @@ const CommentIndex = (props) => {
                 REPLY
               </button>
               {userLoggedin(comment.commenterId) && (
-                <button
-                  className='comments__delete'
-                  onClick={() => handleDelete(comment.id)}
-                >
-                  DELETE
-                </button>
-              )}
-              {userLoggedin(comment.commenterId) && (
-                <button className='comments__edit' onClick={toggleEditing}>
-                  EDIT
-                </button>
+                <div>
+                  <button
+                    className='comments__delete'
+                    onClick={() => handleDelete(comment.id)}
+                  >
+                    DELETE
+                  </button>
+
+                  <button className='comments__edit' onClick={toggleEditing}>
+                    EDIT
+                  </button>
+                </div>
               )}
             </div>
             {openReply && (
@@ -93,13 +94,14 @@ const CommentIndex = (props) => {
                 autoFocus={true}
                 currentVideoId={currentVideoId}
                 parentCommentId={comment.id}
+                editing={editing}
                 toggleOpenReply={toggleOpenReply}
               />
             )}
-            {comment.numChildComments > 0 && (
+            {childComments.length > 0 && (
               <div className='comments__replies' onClick={toggleArrow}>
                 {arrowUp ? "▲ Hide " : "▼ View "}
-                {`${comment.numChildComments} replies`}
+                {`${childComments.length} replies`}
               </div>
             )}
             {arrowUp &&
@@ -109,6 +111,7 @@ const CommentIndex = (props) => {
                   comment={comment}
                   handleDelete={handleDelete}
                   userLoggedin={userLoggedin}
+                  currentVideoId={currentVideoId}
                 />
               ))}
           </div>
