@@ -71,7 +71,8 @@ export const createComment = (comment) => (dispatch) => {
 
 export const editComment = (commentId, comment) => (dispatch) => {
   return APIUtil.editComment(commentId, comment).then((comment) => {
-    dispatch(receiveComment(comment));
+    if (comment.parentCommentId) dispatch(receiveChildComment(comment));
+    else dispatch(receiveComment(comment));
   });
 };
 
