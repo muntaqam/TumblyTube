@@ -57,7 +57,6 @@
     &--users {
       display: flex;
       flex-wrap: wrap;
-      margin-top: 2em;
 
       // overwrite global subscribe button
       .subscribe {
@@ -81,7 +80,10 @@
     align-items: center;
     flex-direction: column;
     flex-shrink: 0;
+
     width: max-content;
+    margin-right: 1.5em;
+    margin-top: 2em;
   }
 
   &__usericon {
