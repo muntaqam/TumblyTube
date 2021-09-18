@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { Link } from "react-router-dom";
+import { useListenViewport } from "../../hooks/useListenViewport";
 
 const Dropdown = forwardRef(({ mode, right, bottom, left }, ref) => {
   const styles = {
@@ -10,6 +11,8 @@ const Dropdown = forwardRef(({ mode, right, bottom, left }, ref) => {
     bottom: bottom,
     left: left,
   };
+
+  const { viewportWidth } = useListenViewport();
 
   let title;
   let subtitle;
@@ -40,6 +43,7 @@ const Dropdown = forwardRef(({ mode, right, bottom, left }, ref) => {
       break;
   }
 
+  if (viewportWidth <= 530) return null;
   return (
     <div ref={ref} style={styles} className='requireLoginDD'>
       <section className='requireLoginDD__split requireLoginDD__split--top'>
