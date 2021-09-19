@@ -14,6 +14,7 @@ function SideVideoIndex(props) {
     <Link className='sideidx__card' to={`/watch/${video.id}`}>
       <video
         className='sideidx__vid'
+        preload='metadata'
         muted
         src={video.videoUrl}
         onMouseEnter={handleAutoPlayIn}

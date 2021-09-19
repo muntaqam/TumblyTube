@@ -138,9 +138,10 @@ class VideoPlayer extends React.Component {
     return (
       <div className='player'>
         <video
+          ref={this.videoRef}
           className='player__video viewer'
           src={this.props.video.videoUrl}
-          ref={this.videoRef}
+          preload='metadata'
           onClick={this.togglePlay}
           onDoubleClick={this.toggleFullScreen}
           onTimeUpdate={this.setTime}
