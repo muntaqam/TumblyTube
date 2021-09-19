@@ -14,6 +14,7 @@ class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      videoSupported: false,
       paused: false,
       muted: false,
       ended: false,
@@ -28,28 +29,34 @@ class VideoPlayer extends React.Component {
     this.progressBarRef = React.createRef();
     this.progressRef = React.createRef();
 
+    this.initializeVideo = this.initializeVideo.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
     this.handleEnded = this.handleEnded.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
-    this.setTime = this.setTime.bind(this);
+    this.updateCurrentTime = this.updateCurrentTime.bind(this);
     this.handleProgress = this.handleProgress.bind(this);
     this.handleScrub = this.handleScrub.bind(this);
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
+  }
+
+  // if the browser supports HTML5 video, hide default video controls and show custom controls
+  componentDidMount() {
+    const isVideoSupported = !!document.createElement("video").canPlayType;
+    if (isVideoSupported) {
+      this.videoRef.current.controls = false;
+      this.setState({ videoSupported: true });
+    }
   }
 
   togglePlay() {
     const vid = this.videoRef.current;
     if (vid.paused) {
       vid.play();
-      this.setState({ paused: false });
+      this.setState({ paused: false, ended: false });
     } else {
       vid.pause();
-      this.setState({ paused: true });
-    }
-
-    if (this.state.ended) {
-      this.setState({ ended: false });
+      this.setState({ paused: true, ended: false });
     }
   }
 
@@ -84,30 +91,43 @@ class VideoPlayer extends React.Component {
     this.videoRef.current.requestFullscreen();
   }
 
-  setTime() {
-    this.handleProgress();
+  // takes time length in seconds and returns the time in minutes and seconds
+  formatTime(timeInSeconds) {
+    const result = new Date(timeInSeconds * 1000).toISOString().substr(11, 8);
 
-    const vid = this.videoRef.current;
-    let durationMin = Math.floor(vid.duration / 60);
-    let durationSec = Math.floor(vid.duration - durationMin * 60);
-    let currentMin = Math.floor(vid.currentTime / 60);
-    let currentSec = Math.floor(vid.currentTime - currentMin * 60);
-    if (durationSec < 10) {
-      durationSec = `0${durationSec}`;
-    }
-    if (currentSec < 10) {
-      currentSec = `0${currentSec}`;
-    }
-    this.setState({
-      duration: `${durationMin}:${durationSec}`,
-      currentTime: `${currentMin}:${currentSec}`,
-    });
+    return {
+      minutes: result.substr(3, 2),
+      seconds: result.substr(6, 2),
+    };
   }
 
   handleProgress() {
     const vid = this.videoRef.current;
     const percent = (vid.currentTime / vid.duration) * 100;
     this.progressBarRef.current.style.flexBasis = `${percent}%`;
+  }
+
+  initializeVideo() {
+    const vid = this.videoRef.current;
+    const duration = Math.floor(vid.duration);
+    const time = this.formatTime(duration);
+
+    this.setState({
+      duration: `${time.minutes}:${time.seconds}`,
+    });
+
+    this.handleProgress();
+  }
+
+  updateCurrentTime() {
+    const vid = this.videoRef.current;
+    const time = this.formatTime(vid.currentTime);
+
+    this.setState({
+      currentTime: `${time.minutes}:${time.seconds}`,
+    });
+
+    this.handleProgress();
   }
 
   handleScrub(e) {
@@ -142,16 +162,18 @@ class VideoPlayer extends React.Component {
           className='player__video viewer'
           src={this.props.video.videoUrl}
           preload='metadata'
+          onLoadedMetadata={this.initializeVideo}
+          onTimeUpdate={this.updateCurrentTime}
           onClick={this.togglePlay}
           onDoubleClick={this.toggleFullScreen}
-          onTimeUpdate={this.setTime}
           onEnded={this.handleEnded}
           autoPlay={true}
         ></video>
         <div
+          ref={this.videoControlsRef}
           className={`player__controls player__controls--${
             this.state.paused ? "" : "hidden"
-          }`}
+          } ${!this.state.videoSupported && "hidden"}`}
         >
           <div
             className='progress'
@@ -162,7 +184,11 @@ class VideoPlayer extends React.Component {
           </div>
 
           <Tooltip content={playTitle} position='top'>
-            <button className='player__button toggle' onClick={this.togglePlay}>
+            <button
+              className='player__button toggle'
+              title='Play (k)'
+              onClick={this.togglePlay}
+            >
               {playPauseReplay}
             </button>
           </Tooltip>
@@ -177,6 +203,7 @@ class VideoPlayer extends React.Component {
               position='top'
             >
               <button
+                title='Mute (m)'
                 className='player__button player__button--mute toggle'
                 onClick={this.toggleMute}
               >
@@ -193,9 +220,9 @@ class VideoPlayer extends React.Component {
             )}
           </div>
           <div className='player__time'>
-            <span>{this.state.currentTime}</span>
+            <time>{this.state.currentTime}</time>
             <span>/</span>
-            <span>{this.state.duration}</span>
+            <time>{this.state.duration}</time>
           </div>
 
           <Tooltip content='Full screen' position='top'>
