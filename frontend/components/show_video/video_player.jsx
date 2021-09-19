@@ -7,6 +7,7 @@ import {
   volumeUpIcon,
   volumeOffIcon,
   fullScreenIcon,
+  fullScreenExitIcon,
 } from "./video_control_icons";
 import RangeInput from "./video_control_range";
 
@@ -24,6 +25,7 @@ class VideoPlayer extends React.Component {
       mountedRange: false,
     };
 
+    this.playerContainerRef = React.createRef();
     this.videoRef = React.createRef();
     this.volRef = React.createRef();
     this.progressBarRef = React.createRef();
@@ -40,7 +42,7 @@ class VideoPlayer extends React.Component {
     this.updateCurrentTime = this.updateCurrentTime.bind(this);
     this.handleProgress = this.handleProgress.bind(this);
     this.updateSeekTooltip = this.updateSeekTooltip.bind(this);
-    this.handleScrub = this.handleScrub.bind(this);
+    this.handleSeekTo = this.handleSeekTo.bind(this);
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
 
@@ -67,8 +69,6 @@ class VideoPlayer extends React.Component {
 
   // displays when video onClick
   animatePlayback() {
-    this.togglePlay();
-
     const playbackAnimation = this.playbackAnimationRef.current;
 
     playbackAnimation.animate(
@@ -86,6 +86,8 @@ class VideoPlayer extends React.Component {
         duration: 500,
       }
     );
+
+    this.togglePlay();
   }
 
   toggleMute() {
@@ -113,10 +115,6 @@ class VideoPlayer extends React.Component {
     } else {
       this.setState({ muted: true });
     }
-  }
-
-  toggleFullScreen() {
-    this.videoRef.current.requestFullscreen();
   }
 
   // takes time length in seconds and returns the time in minutes and seconds
@@ -172,7 +170,8 @@ class VideoPlayer extends React.Component {
     seekTooltip.style.left = `${e.nativeEvent.pageX - rect.left - 25}px`;
   }
 
-  handleScrub(e) {
+  // skips video currentTime to mouse click offsetX on progress bar
+  handleSeekTo(e) {
     const vid = this.videoRef.current;
     const progress = this.progressRef.current;
 
@@ -186,20 +185,52 @@ class VideoPlayer extends React.Component {
     this.setState({ ended: true });
   }
 
+  // exit fullscreen, if browser is in fullscreen mode; vice versa
+  toggleFullScreen() {
+    const playerContainer = this.playerContainerRef.current;
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else if (document.webkitFullScreenElement) {
+      // Safari support
+      document.webkitExitFullScreen();
+    } else if (playerContainer.webkitRequestFullscreen) {
+      // Safari support
+      playerContainer.webkitRequestFullscreen();
+    } else {
+      playerContainer.requestFullscreen();
+    }
+  }
+
+  handleKeyboardShortcuts(e) {
+    const { key } = e;
+    switch (e) {
+      case "k":
+        this.togglePlay();
+        this.animatePlayback();
+    }
+  }
+
   render() {
-    let playButton = pauseIcon;
-    let playTitle = "Pause";
+    let playerButton = pauseIcon;
+    let playerButtonTooltip = "Pause";
     if (this.state.ended) {
-      playTitle = "Replay";
-      playButton = replayIcon;
+      playerButtonTooltip = "Replay";
+      playerButton = replayIcon;
     }
     if (this.state.paused) {
-      playTitle = "Play";
-      playButton = playIcon;
+      playerButtonTooltip = "Play";
+      playerButton = playIcon;
     }
 
     return (
-      <div className='player'>
+      <div ref={this.playerContainerRef} className='player'>
+        <div
+          ref={this.playbackAnimationRef}
+          className='player__playbackAnimation'
+        >
+          {this.state.paused ? pauseIcon : playIcon}
+        </div>
         <video
           ref={this.videoRef}
           className='player__video viewer'
@@ -209,15 +240,11 @@ class VideoPlayer extends React.Component {
           onTimeUpdate={this.updateCurrentTime}
           onClick={this.animatePlayback}
           onDoubleClick={this.toggleFullScreen}
+          keyup={this.handleKeyboardShortcuts}
           onEnded={this.handleEnded}
           autoPlay={true}
         ></video>
-        <div
-          ref={this.playbackAnimationRef}
-          className='player__playbackAnimation'
-        >
-          {this.state.paused ? pauseIcon : playIcon}
-        </div>
+
         <div
           ref={this.videoControlsRef}
           className={`player__controls player__controls--${
@@ -227,7 +254,7 @@ class VideoPlayer extends React.Component {
           <div
             className='progress'
             ref={this.progressRef}
-            onClick={this.handleScrub}
+            onClick={this.handleSeekTo}
             onMouseMove={this.updateSeekTooltip}
           >
             <div ref={this.progressBarRef} className='progress__filled'></div>
@@ -236,13 +263,13 @@ class VideoPlayer extends React.Component {
             </div>
           </div>
 
-          <Tooltip content={playTitle} position='top'>
+          <Tooltip content={playerButtonTooltip} position='top'>
             <button
               className='player__button toggle'
               title='Play (k)'
               onClick={this.togglePlay}
             >
-              {playButton}
+              {playerButton}
             </button>
           </Tooltip>
 
@@ -278,12 +305,17 @@ class VideoPlayer extends React.Component {
             <time>{this.state.duration}</time>
           </div>
 
-          <Tooltip content='Full screen' position='top'>
+          <Tooltip
+            content={
+              document.fullscreenElement ? "Exit full screen" : "Full screen"
+            }
+            position='top'
+          >
             <button
               className='player__button player__button--fs'
               onClick={this.toggleFullScreen}
             >
-              {fullScreenIcon}
+              {document.fullscreenElement ? fullScreenExitIcon : fullScreenIcon}
             </button>
           </Tooltip>
         </div>
