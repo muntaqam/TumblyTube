@@ -44,23 +44,6 @@ class VideoPlayer extends React.Component {
     this.updateSeekTooltip = this.updateSeekTooltip.bind(this);
     this.handleSeekTo = this.handleSeekTo.bind(this);
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
-    this.handleKeyboardShortcuts = this.handleKeyboardShortcuts.bind(this);
-  }
-
-  handleKeyboardShortcuts(e) {
-    const { key } = e;
-    switch (key) {
-      case "k":
-      case " ": // key = Space
-        this.animatePlayback(); // animatePlayback triggers togglePlay
-        break;
-      case "m":
-        this.toggleMute();
-        break;
-      case "f":
-        this.toggleFullScreen();
-        break;
-    }
   }
 
   // if the browser supports HTML5 video, hide default video controls and show custom controls
@@ -70,8 +53,6 @@ class VideoPlayer extends React.Component {
       this.videoRef.current.controls = false;
       this.setState({ videoSupported: true });
     }
-
-    document.addEventListener("keyup", this.handleKeyboardShortcuts);
   }
 
   togglePlay() {
