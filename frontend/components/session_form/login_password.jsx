@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { avatarFromInitials } from "../../util/avatar_util";
 
 class LoginPassword extends React.Component {
   constructor(props) {
@@ -37,62 +38,68 @@ class LoginPassword extends React.Component {
     let showErr;
     if (this.props.errors.length > 0) {
       showErr = (
-        <div className="session__errors">
-          <span className="material-icons">error</span>
-          <span className="session__errors__type">{this.props.errors[0]}</span>
+        <div className='session__errors'>
+          <span className='material-icons'>error</span>
+          <span className='session__errors__type'>{this.props.errors[0]}</span>
         </div>
       );
     }
 
     return (
-      <div className="login login--container">
-        <header className="session__header session__header__login">
-          <Link to="/" className="session__header__logo__container">
+      <div className='login login--container'>
+        <header className='session__header session__header__login'>
+          <Link to='/' className='session__header__logo__container'>
             <img
-              className="session__header__logo__img"
+              className='session__header__logo__img'
               src={window.tumbleLogoURL}
             />
           </Link>
-          <h2 className="session__header__title">
+          <h2 className='session__header__title'>
             Hi {this.props.identifiedUser.username}
           </h2>
           <div
-            className="session__header__username"
+            className='session__header__username'
             onClick={this.props.prevStep}
           >
-            <span className="session__header__subtitle">
+            <span className='session__header__subtitle'>
+              <img
+                className='session__header__avatar'
+                src={avatarFromInitials(this.props.identifiedUser, 20)}
+                alt='avatar'
+              />
+
               {this.props.identifiedUser.email}
             </span>
-            <span className="material-icons">expand_more</span>
+            <span className='material-icons'>expand_more</span>
           </div>
         </header>
-        <form className="login__form">
-          <div className="login__form__input">
+        <form className='login__form'>
+          <div className='login__form__input'>
             <input
-              type="password"
+              type='password'
               className={
                 "login__form__input__item" +
                 (showErr ? " signup__form__input__item--error" : "")
               }
               onChange={this.handleChange}
-              placeholder=" "
+              placeholder=' '
               value={this.state.password}
             />
-            <label className="login__form__input__label">Password</label>
+            <label className='login__form__input__label'>Password</label>
             {showErr}
           </div>
-          <div className="login__form__question">
+          <div className='login__form__question'>
             Don't want to sign in or create an account?{" "}
           </div>
-          <a className="login__form__demo" onClick={this.props.handleDemo}>
+          <a className='login__form__demo' onClick={this.props.handleDemo}>
             Sign in as demo user
           </a>
-          <div className="login__form__btn">
-            <div className="login__form__btn__link--light">
+          <div className='login__form__btn'>
+            <div className='login__form__btn__link--light'>
               {this.props.formLink}
             </div>
             <button
-              className="login__form__btn__item"
+              className='login__form__btn__item'
               onClick={this.handleSubmit}
             >
               Sign In
