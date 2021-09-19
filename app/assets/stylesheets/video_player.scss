@@ -78,9 +78,9 @@
 
 .progress {
   flex: 10;
-  position: relative;
   display: flex;
   flex-basis: 100%;
+
   height: 4px;
   margin-inline: 10px;
   transition: height 0.1s linear;
@@ -92,6 +92,22 @@
   background: #01ffff;
   flex: 0;
   flex-basis: 0.5%;
+}
+
+.progress__seekTooltip {
+  position: absolute;
+  top: -2.5em;
+  display: none;
+
+  font-size: 0.75rem;
+  color: white;
+  background-color: #000000c7;
+  border-radius: 1px;
+  padding: 0.5em 1em;
+}
+
+.progress:hover .progress__seekTooltip {
+  display: inline-block;
 }
 
 .player__time {

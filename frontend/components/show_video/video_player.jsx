@@ -28,6 +28,7 @@ class VideoPlayer extends React.Component {
     this.volRef = React.createRef();
     this.progressBarRef = React.createRef();
     this.progressRef = React.createRef();
+    this.seekTooltipRef = React.createRef();
 
     this.initializeVideo = this.initializeVideo.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
@@ -36,6 +37,7 @@ class VideoPlayer extends React.Component {
     this.handleVolume = this.handleVolume.bind(this);
     this.updateCurrentTime = this.updateCurrentTime.bind(this);
     this.handleProgress = this.handleProgress.bind(this);
+    this.updateSeekTooltip = this.updateSeekTooltip.bind(this);
     this.handleScrub = this.handleScrub.bind(this);
     this.toggleFullScreen = this.toggleFullScreen.bind(this);
   }
@@ -130,12 +132,27 @@ class VideoPlayer extends React.Component {
     this.handleProgress();
   }
 
+  // find position of mouse on the progress bar and sets the tooltip position
+  updateSeekTooltip(e) {
+    const vid = this.videoRef.current;
+    const seekTooltip = this.seekTooltipRef.current;
+    const progress = this.progressRef.current;
+    const seekTo =
+      (e.nativeEvent.offsetX / progress.offsetWidth) * vid.duration;
+    const time = this.formatTime(seekTo);
+
+    seekTooltip.textContent = `${time.minutes}:${time.seconds}`;
+    const rect = vid.getBoundingClientRect();
+    seekTooltip.style.left = `${e.nativeEvent.pageX - rect.left - 25}px`;
+  }
+
   handleScrub(e) {
-    e.preventDefault();
     const vid = this.videoRef.current;
     const progress = this.progressRef.current;
+
     const scrubTime =
       (e.nativeEvent.offsetX / progress.offsetWidth) * vid.duration;
+
     vid.currentTime = scrubTime;
   }
 
@@ -179,8 +196,12 @@ class VideoPlayer extends React.Component {
             className='progress'
             ref={this.progressRef}
             onClick={this.handleScrub}
+            onMouseMove={this.updateSeekTooltip}
           >
-            <div className='progress__filled' ref={this.progressBarRef}></div>
+            <div ref={this.progressBarRef} className='progress__filled'></div>
+            <div ref={this.seekTooltipRef} className='progress__seekTooltip'>
+              00:00
+            </div>
           </div>
 
           <Tooltip content={playTitle} position='top'>
