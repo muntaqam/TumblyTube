@@ -63,7 +63,7 @@ export default function Subscriptions({
 
       <div className='subs__title subs__title--channel'>
         Channels
-        <span className='subs__subtitle'>{currentUser.numSubscribees}</span>
+        <span className='subs__subtitle'>{filteredSubUsersArr.length}</span>
       </div>
       {!filteredSubUsersArr.length ? (
         <div className='subs__nosubs'>
