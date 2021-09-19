@@ -148,11 +148,19 @@
 }
 
 // hide subscribe button
+// shrink down user avatar
 @media only screen and (max-width: 490px) {
   .results {
     .subscribe,
     &__emptysub {
       display: none;
+    }
+
+    &__item--user {
+      .results__user {
+        width: 90px;
+        height: 90px;
+      }
     }
   }
 }
