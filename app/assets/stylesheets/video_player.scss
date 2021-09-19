@@ -6,10 +6,11 @@
 
   background: var(--clr-hightlight-gray);
   border-radius: 1px;
-  aspect-ratio: 16 / 9;
 
   &__video {
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
   }
 
   &__volume {
