@@ -11,7 +11,7 @@ json.numSubscribees user.subscribees.size
 json.subscribees({})
 user.subscribees.each do |subscribee|
   json.set! :subscribees do
-    json.set! subscribee.username do
+    json.set! subscribee.username.downcase do
       json.extract! subscribee, :id, :username, :color
       json.numSubscribers subscribee.subscribers.size
       json.numVideos subscribee.videos.size
