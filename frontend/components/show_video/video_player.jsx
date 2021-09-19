@@ -19,6 +19,7 @@ class VideoPlayer extends React.Component {
       paused: false,
       muted: false,
       ended: false,
+      fullscreen: false,
       duration: "0:00",
       currentTime: "0:00",
       volume: 30,
@@ -190,14 +191,18 @@ class VideoPlayer extends React.Component {
     const playerContainer = this.playerContainerRef.current;
 
     if (document.fullscreenElement) {
+      this.setState({ fullscreen: false });
       document.exitFullscreen();
     } else if (document.webkitFullScreenElement) {
       // Safari support
+      this.setState({ fullscreen: false });
       document.webkitExitFullScreen();
     } else if (playerContainer.webkitRequestFullscreen) {
       // Safari support
+      this.setState({ fullscreen: true });
       playerContainer.webkitRequestFullscreen();
     } else {
+      this.setState({ fullscreen: true });
       playerContainer.requestFullscreen();
     }
   }
@@ -296,16 +301,14 @@ class VideoPlayer extends React.Component {
           </div>
 
           <Tooltip
-            content={
-              document.fullscreenElement ? "Exit full screen" : "Full screen"
-            }
+            content={this.state.fullscreen ? "Exit full screen" : "Full screen"}
             position='top'
           >
             <button
               className='player__button player__button--fs'
               onClick={this.toggleFullScreen}
             >
-              {document.fullscreenElement ? fullScreenExitIcon : fullScreenIcon}
+              {this.state.fullscreen ? fullScreenExitIcon : fullScreenIcon}
             </button>
           </Tooltip>
         </div>
