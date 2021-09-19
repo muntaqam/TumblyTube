@@ -72,6 +72,7 @@ function SearchResults(props) {
             <div className='results__split results__split--left'>
               <video
                 className='results__video'
+                preload='metadata'
                 muted
                 onMouseEnter={handleAutoPlayIn}
                 onMouseOut={handleAutoPlayOut}

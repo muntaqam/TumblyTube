@@ -15,6 +15,7 @@ function MainVideoIndexItem(props) {
     <Link className='main__card' to={`/watch/${video.id}`}>
       <video
         className='main__vid'
+        preload='metadata'
         muted
         onMouseEnter={handleAutoPlayIn}
         onMouseOut={handleAutoPlayOut}
