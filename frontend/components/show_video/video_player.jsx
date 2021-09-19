@@ -29,9 +29,11 @@ class VideoPlayer extends React.Component {
     this.progressBarRef = React.createRef();
     this.progressRef = React.createRef();
     this.seekTooltipRef = React.createRef();
+    this.playbackAnimationRef = React.createRef();
 
     this.initializeVideo = this.initializeVideo.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+    this.animatePlayback = this.animatePlayback.bind(this);
     this.handleEnded = this.handleEnded.bind(this);
     this.toggleMute = this.toggleMute.bind(this);
     this.handleVolume = this.handleVolume.bind(this);
@@ -53,6 +55,7 @@ class VideoPlayer extends React.Component {
 
   togglePlay() {
     const vid = this.videoRef.current;
+
     if (vid.paused) {
       vid.play();
       this.setState({ paused: false, ended: false });
@@ -60,6 +63,29 @@ class VideoPlayer extends React.Component {
       vid.pause();
       this.setState({ paused: true, ended: false });
     }
+  }
+
+  // displays when video onClick
+  animatePlayback() {
+    this.togglePlay();
+
+    const playbackAnimation = this.playbackAnimationRef.current;
+
+    playbackAnimation.animate(
+      [
+        {
+          opacity: 1,
+          transform: "scale(1)",
+        },
+        {
+          opacity: 0,
+          transform: "scale(1.3)",
+        },
+      ],
+      {
+        duration: 500,
+      }
+    );
   }
 
   toggleMute() {
@@ -161,15 +187,15 @@ class VideoPlayer extends React.Component {
   }
 
   render() {
-    let playPauseReplay = pauseIcon;
+    let playButton = pauseIcon;
     let playTitle = "Pause";
     if (this.state.ended) {
       playTitle = "Replay";
-      playPauseReplay = replayIcon;
+      playButton = replayIcon;
     }
     if (this.state.paused) {
       playTitle = "Play";
-      playPauseReplay = playIcon;
+      playButton = playIcon;
     }
 
     return (
@@ -181,11 +207,17 @@ class VideoPlayer extends React.Component {
           preload='metadata'
           onLoadedMetadata={this.initializeVideo}
           onTimeUpdate={this.updateCurrentTime}
-          onClick={this.togglePlay}
+          onClick={this.animatePlayback}
           onDoubleClick={this.toggleFullScreen}
           onEnded={this.handleEnded}
           autoPlay={true}
         ></video>
+        <div
+          ref={this.playbackAnimationRef}
+          className='player__playbackAnimation'
+        >
+          {this.state.paused ? pauseIcon : playIcon}
+        </div>
         <div
           ref={this.videoControlsRef}
           className={`player__controls player__controls--${
@@ -210,7 +242,7 @@ class VideoPlayer extends React.Component {
               title='Play (k)'
               onClick={this.togglePlay}
             >
-              {playPauseReplay}
+              {playButton}
             </button>
           </Tooltip>
 
