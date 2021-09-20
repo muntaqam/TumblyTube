@@ -54,7 +54,8 @@
   }
 
   &__vid {
-    width: 100%;
+    // width: 100%;
+    width: -webkit-fill-available;
     object-fit: contain;
 
     background: var(--clr-hightlight-gray);
@@ -69,7 +70,6 @@
     &--meta {
       display: block;
       flex-direction: column;
-      word-spacing: 0.5px;
       overflow-wrap: break-word;
     }
   }

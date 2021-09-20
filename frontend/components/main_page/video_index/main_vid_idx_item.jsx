@@ -35,7 +35,7 @@ function MainVideoIndexItem(props) {
           </Tooltip>
           <div className='main__viewsdate'>
             {viewsFormatted(video.views)} views
-            <span className='main__dot'> ● </span>
+            <span className='main__dot'> • </span>
             {video.uploadedAt} ago
           </div>
         </div>
