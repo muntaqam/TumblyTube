@@ -51,11 +51,11 @@
   &__card {
     text-decoration: none;
     color: black;
+    min-width: 100%;
   }
 
   &__vid {
-    // width: 100%;
-    width: -webkit-fill-available;
+    width: 100%;
     object-fit: contain;
 
     background: var(--clr-hightlight-gray);
