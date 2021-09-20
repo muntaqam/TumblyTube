@@ -176,14 +176,10 @@ class VideoPlayer extends React.Component {
     const vid = this.videoRef.current;
     const progress = this.progressRef.current;
 
-    const scrubTime =
+    const seekTo =
       (e.nativeEvent.offsetX / progress.offsetWidth) * vid.duration;
 
-    vid.currentTime = scrubTime;
-  }
-
-  handleEnded() {
-    this.setState({ ended: true });
+    vid.currentTime = seekTo;
   }
 
   // exit fullscreen, if browser is in fullscreen mode; vice versa
@@ -205,6 +201,10 @@ class VideoPlayer extends React.Component {
       this.setState({ fullscreen: true });
       playerContainer.requestFullscreen();
     }
+  }
+
+  handleEnded() {
+    this.setState({ ended: true });
   }
 
   render() {
