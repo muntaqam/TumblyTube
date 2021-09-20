@@ -56,7 +56,7 @@
 
   &__vid {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 
     background: var(--clr-hightlight-gray);
     border-radius: 1px;
