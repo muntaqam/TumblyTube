@@ -231,7 +231,6 @@ class VideoPlayer extends React.Component {
           ref={this.videoRef}
           className='player__video viewer'
           src={this.props.video.videoUrl}
-          preload='metadata'
           onLoadedMetadata={this.initializeVideo}
           onTimeUpdate={this.updateCurrentTime}
           onClick={this.animatePlayback}
