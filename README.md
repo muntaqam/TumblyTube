@@ -12,23 +12,23 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-  - [Technologies](#technologies)
-  - [Libraries & Methodologies](#libraries--methodologies)
-- [Features](#features)
-- [Technical Implementation Details](#technical-implementation-details)
-  - [Ploymorphic Associations](#ploymorphic-associations)
-  - [Toast Notifications](#toast-notifications)
-- [Sources](#sources)
-- [TODOs / Features to implement](#todos--features-to-implement)
-- [Author Info](#author-info)
+1. [Overview](#overview)
+    - [Technologies](#technologies)
+    - [Libraries & Methodologies](#libraries--methodologies)
+2. [Features](#features)
+3. [Technical Implementation Details](#technical-implementation-details)
+    - [Ploymorphic Associations](#ploymorphic-associations)
+    - [Toast Notifications](#toast-notifications)
+4. [Sources](#sources)
+5. [TODOs / Features to implement](#todos--features-to-implement)
+6. [Author Info](#author-info)
 
----
+
 
 ## Overview
 
-TumblyTube is a fully responsive clone of YouTube.
-It includes key featrues of a typical video sharing social media web application.
+TumblyTube is a fully responsive clone of YouTube, while highlighting most of its key features. 
+This platform allows users to connect with people around the world as they like, comment, and share videos. 
 
 ### Technologies
 
@@ -94,6 +94,9 @@ It includes key featrues of a typical video sharing social media web application
 ## Technical Implementation Details
 
 ### Ploymorphic Associations
+
+After I completed building the comments feature, I was going to create another Like model for comments since I already had an existing Like model for videos.
+But I knew I wasn't following the ***DRY*** principle.
 
 ```RUBY
 class Like < ApplicationRecord
