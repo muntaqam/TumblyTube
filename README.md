@@ -77,40 +77,40 @@ It includes key featrues of a typical video sharing social media web application
 
 ```RUBY
 class Like < ApplicationRecord
-    validates :liker_id, uniqueness: { scope: [:likeable_id, :likeable_type] }
-    validates :version, inclusion: { in: %w(like dislike), 
-        message: "%{value} is not a valid version, must be like or dislike"}
+  validates :liker_id, uniqueness: { scope: [:likeable_id, :likeable_type] }
+  validates :version, inclusion: { in: %w(like dislike), 
+    message: "%{value} is not a valid version, must be like or dislike"}
 
-    belongs_to :likeable, polymorphic: true
+  belongs_to :likeable, polymorphic: true
   
-    belongs_to :user,
-        foreign_key: :liker_id,
-        class_name: :User
+  belongs_to :user,
+    foreign_key: :liker_id,
+    class_name: :User
 end
 ```
 
 ```RUBY
 # app/models/like.rb
 class User < ApplicationRecord
-    has_many :likes,
-        foreign_key: :liker_id,
-        class_name: :Like,
-        dependent: :destroy
+  has_many :likes,
+    foreign_key: :liker_id,
+    class_name: :Like,
+    dependent: :destroy
 
-    has_many :liked_videos,
-        through: :likes,
-        source: :likeable,
-        source_type: :Video
+  has_many :liked_videos,
+    through: :likes,
+    source: :likeable,
+    source_type: :Video
 end
 
 # app/models/comment.rb
 class Comment < ApplicationRecord
-    has_many :likes, as: :likeable, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
 end
 
 # app/models/video.rb
 class Video < ApplicationRecord
-    has_many :likes, as: :likeable, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
 end
 ```
 
@@ -122,28 +122,28 @@ const [loaded, setLoaded] = useState(false);
 const [portalId] = useState(`noti-portal-${uuid()}`);
 
 useEffect(() => {
-    const div = document.createElement("div");
-    div.id = portalId;
-    div.style = "position: fixed; bottom: 20px; left: 30px; z-index: 300";
+  const div = document.createElement("div");
+  div.id = portalId;
+  div.style = "position: fixed; bottom: 20px; left: 30px; z-index: 300";
     
-    document.getElementsByTagName("body")[0].prepend(div);
-    setLoaded(true);
+  document.getElementsByTagName("body")[0].prepend(div);
+  setLoaded(true);
 
-    return () => document.getElementsByTagName("body")[0].removeChild(div);
+  return () => document.getElementsByTagName("body")[0].removeChild(div);
 }, [portalId]);
 
 return (
-    loaded && createPortal(
-      <div className='noti'>
-        {notis.map((noti) => (
-          <Noti
-            key={noti.id}
-            mode={noti.mode}
-            message={noti.message}
-            onClose={() => removeNoti(noti.id)}
-          />
-        ))}
-      </div>,
+  loaded && createPortal(
+    <div className='noti'>
+      {notis.map((noti) => (
+        <Noti
+          key={noti.id}
+          mode={noti.mode}
+          message={noti.message}
+          onClose={() => removeNoti(noti.id)}
+        />
+      ))}
+    </div>,
       
   document.getElementById(portalId)
 )
@@ -162,27 +162,27 @@ const Root = ({ store }) => {
   
   return (
     <>
-        <NotiContext.Provider value={{ addNoti }}>
-            <App />
-        </NotiContext.Provider>
-        <NotiPortal ref={notiRef} autoClose={true} />
+      <NotiContext.Provider value={{ addNoti }}>
+        <App />
+      </NotiContext.Provider>
+      <NotiPortal ref={notiRef} autoClose={true} />
     </>
   );
 }
 
 // components/noti_portal/noti_portal.jsx
-const NotiPortal = forwardRef(({ autoClose, autoCloseTime = 3000 }, ref) => {
-    const [notis, setNotis] = useState([]); // contains message and color(mode)
+const NotiPortal = forwardRef((props, ref) => {
+  const [notis, setNotis] = useState([]); // contains message and color(mode)
   
-    useImperativeHandle(ref, () => ({
-        addMessage(noti) {
-            setNotis([{ ...noti, id: uuid() }, ...notis]);  // takes in message and mode; generates unique id
-        },
-    }));
+  useImperativeHandle(ref, () => ({
+    addMessage(noti) {
+      setNotis([{ ...noti, id: uuid() }, ...notis]);  // takes in message and mode; generates unique id
+    },
+  }));
     
-    return (
-        // create portal...
-    )
+  return (
+    // create portal...
+  )
 });
 ```
 
