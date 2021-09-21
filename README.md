@@ -14,7 +14,6 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Overview](#overview)
   - [Technologies](#technologies)
   - [Libraries & Methodologies](#libraries--methodologies)
