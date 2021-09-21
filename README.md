@@ -3,7 +3,7 @@
 <h1 align="center"> TumblyTube </h1> <br>
 <p align="center">
     <a href="https://tumblytube.herokuapp.com/">
-        <img alt="TumblyTube" title="TumblyTube" src="app/assets/images/logo.svg" width="300">
+        <img alt="TumblyTube" title="TumblyTube" src="app/assets/images/logo.svg" width="200">
     </a>
 </p>
 
@@ -27,7 +27,7 @@
 
 ## Overview
 
-TumblyTube is a fully responsive clone of YouTube, while highlighting most of its key features. This platform allows users to connect with people around the world as they like, comment, and share videos. 
+TumblyTube is a full stack clone of YouTube, while highlightingits key features. This application allows users to connect with people around the world as they like, comment, share videos, and subscribe to others.
 
 ### Technologies
 
@@ -47,7 +47,7 @@ TumblyTube is a fully responsive clone of YouTube, while highlighting most of it
 
 ## Features
 
-<img alt="Comments gif" title="Comments" src="app/assets/images/child_comments.gif" width="550"  align="right">
+<img alt="Comments gif" title="Comments" src="app/assets/images/child_comments.gif" width="500"  align="right">
 
 - *USER AUTH*
   - Login, Create Account
@@ -63,7 +63,7 @@ TumblyTube is a fully responsive clone of YouTube, while highlighting most of it
   - Reply to comments
   - Edit, Delete your own comments
 
-<img alt="likes gif" title="likes" src="app/assets/images/likes.gif" width="550"  align="right">
+<img alt="likes gif" title="likes" src="app/assets/images/likes.gif" width="500"  align="right">
 
 - *SUBSCRIPTIONS*
   - Subscribe to channels
@@ -98,6 +98,7 @@ After I completed building the comments feature, I was going to create a seperat
 Polymorphic associations became the perfect solution to my problem.
 
 ```RUBY
+# app/models/like.rb
 class Like < ApplicationRecord
   validates :liker_id, uniqueness: { scope: [:likeable_id, :likeable_type] }
   validates :version, inclusion: { in: %w(like dislike), 
@@ -109,12 +110,8 @@ class Like < ApplicationRecord
     foreign_key: :liker_id,
     class_name: :User
 end
-```
-The Like model is associated not only with the Like button, but also with the Dislike button through the `version` column.
-This model limits a user`liker_id` to one like/dislike on the same comment or video by validating uniqueness of the `likeable_id` and `likeable_type`.
 
-```RUBY
-# app/models/like.rb
+# app/models/user.rb
 class User < ApplicationRecord
   has_many :likes,
     foreign_key: :liker_id,
@@ -126,7 +123,12 @@ class User < ApplicationRecord
     source: :likeable,
     source_type: :Video
 end
+```
 
+The Like model is associated not only with the Like button, but also with the Dislike button through the `version` column.
+User`liker_id` is limited to one like/dislike on the same comment or video by validating uniqueness of the `likeable_id` and `likeable_type` in Like.
+
+```RUBY
 # app/models/comment.rb
 class Comment < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
@@ -137,13 +139,26 @@ class Video < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 end
 ```
-Instances of Like now belong to either Video or Comment on a single association as `likeable`
+
+Instances of Like now belong to either Video or Comment on a single association as `likeable`.
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
 
 
 ### Toast Notifications
 
+In order for me to avoid `overflow: hidden` `z-index` issues, the Notification component has to sit on top of the entire application rather than inside of the application.
+
+```html
+<body>
+    <!-- Notifications need to go here --> 
+    <main id="root">
+        <!-- Application gets rendered here --> 
+    </main>
+</body>
+```
+
+`React.createPortal()` in conjuction with `document.createElement("div")` allow me to do just that.
 
 ```javascript
 // components/noti_portal/noti_portal.jsx
@@ -178,6 +193,12 @@ return (
 )
 ```
 
+A new dom element is created with `document.createElement("div")`. It gets injected as a first child of `<body>` with an unique ID.
+The Notification component is then rendered inside the newly created `<div>` sitting on top of the application with the magic of `React Portals`. <br>
+
+Now I needed to call `addNotis()` function inside of the Notifications component from the Root component to be able to provide the function to other components in the App using `React Context`.
+This is when `React.forwardRef()` and `React.useImperativeHandle()` come in to make the functions inside the child component accessible from a parent component.
+
 ```javascript
 // components/root.jsx
 import { NotiContext } from "../context/noti_context"
@@ -211,9 +232,11 @@ const NotiPortal = forwardRef((props, ref) => {
     
   return (
     // create portal...
+    // render Notifications
   )
 });
 ```
+The combination of `ref` `forwardRef` and `useImperativeHandle` allows the Root component to get access to `addNotis()` function inside Notifications components whenever `NotiPortal` gets renderd.
 
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
@@ -221,8 +244,7 @@ const NotiPortal = forwardRef((props, ref) => {
 ## Sources
 
 - https://stackoverflow.com/a/25821830
-  padStart fix for hex code length issue <br>
-  when generating random colors for user avatars at Create Account completion
+  padStart fix for hex code length issue when generating random colors.
 
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
