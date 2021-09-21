@@ -45,42 +45,51 @@ It includes key featrues of a typical video sharing social media web application
 - [BCrypt](https://github.com/bcrypt-ruby/bcrypt-ruby) for user authentication
 - [Material-ui icons](https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/material-icons/material-icons.md) for app-wide icons
 
-[:arrow_up_small: Back To The Top](#table-of-contents)
 
 ## Features
 
-<img alt="Comments gif" title="Comments" src="app/assets/images/child_comments.gif" width="600"  align="right">
+<img alt="Comments gif" title="Comments" src="app/assets/images/child_comments.gif" width="550"  align="right">
 
-- **USER AUTH**
+- *USER AUTH*
   - Login, Create Account
   - or browse as guest / demo-user
 
-- **VIDEOS**
+- *VIDEOS*
   - Watch videos shared by other users
   - Upload, Edit, Delete your videos
   - View your liked videos
 
-
-- **COMMENTS** 
+- *COMMENTS*
   - Leave comments on videos
   - Reply to comments
   - Edit, Delete your own comments
 
-<img alt="likes gif" title="likes" src="app/assets/images/likes.gif" width="600"  align="right">
+<img alt="likes gif" title="likes" src="app/assets/images/likes.gif" width="550"  align="right">
 
-- **CHANNELS**
+- *SUBSCRIPTIONS*
   - Subscribe to channels
   - View videos from subscribed channels
 
-- **SEARCH**
+- *SEARCH*
   - Search for channles by name
   - Search for videos by title
 
-- **LIKES / DISLIKES**
+- *LIKES / DISLIKES*
   - Like / Dislike videos
   - Like / Dislike vomments
 
-[:arrow_up_small: Back To The Top](#table-of-contents)
+
+### Check out additional features such as:
+
+- *INFINITE SCROLL*
+- *ERRORS*
+- *CUSTOM HTML5 VIDEO PLAYER*
+- *REQUIRE LOGIN DROP DOWNS*
+
+    ***demonstrated under videos titled "FEATURE:" on [TumblyTube :arrow_upper_right:](https://tumblytube.herokuapp.com)***
+
+
+[Back To The Top :arrow_up_small:](#table-of-contents)
 
 ## Technical Implementation Details
 
@@ -124,6 +133,10 @@ class Video < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 end
 ```
+
+
+[Back To The Top :arrow_up_small:](#table-of-contents)
+
 
 ### Toast Notifications
 
@@ -198,20 +211,24 @@ const NotiPortal = forwardRef((props, ref) => {
 ```
 
 
+[Back To The Top :arrow_up_small:](#table-of-contents)
+
 ## Sources
 
 - https://stackoverflow.com/a/25821830
   padStart fix for hex code length issue <br>
   when generating random colors for user avatars at Create Account completion
 
-[:arrow_up_small: Back To The Top](#table-of-contents)
+
+[Back To The Top :arrow_up_small:](#table-of-contents)
 
 ## TODOs / Features to implement
 
 - [ ] Fix video metadata not preloading on iOS devices
 - [ ] Add light / dark mode
 
-[:arrow_up_small: Back To The Top](#table-of-contents)
+
+[Back To The Top :arrow_up_small:](#table-of-contents)
 
 ---
 
@@ -219,4 +236,5 @@ const NotiPortal = forwardRef((props, ref) => {
 
 - Website - [Ryan Naing]()
 
-[:arrow_up_small: Back To The Top](#table-of-contents)
+
+[Back To The Top :arrow_up_small:](#table-of-contents)
