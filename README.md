@@ -78,7 +78,7 @@ TumblyTube is a full stack clone of YouTube, while highlightingits key features.
   - Like / Dislike vomments
 
 
-### Check out additional features such as:
+### Check out additional features:
 
 - *INFINITE SCROLL*
 - *ERRORS*
