@@ -27,8 +27,7 @@
 
 ## Overview
 
-TumblyTube is a fully responsive clone of YouTube, while highlighting most of its key features. 
-This platform allows users to connect with people around the world as they like, comment, and share videos. 
+TumblyTube is a fully responsive clone of YouTube, while highlighting most of its key features. This platform allows users to connect with people around the world as they like, comment, and share videos. 
 
 ### Technologies
 
@@ -95,8 +94,8 @@ This platform allows users to connect with people around the world as they like,
 
 ### Ploymorphic Associations
 
-After I completed building the comments feature, I was going to create another Like model for comments since I already had an existing Like model for videos.
-But I knew I wasn't following the ***DRY*** principle.
+After I completed building the comments feature, I was going to create a seperate Like model for comments since I already had an existing Like model for videos. However, I knew this wasn't ***DRY***.<br> 
+Polymorphic associations became the perfect solution to my problem.
 
 ```RUBY
 class Like < ApplicationRecord
@@ -111,6 +110,8 @@ class Like < ApplicationRecord
     class_name: :User
 end
 ```
+The Like model is associated not only with the Like button, but also with the Dislike button through the `version` column.
+This model limits a user`liker_id` to one like/dislike on the same comment or video by validating uniqueness of the `likeable_id` and `likeable_type`.
 
 ```RUBY
 # app/models/like.rb
@@ -136,12 +137,13 @@ class Video < ApplicationRecord
   has_many :likes, as: :likeable, dependent: :destroy
 end
 ```
-
+Instances of Like now belong to either Video or Comment on a single association as `likeable`
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
 
 
 ### Toast Notifications
+
 
 ```javascript
 // components/noti_portal/noti_portal.jsx
