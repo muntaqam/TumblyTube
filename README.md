@@ -3,7 +3,7 @@
 <h1 align="center"> TumblyTube </h1> <br>
 <p align="center">
     <a href="https://tumblytube.herokuapp.com/">
-        <img alt="TumblyTube" title="TumblyTube" src="app/assets/images/logo.svg" width="350">
+        <img alt="TumblyTube" title="TumblyTube" src="app/assets/images/logo.svg" width="300">
     </a>
 </p>
 
