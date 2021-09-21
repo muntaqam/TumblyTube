@@ -158,7 +158,7 @@ In order for me to avoid `overflow: hidden` `z-index` issues, the Notification c
 </body>
 ```
 
-`React.createPortal()` in conjuction with `document.createElement("div")` allow me to do just that.
+`React.createPortal()` in conjunction with `document.createElement()` allow me to do just that.
 
 ```javascript
 // components/noti_portal/noti_portal.jsx
