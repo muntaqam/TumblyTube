@@ -8,9 +8,7 @@
 </p>
 
 <p align="center" > Inspired by YouTube </p>
-<p align="center" > <a href="https://tumblytube.herokuapp.com/">🚀 LINK TO LIVE SITE </a></p>
-
----
+<p align="center" > <a href="https://tumblytube.herokuapp.com/"> :rocket: LINK TO LIVE SITE </a></p>
 
 ## Table of Contents
 
@@ -47,35 +45,31 @@ It includes key featrues of a typical video sharing social media web application
 - [BCrypt](https://github.com/bcrypt-ruby/bcrypt-ruby) for user authentication
 - [Material-ui icons](https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/material-icons/material-icons.md) for app-wide icons
 
-[⏫ Back To The Top](#table-of-contents)
-
----
+[:arrow_up_small: Back To The Top](#table-of-contents)
 
 ## Features
 
-- USER AUTH
+- **USER AUTH**
   - Login, Create Account, or browse as guest/ demo-user
-- VIDEOS
+- **VIDEOS**
   - Watch Videos shared by other users
   - Upload, Edit, Delete your uploaded Videos
   - View your Liked videos
-- COMMENTS
+- **COMMENTS**
   - Leave Comments on Videos
   - Reply to Comments
   - Edit, Delete your own Comments
-- LIKES / DISLIKES
+- **LIKES / DISLIKES**
   - Like / Dislike Videos
   - Like / Dislike Comments
-- CHANNELS
+- **CHANNELS**
   - Subscribe to Channels
   - View Videos from Subscribed Channels
-- SEARCH
+- **SEARCH**
   - Search for Channles by name
   - Search for Videos by title
 
-[⏫ Back To The Top](#table-of-contents)
-
----
+[:arrow_up_small: Back To The Top](#table-of-contents)
 
 ## Technical Implementation Details
 
@@ -83,24 +77,20 @@ It includes key featrues of a typical video sharing social media web application
 
 ### Toast Notifications
 
----
-
 ## Sources
 
 - https://stackoverflow.com/a/25821830
   padStart fix for hex code length issue <br>
-  when generating random colors for user avatars at Create Account complete
+  when generating random colors for user avatars at Create Account completion
 
-[⏫ Back To The Top](#table-of-contents)
-
----
+[:arrow_up_small: Back To The Top](#table-of-contents)
 
 ## TODOs / Features to implement
 
 - [ ] Fix video metadata not preloading on iOS devices
 - [ ] Add light / dark mode
 
-[⏫ Back To The Top](#table-of-contents)
+[:arrow_up_small: Back To The Top](#table-of-contents)
 
 ---
 
@@ -108,4 +98,4 @@ It includes key featrues of a typical video sharing social media web application
 
 - Website - [Ryan Naing]()
 
-[⏫ Back To The Top](#table-of-contents)
+[:arrow_up_small: Back To The Top](#table-of-contents)
