@@ -12,7 +12,6 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Overview](#overview)
   - [Technologies](#technologies)
   - [Libraries & Methodologies](#libraries--methodologies)
@@ -50,28 +49,36 @@ It includes key featrues of a typical video sharing social media web application
 
 ## Features
 
-- **USER AUTH**
-  - Login, Create Account, or browse as guest/ demo-user
-- **VIDEOS**
-  - Watch Videos shared by other users
-  - Upload, Edit, Delete your uploaded Videos
-  - View your Liked videos
-- **COMMENTS** 
-  - Leave Comments on Videos
-  - Reply to Comments
-  - Edit, Delete your own Comments
+<img alt="Comments gif" title="Comments" src="app/assets/images/child_comments.gif" width="600"  align="right">
 
-<img alt="Parent Comments" title="Parent Comments" src="app/assets/images/parent_comment.gif" width="500"  float="right">
+- **USER AUTH**
+  - Login, Create Account
+  - or browse as guest / demo-user
+
+- **VIDEOS**
+  - Watch videos shared by other users
+  - Upload, Edit, Delete your videos
+  - View your liked videos
+
+
+- **COMMENTS** 
+  - Leave comments on videos
+  - Reply to comments
+  - Edit, Delete your own comments
+
+<img alt="likes gif" title="likes" src="app/assets/images/likes.gif" width="600"  align="right">
+
+- **CHANNELS**
+  - Subscribe to channels
+  - View videos from subscribed channels
+
+- **SEARCH**
+  - Search for channles by name
+  - Search for videos by title
 
 - **LIKES / DISLIKES**
-  - Like / Dislike Videos
-  - Like / Dislike Comments
-- **CHANNELS**
-  - Subscribe to Channels
-  - View Videos from Subscribed Channels
-- **SEARCH**
-  - Search for Channles by name
-  - Search for Videos by title
+  - Like / Dislike videos
+  - Like / Dislike vomments
 
 [:arrow_up_small: Back To The Top](#table-of-contents)
 
