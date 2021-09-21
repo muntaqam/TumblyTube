@@ -85,7 +85,7 @@ TumblyTube is a full stack clone of YouTube, while highlightingits key features.
 - *CUSTOM HTML5 VIDEO PLAYER*
 - *REQUIRE LOGIN DROP DOWNS*
 
-    ***demonstrated under videos titled "FEATURE:" on [TumblyTube :arrow_upper_right:](https://tumblytube.herokuapp.com)***
+    ***demonstrated under videos titled "FEATURE:" on [TumblyTube :arrow_upper_right:](https://tumblytube.herokuapp.com/#/results?search_query=FEATURE)***
 
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
