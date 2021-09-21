@@ -236,7 +236,7 @@ const NotiPortal = forwardRef((props, ref) => {
   )
 });
 ```
-The combination of `ref` `forwardRef` and `useImperativeHandle` allows the Root component to get access to `addNotis()` function inside Notifications components whenever `NotiPortal` gets renderd.
+The combination of `ref` `forwardRef` and `useImperativeHandle` allows the Root component to get access to `addNotis()` function inside the Notifications components whenever it gets renderd.
 
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
