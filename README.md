@@ -12,6 +12,7 @@
 
 ## Table of Contents
 
+- [Table of Contents](#table-of-contents)
 - [Overview](#overview)
   - [Technologies](#technologies)
   - [Libraries & Methodologies](#libraries--methodologies)
@@ -55,10 +56,13 @@ It includes key featrues of a typical video sharing social media web application
   - Watch Videos shared by other users
   - Upload, Edit, Delete your uploaded Videos
   - View your Liked videos
-- **COMMENTS**
+- **COMMENTS** 
   - Leave Comments on Videos
   - Reply to Comments
   - Edit, Delete your own Comments
+
+<img alt="Parent Comments" title="Parent Comments" src="app/assets/images/parent_comment.gif" width="500"  float="right">
+
 - **LIKES / DISLIKES**
   - Like / Dislike Videos
   - Like / Dislike Comments
