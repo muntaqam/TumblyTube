@@ -157,7 +157,7 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
         <LinkedInIcon id='ryan-icon' />
         <p className='sidebar__title'>Ryan Linkedin</p>
       </a>
-      <a
+      {/* <a
         className='sidebar__item sidebar__item--ryan'
         href='https://www.ryannaing.com/'
         target='_blank'
@@ -165,7 +165,7 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
       >
         <LanguageIcon id='ryan-icon' />
         <p className='sidebar__title'>Ryan Portfolio</p>
-      </a>
+      </a> */}
     </div>
   );
 }
