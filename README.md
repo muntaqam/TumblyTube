@@ -41,7 +41,7 @@ TumblyTube is a full stack clone of YouTube, while highlightingits key features.
 ### Libraries & Methodologies
 
 - [Ajax](https://api.jquery.com/jQuery.ajax/) for sending and requesting data asynchronously
-- [BCrypt](https://github.com/bcrypt-ruby/bcrypt-ruby) for user authentication
+- [BCrypt](https://github.com/bcrypt-ruby/bcrypt-ruby) for storing salted and encrypted password hash.
 - [Material-ui icons](https://github.com/mui-org/material-ui/blob/master/docs/src/pages/components/material-icons/material-icons.md) for app-wide icons
 
 
