@@ -147,7 +147,7 @@ Instances of Like now belong to either Video or Comment on a single association 
 
 ### Toast Notifications
 
-In order for me to avoid `overflow: hidden` `z-index` issues, the Notification component has to sit on top of the entire application rather than inside of the application.
+I wanted the Notification component to sit on top of the entire application rather than inside of the application to avoid render issues such as `overflow: hidden` `z-index`.
 
 ```html
 <body>
