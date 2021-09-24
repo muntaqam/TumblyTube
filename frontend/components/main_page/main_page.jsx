@@ -6,7 +6,6 @@ import MainVideoIndex from "./video_index/main_vid_idx_container";
 import SearchResultsContainer from "./search_results/search_results_container";
 import SubscriptionsContainer from "./subscriptions/subscriptions_container";
 import LibraryContainer from "./library/library_container";
-import RyanNaing from "./ryan_naing/ryan_naing";
 
 const MainPage = ({ sidebarExpanded }) => {
   const location = useLocation();
@@ -23,7 +22,6 @@ const MainPage = ({ sidebarExpanded }) => {
       {isLocation("/") && <MainVideoIndex />}
       {isLocation("/feed/subscriptions") && <SubscriptionsContainer />}
       {isLocation("/feed/library") && <LibraryContainer />}
-      {isLocation("/feed/ryannaing") && <RyanNaing />}
       {isLocation("/results") && <SearchResultsContainer />}
     </div>
   );

@@ -12,8 +12,10 @@ import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
 import SubscriptionsOutlinedIcon from "@material-ui/icons/SubscriptionsOutlined";
 import VideoLibraryIcon from "@material-ui/icons/VideoLibrary";
 import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
-import SentimentSatisfiedAltIcon from "@material-ui/icons/SentimentSatisfiedAlt";
-import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
+import GitHubIcon from "@material-ui/icons/GitHub";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import LanguageIcon from "@material-ui/icons/Language";
 
 function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
   const sidebarRef = useRef(null);
@@ -58,7 +60,6 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
   const isHome = showToggled === "home";
   const isSubscriptions = showToggled === "subscriptions";
   const isLibrary = showToggled === "library";
-  const isRyan = showToggled === "ryannaing";
 
   return (
     <div
@@ -76,11 +77,13 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
             className='navbar__icon navbar__icon--menu'
             onClick={handleCloseModal}
           />
+
           <Link to='/' className='navbar__logoCont'>
             <img className='navbar__logo' src={window.logoURL} />
           </Link>
         </div>
       )}
+
       <Link
         to='/'
         className={`sidebar__item sidebar__item--${isHome ? "active" : null}`}
@@ -91,8 +94,10 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
         ) : (
           <HomeOutlinedIcon id='home-outline-icon' />
         )}
+
         <p className='sidebar__title'>Home</p>
       </Link>
+
       <Link
         to='/feed/subscriptions'
         className={`sidebar__item sidebar__item--${
@@ -105,8 +110,10 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
         ) : (
           <SubscriptionsOutlinedIcon id='subscriptions-outline-icon' />
         )}
+
         <p className='sidebar__title'>Subscriptions</p>
       </Link>
+
       <Link
         to='/feed/library'
         className={`sidebar__item sidebar__item--${
@@ -119,20 +126,38 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
         ) : (
           <VideoLibraryOutlinedIcon id='library-outline-icon' />
         )}
+
         <p className='sidebar__title'>Library</p>
       </Link>
-      <Link
-        to='/feed/ryannaing'
-        className={`sidebar__item sidebar__item--${isRyan ? "active" : null}`}
-        onClick={() => changeFeed("ryannaing")}
+
+      <a
+        className='sidebar__item sidebar__item--ryan'
+        href='https://github.com/nyan9/TumblyTube#readme'
       >
-        {isRyan ? (
-          <SentimentVerySatisfiedIcon id='ryan-icon' />
-        ) : (
-          <SentimentSatisfiedAltIcon id='ryan-outline-icon' />
-        )}
-        <p className='sidebar__title'>Ryan Naing</p>
-      </Link>
+        <MenuBookIcon id='ryan-icon' />
+        <p className='sidebar__title'>Project Repo</p>
+      </a>
+      <a
+        className='sidebar__item sidebar__item--ryan'
+        href='https://github.com/nyan9'
+      >
+        <GitHubIcon id='ryan-icon' />
+        <p className='sidebar__title'>Ryan Github</p>
+      </a>
+      <a
+        className='sidebar__item sidebar__item--ryan'
+        href='https://www.linkedin.com/in/ryannaing/'
+      >
+        <LinkedInIcon id='ryan-icon' />
+        <p className='sidebar__title'>Ryan Linkedin</p>
+      </a>
+      <a
+        className='sidebar__item sidebar__item--ryan'
+        href='http://www.ryannaing.com/'
+      >
+        <LanguageIcon id='ryan-icon' />
+        <p className='sidebar__title'>Ryan Portfolio</p>
+      </a>
     </div>
   );
 }
