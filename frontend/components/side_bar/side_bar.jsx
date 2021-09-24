@@ -133,6 +133,8 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
       <a
         className='sidebar__item sidebar__item--ryan'
         href='https://github.com/nyan9/TumblyTube#readme'
+        target='_blank'
+        rel='noopener noreferrer'
       >
         <MenuBookIcon id='ryan-icon' />
         <p className='sidebar__title'>Project Repo</p>
@@ -140,6 +142,8 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
       <a
         className='sidebar__item sidebar__item--ryan'
         href='https://github.com/nyan9'
+        target='_blank'
+        rel='noopener noreferrer'
       >
         <GitHubIcon id='ryan-icon' />
         <p className='sidebar__title'>Ryan Github</p>
@@ -147,6 +151,8 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
       <a
         className='sidebar__item sidebar__item--ryan'
         href='https://www.linkedin.com/in/ryannaing/'
+        target='_blank'
+        rel='noopener noreferrer'
       >
         <LinkedInIcon id='ryan-icon' />
         <p className='sidebar__title'>Ryan Linkedin</p>
@@ -154,6 +160,8 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
       <a
         className='sidebar__item sidebar__item--ryan'
         href='http://www.ryannaing.com/'
+        target='_blank'
+        rel='noopener noreferrer'
       >
         <LanguageIcon id='ryan-icon' />
         <p className='sidebar__title'>Ryan Portfolio</p>
