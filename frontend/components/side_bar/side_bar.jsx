@@ -159,7 +159,7 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
       </a>
       <a
         className='sidebar__item sidebar__item--ryan'
-        href='http://www.ryannaing.com/'
+        href='https://www.ryannaing.com/'
         target='_blank'
         rel='noopener noreferrer'
       >
