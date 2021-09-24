@@ -17,7 +17,7 @@
     - [Libraries & Methodologies](#libraries--methodologies)
 2. [Features](#features)
 3. [Technical Implementation Details](#technical-implementation-details)
-    - [Ploymorphic Associations](#ploymorphic-associations)
+    - [Polymorphic Associations](#polymorphic-associations)
     - [Toast Notifications](#toast-notifications)
 4. [Sources](#sources)
 5. [TODOs / Features to implement](#todos--features-to-implement)
@@ -92,7 +92,7 @@ TumblyTube is a full stack clone of YouTube, while highlightingits key features.
 
 ## Technical Implementation Details
 
-### Ploymorphic Associations
+### Polymorphic Associations
 
 After I completed building the comments feature, I was going to create a seperate Like model for comments since I already had an existing Like model for videos. However, I knew this wasn't ***DRY***.<br> 
 Polymorphic associations became the perfect solution to my problem.
@@ -236,7 +236,7 @@ const NotiPortal = forwardRef((props, ref) => {
   )
 });
 ```
-The combination of `ref` `forwardRef` and `useImperativeHandle` allows the Root component to get access to `addNotis()` function inside the Notifications components whenever it gets renderd.
+The combination of `ref` `forwardRef` and `useImperativeHandle` allows the Root component to get access to `addNotis()` function inside the Notifications components whenever it gets rendered.
 
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
@@ -261,7 +261,7 @@ The combination of `ref` `forwardRef` and `useImperativeHandle` allows the Root 
 
 ## Author Info
 
-- Website - [Ryan Naing]()
+- Website - [Ryan Naing](www.RyanNaing.com)
 
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
