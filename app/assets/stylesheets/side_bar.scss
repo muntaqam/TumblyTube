@@ -26,6 +26,11 @@
         background-color: var(--clr-hightlight-gray);
         font-weight: 900;
       }
+
+      // personal links
+      &--ryan:hover {
+        background-color: #74f7f9;
+      }
     }
 
     .sidebar__title {
@@ -51,6 +56,11 @@
     &:hover {
       background-color: var(--clr-hightlight-gray);
     }
+
+    // personal links
+    &--ryan:hover {
+      background-color: #74f7f9;
+    }
   }
 
   &__modalNav {
@@ -70,8 +80,7 @@
 #subscriptions-outline-icon,
 #library-icon,
 #library-outline-icon,
-#ryan-icon,
-#ryan-outline-icon {
+#ryan-icon {
   font-size: 1.5rem;
 }
 

@@ -33,8 +33,7 @@
   &__library,
   .library__session,
   &__subs,
-  .subs__session,
-  &__ryan {
+  .subs__session {
     grid-column: 2;
   }
 
@@ -143,8 +142,7 @@
     &__library,
     .library__session,
     &__subscriptions,
-    .subs__session,
-    &__ryan {
+    .subs__session {
       grid-column: 1;
     }
   }
