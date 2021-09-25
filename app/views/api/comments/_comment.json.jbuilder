@@ -9,7 +9,7 @@ json.set! :childComments do
     json.set! child_comment.id do
       json.extract! child_comment, :id, :commenter_id, :parent_comment_id, :video_id, :body, :num_child_comments, :num_likes, :num_dislikes
       json.set! :commenter do
-        json.extract! comment.commenter, :username, :color
+        json.extract! child_comment.commenter, :username, :color
       end
       json.commentedAt time_ago_in_words(child_comment.created_at)
     end
