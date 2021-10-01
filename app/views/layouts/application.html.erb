@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>TumblyTube</title>
-    <link rel="shortcut icon" type="image/jpg" href="<%= image_url('logo.svg') %>"/>
+    <link rel="shortcut icon" type="image/png" href="<%= image_url('logo.svg') %>"/>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <!-- Fonts -->
@@ -12,6 +12,13 @@
     
     <!-- Meta -->
     <meta name="viewport" content="width=device-width initial-scale=1">
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:title" content="TumblyTube" />
+    <meta property="og:image" content="<%= image_url('likes.gif') %>" />
+    <meta property="og:description" content="Watch videos. Share your own videos and opinion." />
+    <meta property="og: url" content="https://tumblytube.herokuapp.com/" />
+    <meta name="author" content="Ryan Naing" />
+
     <meta name="google-site-verification" content="-HkY8iieeHBSkEHtHKWJCluBlpVG0JjAfliXLNo0sls" />
 
     <!-- JS Window-->
