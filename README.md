@@ -47,8 +47,6 @@ TumblyTube is a full stack clone of YouTube, while highlightingits key features.
 
 ## Features
 
-<img alt="Comments gif" title="Comments" src="app/assets/images/child_comments.gif" width="500"  align="right">
-
 - *USER AUTH*
   - Login, Create Account
   - or browse as guest / demo-user
@@ -63,7 +61,7 @@ TumblyTube is a full stack clone of YouTube, while highlightingits key features.
   - Reply to comments
   - Edit, Delete your own comments
 
-<img alt="likes gif" title="likes" src="app/assets/images/likes.gif" width="500"  align="right">
+<img alt="Comments gif" title="Comments" src="app/assets/images/child_comments.gif" width="800">
 
 - *SUBSCRIPTIONS*
   - Subscribe to channels
@@ -77,6 +75,7 @@ TumblyTube is a full stack clone of YouTube, while highlightingits key features.
   - Like / Dislike videos
   - Like / Dislike vomments
 
+<img alt="likes gif" title="likes" src="app/assets/images/likes.gif" width="800">
 
 ### Check out additional features:
 
