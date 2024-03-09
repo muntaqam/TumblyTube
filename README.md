@@ -260,7 +260,7 @@ The combination of `ref` `forwardRef` and `useImperativeHandle` allows the Root 
 
 ## Author Info
 
-- Website - [Ryan Naing](www.RyanNaing.com)
+- Website - [Muntaqa Maahi](https://muntaqamaahi.com/)
 
 
 [Back To The Top :arrow_up_small:](#table-of-contents)
