@@ -132,39 +132,39 @@ function SideBar({ sidebarExpanded, shrinkSidebar, modal, closeModal }) {
 
       <a
         className='sidebar__item sidebar__item--ryan'
-        href='https://github.com/nyan9/TumblyTube#readme'
+        href='https://github.com/muntaqam/TumblyTube/blob/main/#readme'
         target='_blank'
         rel='noopener noreferrer'
       >
-        <MenuBookIcon id='ryan-icon' />
+        <MenuBookIcon id='maahi-icon' />
         <p className='sidebar__title'>Project Repo</p>
       </a>
       <a
         className='sidebar__item sidebar__item--ryan'
-        href='https://github.com/nyan9'
+        href='https://github.com/muntaqam/TumblyTube'
         target='_blank'
         rel='noopener noreferrer'
       >
-        <GitHubIcon id='ryan-icon' />
-        <p className='sidebar__title'>Ryan Github</p>
+        <GitHubIcon id='maahi-icon' />
+        <p className='sidebar__title'>Maahi Github</p>
       </a>
       <a
         className='sidebar__item sidebar__item--ryan'
-        href='https://www.linkedin.com/in/ryannaing/'
+        href='https://www.linkedin.com/in/muntaqam/'
         target='_blank'
         rel='noopener noreferrer'
       >
-        <LinkedInIcon id='ryan-icon' />
-        <p className='sidebar__title'>Ryan Linkedin</p>
+        <LinkedInIcon id='maahi-icon' />
+        <p className='sidebar__title'>Maahi Linkedin</p>
       </a>
       <a
         className='sidebar__item sidebar__item--ryan'
-        href='http://www.ryannaing.com/'
+        href='https://muntaqamaahi.com/'
         target='_blank'
         rel='noopener noreferrer'
       >
-        <LanguageIcon id='ryan-icon' />
-        <p className='sidebar__title'>Ryan Portfolio</p>
+        <LanguageIcon id='maahi-icon' />
+        <p className='sidebar__title'>Maahi Portfolio</p>
       </a>
     </div>
   );
