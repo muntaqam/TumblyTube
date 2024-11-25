@@ -27,7 +27,10 @@ vendor/
 /app/assets/javascripts/bundle.js.map
 
 .byebug_history
+.DS_Store
+
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 .key
+
