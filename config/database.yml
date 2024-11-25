@@ -78,8 +78,14 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+# production:
+#   <<: *default
+#   database: TumblyTube_production
+#   username: TumblyTube
+#   password: <%= ENV['TUMBLYTUBE_DATABASE_PASSWORD'] %>
+#   url: <%= ENV['DATABASE_URL'] %>
+
+
 production:
   <<: *default
-  database: TumblyTube_production
-  username: TumblyTube
-  password: <%= ENV['TUMBLYTUBE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
