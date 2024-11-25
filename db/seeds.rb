@@ -8,6 +8,7 @@
 
 
 User.create!(
+  username: 'demo',
   email: 'demo@demouser.com',
   password: 'demouser123'
 )
