@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.7.6'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
@@ -32,6 +33,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem "aws-sdk-s3"
 # Required for AJAX
 gem 'jquery-rails'
+
+#----- for hostin
+gem 'minitest', '~> 5.11' 
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -67,3 +72,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+
+gem 'nokogiri', '< 1.16.0'
+
+gem 'minitest', '~> 5.11'
