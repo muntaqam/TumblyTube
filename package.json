@@ -36,17 +36,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --mode=development --watch",
+    "build": "webpack --mode=production",
     "postinstall": "webpack"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nyan9/TumblyTube.git"
+    "url": "git+https://github.com/muntaqam/TumblyTube"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nyan9/TumblyTube/issues"
+    "url": "https://github.com/muntaqam/TumblyTube"
   },
-  "homepage": "https://github.com/nyan9/TumblyTube#readme"
+  "homepage": "https://github.com/muntaqam/TumblyTube#readme"
 }
