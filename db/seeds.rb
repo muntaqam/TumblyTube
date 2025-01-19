@@ -7,8 +7,16 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-User.create!(
+# User.create!(
+#   username: 'demo',
+#   email: 'demo@demouser.com',
+#   password: 'demouser123'
+# )
+
+User.find_or_create_by!(
   username: 'demo',
-  email: 'demo@demouser.com',
-  password: 'demouser123'
-)
+  email: 'demo@demouser.com'
+) do |user|
+  user.password = 'demouser123' # Set the password only if creating a new user
+end
+
