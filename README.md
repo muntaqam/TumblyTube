@@ -8,13 +8,13 @@
 </p>
 
 <p align="center" > Inspired by YouTube </p>
-<p align="center" > <a href="[https://tumblytube.herokuapp.com/](https://tumblytube-production.up.railway.app/#/)"> :rocket: LINK TO LIVE SITE </a></p>
+<p align="center" > <a href="[(https://tumblytube-production.up.railway.app/#//](https://tumblytube-production.up.railway.app/#/)"> :rocket: LINK TO LIVE SITE </a></p>
 
 ## Table of Contents
 
 1. [Overview](#overview)
     - [Technologies](#technologies)
-    - [Libraries & Methodologies](#libraries--methodologies)
+    - [Libraries & Methodologies](#libraries--methodologies)z
 2. [Features](#features)
 3. [Technical Implementation Details](#technical-implementation-details)
     - [Polymorphic Associations](#polymorphic-associations)
