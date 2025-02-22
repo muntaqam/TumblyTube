@@ -8,7 +8,10 @@
 </p>
 
 <p align="center" > Inspired by YouTube </p>
-<p align="center" > <a href="[(https://tumblytube-production.up.railway.app/#//](https://tumblytube-production.up.railway.app/#/)"> :rocket: LINK TO LIVE SITE </a></p>
+<p align="center">
+  <a href="https://tumblytube-production.up.railway.app/#/">:rocket: LINK TO LIVE SITE</a>
+</p>
+
 
 ## Table of Contents
 
